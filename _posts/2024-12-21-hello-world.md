@@ -8,3 +8,4 @@ tags: [general]     # TAG names should always be lowercase
 # Hello World
 
 This is a test blog.
+:D

@@ -1,15 +1,14 @@
 ---
-title: 投影學的數學建模： Mathematical Model for 2D Projection in Technical Drawing
+title: 投影學的數學建模：通用投影
 date: 2024-12-21 17:30:00 +/+0800
-description: 基於函數的副投影辦法
+description: Mathematical Model for 2D Projection in Engineering Graphic
 categories: [Derivation]
 tags: [mathematic,engineering_graphic]     # TAG names should always be lowercase
 math: true
 toc: true
-
 ---
 ## 前言
-這是一篇大一時對工程圖學基本概念的數學建模。從紙本遷移過來，因此不會太嚴謹。本意是爲了寫程序確認自己的工程圖學作業是否合理。
+這是一篇大一時對工程圖學基本概念的數學建模。從紙本遷移過來，因此不會太嚴謹。本意是爲了寫程序確認自己的工程圖學作業是否合理。原文是基於我更早推導的正投影的數學建模公式的廣義推廣（從正投影推廣到所有投影）
 
 ## The Basic Concept
 The basic concept is to create a function that takes 6 variables and produces a 2D point that can be shown in the projection coordinate. The definition can be described as follows:  

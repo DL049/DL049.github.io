@@ -7,5 +7,12 @@ tags: [general]     # TAG names should always be lowercase
 
 # Hello World
 
-This is a test blog.
-:D
+```
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "age": 25
+}
+```
+
+X^2^ 

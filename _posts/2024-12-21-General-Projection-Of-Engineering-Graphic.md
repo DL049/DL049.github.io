@@ -22,8 +22,8 @@ The basic concept is to create a function that takes 6 variables and produces a 
 \\]  
 
 Where:
-- \\(a, b\\) are the points that need to be projected (called \\($P_1$\\)),
-- \\(f\\) is the length of data that is not included by the projected point (\\($P_1$\\)),
+- \\(a, b\\) are the points that need to be projected (called \\(P_1\\)),
+- \\(f\\) is the length of data that is not included by the projected point (\\(P_1\\)),
 - \\(m, c\\) are the factor and constant used to describe the projection line, \\(y = mx + c\\),
 - \\(s\\) is the variable describing the side properties.
 
@@ -112,8 +112,8 @@ Thus:
 \\[
     \\Delta P = f \\cdot
     \\begin{bmatrix}
-        \\frac{m}{\\sqrt(m^2+1)} \\\\ 
-        \\frac{1}{\\sqrt(m^2+1)} 
+        \\frac{m}{\\sqrt{m^2+1}} \\\\ 
+        \\frac{1}{\\sqrt{m^2+1}} 
     \\end{bmatrix}
 \\]
 ## Conclusion
@@ -130,7 +130,7 @@ Simplified:
 \\[
 GP(a, b, f, m, c, s) = 
 \\begin{bmatrix}
-\\frac{mb-mc+a-s \\cdot f \\cdot m \\cdot \\sqrt(m^2+1)}{m^2+1}
-\\frac{m^2 b+ma+c + s \\cdot f\\cdot \\sqrt(m^2+1)}{m^2+1}
+\\frac{mb-mc+a-s \\cdot f \\cdot m \\cdot \\sqrt{m^2+1}}{m^2+1}
+\\frac{m^2 b+ma+c + s \\cdot f\\cdot \\sqrt{m^2+1}}{m^2+1}
 \\end{bmatrix}
 \\] 

@@ -15,4 +15,7 @@ tags: [general]     # TAG names should always be lowercase
 }
 ```
 
-X^2^ 
+
+
+
+(x^2)

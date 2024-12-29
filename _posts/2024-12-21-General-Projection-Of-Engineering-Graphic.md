@@ -134,4 +134,4 @@ GP(a, b, f, m, c, s) =
 \\frac{mb-mc+a-s \\cdot f \\cdot m \\cdot \\sqrt(m^2+1)}{m^2+1}
 \\frac{m^2 b+ma+c + s \\cdot f\\cdot \\sqrt(m^2+1)}{m^2+1}
 \\end{bmatrix}
-\\]
+\\] 

@@ -77,7 +77,7 @@ Since \\(P_1\\) is extended perpendicular to the projection line, the extended l
 \\]  
 and thus,
 \\[
-    y = \\frac{-x}{m} + \\frac{a}{m} + b
+    y = \\frac{-x}{m} + \\frac{a}{m} + b \\tag{2}
 \\]  
 Combining (1) and (2):
 \\[

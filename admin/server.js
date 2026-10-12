@@ -6,13 +6,15 @@ const { exec, spawn } = require('child_process');
 const PORT = 3000;
 const ROOT_DIR = path.resolve(__dirname, '..');
 const POSTS_DIR = path.join(ROOT_DIR, '_posts');
+const DRAFTS_DIR = path.join(ROOT_DIR, '_drafts');
+const IMG_DIR = path.join(ROOT_DIR, 'assets', 'img', 'posts');
 const CONFIG_FILE = path.join(__dirname, 'config.json');
 const PUBLIC_DIR = path.join(__dirname, 'public');
 
 // Ensure directories exist
-if (!fs.existsSync(POSTS_DIR)) {
-  fs.mkdirSync(POSTS_DIR, { recursive: true });
-}
+if (!fs.existsSync(POSTS_DIR)) fs.mkdirSync(POSTS_DIR, { recursive: true });
+if (!fs.existsSync(DRAFTS_DIR)) fs.mkdirSync(DRAFTS_DIR, { recursive: true });
+if (!fs.existsSync(IMG_DIR)) fs.mkdirSync(IMG_DIR, { recursive: true });
 
 // Jekyll preview process reference
 let jekyllProcess = null;
@@ -114,7 +116,7 @@ function formatPost(frontmatter, content) {
 
 // Helper: Run shell command safely
 function runCmd(command, cwd = ROOT_DIR) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     exec(command, { cwd, maxBuffer: 1024 * 1024 * 5 }, (error, stdout, stderr) => {
       resolve({
         success: !error,
@@ -135,8 +137,47 @@ const MIME_TYPES = {
   '.json': 'application/json; charset=UTF-8',
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.gif': 'image/gif',
+  '.webp': 'image/webp',
   '.ico': 'image/x-icon'
 };
+
+// Scan markdown posts in a folder
+function scanMarkdownDir(dir, isDraft) {
+  if (!fs.existsSync(dir)) return [];
+  const files = fs.readdirSync(dir).filter(f => f.endsWith('.md'));
+  const list = [];
+  for (const file of files) {
+    const filePath = path.join(dir, file);
+    try {
+      const stat = fs.statSync(filePath);
+      const raw = fs.readFileSync(filePath, 'utf8');
+      const { frontmatter, content } = parsePost(raw);
+
+      const cleanContent = content.replace(/[#*`_>\[\]]/g, '').trim();
+      const excerpt = cleanContent.slice(0, 150) + (cleanContent.length > 150 ? '...' : '');
+
+      list.push({
+        filename: file,
+        isDraft,
+        title: frontmatter.title || file.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, ''),
+        date: frontmatter.date || '',
+        categories: frontmatter.categories || [],
+        tags: frontmatter.tags || [],
+        math: !!frontmatter.math,
+        toc: frontmatter.toc !== false,
+        description: frontmatter.description || '',
+        excerpt,
+        mtime: stat.mtime
+      });
+    } catch (e) {
+      console.error(`Error scanning ${file}:`, e);
+    }
+  }
+  return list;
+}
 
 // HTTP Server
 const server = http.createServer(async (req, res) => {
@@ -144,7 +185,7 @@ const server = http.createServer(async (req, res) => {
   const pathname = parsedUrl.pathname;
   const method = req.method;
 
-  // JSON Body Helper
+  // JSON Body Helper (Supports up to 25MB for base64 images)
   const getBody = () => new Promise(resolve => {
     let body = '';
     req.on('data', chunk => { body += chunk; });
@@ -174,40 +215,28 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // API Endpoints
-  // 1. List Posts
+  // 1. List Posts (Both Published and Drafts)
   if (method === 'GET' && pathname === '/api/posts') {
     try {
-      const files = fs.readdirSync(POSTS_DIR).filter(f => f.endsWith('.md'));
-      const posts = [];
-
-      for (const file of files) {
-        const filePath = path.join(POSTS_DIR, file);
-        const stat = fs.statSync(filePath);
-        const raw = fs.readFileSync(filePath, 'utf8');
-        const { frontmatter, content } = parsePost(raw);
-
-        // Excerpt
-        const cleanContent = content.replace(/[#*`_>\[\]]/g, '').trim();
-        const excerpt = cleanContent.slice(0, 150) + (cleanContent.length > 150 ? '...' : '');
-
-        posts.push({
-          filename: file,
-          title: frontmatter.title || file.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, ''),
-          date: frontmatter.date || '',
-          categories: frontmatter.categories || [],
-          tags: frontmatter.tags || [],
-          math: !!frontmatter.math,
-          toc: frontmatter.toc !== false,
-          description: frontmatter.description || '',
-          excerpt,
-          mtime: stat.mtime
-        });
-      }
+      const publishedPosts = scanMarkdownDir(POSTS_DIR, false);
+      const draftPosts = scanMarkdownDir(DRAFTS_DIR, true);
+      const allPosts = [...publishedPosts, ...draftPosts];
 
       // Sort by date or filename descending
-      posts.sort((a, b) => b.filename.localeCompare(a.filename));
-      return json({ success: true, posts });
+      allPosts.sort((a, b) => {
+        if (a.date && b.date) return b.date.localeCompare(a.date);
+        return b.filename.localeCompare(a.filename);
+      });
+
+      return json({
+        success: true,
+        posts: allPosts,
+        stats: {
+          total: allPosts.length,
+          published: publishedPosts.length,
+          drafts: draftPosts.length
+        }
+      });
     } catch (err) {
       return json({ success: false, error: err.message }, 500);
     }
@@ -216,7 +245,13 @@ const server = http.createServer(async (req, res) => {
   // 2. Get Single Post
   if (method === 'GET' && pathname.startsWith('/api/posts/')) {
     const filename = decodeURIComponent(pathname.replace('/api/posts/', ''));
-    const filePath = path.join(POSTS_DIR, filename);
+    let filePath = path.join(POSTS_DIR, filename);
+    let isDraft = false;
+
+    if (!fs.existsSync(filePath)) {
+      filePath = path.join(DRAFTS_DIR, filename);
+      isDraft = true;
+    }
 
     if (!fs.existsSync(filePath)) {
       return json({ success: false, error: '文章不存在' }, 404);
@@ -225,17 +260,18 @@ const server = http.createServer(async (req, res) => {
     try {
       const raw = fs.readFileSync(filePath, 'utf8');
       const { frontmatter, content } = parsePost(raw);
-      return json({ success: true, post: { filename, frontmatter, content } });
+      return json({ success: true, post: { filename, isDraft, frontmatter, content } });
     } catch (err) {
       return json({ success: false, error: err.message }, 500);
     }
   }
 
-  // 3. Save Post (Create / Update)
+  // 3. Save Post (Create / Update / Move between draft & published)
   if (method === 'POST' && pathname === '/api/posts') {
     try {
       const data = await getBody();
-      let { originalFilename, filename, frontmatter, content } = data;
+      let { originalFilename, filename, frontmatter, content, isDraft } = data;
+      isDraft = !!isDraft;
 
       if (!filename) {
         return json({ success: false, error: '檔名不能為空' }, 400);
@@ -245,19 +281,36 @@ const server = http.createServer(async (req, res) => {
         filename += '.md';
       }
 
-      // If renaming, remove old file
-      if (originalFilename && originalFilename !== filename) {
-        const oldPath = path.join(POSTS_DIR, originalFilename);
-        if (fs.existsSync(oldPath)) {
-          fs.unlinkSync(oldPath);
+      // If published, ensure standard Jekyll post naming: YYYY-MM-DD-title.md
+      if (!isDraft && !/^\d{4}-\d{2}-\d{2}-/.test(filename)) {
+        let datePrefix = new Date().toISOString().slice(0, 10);
+        if (frontmatter && frontmatter.date) {
+          const m = frontmatter.date.match(/^\d{4}-\d{2}-\d{2}/);
+          if (m) datePrefix = m[0];
+        }
+        filename = `${datePrefix}-${filename}`;
+      }
+
+      const targetDir = isDraft ? DRAFTS_DIR : POSTS_DIR;
+      const targetPath = path.join(targetDir, filename);
+
+      // Handle file relocation or renaming
+      if (originalFilename) {
+        const oldInPosts = path.join(POSTS_DIR, originalFilename);
+        const oldInDrafts = path.join(DRAFTS_DIR, originalFilename);
+
+        if (fs.existsSync(oldInPosts) && oldInPosts !== targetPath) {
+          fs.unlinkSync(oldInPosts);
+        }
+        if (fs.existsSync(oldInDrafts) && oldInDrafts !== targetPath) {
+          fs.unlinkSync(oldInDrafts);
         }
       }
 
       const formatted = formatPost(frontmatter || {}, content || '');
-      const filePath = path.join(POSTS_DIR, filename);
-      fs.writeFileSync(filePath, formatted, 'utf8');
+      fs.writeFileSync(targetPath, formatted, 'utf8');
 
-      return json({ success: true, filename });
+      return json({ success: true, filename, isDraft });
     } catch (err) {
       return json({ success: false, error: err.message }, 500);
     }
@@ -266,21 +319,89 @@ const server = http.createServer(async (req, res) => {
   // 4. Delete Post
   if (method === 'DELETE' && pathname.startsWith('/api/posts/')) {
     const filename = decodeURIComponent(pathname.replace('/api/posts/', ''));
-    const filePath = path.join(POSTS_DIR, filename);
+    const postPath = path.join(POSTS_DIR, filename);
+    const draftPath = path.join(DRAFTS_DIR, filename);
 
-    if (fs.existsSync(filePath)) {
-      try {
-        fs.unlinkSync(filePath);
-        return json({ success: true });
-      } catch (err) {
-        return json({ success: false, error: err.message }, 500);
+    try {
+      let deleted = false;
+      if (fs.existsSync(postPath)) {
+        fs.unlinkSync(postPath);
+        deleted = true;
       }
-    } else {
-      return json({ success: false, error: '檔案不存在' }, 404);
+      if (fs.existsSync(draftPath)) {
+        fs.unlinkSync(draftPath);
+        deleted = true;
+      }
+
+      if (deleted) {
+        return json({ success: true });
+      } else {
+        return json({ success: false, error: '檔案不存在' }, 404);
+      }
+    } catch (err) {
+      return json({ success: false, error: err.message }, 500);
     }
   }
 
-  // 5. Config (Get & Save)
+  // 5. Image Upload API (Clipboard paste & file drop)
+  if (method === 'POST' && pathname === '/api/upload-image') {
+    try {
+      const data = await getBody();
+      const rawData = data.data || '';
+      const origFilename = data.filename || '';
+
+      if (!rawData) {
+        return json({ success: false, error: '未提供圖片數據' }, 400);
+      }
+
+      // Determine date subfolder YYYYMM
+      const now = new Date();
+      const yyyymm = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}`;
+      const targetSubDir = path.join(IMG_DIR, yyyymm);
+      if (!fs.existsSync(targetSubDir)) {
+        fs.mkdirSync(targetSubDir, { recursive: true });
+      }
+
+      // Determine file extension and decode base64
+      let ext = '.png';
+      let buffer;
+      const dataUriMatch = rawData.match(/^data:image\/([a-zA-Z0-9-+.]+);base64,(.+)$/);
+
+      if (dataUriMatch) {
+        let type = dataUriMatch[1].toLowerCase();
+        if (type === 'jpeg') ext = '.jpg';
+        else if (type === 'png') ext = '.png';
+        else if (type === 'gif') ext = '.gif';
+        else if (type === 'webp') ext = '.webp';
+        else if (type === 'svg+xml') ext = '.svg';
+        buffer = Buffer.from(dataUriMatch[2], 'base64');
+      } else {
+        if (origFilename && path.extname(origFilename)) {
+          ext = path.extname(origFilename).toLowerCase();
+        }
+        buffer = Buffer.from(rawData, 'base64');
+      }
+
+      // Generate unique safe filename
+      const timestamp = Date.now();
+      const randomStr = Math.random().toString(36).substring(2, 7);
+      const safeFilename = `img_${timestamp}_${randomStr}${ext}`;
+      const savePath = path.join(targetSubDir, safeFilename);
+
+      fs.writeFileSync(savePath, buffer);
+
+      const publicUrl = `/assets/img/posts/${yyyymm}/${safeFilename}`;
+      return json({
+        success: true,
+        url: publicUrl,
+        filename: safeFilename
+      });
+    } catch (err) {
+      return json({ success: false, error: err.message }, 500);
+    }
+  }
+
+  // 6. Config (Get & Save)
   if (method === 'GET' && pathname === '/api/config') {
     const cfg = readConfig();
     return json({
@@ -304,7 +425,7 @@ const server = http.createServer(async (req, res) => {
     return json({ success: true });
   }
 
-  // 6. Git Status
+  // 7. Git Status
   if (method === 'GET' && pathname === '/api/git/status') {
     const statusRes = await runCmd('git status -s');
     const logRes = await runCmd('git log -1 --pretty=format:"%h - %s (%cr)"');
@@ -319,7 +440,7 @@ const server = http.createServer(async (req, res) => {
     });
   }
 
-  // 7. Publish to GitHub
+  // 8. Publish to GitHub
   if (method === 'POST' && pathname === '/api/publish') {
     const cfg = readConfig();
     const logs = [];
@@ -356,7 +477,6 @@ const server = http.createServer(async (req, res) => {
 
     const pushRes = await runCmd(pushCmd);
     if (!pushRes.success) {
-      // Filter out token from output if present
       let cleanErr = (pushRes.stderr || pushRes.stdout || pushRes.error || '').replace(new RegExp(cfg.githubToken, 'g'), '***TOKEN***');
       logs.push(`推送失敗: ${cleanErr}`);
       return json({
@@ -373,14 +493,14 @@ const server = http.createServer(async (req, res) => {
     });
   }
 
-  // 8. Preview Toggle (Jekyll Serve)
+  // 9. Preview Toggle (Jekyll Serve with --drafts flag)
   if (method === 'POST' && pathname === '/api/preview/start') {
     if (jekyllProcess) {
       return json({ success: true, message: '預覽服務已在運行中' });
     }
 
     try {
-      jekyllProcess = spawn('bundle', ['exec', 'jekyll', 'serve', '--livereload', '--port', '4000'], {
+      jekyllProcess = spawn('bundle', ['exec', 'jekyll', 'serve', '--livereload', '--port', '4000', '--drafts'], {
         cwd: ROOT_DIR,
         shell: true
       });
@@ -389,7 +509,7 @@ const server = http.createServer(async (req, res) => {
         jekyllProcess = null;
       });
 
-      return json({ success: true, message: '預覽服務已啟動，請訪問 http://127.0.0.1:4000' });
+      return json({ success: true, message: '預覽服務已啟動（包含草稿預覽），請訪問 http://127.0.0.1:4000' });
     } catch (err) {
       return json({ success: false, error: err.message }, 500);
     }
@@ -414,12 +534,12 @@ const server = http.createServer(async (req, res) => {
     return json({ success: true, running: !!jekyllProcess, url: 'http://127.0.0.1:4000' });
   }
 
-  // Static File Serving
-  let filePath = path.join(PUBLIC_DIR, pathname === '/' ? 'index.html' : pathname);
-  if (!filePath.startsWith(PUBLIC_DIR)) {
-    res.writeHead(403);
-    res.end('Forbidden');
-    return;
+  // 10. Static File Serving (Admin UI) & Assets Serving
+  let filePath;
+  if (pathname.startsWith('/assets/')) {
+    filePath = path.join(ROOT_DIR, pathname);
+  } else {
+    filePath = path.join(PUBLIC_DIR, pathname === '/' ? 'index.html' : pathname);
   }
 
   if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
@@ -442,7 +562,7 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`===============================================`);
-  console.log(`  D-Lib 部落格管理後台已成功啟動！`);
+  console.log(`  D-Lib 部落格管理後台 (升級版) 已成功啟動！`);
   console.log(`  管理後台網址: http://localhost:${PORT}`);
   console.log(`  按 Ctrl + C 可關閉服務`);
   console.log(`===============================================`);

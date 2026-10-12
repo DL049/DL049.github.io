@@ -214,6 +214,8 @@ exclude:
   - purgecss.js
   - rollup.config.js
   - "package*.json"
+  - admin
+  - "啟動後台.bat"
 
 jekyll-archives:
   enabled: [categories, tags]

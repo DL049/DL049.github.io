@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D-Lib Blog Admin | 部落格管理後台</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Markdown & KaTeX & Highlight.js -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    :root {
+      --bg-main: #0f172a;
+      --bg-sidebar: #1e293b;
+      --bg-card: #1e293b;
+      --bg-hover: #334155;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+      background: var(--bg-main);
+      color: var(--text);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Layout */
+    .sidebar {
+      width: 320px;
+      min-width: 320px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Sidebar Header */
+    .sidebar-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.5px;
+    }
+    .brand-icon {
+      background: var(--primary);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Search & New Post */
+    .sidebar-actions {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .btn-new-post {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-new-post:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+    .search-box {
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 12px 8px 36px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .search-box input:focus { border-color: var(--primary); }
+    .search-box i {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Post List */
+    .post-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .post-item {
+      padding: 12px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      background: transparent;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .post-item:hover {
+      background: var(--bg-hover);
+    }
+    .post-item.active {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+    .post-item-title {
+      font-weight: 600;
+      font-size: 0.92rem;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .post-item-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tag-badge {
+      background: #334155;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+    }
+
+    /* Sidebar Footer */
+    .sidebar-footer {
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .icon-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.15s;
+    }
+    .icon-btn:hover { background: var(--bg-hover); color: var(--text); }
+
+    /* Top Navbar */
+    .navbar {
+      height: 60px;
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-main);
+    }
+    .navbar-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+    .navbar-title strong { color: var(--text); }
+
+    .navbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .btn:hover { background: var(--bg-hover); }
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-success {
+      background: var(--success);
+      border-color: var(--success);
+      color: white;
+    }
+    .btn-success:hover { filter: brightness(1.1); }
+    .btn-danger {
+      color: var(--danger);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    .btn-danger:hover { background: rgba(239, 68, 68, 0.1); }
+
+    /* Frontmatter Bar */
+    .fm-bar {
+      background: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: grid;
+      grid-template-columns: 2fr 1.2fr 1fr 1fr;
+      gap: 12px;
+      align-items: end;
+    }
+    .fm-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .fm-field label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .fm-field input {
+      background: var(--bg-main);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .fm-field input:focus { border-color: var(--primary); }
+    
+    .fm-options {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding-bottom: 8px;
+    }
+    .fm-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* Editor Toolbar */
+    .toolbar {
+      padding: 8px 24px;
+      background: var(--bg-main);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow-x: auto;
+    }
+    .tool-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tool-btn:hover { background: var(--bg-hover); color: var(--text); }
+    .tool-divider {
+      width: 1px;
+      height: 18px;
+      background: var(--border);
+      margin: 0 4px;
+    }
+
+    /* Editor & Preview Split */
+    .workspace {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+    .pane {
+      flex: 1;
+      height: 100%;
+      overflow-y: auto;
+      position: relative;
+    }
+    .editor-pane {
+      border-right: 1px solid var(--border);
+      background: #0b1120;
+    }
+    .editor-textarea {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      resize: none;
+      padding: 24px;
+      color: #e2e8f0;
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* Preview Styling */
+    .preview-pane {
+      background: #0f172a;
+      padding: 30px 40px;
+    }
+    .markdown-body {
+      color: #cbd5e1;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+    .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+      color: #f8fafc;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .markdown-body h1 { font-size: 1.8rem; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .markdown-body h2 { font-size: 1.4rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    .markdown-body h3 { font-size: 1.2rem; }
+    .markdown-body p { margin-bottom: 16px; }
+    .markdown-body pre {
+      background: #1e293b;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+    }
+    .markdown-body code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      background: rgba(51, 65, 85, 0.6);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .markdown-body pre code { background: transparent; padding: 0; }
+    .markdown-body blockquote {
+      border-left: 4px solid var(--primary);
+      padding-left: 16px;
+      color: var(--text-muted);
+      margin: 16px 0;
+    }
+    .markdown-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+    .markdown-body th, .markdown-body td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .markdown-body th { background: #1e293b; }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-card {
+      background: var(--bg-sidebar);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      width: 500px;
+      max-width: 90vw;
+      padding: 24px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .modal-header h3 { font-size: 1.15rem; font-weight: 600; }
+    .log-box {
+      background: #0b1120;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      max-height: 200px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      color: #94a3b8;
+      margin: 14px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="brand">
+        <div class="brand-icon"><i data-lucide="feather" style="width: 18px; color: white;"></i></div>
+        <span>D-Lib Admin</span>
+      </div>
+      <button class="icon-btn" onclick="openSettings()" title="GitHub 設定"><i data-lucide="settings" style="width: 18px;"></i></button>
+    </div>
+
+    <div class="sidebar-actions">
+      <button class="btn-new-post" onclick="createNewPost()">
+        <i data-lucide="plus" style="width: 18px;"></i> 寫新文章
+      </button>
+      <div class="search-box">
+        <i data-lucide="search"></i>
+        <input type="text" id="searchInput" placeholder="搜尋文章標題、標籤..." oninput="filterPosts()">
+      </div>
+    </div>
+
+    <div class="post-list" id="postList">
+      <!-- Injected by JavaScript -->
+    </div>
+
+    <div class="sidebar-footer">
+      <span id="postCount">共 0 篇文章</span>
+      <div style="display: flex; gap: 4px;">
+        <button class="icon-btn" onclick="toggleJekyllPreview()" id="btnPreviewToggle" title="啟動/關閉本地預覽 (Jekyll)">
+          <i data-lucide="play" style="width: 16px;"></i>
+        </button>
+        <button class="icon-btn" onclick="loadPosts()" title="重新整理"><i data-lucide="refresh-cw" style="width: 16px;"></i></button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Top Navbar -->
+    <header class="navbar">
+      <div class="navbar-title">
+        <span id="currentStatusText">正在編輯：</span>
+        <strong id="displayTitle">未命名文章</strong>
+        <span id="saveStatus" style="font-size: 0.75rem; color: var(--text-muted); margin-left: 8px;"></span>
+      </div>
+      <div class="navbar-actions">
+        <button class="btn btn-danger" onclick="deleteCurrentPost()" id="btnDelete" title="刪除此文章">
+          <i data-lucide="trash-2" style="width: 16px;"></i> 刪除
+        </button>
+        <button class="btn" onclick="saveCurrentPost(false)">
+          <i data-lucide="save" style="width: 16px;"></i> 儲存草稿
+        </button>
+        <button class="btn btn-success" onclick="publishToGithub()">
+          <i data-lucide="upload-cloud" style="width: 16px;"></i> 一鍵發布至 GitHub
+        </button>
+      </div>
+    </header>
+
+    <!-- Frontmatter Metadata Bar -->
+    <div class="fm-bar">
+      <div class="fm-field">
+        <label>文章標題</label>
+        <input type="text" id="fmTitle" placeholder="例如：投影學的數學建模" oninput="onTitleChange()">
+      </div>
+      <div class="fm-field">
+        <label>檔案名稱 (Slug)</label>
+        <input type="text" id="fmFilename" placeholder="YYYY-MM-DD-title.md">
+      </div>
+      <div class="fm-field">
+        <label>分類 (逗號分隔)</label>
+        <input type="text" id="fmCategories" placeholder="Derivation, Math">
+      </div>
+      <div class="fm-field">
+        <label>標籤 (逗號分隔)</label>
+        <input type="text" id="fmTags" placeholder="mathematic, graphic">
+      </div>
+      <div class="fm-field" style="grid-column: span 2;">
+        <label>發布日期</label>
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="fmDate" style="flex: 1;" placeholder="YYYY-MM-DD HH:mm:ss +0800">
+          <button class="btn" style="padding: 4px 10px;" onclick="setCurrentTime()">現在</button>
+        </div>
+      </div>
+      <div class="fm-options" style="grid-column: span 2;">
+        <label class="fm-checkbox">
+          <input type="checkbox" id="fmMath" checked onchange="renderPreview()">
+          LaTeX 數學公式 (math: true)
+        </label>
+        <label class="fm-checkbox">
+          <input type="checkbox" id="fmToc" checked>
+          顯示目錄 (toc: true)
+        </label>
+      </div>
+    </div>
+
+    <!-- Editor Toolbar -->
+    <div class="toolbar">
+      <button class="tool-btn" onclick="insertSyntax('**', '**')" title="粗體"><i data-lucide="bold" style="width: 16px;"></i></button>
+      <button class="tool-btn" onclick="insertSyntax('*', '*')" title="斜體"><i data-lucide="italic" style="width: 16px;"></i></button>
+      <div class="tool-divider"></div>
+      <button class="tool-btn" onclick="insertSyntax('## ', '')" title="標題 2"><i data-lucide="heading-2" style="width: 16px;"></i></button>
+      <button class="tool-btn" onclick="insertSyntax('### ', '')" title="標題 3"><i data-lucide="heading-3" style="width: 16px;"></i></button>
+      <div class="tool-divider"></div>
+      <button class="tool-btn" onclick="insertSyntax('> ', '')" title="引用"><i data-lucide="quote" style="width: 16px;"></i></button>
+      <button class="tool-btn" onclick="insertSyntax('`', '`')" title="行內代碼"><i data-lucide="code" style="width: 16px;"></i></button>
+      <button class="tool-btn" onclick="insertSyntax('```\n', '\n```')" title="代碼區塊"><i data-lucide="file-code" style="width: 16px;"></i></button>
+      <button class="tool-btn" onclick="insertSyntax('\\[\n', '\n\\]')" title="LaTeX 數學公式區塊"><i data-lucide="sigma" style="width: 16px;"></i></button>
+      <div class="tool-divider"></div>
+      <button class="tool-btn" onclick="insertSyntax('- ', '')" title="無序清單"><i data-lucide="list" style="width: 16px;"></i></button>
+      <button class="tool-btn" onclick="insertSyntax('[文字](', 'url)')" title="超連結"><i data-lucide="link" style="width: 16px;"></i></button>
+      <button class="tool-btn" onclick="insertSyntax('![說明](', 'url)')" title="圖片"><i data-lucide="image" style="width: 16px;"></i></button>
+      <button class="tool-btn" onclick="insertTable()" title="表格"><i data-lucide="table" style="width: 16px;"></i></button>
+    </div>
+
+    <!-- Dual Workspace -->
+    <div class="workspace">
+      <!-- Editor -->
+      <div class="pane editor-pane">
+        <textarea id="editorTextarea" class="editor-textarea" placeholder="在此輸入 Markdown 內容..." oninput="onContentChange()"></textarea>
+      </div>
+
+      <!-- Live Preview -->
+      <div class="pane preview-pane" id="previewPane">
+        <div class="markdown-body" id="previewContent"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i data-lucide="settings" style="width: 20px; vertical-align: middle; margin-right: 6px;"></i> GitHub 發布設定</h3>
+        <button class="icon-btn" onclick="closeSettings()"><i data-lucide="x"></i></button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="fm-field">
+          <label>GitHub 儲存庫 (User/Repo)</label>
+          <input type="text" id="cfgRepo" value="DL049/DL049.github.io">
+        </div>
+        <div class="fm-field">
+          <label>Personal Access Token (PAT)</label>
+          <input type="password" id="cfgToken" placeholder="ghp_xxxxxxxxxxxx">
+          <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">
+            Token 僅保存在本機 `admin/config.json`，已自動加入 `.gitignore`，絕不上傳。<br>
+            <a href="https://github.com/settings/tokens/new" target="_blank" style="color: var(--primary);">點此前往建立 Token</a>（請勾選 <strong>repo</strong> 權限）。
+          </span>
+        </div>
+        <div class="log-box" id="gitStatusBox">正在載入 Git 狀態...</div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+          <button class="btn" onclick="closeSettings()">取消</button>
+          <button class="btn btn-primary" onclick="saveSettings()">儲存設定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // State
+    let posts = [];
+    let currentPost = null;
+    let isJekyllRunning = false;
+
+    // Configure Marked.js
+    marked.setOptions({
+      highlight: function(code, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+          return hljs.highlight(code, { language: lang }).value;
+        }
+        return hljs.highlightAuto(code).value;
+      },
+      breaks: true
+    });
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', async () => {
+      lucide.createIcons();
+      await loadPosts();
+      await checkPreviewStatus();
+
+      // Keyboard shortcuts
+      document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+          e.preventDefault();
+          saveCurrentPost(false);
+        }
+      });
+    });
+
+    // Load Posts
+    async function loadPosts() {
+      try {
+        const res = await fetch('/api/posts');
+        const data = await res.json();
+        if (data.success) {
+          posts = data.posts;
+          renderPostList();
+          if (posts.length > 0 && !currentPost) {
+            selectPost(posts[0].filename);
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // Render Post List
+    function renderPostList(filter = '') {
+      const listEl = document.getElementById('postList');
+      listEl.innerHTML = '';
+
+      const filtered = posts.filter(p => {
+        const q = filter.toLowerCase();
+        return p.title.toLowerCase().includes(q) || 
+               p.tags.some(t => t.toLowerCase().includes(q)) ||
+               p.filename.toLowerCase().includes(q);
+      });
+
+      document.getElementById('postCount').innerText = `共 ${filtered.length} 篇文章`;
+
+      filtered.forEach(p => {
+        const div = document.createElement('div');
+        div.className = `post-item ${currentPost && currentPost.filename === p.filename ? 'active' : ''}`;
+        div.onclick = () => selectPost(p.filename);
+
+        const tagsHtml = p.tags.map(t => `<span class="tag-badge">#${t}</span>`).join(' ');
+
+        div.innerHTML = `
+          <div class="post-item-title">${escapeHtml(p.title)}</div>
+          <div class="post-item-meta">
+            <span>${p.date ? p.date.split(' ')[0] : p.filename.slice(0, 10)}</span>
+            <div style="flex: 1;"></div>
+            ${tagsHtml}
+          </div>
+        `;
+        listEl.appendChild(div);
+      });
+    }
+
+    function filterPosts() {
+      const q = document.getElementById('searchInput').value;
+      renderPostList(q);
+    }
+
+    // Select Post
+    async function selectPost(filename) {
+      try {
+        const res = await fetch(`/api/posts/${encodeURIComponent(filename)}`);
+        const data = await res.json();
+        if (data.success) {
+          currentPost = data.post;
+          populateEditor(currentPost);
+          renderPostList(document.getElementById('searchInput').value);
+          document.getElementById('btnDelete').style.display = 'flex';
+        }
+      } catch (err) {
+        SwAlert('錯誤', '讀取文章失敗: ' + err.message, 'error');
+      }
+    }
+
+    // Populate Editor
+    function populateEditor(post) {
+      const fm = post.frontmatter || {};
+      document.getElementById('fmTitle').value = fm.title || '';
+      document.getElementById('displayTitle').innerText = fm.title || post.filename;
+      document.getElementById('fmFilename').value = post.filename || '';
+      document.getElementById('fmCategories').value = Array.isArray(fm.categories) ? fm.categories.join(', ') : (fm.categories || '');
+      document.getElementById('fmTags').value = Array.isArray(fm.tags) ? fm.tags.join(', ') : (fm.tags || '');
+      document.getElementById('fmDate').value = fm.date || '';
+      document.getElementById('fmMath').checked = fm.math !== false;
+      document.getElementById('fmToc').checked = fm.toc !== false;
+      document.getElementById('editorTextarea').value = post.content || '';
+
+      renderPreview();
+    }
+
+    // Create New Post
+    function createNewPost() {
+      const now = new Date();
+      const dateStr = formatDate(now);
+      const dayPrefix = dateStr.split(' ')[0];
+
+      currentPost = {
+        filename: `${dayPrefix}-new-post.md`,
+        frontmatter: {
+          title: '未命名新文章',
+          date: dateStr,
+          categories: ['General'],
+          tags: ['blog'],
+          math: true,
+          toc: true
+        },
+        content: '## 介紹\n\n開始撰寫你的部落格文章內容...\n'
+      };
+
+      populateEditor(currentPost);
+      document.getElementById('btnDelete').style.display = 'none';
+      renderPostList();
+    }
+
+    // Save Post
+    async function saveCurrentPost(silent = false) {
+      const title = document.getElementById('fmTitle').value.trim() || '未命名文章';
+      let filename = document.getElementById('fmFilename').value.trim();
+      if (!filename) {
+        filename = `${formatDate(new Date()).split(' ')[0]}-post.md`;
+      }
+      if (!filename.endsWith('.md')) filename += '.md';
+
+      const categories = document.getElementById('fmCategories').value
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      const tags = document.getElementById('fmTags').value
+        .split(',')
+        .map(s => s.trim().toLowerCase())
+        .filter(Boolean);
+
+      const payload = {
+        originalFilename: currentPost ? currentPost.filename : null,
+        filename,
+        frontmatter: {
+          title,
+          date: document.getElementById('fmDate').value.trim() || formatDate(new Date()),
+          categories,
+          tags,
+          math: document.getElementById('fmMath').checked,
+          toc: document.getElementById('fmToc').checked
+        },
+        content: document.getElementById('editorTextarea').value
+      };
+
+      try {
+        const res = await fetch('/api/posts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.success) {
+          currentPost.filename = data.filename;
+          document.getElementById('fmFilename').value = data.filename;
+          document.getElementById('displayTitle').innerText = title;
+          document.getElementById('saveStatus').innerText = `已儲存 (${new Date().toLocaleTimeString()})`;
+          await loadPosts();
+          if (!silent) {
+            Swal.fire({
+              toast: true,
+              position: 'top-end',
+              icon: 'success',
+              title: '文章已儲存至本地！',
+              showConfirmButton: false,
+              timer: 2000
+            });
+          }
+        } else {
+          Swal.fire('儲存失敗', data.error, 'error');
+        }
+      } catch (err) {
+        Swal.fire('錯誤', err.message, 'error');
+      }
+    }
+
+    // Delete Current Post
+    async function deleteCurrentPost() {
+      if (!currentPost || !currentPost.filename) return;
+
+      const confirm = await Swal.fire({
+        title: '確定要刪除這篇文章嗎？',
+        text: `將永久刪除檔案: ${currentPost.filename}`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#334155',
+        confirmButtonText: '確定刪除',
+        cancelButtonText: '取消'
+      });
+
+      if (!confirm.isConfirmed) return;
+
+      try {
+        const res = await fetch(`/api/posts/${encodeURIComponent(currentPost.filename)}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (data.success) {
+          Swal.fire('已刪除', '文章檔案已成功移除', 'success');
+          currentPost = null;
+          await loadPosts();
+          if (posts.length === 0) createNewPost();
+        } else {
+          Swal.fire('刪除失敗', data.error, 'error');
+        }
+      } catch (err) {
+        Swal.fire('錯誤', err.message, 'error');
+      }
+    }
+
+    // Publish to GitHub
+    async function publishToGithub() {
+      // First, save current post
+      await saveCurrentPost(true);
+
+      // Check if Token is configured
+      const cfgRes = await fetch('/api/config');
+      const cfgData = await cfgRes.json();
+      if (!cfgData.hasToken) {
+        const ask = await Swal.fire({
+          title: '尚未配置 GitHub Token',
+          html: `推送到 GitHub 需要 Personal Access Token 授權。<br>您是否要現在設定？`,
+          icon: 'info',
+          showCancelButton: true,
+          confirmButtonText: '前往設定 Token',
+          cancelButtonText: '稍後再說'
+        });
+        if (ask.isConfirmed) {
+          openSettings();
+        }
+        return;
+      }
+
+      // Show Loading / Publishing progress
+      Swal.fire({
+        title: '正在發布到 GitHub...',
+        html: `
+          <div style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 12px;">
+            正在執行 Git 暫存、建立 Commit 並推送到遠端儲存庫...
+          </div>
+          <div class="log-box" id="publishLog">執行中...</div>
+        `,
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        didOpen: async () => {
+          Swal.showLoading();
+          try {
+            const res = await fetch('/api/publish', { method: 'POST' });
+            const data = await res.json();
+            const logBox = document.getElementById('publishLog');
+            if (logBox) logBox.innerText = data.log || '';
+
+            if (data.success) {
+              Swal.fire({
+                icon: 'success',
+                title: '🎉 發布成功！',
+                html: `
+                  <p>文章已順利推送到 GitHub！</p>
+                  <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 8px;">
+                    GitHub Actions 將在 1~2 分鐘內自動完成編譯上線。
+                  </p>
+                  <div style="margin-top: 16px; display: flex; gap: 10px; justify-content: center;">
+                    <a href="https://${cfgData.repo}" target="_blank" class="btn btn-primary" style="text-decoration: none;">訪問線上網站</a>
+                    <a href="https://github.com/${cfgData.repo}/actions" target="_blank" class="btn" style="text-decoration: none;">查看部署進度</a>
+                  </div>
+                `
+              });
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: '發布失敗',
+                html: `<div class="log-box">${escapeHtml(data.log || data.error)}</div>`
+              });
+            }
+          } catch (err) {
+            Swal.fire('錯誤', err.message, 'error');
+          }
+        }
+      });
+    }
+
+    // Live Render Preview with Math & Highlight
+    function renderPreview() {
+      const rawMarkdown = document.getElementById('editorTextarea').value;
+      const previewEl = document.getElementById('previewContent');
+
+      // Render Markdown
+      previewEl.innerHTML = marked.parse(rawMarkdown);
+
+      // Render KaTeX Math
+      if (document.getElementById('fmMath').checked && window.renderMathInElement) {
+        renderMathInElement(previewEl, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '\\[', right: '\\]', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    }
+
+    function onContentChange() {
+      renderPreview();
+    }
+
+    function onTitleChange() {
+      const title = document.getElementById('fmTitle').value;
+      document.getElementById('displayTitle').innerText = title || '未命名文章';
+
+      // Auto update filename if it's a new post or matches pattern
+      const filenameEl = document.getElementById('fmFilename');
+      if (!currentPost || currentPost.filename.includes('new-post')) {
+        const slug = slugify(title);
+        const dayPrefix = formatDate(new Date()).split(' ')[0];
+        filenameEl.value = `${dayPrefix}-${slug || 'post'}.md`;
+      }
+    }
+
+    function slugify(text) {
+      return text
+        .toString()
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\u4e00-\u9fa5-]+/g, '')
+        .replace(/--+/g, '-');
+    }
+
+    function formatDate(d) {
+      const pad = n => String(n).padStart(2, '0');
+      const year = d.getFullYear();
+      const month = pad(d.getMonth() + 1);
+      const day = pad(d.getDate());
+      const hours = pad(d.getHours());
+      const mins = pad(d.getMinutes());
+      const secs = pad(d.getSeconds());
+      return `${year}-${month}-${day} ${hours}:${mins}:${secs} +0800`;
+    }
+
+    function setCurrentTime() {
+      document.getElementById('fmDate').value = formatDate(new Date());
+    }
+
+    // Toolbar Helpers
+    function insertSyntax(before, after) {
+      const textarea = document.getElementById('editorTextarea');
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const text = textarea.value;
+      const selected = text.substring(start, end);
+
+      const replacement = before + (selected || '範例內容') + after;
+      textarea.value = text.substring(0, start) + replacement + text.substring(end);
+      textarea.focus();
+      textarea.selectionStart = start + before.length;
+      textarea.selectionEnd = start + before.length + (selected ? selected.length : 4);
+
+      renderPreview();
+    }
+
+    function insertTable() {
+      const tableTpl = '\n| 欄位 1 | 欄位 2 | 欄位 3 |\n| :--- | :--- | :--- |\n| 項目 A | 內容 1 | 數值 |\n| 項目 B | 內容 2 | 數值 |\n\n';
+      insertSyntax(tableTpl, '');
+    }
+
+    // Settings Modal
+    async function openSettings() {
+      document.getElementById('settingsModal').classList.add('active');
+      const cfgRes = await fetch('/api/config');
+      const cfg = await cfgRes.json();
+      if (cfg.success) {
+        document.getElementById('cfgRepo').value = cfg.repo || 'DL049/DL049.github.io';
+        if (cfg.hasToken) {
+          document.getElementById('cfgToken').placeholder = `已配置 (${cfg.maskedToken})`;
+        }
+      }
+
+      // Load Git Status
+      try {
+        const gitRes = await fetch('/api/git/status');
+        const git = await gitRes.json();
+        const box = document.getElementById('gitStatusBox');
+        if (git.success) {
+          box.innerText = `目前分支: ${git.branch}\n最新 Commit: ${git.lastCommit}\n未提交變更:\n${git.changes || '(無未提交變更)'}`;
+        }
+      } catch (e) {}
+    }
+
+    function closeSettings() {
+      document.getElementById('settingsModal').classList.remove('active');
+    }
+
+    async function saveSettings() {
+      const repo = document.getElementById('cfgRepo').value.trim();
+      const token = document.getElementById('cfgToken').value.trim();
+
+      const payload = { repo };
+      if (token) payload.githubToken = token;
+
+      try {
+        const res = await fetch('/api/config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.success) {
+          Swal.fire('成功', '設定已儲存', 'success');
+          closeSettings();
+        }
+      } catch (err) {
+        Swal.fire('錯誤', err.message, 'error');
+      }
+    }
+
+    // Jekyll Preview Controller
+    async function checkPreviewStatus() {
+      try {
+        const res = await fetch('/api/preview/status');
+        const data = await res.json();
+        updatePreviewBtn(data.running);
+      } catch (e) {}
+    }
+
+    function updatePreviewBtn(running) {
+      isJekyllRunning = running;
+      const btn = document.getElementById('btnPreviewToggle');
+      if (running) {
+        btn.innerHTML = `<i data-lucide="square" style="width: 16px; color: var(--danger);"></i>`;
+        btn.title = '停止本地 Jekyll 預覽服務';
+      } else {
+        btn.innerHTML = `<i data-lucide="play" style="width: 16px; color: var(--success);"></i>`;
+        btn.title = '啟動本地 Jekyll 預覽服務 (http://localhost:4000)';
+      }
+      lucide.createIcons();
+    }
+
+    async function toggleJekyllPreview() {
+      const endpoint = isJekyllRunning ? '/api/preview/stop' : '/api/preview/start';
+      try {
+        const res = await fetch(endpoint, { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          await checkPreviewStatus();
+          if (!isJekyllRunning) {
+            Swal.fire({
+              icon: 'info',
+              title: 'Jekyll 預覽已啟動',
+              html: `正在本地啟動 Jekyll 服務，請訪問：<br><a href="http://127.0.0.1:4000" target="_blank" style="color: var(--primary);">http://127.0.0.1:4000</a>`,
+              timer: 4000
+            });
+          }
+        }
+      } catch (err) {
+        Swal.fire('錯誤', err.message, 'error');
+      }
+    }
+
+    function escapeHtml(str) {
+      return (str || '').replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+      );
+    }
+  </script>
+</body>
+</html>

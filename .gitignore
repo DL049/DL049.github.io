@@ -22,3 +22,6 @@ package-lock.json
 # Misc
 _sass/vendors
 assets/js/dist
+
+# Admin Config (Contains GitHub Token)
+admin/config.json

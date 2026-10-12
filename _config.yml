@@ -10,6 +10,7 @@ lang: en
 
 # Change to your timezone › https://kevinnovak.github.io/Time-Zone-Picker
 timezone: Asia/Kuching
+future: true # 允許即使發布時間稍早或有時鐘誤差的文章也能正常編譯上線
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
@@ -137,9 +138,9 @@ assets:
     env: # [development | production]
 
 pwa:
-  enabled: true # The option for PWA feature (installable)
+  enabled: false # 完全停用 PWA，避免瀏覽器註冊 Service Worker 導致幽靈快取
   cache:
-    enabled: false # The option for PWA offline cache (關閉以避免舊頁面被強制快取無法及時更新)
+    enabled: false # The option for PWA offline cache
     # Paths defined here will be excluded from the PWA cache.
     # Usually its value is the `baseurl` of another website that
     # shares the same domain name as the current website.

@@ -1143,6 +1143,17 @@
       const mathBlocks = [];
       const codeBlocks = [];
 
+      function cleanFormula(formula) {
+        let f = formula.trim();
+        // 移除因轉義殘留的尾部反斜線
+        f = f.replace(/\\+$/, '');
+        // 將 Kramdown 的雙反斜線指令還原為標準 LaTeX 指令（如 \\frac -> \frac, \\tag -> \tag）
+        f = f.replace(/\\\\([a-zA-Z]+)/g, '\\$1');
+        // 還原矩陣中的雙換行符
+        f = f.replace(/\\\\\\\\/g, '\\\\');
+        return f;
+      }
+
       if (enableMath) {
         // Protect multi-line code blocks
         rawMarkdown = rawMarkdown.replace(/```[\s\S]*?```/g, match => {
@@ -1158,31 +1169,31 @@
           return id;
         });
 
-        // Extract Block Math: \\[ ... \\]
-        rawMarkdown = rawMarkdown.replace(/\\\[([\s\S]*?)\\\]/g, (match, code) => {
+        // Extract Block Math: \\[ ... \\] 或 \\\\[ ... \\\\]
+        rawMarkdown = rawMarkdown.replace(/\\{1,2}\[([\s\S]*?)\\{1,2}\]/g, (match, code) => {
           const id = `MATHBLOCKPLACEHOLDER${mathBlocks.length}END`;
-          mathBlocks.push({ code, display: true });
+          mathBlocks.push({ code: cleanFormula(code), display: true });
           return id;
         });
 
         // Extract Block Math: $$ ... $$
         rawMarkdown = rawMarkdown.replace(/\$\$([\s\S]*?)\$\$/g, (match, code) => {
           const id = `MATHBLOCKPLACEHOLDER${mathBlocks.length}END`;
-          mathBlocks.push({ code, display: true });
+          mathBlocks.push({ code: cleanFormula(code), display: true });
           return id;
         });
 
-        // Extract Inline Math: \\( ... \\)
-        rawMarkdown = rawMarkdown.replace(/\\\(([\s\S]*?)\\\)/g, (match, code) => {
+        // Extract Inline Math: \\( ... \\) 或 \\\\( ... \\\\)
+        rawMarkdown = rawMarkdown.replace(/\\{1,2}\(([\s\S]*?)\\{1,2}\)/g, (match, code) => {
           const id = `MATHINLINEPLACEHOLDER${mathBlocks.length}END`;
-          mathBlocks.push({ code, display: false });
+          mathBlocks.push({ code: cleanFormula(code), display: false });
           return id;
         });
 
         // Extract Inline Math: $ ... $
         rawMarkdown = rawMarkdown.replace(/\$([^\$\n]+?)\$/g, (match, code) => {
           const id = `MATHINLINEPLACEHOLDER${mathBlocks.length}END`;
-          mathBlocks.push({ code, display: false });
+          mathBlocks.push({ code: cleanFormula(code), display: false });
           return id;
         });
 

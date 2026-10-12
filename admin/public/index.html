@@ -581,6 +581,19 @@
     .chirpy-content th { background: var(--sidebar-bg); color: var(--heading-color); font-weight: 600; }
     .chirpy-content tr:nth-child(even) { background-color: var(--tb-even-bg); }
 
+    /* KaTeX Math Styling */
+    .katex-display {
+      margin: 1.4rem 0 !important;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 10px 0;
+      text-align: center;
+    }
+    .katex {
+      font-size: 1.08em;
+      line-height: 1.2;
+    }
+
     /* Modal Styling */
     .modal-overlay {
       position: fixed;
@@ -1119,28 +1132,93 @@
     function renderPreview() {
       let rawMarkdown = document.getElementById('editorTextarea').value;
       const previewEl = document.getElementById('previewContent');
+      const enableMath = document.getElementById('fmMath').checked && typeof katex !== 'undefined';
 
-      // Convert prompt syntax if present
+      // 1. Convert prompt syntax if present
       rawMarkdown = rawMarkdown.replace(/^>\s*\[!TIP\]\s*\n((?:>.*\n?)*)/gm, (match, p1) => {
         const clean = p1.replace(/^>\s?/gm, '');
         return `<div class="prompt-box">${clean}</div>\n`;
       });
 
-      // Render Markdown
-      previewEl.innerHTML = marked.parse(rawMarkdown);
+      const mathBlocks = [];
+      const codeBlocks = [];
 
-      // Render KaTeX Math
-      if (document.getElementById('fmMath').checked && window.renderMathInElement) {
-        renderMathInElement(previewEl, {
-          delimiters: [
-            { left: '$$', right: '$$', display: true },
-            { left: '\\[', right: '\\]', display: true },
-            { left: '$', right: '$', display: false },
-            { left: '\\(', right: '\\)', display: false }
-          ],
-          throwOnError: false
+      if (enableMath) {
+        // Protect multi-line code blocks
+        rawMarkdown = rawMarkdown.replace(/```[\s\S]*?```/g, match => {
+          const id = `CODEBLOCKPLACEHOLDER${codeBlocks.length}END`;
+          codeBlocks.push(match);
+          return id;
+        });
+
+        // Protect inline code
+        rawMarkdown = rawMarkdown.replace(/`[^`\n]+`/g, match => {
+          const id = `CODEBLOCKPLACEHOLDER${codeBlocks.length}END`;
+          codeBlocks.push(match);
+          return id;
+        });
+
+        // Extract Block Math: \\[ ... \\]
+        rawMarkdown = rawMarkdown.replace(/\\\[([\s\S]*?)\\\]/g, (match, code) => {
+          const id = `MATHBLOCKPLACEHOLDER${mathBlocks.length}END`;
+          mathBlocks.push({ code, display: true });
+          return id;
+        });
+
+        // Extract Block Math: $$ ... $$
+        rawMarkdown = rawMarkdown.replace(/\$\$([\s\S]*?)\$\$/g, (match, code) => {
+          const id = `MATHBLOCKPLACEHOLDER${mathBlocks.length}END`;
+          mathBlocks.push({ code, display: true });
+          return id;
+        });
+
+        // Extract Inline Math: \\( ... \\)
+        rawMarkdown = rawMarkdown.replace(/\\\(([\s\S]*?)\\\)/g, (match, code) => {
+          const id = `MATHINLINEPLACEHOLDER${mathBlocks.length}END`;
+          mathBlocks.push({ code, display: false });
+          return id;
+        });
+
+        // Extract Inline Math: $ ... $
+        rawMarkdown = rawMarkdown.replace(/\$([^\$\n]+?)\$/g, (match, code) => {
+          const id = `MATHINLINEPLACEHOLDER${mathBlocks.length}END`;
+          mathBlocks.push({ code, display: false });
+          return id;
+        });
+
+        // Restore code blocks for marked to render
+        codeBlocks.forEach((code, i) => {
+          rawMarkdown = rawMarkdown.replace(`CODEBLOCKPLACEHOLDER${i}END`, code);
         });
       }
+
+      // 2. Render Markdown via marked
+      let html = marked.parse(rawMarkdown);
+
+      // 3. Restore and render Math via KaTeX
+      if (enableMath && mathBlocks.length > 0) {
+        mathBlocks.forEach((item, i) => {
+          const token = item.display ? `MATHBLOCKPLACEHOLDER${i}END` : `MATHINLINEPLACEHOLDER${i}END`;
+          let renderedMath;
+          try {
+            renderedMath = katex.renderToString(item.code, {
+              displayMode: item.display,
+              throwOnError: false
+            });
+          } catch (e) {
+            renderedMath = `<span style="color:#ef4444;">[LaTeX 格式錯誤: ${escapeHtml(e.message)}]</span>`;
+          }
+
+          if (item.display) {
+            html = html.replace(`<p>${token}</p>`, `<div class="katex-display">${renderedMath}</div>`);
+            html = html.replace(token, `<div class="katex-display">${renderedMath}</div>`);
+          } else {
+            html = html.replace(token, renderedMath);
+          }
+        });
+      }
+
+      previewEl.innerHTML = html;
     }
 
     function onContentChange() { renderPreview(); }

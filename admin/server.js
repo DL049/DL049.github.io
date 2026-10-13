@@ -8,6 +8,9 @@ const PORT = 3000;
 const ROOT_DIR = path.resolve(__dirname, '..');
 const POSTS_DIR = path.join(ROOT_DIR, '_posts');
 const DRAFTS_DIR = path.join(ROOT_DIR, '_drafts');
+const TABS_DIR = path.join(ROOT_DIR, '_tabs');
+const ABOUT_FILE = path.join(TABS_DIR, 'about.md');
+const SITE_CONFIG_FILE = path.join(ROOT_DIR, '_config.yml');
 const IMG_DIR = path.join(ROOT_DIR, 'assets', 'img', 'posts');
 const CONFIG_FILE = path.join(__dirname, 'config.json');
 const PUBLIC_DIR = path.join(__dirname, 'public');
@@ -15,6 +18,7 @@ const PUBLIC_DIR = path.join(__dirname, 'public');
 // Ensure directories exist
 if (!fs.existsSync(POSTS_DIR)) fs.mkdirSync(POSTS_DIR, { recursive: true });
 if (!fs.existsSync(DRAFTS_DIR)) fs.mkdirSync(DRAFTS_DIR, { recursive: true });
+if (!fs.existsSync(TABS_DIR)) fs.mkdirSync(TABS_DIR, { recursive: true });
 if (!fs.existsSync(IMG_DIR)) fs.mkdirSync(IMG_DIR, { recursive: true });
 
 // Jekyll preview process reference
@@ -57,7 +61,6 @@ function parsePost(raw) {
   for (let rawLine of lines) {
     if (!rawLine.trim() || rawLine.trim().startsWith('#')) continue;
 
-    // Handle indented sub-properties (e.g. image:\n  path: /assets/...)
     if (/^\s+/.test(rawLine) && currentBlockKey === 'image') {
       const subColon = rawLine.indexOf(':');
       if (subColon !== -1) {
@@ -78,7 +81,6 @@ function parsePost(raw) {
     let val = line.slice(colonIdx + 1).trim();
     currentBlockKey = key;
 
-    // Strip inline comments if not part of a URL
     if (val.includes(' #') && !val.includes('http')) {
       val = val.split(' #')[0].trim();
     }
@@ -157,7 +159,7 @@ function runCmd(command, cwd = ROOT_DIR) {
 function fetchGithubJson(apiPath, token) {
   return new Promise((resolve, reject) => {
     const headers = {
-      'User-Agent': 'DLib-Blog-Admin/2.0',
+      'User-Agent': 'DLib-Blog-Admin/3.0',
       'Accept': 'application/vnd.github.v3+json'
     };
     if (token) {
@@ -262,13 +264,22 @@ function scanAllImages(dir, baseFolder = '') {
   return results;
 }
 
+// Resolve relative Git path for a filename
+function resolveGitRelPath(filename) {
+  if (filename === '__ABOUT__') return '_tabs/about.md';
+  const postPath = path.join(POSTS_DIR, filename);
+  if (fs.existsSync(postPath)) return `_posts/${filename}`;
+  const draftPath = path.join(DRAFTS_DIR, filename);
+  if (fs.existsSync(draftPath)) return `_drafts/${filename}`;
+  return `_posts/${filename}`;
+}
+
 // HTTP Server
 const server = http.createServer(async (req, res) => {
   const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
   const pathname = parsedUrl.pathname;
   const method = req.method;
 
-  // JSON Body Helper (Supports up to 25MB for base64 images)
   const getBody = () => new Promise(resolve => {
     let body = '';
     req.on('data', chunk => { body += chunk; });
@@ -281,13 +292,11 @@ const server = http.createServer(async (req, res) => {
     });
   });
 
-  // Response JSON Helper
   const json = (data, status = 200) => {
     res.writeHead(status, { 'Content-Type': 'application/json; charset=UTF-8' });
     res.end(JSON.stringify(data));
   };
 
-  // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -305,7 +314,6 @@ const server = http.createServer(async (req, res) => {
       const draftPosts = scanMarkdownDir(DRAFTS_DIR, true).map(({ rawContent, ...rest }) => rest);
       const allPosts = [...publishedPosts, ...draftPosts];
 
-      // Sort: Pinned first, then by date or filename descending
       allPosts.sort((a, b) => {
         if (a.pin !== b.pin) return a.pin ? -1 : 1;
         if (a.date && b.date) return b.date.localeCompare(a.date);
@@ -350,7 +358,7 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // 3. Save Post (Create / Update / Move between draft & published)
+  // 3. Save Post
   if (method === 'POST' && pathname === '/api/posts') {
     try {
       const data = await getBody();
@@ -365,7 +373,6 @@ const server = http.createServer(async (req, res) => {
         filename += '.md';
       }
 
-      // If published, ensure standard Jekyll post naming: YYYY-MM-DD-title.md
       if (!isDraft && !/^\d{4}-\d{2}-\d{2}-/.test(filename)) {
         let datePrefix = new Date().toISOString().slice(0, 10);
         if (frontmatter && frontmatter.date) {
@@ -378,7 +385,6 @@ const server = http.createServer(async (req, res) => {
       const targetDir = isDraft ? DRAFTS_DIR : POSTS_DIR;
       const targetPath = path.join(targetDir, filename);
 
-      // Handle file relocation or renaming
       if (originalFilename) {
         const oldInPosts = path.join(POSTS_DIR, originalFilename);
         const oldInDrafts = path.join(DRAFTS_DIR, originalFilename);
@@ -427,7 +433,159 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // 5. Image Upload API (Clipboard paste & file drop)
+  // 4b. About Page API (_tabs/about.md)
+  if (method === 'GET' && pathname === '/api/about') {
+    try {
+      if (!fs.existsSync(ABOUT_FILE)) {
+        return json({ success: true, content: '## Education\n', math: true });
+      }
+      const raw = fs.readFileSync(ABOUT_FILE, 'utf8');
+      const { frontmatter, content } = parsePost(raw);
+      return json({ success: true, content, math: frontmatter.math !== false });
+    } catch (err) {
+      return json({ success: false, error: err.message }, 500);
+    }
+  }
+
+  if (method === 'POST' && pathname === '/api/about') {
+    try {
+      const data = await getBody();
+      const bodyContent = (data.content || '').trim();
+      const out = [
+        '---',
+        '# the default layout is \'page\'',
+        'icon: fas fa-info-circle',
+        'order: 4',
+        'math: true',
+        '---',
+        '',
+        bodyContent,
+        ''
+      ].join('\n');
+      fs.writeFileSync(ABOUT_FILE, out, 'utf8');
+      return json({ success: true });
+    } catch (err) {
+      return json({ success: false, error: err.message }, 500);
+    }
+  }
+
+  // 4c. Site Config API (_config.yml)
+  if (method === 'GET' && pathname === '/api/site-config') {
+    try {
+      const raw = fs.readFileSync(SITE_CONFIG_FILE, 'utf8');
+      const extract = (regex) => {
+        const m = raw.match(regex);
+        if (!m) return '';
+        let v = m[1].trim();
+        if (v.includes(' #') && !v.includes('http')) v = v.split(' #')[0].trim();
+        return v.replace(/^['"]|['"]$/g, '');
+      };
+      return json({
+        success: true,
+        siteConfig: {
+          title: extract(/^title:\s*(.+)$/m),
+          tagline: extract(/^tagline:\s*(.+)$/m),
+          timezone: extract(/^timezone:\s*(.+)$/m),
+          avatar: extract(/^avatar:\s*(.+)$/m),
+          authorName: extract(/^\s+name:\s*(.+)$/m),
+          authorEmail: extract(/^\s+email:\s*(.+)$/m)
+        }
+      });
+    } catch (err) {
+      return json({ success: false, error: err.message }, 500);
+    }
+  }
+
+  if (method === 'POST' && pathname === '/api/site-config') {
+    try {
+      const data = await getBody();
+      let raw = fs.readFileSync(SITE_CONFIG_FILE, 'utf8');
+
+      if (data.title !== undefined) {
+        raw = raw.replace(/^(title:\s*).*$/m, `$1${data.title} # the main title`);
+      }
+      if (data.tagline !== undefined) {
+        raw = raw.replace(/^(tagline:\s*).*$/m, `$1${data.tagline} # it will display as the subtitle`);
+      }
+      if (data.timezone !== undefined) {
+        raw = raw.replace(/^(timezone:\s*).*$/m, `$1${data.timezone}`);
+      }
+      if (data.avatar !== undefined) {
+        raw = raw.replace(/^(avatar:\s*).*$/m, `$1"${data.avatar}"`);
+      }
+      if (data.authorName !== undefined) {
+        raw = raw.replace(/^(\s+name:\s*).*$/m, `$1${data.authorName}`);
+      }
+      if (data.authorEmail !== undefined) {
+        raw = raw.replace(/^(\s+email:\s*).*$/m, `$1${data.authorEmail}`);
+      }
+
+      fs.writeFileSync(SITE_CONFIG_FILE, raw, 'utf8');
+      return json({ success: true });
+    } catch (err) {
+      return json({ success: false, error: err.message }, 500);
+    }
+  }
+
+  // 4d. Check Local Image Links for Linter
+  if (method === 'POST' && pathname === '/api/check-links') {
+    try {
+      const data = await getBody();
+      const paths = Array.isArray(data.paths) ? data.paths : [];
+      const missing = [];
+      for (const p of paths) {
+        if (typeof p === 'string' && p.startsWith('/assets/')) {
+          const full = path.join(ROOT_DIR, p.replace(/\//g, path.sep));
+          if (!fs.existsSync(full)) {
+            missing.push(p);
+          }
+        }
+      }
+      return json({ success: true, missing });
+    } catch (err) {
+      return json({ success: false, error: err.message }, 500);
+    }
+  }
+
+  // 4e. Git Version History & Rollback APIs
+  if (method === 'GET' && pathname === '/api/git/history') {
+    const fileParam = parsedUrl.searchParams.get('file') || '';
+    if (!fileParam) return json({ success: false, error: '未指定檔案' }, 400);
+
+    const relPath = resolveGitRelPath(fileParam);
+    const cmd = `git log -n 30 --pretty=format:"%h|%ad|%s" --date=format:"%Y-%m-%d %H:%M" -- "${relPath}"`;
+    const logRes = await runCmd(cmd);
+    const commits = (logRes.stdout || '')
+      .split(/\r?\n/)
+      .filter(Boolean)
+      .map(line => {
+        const parts = line.split('|');
+        return {
+          hash: parts[0],
+          date: parts[1],
+          message: parts.slice(2).join('|')
+        };
+      });
+
+    return json({ success: true, file: relPath, commits });
+  }
+
+  if (method === 'GET' && pathname === '/api/git/file-at-commit') {
+    const hash = parsedUrl.searchParams.get('hash') || '';
+    const fileParam = parsedUrl.searchParams.get('file') || '';
+    if (!/^[0-9a-f]{5,40}$/i.test(hash)) {
+      return json({ success: false, error: '無效的 Commit Hash' }, 400);
+    }
+    const relPath = resolveGitRelPath(fileParam);
+    const showRes = await runCmd(`git show ${hash}:"${relPath}"`);
+    if (!showRes.success) {
+      return json({ success: false, error: '無法讀取該歷史版本內容' }, 404);
+    }
+    const { frontmatter, content } = parsePost(showRes.stdout);
+    return json({ success: true, raw: showRes.stdout, frontmatter, content });
+  }
+
+  // 5. Image Upload API
   if (method === 'POST' && pathname === '/api/upload-image') {
     try {
       const data = await getBody();
@@ -466,7 +624,8 @@ const server = http.createServer(async (req, res) => {
 
       const timestamp = Date.now();
       const randomStr = Math.random().toString(36).substring(2, 7);
-      const safeFilename = `img_${timestamp}_${randomStr}${ext}`;
+      const prefix = origFilename && origFilename.startsWith('plot') ? 'plot' : (origFilename && origFilename.startsWith('sketch') ? 'sketch' : 'img');
+      const safeFilename = `${prefix}_${timestamp}_${randomStr}${ext}`;
       const savePath = path.join(targetSubDir, safeFilename);
 
       fs.writeFileSync(savePath, buffer);
@@ -498,7 +657,6 @@ const server = http.createServer(async (req, res) => {
         return { ...img, usedIn };
       });
 
-      // Sort newest first
       enriched.sort((a, b) => new Date(b.mtime) - new Date(a.mtime));
       return json({ success: true, images: enriched });
     } catch (err) {
@@ -728,7 +886,7 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`===============================================`);
-  console.log(`  D-Lib 部落格管理後台 (Phase 2 旗艦版) 已啟動！`);
+  console.log(`  D-Lib 部落格管理後台 (Phase 3 終極版) 已啟動！`);
   console.log(`  管理後台網址: http://localhost:${PORT}`);
   console.log(`  按 Ctrl + C 可關閉服務`);
   console.log(`===============================================`);

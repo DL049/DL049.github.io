@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D-Lib Admin | 部落格管理後台</title>
+  <title>D-Lib Admin | 部落格管理與理工寫作工作站</title>
 
   <!-- Google Fonts: Lato, Source Sans 3, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Lato:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-  <!-- FontAwesome 6 (Chirpy's exact icon system) -->
+  <!-- FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Markdown, KaTeX, Highlight.js & Mermaid.js -->
@@ -25,12 +25,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <style>
-    /* -------------------------------------------------------------
-       Jekyll Chirpy Theme System Variables (Exact replica)
-    ------------------------------------------------------------- */
-    :root {
-      font-size: 16px;
-    }
+    :root { font-size: 16px; }
 
     /* Chirpy Dark Mode (Default) */
     html[data-mode="dark"] {
@@ -62,7 +57,6 @@
       --avatar-border-color: rgb(206, 206, 206, 0.9);
       --input-bg: #151517;
       --topbar-bg: rgba(27, 27, 30, 0.85);
-      /* Chirpy 4 Prompt Colors (Dark) */
       --prompt-tip-bg: rgba(22, 60, 36, 0.64);
       --prompt-tip-color: #15d615;
       --prompt-info-bg: rgba(7, 59, 104, 0.8);
@@ -107,7 +101,6 @@
       --avatar-border-color: #ffffff;
       --input-bg: #f8fafc;
       --topbar-bg: rgba(255, 255, 255, 0.88);
-      /* Chirpy 4 Prompt Colors (Light) */
       --prompt-tip-bg: rgba(123, 247, 144, 0.2);
       --prompt-tip-color: #03b303;
       --prompt-info-bg: #e1f5fe;
@@ -122,11 +115,7 @@
       --published-bg: rgba(37, 99, 235, 0.12);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -137,9 +126,7 @@
       display: flex;
     }
 
-    /* -------------------------------------------------------------
-       Sidebar (Matches Chirpy)
-    ------------------------------------------------------------- */
+    /* Sidebar */
     .sidebar {
       width: 310px;
       background: var(--sidebar-bg);
@@ -151,91 +138,77 @@
     }
 
     .profile-wrapper {
-      padding: 20px 18px 14px;
+      padding: 18px 16px 12px;
       text-align: center;
       border-bottom: 1px solid var(--sidebar-border-color);
     }
     .profile-avatar {
-      width: 62px;
-      height: 62px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
       border: 2px solid var(--avatar-border-color);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       object-fit: cover;
     }
     .site-title {
       font-family: 'Lato', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.18rem;
       font-weight: 700;
       color: var(--heading-color);
-      letter-spacing: 0.5px;
       text-decoration: none;
       display: block;
     }
     .site-subtitle {
-      font-size: 0.76rem;
+      font-size: 0.74rem;
       color: var(--sidebar-muted-color);
-      margin-top: 3px;
+      margin-top: 2px;
     }
 
     .sidebar-actions {
-      padding: 10px 14px 8px;
+      padding: 10px 12px 8px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 7px;
     }
-
-    .sidebar-btn-row {
-      display: flex;
-      gap: 6px;
-    }
-
+    .sidebar-btn-row { display: flex; gap: 6px; }
     .btn-chirpy-new {
       flex: 1;
       background: var(--link-color);
       color: #ffffff;
       border: none;
       border-radius: 8px;
-      padding: 8px 12px;
+      padding: 7px 10px;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: opacity 0.2s;
     }
     .btn-chirpy-new:hover { opacity: 0.9; }
-
     .btn-chirpy-media {
       background: var(--card-bg);
       color: var(--text-color);
       border: 1px solid var(--sidebar-border-color);
       border-radius: 8px;
-      padding: 8px 10px;
-      font-size: 0.82rem;
+      padding: 7px 10px;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 5px;
-      transition: all 0.15s;
     }
-    .btn-chirpy-media:hover {
-      background: var(--sidebar-hover-bg);
-      color: var(--heading-color);
-    }
+    .btn-chirpy-media:hover { background: var(--sidebar-hover-bg); color: var(--heading-color); }
 
-    .search-wrapper {
-      position: relative;
-    }
+    .search-wrapper { position: relative; }
     .search-icon {
       position: absolute;
       left: 10px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--sidebar-muted-color);
     }
     .search-input {
@@ -243,57 +216,50 @@
       background: var(--input-bg);
       border: 1px solid var(--sidebar-border-color);
       border-radius: 6px;
-      padding: 6px 10px 6px 30px;
+      padding: 6px 10px 6px 28px;
       color: var(--text-color);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       outline: none;
     }
     .search-input:focus { border-color: var(--link-color); }
 
-    /* Post Tabs: All | Published | Drafts */
+    /* Post Tabs: All | Published | Drafts | About */
     .post-tabs {
       display: flex;
-      padding: 4px 14px;
-      gap: 4px;
+      padding: 4px 10px;
+      gap: 3px;
       border-bottom: 1px solid var(--sidebar-border-color);
       background: rgba(0, 0, 0, 0.05);
     }
     .tab-btn {
       flex: 1;
-      padding: 6px 4px;
+      padding: 5px 3px;
       background: transparent;
       border: none;
       color: var(--sidebar-muted-color);
-      font-size: 0.76rem;
+      font-size: 0.73rem;
       font-weight: 600;
       border-radius: 6px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
-      transition: all 0.15s;
+      gap: 3px;
     }
-    .tab-btn:hover {
-      background: var(--sidebar-hover-bg);
-      color: var(--text-color);
-    }
+    .tab-btn:hover { background: var(--sidebar-hover-bg); color: var(--text-color); }
     .tab-btn.active {
       background: var(--card-bg);
       color: var(--heading-color);
       box-shadow: 0 1px 3px rgba(0,0,0,0.15);
     }
     .tab-badge {
-      font-size: 0.68rem;
-      padding: 1px 5px;
+      font-size: 0.65rem;
+      padding: 1px 4px;
       border-radius: 10px;
       background: var(--sidebar-hover-bg);
       color: var(--text-muted-color);
     }
-    .tab-btn.active .tab-badge {
-      background: var(--link-color);
-      color: #fff;
-    }
+    .tab-btn.active .tab-badge { background: var(--link-color); color: #fff; }
 
     .post-list {
       flex: 1;
@@ -301,42 +267,33 @@
       padding: 8px 10px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
     }
     .post-card {
       background: transparent;
       border: 1px solid transparent;
       border-radius: 8px;
-      padding: 9px 11px;
+      padding: 8px 10px;
       cursor: pointer;
       transition: all 0.15s ease;
-      position: relative;
     }
-    .post-card:hover {
-      background: var(--sidebar-hover-bg);
-    }
+    .post-card:hover { background: var(--sidebar-hover-bg); }
     .post-card.active {
       background: var(--card-bg);
       border-color: var(--main-border-color);
       box-shadow: var(--card-shadow);
     }
     .post-card-title {
-      font-size: 0.86rem;
+      font-size: 0.85rem;
       font-weight: 600;
       color: var(--heading-color);
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       line-height: 1.35;
       display: flex;
       align-items: flex-start;
       gap: 5px;
     }
-    .pin-icon {
-      color: #f59e0b;
-      font-size: 0.75rem;
-      margin-top: 3px;
-      flex-shrink: 0;
-      transform: rotate(45deg);
-    }
+    .pin-icon { color: #f59e0b; font-size: 0.74rem; margin-top: 3px; transform: rotate(45deg); }
     .post-card-meta {
       display: flex;
       align-items: center;
@@ -346,7 +303,6 @@
       flex-wrap: wrap;
     }
 
-    /* Status Badges */
     .status-badge {
       display: inline-flex;
       align-items: center;
@@ -356,53 +312,38 @@
       font-size: 0.68rem;
       font-weight: 600;
     }
-    .status-badge.draft {
-      background: var(--draft-bg);
-      color: var(--draft-color);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-    }
-    .status-badge.published {
-      background: var(--published-bg);
-      color: var(--published-color);
-      border: 1px solid rgba(59, 130, 246, 0.3);
-    }
+    .status-badge.draft { background: var(--draft-bg); color: var(--draft-color); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .status-badge.published { background: var(--published-bg); color: var(--published-color); border: 1px solid rgba(59, 130, 246, 0.3); }
 
     .chirpy-tag {
-      background: transparent;
       border: 1px solid var(--tag-border);
       color: var(--sidebar-muted-color);
       border-radius: 4px;
       padding: 0 4px;
-      font-size: 0.66rem;
+      font-size: 0.65rem;
     }
 
     .sidebar-bottom {
-      padding: 9px 14px;
+      padding: 8px 12px;
       border-top: 1px solid var(--sidebar-border-color);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--sidebar-muted-color);
     }
     .sidebar-btn {
       background: transparent;
       border: none;
       color: var(--sidebar-muted-color);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       cursor: pointer;
       padding: 4px 6px;
       border-radius: 6px;
-      transition: color 0.15s, background 0.15s;
     }
-    .sidebar-btn:hover {
-      color: var(--heading-color);
-      background: var(--sidebar-hover-bg);
-    }
+    .sidebar-btn:hover { color: var(--heading-color); background: var(--sidebar-hover-bg); }
 
-    /* -------------------------------------------------------------
-       Main Content Area
-    ------------------------------------------------------------- */
+    /* Main Content Area */
     .main {
       flex: 1;
       display: flex;
@@ -412,10 +353,9 @@
       background: var(--main-bg);
     }
 
-    /* Topbar */
     .topbar {
-      height: 50px;
-      padding: 0 18px;
+      height: 48px;
+      padding: 0 16px;
       border-bottom: 1px solid var(--main-border-color);
       background: var(--topbar-bg);
       backdrop-filter: blur(8px);
@@ -423,61 +363,53 @@
       align-items: center;
       justify-content: space-between;
       flex-shrink: 0;
-      gap: 10px;
+      gap: 8px;
     }
     .breadcrumb {
       display: flex;
       align-items: center;
-      gap: 7px;
-      font-size: 0.82rem;
+      gap: 6px;
+      font-size: 0.8rem;
       color: var(--text-muted-color);
       overflow: hidden;
-      text-overflow: ellipsis;
       white-space: nowrap;
     }
     .breadcrumb strong {
       color: var(--heading-color);
       font-weight: 600;
-      max-width: 240px;
+      max-width: 210px;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .topbar-actions {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       flex-shrink: 0;
     }
 
-    /* Pills: Word Count & GitHub Actions Status */
     .stat-pill {
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      font-size: 0.73rem;
+      font-size: 0.72rem;
       color: var(--text-muted-color);
       background: var(--input-bg);
-      padding: 4px 9px;
+      padding: 3px 8px;
       border-radius: 20px;
       border: 1px solid var(--main-border-color);
       text-decoration: none;
     }
-    .actions-pill {
-      cursor: pointer;
-      transition: border-color 0.15s;
-    }
-    .actions-pill:hover {
-      border-color: var(--link-color);
-      color: var(--heading-color);
-    }
+    .actions-pill { cursor: pointer; }
+    .actions-pill:hover { border-color: var(--link-color); color: var(--heading-color); }
     .dot-green { width: 7px; height: 7px; border-radius: 50%; background: #10b981; display: inline-block; }
     .dot-yellow { width: 7px; height: 7px; border-radius: 50%; background: #f59e0b; display: inline-block; animation: pulse 1s infinite; }
     .dot-red { width: 7px; height: 7px; border-radius: 50%; background: #ef4444; display: inline-block; }
 
     .btn {
-      padding: 5px 11px;
+      padding: 5px 10px;
       border-radius: 6px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
@@ -489,104 +421,64 @@
       transition: all 0.15s;
     }
     .btn:hover { background: var(--card-hover-bg); color: var(--heading-color); }
-    .btn-save-draft {
-      background: var(--draft-bg);
-      color: var(--draft-color);
-      border-color: rgba(245, 158, 11, 0.4);
-    }
-    .btn-save-draft:hover {
-      background: rgba(245, 158, 11, 0.25);
-    }
-    .btn-publish {
-      background: var(--link-color);
-      color: #ffffff;
-      border-color: transparent;
-    }
+    .btn-save-draft { background: var(--draft-bg); color: var(--draft-color); border-color: rgba(245, 158, 11, 0.4); }
+    .btn-publish { background: var(--link-color); color: #ffffff; border-color: transparent; }
     .btn-publish:hover { opacity: 0.9; }
-    .btn-delete {
-      color: #ef4444;
-      border-color: rgba(239, 68, 68, 0.2);
-    }
-    .btn-delete:hover {
-      background: rgba(239, 68, 68, 0.1);
-    }
+    .btn-delete { color: #ef4444; border-color: rgba(239, 68, 68, 0.2); }
 
     /* Metadata Bar */
     .meta-bar {
-      padding: 10px 18px;
+      padding: 9px 16px;
       background: var(--sidebar-bg);
       border-bottom: 1px solid var(--main-border-color);
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px 12px;
-      font-size: 0.78rem;
+      gap: 7px 12px;
+      font-size: 0.76rem;
     }
-    .meta-field {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
+    .meta-field { display: flex; flex-direction: column; gap: 3px; }
     .meta-field label {
       color: var(--text-muted-color);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 600;
       display: flex;
-      align-items: center;
       justify-content: space-between;
     }
-    .meta-field input, .meta-field select {
+    .meta-field input, .meta-field select, .meta-field textarea {
       background: var(--input-bg);
       border: 1px solid var(--main-border-color);
       border-radius: 6px;
       padding: 5px 8px;
       color: var(--text-color);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       outline: none;
+      font-family: inherit;
     }
-    .meta-field input:focus { border-color: var(--link-color); }
+    .meta-field input:focus, .meta-field textarea:focus { border-color: var(--link-color); }
 
     .suggestion-chips {
       display: flex;
       gap: 4px;
       flex-wrap: wrap;
       margin-top: 2px;
-      max-height: 24px;
+      max-height: 22px;
       overflow-y: auto;
     }
     .chip {
-      font-size: 0.68rem;
-      padding: 0px 5px;
+      font-size: 0.66rem;
+      padding: 0 5px;
       border-radius: 4px;
       background: var(--inline-code-bg);
       color: var(--text-muted-color);
       border: 1px solid var(--main-border-color);
       cursor: pointer;
       user-select: none;
-      transition: all 0.15s;
     }
-    .chip:hover {
-      color: var(--link-color);
-      border-color: var(--link-color);
-    }
+    .chip:hover { color: var(--link-color); border-color: var(--link-color); }
 
-    .meta-options {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      flex-wrap: wrap;
-      padding-top: 2px;
-    }
-    .chirpy-checkbox {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.76rem;
-      cursor: pointer;
-      user-select: none;
-      color: var(--text-color);
-    }
+    .meta-options { display: flex; gap: 11px; align-items: center; flex-wrap: wrap; }
+    .chirpy-checkbox { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; cursor: pointer; user-select: none; }
 
-    /* Collapsible Advanced Meta Row */
     .meta-advanced {
       grid-column: span 4;
       display: none;
@@ -594,19 +486,15 @@
       gap: 10px 12px;
       padding-top: 6px;
       border-top: 1px dashed var(--main-border-color);
-      margin-top: 2px;
     }
-    .meta-advanced.open {
-      display: grid;
-    }
+    .meta-advanced.open { display: grid; }
 
-    /* Autosave notification bar */
     .autosave-banner {
       display: none;
       background: rgba(245, 158, 11, 0.12);
       border-bottom: 1px solid rgba(245, 158, 11, 0.3);
-      padding: 5px 18px;
-      font-size: 0.76rem;
+      padding: 4px 16px;
+      font-size: 0.75rem;
       color: var(--draft-color);
       align-items: center;
       justify-content: space-between;
@@ -615,12 +503,12 @@
 
     /* Editor Toolbar */
     .editor-toolbar {
-      padding: 5px 18px;
+      padding: 4px 16px;
       background: var(--main-bg);
       border-bottom: 1px solid var(--main-border-color);
       display: flex;
       align-items: center;
-      gap: 3px;
+      gap: 2px;
       position: relative;
       flex-wrap: wrap;
     }
@@ -628,13 +516,12 @@
       background: transparent;
       border: 1px solid transparent;
       color: var(--text-muted-color);
-      padding: 5px 8px;
+      padding: 4px 7px;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 4px;
       transition: all 0.15s;
     }
@@ -644,14 +531,8 @@
       color: var(--link-color);
       border-color: rgba(138, 180, 248, 0.3);
     }
-    .tool-sep {
-      width: 1px;
-      height: 16px;
-      background: var(--main-border-color);
-      margin: 0 3px;
-    }
+    .tool-sep { width: 1px; height: 15px; background: var(--main-border-color); margin: 0 3px; }
 
-    /* View Mode Segmented Control */
     .view-switch {
       display: inline-flex;
       background: var(--input-bg);
@@ -664,24 +545,19 @@
       background: transparent;
       border: none;
       color: var(--text-muted-color);
-      font-size: 0.73rem;
+      font-size: 0.72rem;
       font-weight: 600;
-      padding: 3px 8px;
+      padding: 2px 7px;
       border-radius: 4px;
       cursor: pointer;
-      transition: all 0.15s;
     }
-    .view-btn.active {
-      background: var(--card-bg);
-      color: var(--link-color);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    }
+    .view-btn.active { background: var(--card-bg); color: var(--link-color); }
 
-    /* Floating Popovers: Math Palette & Prompt Menu */
+    /* Floating Popovers */
     .floating-palette {
       position: absolute;
-      top: 40px;
-      left: 160px;
+      top: 38px;
+      left: 120px;
       width: 460px;
       max-width: 92vw;
       background: var(--sidebar-bg);
@@ -705,72 +581,41 @@
       background: transparent;
       border: none;
       color: var(--text-muted-color);
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       font-weight: 600;
-      padding: 5px 10px;
+      padding: 4px 9px;
       border-radius: 5px;
       cursor: pointer;
     }
-    .palette-tab.active {
-      background: var(--card-bg);
-      color: var(--link-color);
-    }
+    .palette-tab.active { background: var(--card-bg); color: var(--link-color); }
     .palette-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 6px;
-      padding: 12px;
-      max-height: 260px;
+      padding: 10px;
+      max-height: 250px;
       overflow-y: auto;
     }
     .math-item-btn {
       background: var(--input-bg);
       border: 1px solid var(--main-border-color);
       border-radius: 6px;
-      padding: 8px 6px;
+      padding: 7px 5px;
       color: var(--heading-color);
       cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 4px;
-      transition: all 0.15s;
+      gap: 3px;
     }
-    .math-item-btn:hover {
-      border-color: var(--link-color);
-      background: var(--card-hover-bg);
-      transform: translateY(-1px);
-    }
-    .math-item-btn .sym {
-      font-size: 1rem;
-      font-family: 'JetBrains Mono', serif;
-      color: var(--link-color);
-    }
-    .math-item-btn .lbl {
-      font-size: 0.68rem;
-      color: var(--text-muted-color);
-    }
+    .math-item-btn:hover { border-color: var(--link-color); background: var(--card-hover-bg); }
+    .math-item-btn .sym { font-size: 0.95rem; font-family: 'JetBrains Mono', serif; color: var(--link-color); }
+    .math-item-btn .lbl { font-size: 0.66rem; color: var(--text-muted-color); }
 
-    /* -------------------------------------------------------------
-       Dual Workspace + TOC Outline Drawer
-    ------------------------------------------------------------- */
-    .workspace {
-      flex: 1;
-      display: flex;
-      overflow: hidden;
-      position: relative;
-    }
-    .pane {
-      flex: 1;
-      height: 100%;
-      overflow-y: auto;
-    }
-    .editor-pane {
-      border-right: 1px solid var(--main-border-color);
-      background: var(--highlight-bg-color);
-      position: relative;
-    }
+    /* Dual Workspace */
+    .workspace { flex: 1; display: flex; overflow: hidden; position: relative; }
+    .pane { flex: 1; height: 100%; overflow-y: auto; }
+    .editor-pane { border-right: 1px solid var(--main-border-color); background: var(--highlight-bg-color); position: relative; }
     .editor-textarea {
       width: 100%;
       height: 100%;
@@ -778,19 +623,17 @@
       border: none;
       outline: none;
       resize: none;
-      padding: 20px 24px;
+      padding: 18px 22px;
       color: var(--text-color);
       font-family: 'JetBrains Mono', Consolas, monospace;
       font-size: 0.9rem;
       line-height: 1.65;
     }
-
-    /* View Mode Overrides */
     .workspace.mode-editor .preview-pane { display: none; }
     .workspace.mode-editor .editor-pane { border-right: none; max-width: 960px; margin: 0 auto; }
     .workspace.mode-preview .editor-pane { display: none; }
 
-    /* Outline TOC Drawer */
+    /* Outline Drawer */
     .outline-drawer {
       width: 240px;
       background: var(--sidebar-bg);
@@ -801,8 +644,8 @@
     }
     .outline-drawer.active { display: flex; }
     .outline-header {
-      padding: 10px 14px;
-      font-size: 0.78rem;
+      padding: 9px 12px;
+      font-size: 0.76rem;
       font-weight: 700;
       color: var(--heading-color);
       border-bottom: 1px solid var(--main-border-color);
@@ -810,42 +653,28 @@
       justify-content: space-between;
       align-items: center;
     }
-    .outline-list {
-      flex: 1;
-      overflow-y: auto;
-      padding: 8px 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
+    .outline-list { flex: 1; overflow-y: auto; padding: 8px; display: flex; flex-direction: column; gap: 3px; }
     .outline-item {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-muted-color);
-      padding: 5px 8px;
+      padding: 4px 8px;
       border-radius: 5px;
       cursor: pointer;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      transition: all 0.12s;
       border-left: 2px solid transparent;
     }
-    .outline-item:hover {
-      background: var(--sidebar-hover-bg);
-      color: var(--link-color);
-      border-left-color: var(--link-color);
-    }
+    .outline-item:hover { background: var(--sidebar-hover-bg); color: var(--link-color); border-left-color: var(--link-color); }
     .outline-item.lvl-1 { font-weight: 700; color: var(--heading-color); }
-    .outline-item.lvl-2 { padding-left: 14px; }
-    .outline-item.lvl-3 { padding-left: 26px; font-size: 0.74rem; }
-    .outline-item.lvl-4 { padding-left: 36px; font-size: 0.72rem; }
+    .outline-item.lvl-2 { padding-left: 12px; }
+    .outline-item.lvl-3 { padding-left: 22px; font-size: 0.72rem; }
+    .outline-item.lvl-4 { padding-left: 32px; font-size: 0.7rem; }
 
-    /* -------------------------------------------------------------
-       IDE Intellisense / Syntax Auto-Completion Popup
-    ------------------------------------------------------------- */
+    /* IDE Intellisense Popup */
     .intellisense-popup {
       position: fixed;
-      width: 340px;
+      width: 350px;
       max-height: 250px;
       background: var(--sidebar-bg);
       border: 1px solid var(--link-color);
@@ -861,39 +690,26 @@
       padding: 4px 10px;
       background: var(--highlight-bg-color);
       border-bottom: 1px solid var(--main-border-color);
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       color: var(--text-muted-color);
       display: flex;
       justify-content: space-between;
     }
-    .intellisense-list {
-      flex: 1;
-      overflow-y: auto;
-      padding: 4px;
-    }
+    .intellisense-list { flex: 1; overflow-y: auto; padding: 4px; }
     .intellisense-item {
-      padding: 6px 10px;
+      padding: 5px 9px;
       border-radius: 5px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
     }
-    .intellisense-item.selected,
-    .intellisense-item:hover {
-      background: var(--published-bg);
-      color: var(--heading-color);
-    }
-    .intellisense-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      overflow: hidden;
-    }
+    .intellisense-item.selected, .intellisense-item:hover { background: var(--published-bg); color: var(--heading-color); }
+    .intellisense-left { display: flex; align-items: center; gap: 7px; overflow: hidden; }
     .intellisense-kind {
-      font-size: 0.65rem;
+      font-size: 0.63rem;
       font-weight: 700;
       padding: 1px 5px;
       border-radius: 4px;
@@ -903,99 +719,35 @@
     .kind-latex { background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35); }
     .kind-snip { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.35); }
     .kind-chirpy { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
-    .kind-code { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
-    .intellisense-cmd {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 600;
-      color: var(--heading-color);
-    }
-    .intellisense-desc {
-      font-size: 0.73rem;
-      color: var(--text-muted-color);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    .kind-custom { background: rgba(236, 72, 153, 0.2); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.35); }
+    .intellisense-cmd { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--heading-color); }
+    .intellisense-desc { font-size: 0.72rem; color: var(--text-muted-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    /* Hidden Mirror Div for Caret Coordinate Calculation */
     #caretMirror {
-      position: absolute;
-      top: 0;
-      left: 0;
-      visibility: hidden;
-      pointer-events: none;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      padding: 20px 24px;
-      font-family: 'JetBrains Mono', Consolas, monospace;
-      font-size: 0.9rem;
-      line-height: 1.65;
-      overflow: hidden;
+      position: absolute; top: 0; left: 0; visibility: hidden; pointer-events: none;
+      white-space: pre-wrap; word-wrap: break-word; padding: 18px 22px;
+      font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.9rem; line-height: 1.65;
     }
 
-    /* -------------------------------------------------------------
-       Chirpy Post Content Preview Styling (Exact Replica)
-    ------------------------------------------------------------- */
-    .preview-pane {
-      background: var(--main-bg);
-      padding: 28px 40px;
-    }
-    .chirpy-content {
-      color: var(--text-color);
-      line-height: 1.75;
-      font-size: 1.02rem;
-      max-width: 820px;
-      margin: 0 auto;
-    }
+    /* Chirpy Preview Styling */
+    .preview-pane { background: var(--main-bg); padding: 26px 38px; }
+    .chirpy-content { color: var(--text-color); line-height: 1.75; font-size: 1.02rem; max-width: 820px; margin: 0 auto; }
     .chirpy-content h1, .chirpy-content h2, .chirpy-content h3, .chirpy-content h4 {
-      font-family: 'Lato', sans-serif;
-      color: var(--heading-color);
-      font-weight: 700;
-      margin-top: 2rem;
-      margin-bottom: 0.8rem;
+      font-family: 'Lato', sans-serif; color: var(--heading-color); font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.8rem;
     }
-    .chirpy-content h1 { font-size: 1.85rem; border-bottom: 1px solid var(--main-border-color); padding-bottom: 8px; }
-    .chirpy-content h2 { font-size: 1.45rem; border-bottom: 1px solid var(--main-border-color); padding-bottom: 6px; }
-    .chirpy-content h3 { font-size: 1.25rem; }
-    .chirpy-content p { margin-bottom: 1.2rem; }
+    .chirpy-content h1 { font-size: 1.8rem; border-bottom: 1px solid var(--main-border-color); padding-bottom: 8px; }
+    .chirpy-content h2 { font-size: 1.42rem; border-bottom: 1px solid var(--main-border-color); padding-bottom: 6px; }
+    .chirpy-content h3 { font-size: 1.22rem; }
+    .chirpy-content p { margin-bottom: 1.15rem; }
     .chirpy-content a { color: var(--link-color); border-bottom: 1px solid var(--link-underline-color); text-decoration: none; }
-    .chirpy-content a:hover { border-bottom-color: var(--link-color); }
-    
     .chirpy-content blockquote {
-      border-left: 0.25rem solid var(--link-color);
-      padding: 0.5rem 1rem;
-      color: var(--text-muted-color);
-      margin: 1.2rem 0;
-      background: var(--inline-code-bg);
-      border-radius: 0 8px 8px 0;
+      border-left: 0.25rem solid var(--link-color); padding: 0.5rem 1rem; color: var(--text-muted-color);
+      margin: 1.2rem 0; background: var(--inline-code-bg); border-radius: 0 8px 8px 0;
     }
-    .chirpy-content blockquote p { margin-bottom: 0; }
+    .chirpy-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 1.2rem 0; box-shadow: var(--card-shadow); display: block; }
 
-    .chirpy-content img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin: 1.2rem 0;
-      box-shadow: var(--card-shadow);
-      display: block;
-    }
-
-    /* Chirpy 4 Prompt Boxes (Exact Replica) */
-    .prompt-box {
-      border-left: 0;
-      position: relative;
-      padding: 0.85rem 1rem 0.85rem 3rem;
-      border-radius: 8px;
-      margin: 1.2rem 0;
-      color: var(--text-color);
-    }
-    .prompt-box::before {
-      font-family: "Font Awesome 6 Free";
-      font-weight: 900;
-      position: absolute;
-      left: 1.1rem;
-      top: 0.85rem;
-    }
+    .prompt-box { position: relative; padding: 0.85rem 1rem 0.85rem 3rem; border-radius: 8px; margin: 1.2rem 0; color: var(--text-color); }
+    .prompt-box::before { font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 1.1rem; top: 0.85rem; }
     .prompt-tip { background-color: var(--prompt-tip-bg); }
     .prompt-tip::before { content: "\f0eb"; color: var(--prompt-tip-color); }
     .prompt-info { background-color: var(--prompt-info-bg); }
@@ -1005,271 +757,116 @@
     .prompt-danger { background-color: var(--prompt-danger-bg); }
     .prompt-danger::before { content: "\f071"; color: var(--prompt-danger-color); }
 
-    /* Chirpy Code block with header */
     .chirpy-content pre {
-      background: var(--highlight-bg-color);
-      border-radius: 10px;
-      padding: 16px;
-      overflow-x: auto;
-      margin-bottom: 1.2rem;
-      border: 1px solid var(--main-border-color);
-      position: relative;
-    }
-    .chirpy-content pre::before {
-      content: "";
-      display: block;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #444;
-      box-shadow: 16px 0 0 #444, 32px 0 0 #444;
-      margin-bottom: 12px;
+      background: var(--highlight-bg-color); border-radius: 10px; padding: 14px; overflow-x: auto;
+      margin-bottom: 1.2rem; border: 1px solid var(--main-border-color);
     }
     .chirpy-content code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.86rem;
-      background-color: var(--inline-code-bg);
-      color: var(--code-color);
-      padding: 2px 6px;
-      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; background-color: var(--inline-code-bg);
+      color: var(--code-color); padding: 2px 6px; border-radius: 6px;
     }
-    .chirpy-content pre code {
-      background: transparent;
-      padding: 0;
-      display: block;
-    }
-
-    .chirpy-content table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.4rem 0;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid var(--main-border-color);
-    }
-    .chirpy-content th, .chirpy-content td {
-      padding: 8px 14px;
-      text-align: left;
-      border-bottom: 1px solid var(--main-border-color);
-    }
+    .chirpy-content pre code { background: transparent; padding: 0; display: block; }
+    .chirpy-content table { width: 100%; border-collapse: collapse; margin: 1.4rem 0; border: 1px solid var(--main-border-color); }
+    .chirpy-content th, .chirpy-content td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--main-border-color); }
     .chirpy-content th { background: var(--sidebar-bg); color: var(--heading-color); font-weight: 600; }
-    .chirpy-content tr:nth-child(even) { background-color: var(--tb-even-bg); }
 
-    /* KaTeX Math Styling */
-    .katex-display {
-      margin: 1.4rem 0 !important;
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding: 10px 0;
-      text-align: center;
-    }
-    .katex { font-size: 1.08em; line-height: 1.2; }
+    .katex-display { margin: 1.3rem 0 !important; overflow-x: auto; padding: 8px 0; text-align: center; }
+    .mermaid-wrapper { background: var(--card-bg); border: 1px solid var(--main-border-color); border-radius: 10px; padding: 14px; margin: 1.2rem 0; text-align: center; }
 
-    /* Mermaid Container */
-    .mermaid-wrapper {
-      background: var(--card-bg);
-      border: 1px solid var(--main-border-color);
-      border-radius: 10px;
-      padding: 16px;
-      margin: 1.2rem 0;
-      text-align: center;
-      overflow-x: auto;
-    }
-
-    /* -------------------------------------------------------------
-       Modals (Settings & Media Library)
-    ------------------------------------------------------------- */
+    /* Modals */
     .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.72);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.2s;
+      position: fixed; inset: 0; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center; z-index: 100;
+      opacity: 0; pointer-events: none; transition: all 0.2s;
     }
     .modal-overlay.active { opacity: 1; pointer-events: auto; }
     .modal-card {
-      background: var(--sidebar-bg);
-      border: 1px solid var(--main-border-color);
-      border-radius: 12px;
-      width: 560px;
-      max-width: 92vw;
-      max-height: 88vh;
-      padding: 22px;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-      display: flex;
-      flex-direction: column;
+      background: var(--sidebar-bg); border: 1px solid var(--main-border-color); border-radius: 12px;
+      width: 600px; max-width: 94vw; max-height: 90vh; padding: 20px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column;
     }
-    .modal-card.wide { width: 820px; }
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
-
-    /* Modal Tabs */
-    .modal-tabs {
-      display: flex;
-      gap: 6px;
-      border-bottom: 1px solid var(--main-border-color);
-      margin-bottom: 14px;
-    }
+    .modal-card.wide { width: 840px; }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .modal-tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--main-border-color); margin-bottom: 14px; flex-wrap: wrap; }
     .modal-tab-btn {
-      padding: 7px 12px;
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid transparent;
-      color: var(--text-muted-color);
-      font-size: 0.84rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      padding: 6px 11px; background: transparent; border: none; border-bottom: 2px solid transparent;
+      color: var(--text-muted-color); font-size: 0.82rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px;
     }
-    .modal-tab-btn.active {
-      color: var(--link-color);
-      border-bottom-color: var(--link-color);
-    }
+    .modal-tab-btn.active { color: var(--link-color); border-bottom-color: var(--link-color); }
 
-    /* Media Library Grid */
+    /* Matrix Grid Builder */
+    .matrix-grid-container {
+      overflow: auto; max-height: 260px; padding: 10px; background: var(--highlight-bg-color);
+      border: 1px solid var(--main-border-color); border-radius: 8px; margin: 10px 0;
+    }
+    .matrix-grid { display: grid; gap: 6px; }
+    .matrix-cell {
+      background: var(--input-bg); border: 1px solid var(--main-border-color); border-radius: 5px;
+      padding: 6px; color: var(--heading-color); font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem; text-align: center; width: 100%; min-width: 60px; outline: none;
+    }
+    .matrix-cell:focus { border-color: var(--link-color); background: var(--card-hover-bg); }
+
+    /* Media Grid */
     .media-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-      gap: 12px;
-      overflow-y: auto;
-      padding: 4px;
-      max-height: 55vh;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 10px; overflow-y: auto; padding: 4px; max-height: 55vh;
     }
-    .media-card {
-      background: var(--card-bg);
-      border: 1px solid var(--main-border-color);
-      border-radius: 8px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    .media-thumb-wrap {
-      height: 115px;
-      background: var(--highlight-bg-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-    }
-    .media-thumb-wrap img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-    }
-    .media-usage-tag {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      font-size: 0.65rem;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: 700;
-    }
-    .media-usage-tag.used { background: rgba(16, 185, 129, 0.85); color: #fff; }
-    .media-usage-tag.unused { background: rgba(245, 158, 11, 0.85); color: #fff; }
-    .media-info {
-      padding: 8px;
-      font-size: 0.72rem;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .media-name {
-      font-weight: 600;
-      color: var(--heading-color);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .media-actions {
-      display: flex;
-      gap: 4px;
-      margin-top: 4px;
-    }
+    .media-card { background: var(--card-bg); border: 1px solid var(--main-border-color); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+    .media-thumb-wrap { height: 110px; background: var(--highlight-bg-color); display: flex; align-items: center; justify-content: center; position: relative; }
+    .media-thumb-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .media-usage-tag { position: absolute; top: 5px; right: 5px; font-size: 0.64rem; padding: 2px 5px; border-radius: 4px; font-weight: 700; color: #fff; }
+    .media-usage-tag.used { background: rgba(16, 185, 129, 0.85); }
+    .media-usage-tag.unused { background: rgba(245, 158, 11, 0.85); }
+    .media-info { padding: 8px; font-size: 0.72rem; display: flex; flex-direction: column; gap: 4px; }
+    .media-name { font-weight: 600; color: var(--heading-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .media-actions { display: flex; gap: 4px; margin-top: 3px; }
     .media-actions button {
-      flex: 1;
-      padding: 4px;
-      font-size: 0.7rem;
-      border-radius: 4px;
-      cursor: pointer;
-      border: 1px solid var(--btn-border-color);
-      background: var(--input-bg);
-      color: var(--text-color);
+      flex: 1; padding: 4px; font-size: 0.68rem; border-radius: 4px; cursor: pointer;
+      border: 1px solid var(--btn-border-color); background: var(--input-bg); color: var(--text-color);
     }
-    .media-actions button:hover {
-      border-color: var(--link-color);
-      color: var(--link-color);
-    }
+    .media-actions button:hover { border-color: var(--link-color); color: var(--link-color); }
 
     .log-box {
-      background: var(--highlight-bg-color);
-      border: 1px solid var(--main-border-color);
-      border-radius: 6px;
-      padding: 12px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      max-height: 160px;
-      overflow-y: auto;
-      white-space: pre-wrap;
-      color: var(--text-muted-color);
-      margin: 8px 0;
+      background: var(--highlight-bg-color); border: 1px solid var(--main-border-color); border-radius: 6px;
+      padding: 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; max-height: 150px;
+      overflow-y: auto; white-space: pre-wrap; color: var(--text-muted-color); margin: 6px 0;
     }
 
-    /* Shortcuts Settings Table */
-    .shortcut-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.82rem;
-    }
-    .shortcut-table td {
-      padding: 7px 6px;
-      border-bottom: 1px solid var(--main-border-color);
-    }
+    .shortcut-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .shortcut-table td, .shortcut-table th { padding: 6px; border-bottom: 1px solid var(--main-border-color); text-align: left; }
     .key-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 3px 8px;
-      border-radius: 5px;
-      background: var(--input-bg);
-      border: 1px solid var(--main-border-color);
-      color: var(--heading-color);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
+      display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 5px;
+      background: var(--input-bg); border: 1px solid var(--main-border-color);
+      color: var(--heading-color); font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; cursor: pointer;
     }
-    .key-badge.recording {
-      border-color: #f59e0b;
-      color: #f59e0b;
-      animation: pulse 1.2s infinite;
+    .key-badge.recording { border-color: #f59e0b; color: #f59e0b; animation: pulse 1.2s infinite; }
+
+    /* Drag & Drop Overlay */
+    .drop-overlay {
+      position: fixed; inset: 0; background: rgba(59, 130, 246, 0.25); backdrop-filter: blur(4px);
+      border: 4px dashed var(--link-color); z-index: 9999; display: none;
+      align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: #fff;
+      pointer-events: none;
     }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
+    .drop-overlay.active { display: flex; }
+
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
   </style>
 </head>
 <body>
 
-  <!-- Left Sidebar (Chirpy Style) -->
+  <!-- Drag & Drop File Overlay -->
+  <div class="drop-overlay" id="dropOverlay">
+    <div><i class="fa-solid fa-file-import" style="margin-right: 10px;"></i> 放開滑鼠以匯入 `.md` 文章或上傳圖片</div>
+  </div>
+
+  <!-- Left Sidebar -->
   <aside class="sidebar">
     <div class="profile-wrapper">
-      <img src="https://avatars.githubusercontent.com/u/75907889?v=4" class="profile-avatar" alt="avatar">
-      <a href="https://dl049.github.io" target="_blank" class="site-title">D-Lib</a>
-      <p class="site-subtitle">這裏會放各種奇奇怪怪的東西</p>
+      <img src="https://avatars.githubusercontent.com/u/75907889?v=4" class="profile-avatar" id="sidebarAvatar" alt="avatar">
+      <a href="https://dl049.github.io" target="_blank" class="site-title" id="sidebarTitle">D-Lib</a>
+      <p class="site-subtitle" id="sidebarSubtitle">這裏會放各種奇奇怪怪的東西</p>
     </div>
 
     <div class="sidebar-actions">
@@ -1277,7 +874,7 @@
         <button class="btn-chirpy-new" onclick="createNewDraft()">
           <i class="fa-solid fa-feather-pointed"></i> 寫新草稿
         </button>
-        <button class="btn-chirpy-media" onclick="openMediaLibrary()" title="瀏覽與管理所有已上傳的圖片">
+        <button class="btn-chirpy-media" onclick="openMediaLibrary(false)" title="管理已上傳的圖片">
           <i class="fa-regular fa-images"></i> 媒體庫
         </button>
       </div>
@@ -1287,7 +884,7 @@
       </div>
     </div>
 
-    <!-- Filter Tabs: All | Published | Drafts -->
+    <!-- Filter Tabs: All | Published | Drafts | About -->
     <div class="post-tabs">
       <button class="tab-btn active" id="tabAll" onclick="setPostFilter('all')">
         全部 <span class="tab-badge" id="badgeAll">0</span>
@@ -1296,17 +893,20 @@
         已發布 <span class="tab-badge" id="badgePublished">0</span>
       </button>
       <button class="tab-btn" id="tabDrafts" onclick="setPostFilter('drafts')">
-        草稿箱 <span class="tab-badge" id="badgeDrafts">0</span>
+        草稿 <span class="tab-badge" id="badgeDrafts">0</span>
+      </button>
+      <button class="tab-btn" id="tabAbout" onclick="loadAboutPage()" title="編輯個人介紹頁面 (_tabs/about.md)">
+        👤 關於我
       </button>
     </div>
 
     <!-- Post list cards -->
     <div class="post-list" id="postList"></div>
 
-    <!-- Chirpy Signature Bottom Bar -->
+    <!-- Bottom Bar -->
     <div class="sidebar-bottom">
       <div style="display: flex; gap: 4px; align-items: center;">
-        <button class="sidebar-btn" id="modeToggle" onclick="toggleThemeMode()" title="切換深色 / 淺色模式">
+        <button class="sidebar-btn" onclick="toggleThemeMode()" title="切換深色 / 淺色模式">
           <i class="fa-solid fa-circle-half-stroke"></i>
         </button>
         <button class="sidebar-btn" onclick="gitPullRemote()" title="從 GitHub 拉取最新變更 (git pull)">
@@ -1315,10 +915,10 @@
       </div>
       <span id="postCount">0 篇文章</span>
       <div style="display: flex; gap: 4px;">
-        <button class="sidebar-btn" onclick="toggleJekyllPreview()" id="btnPreviewToggle" title="啟動/關閉本地 Jekyll 全站預覽 (支援草稿)">
+        <button class="sidebar-btn" onclick="toggleJekyllPreview()" id="btnPreviewToggle" title="啟動/關閉本地 Jekyll 全站預覽">
           <i class="fa-solid fa-play"></i>
         </button>
-        <button class="sidebar-btn" onclick="openSettings()" title="GitHub 設定與快捷鍵配置">
+        <button class="sidebar-btn" onclick="openSettings('github')" title="網站設定、自訂語法與快捷鍵">
           <i class="fa-solid fa-gear"></i>
         </button>
       </div>
@@ -1327,19 +927,25 @@
 
   <!-- Main Content Workspace -->
   <main class="main">
-    <!-- Frosted Topbar -->
+    <!-- Topbar -->
     <header class="topbar">
       <div class="breadcrumb">
         <span id="breadcrumbFolder"><i class="fa-regular fa-folder-open"></i> _posts</span>
         <span>/</span>
         <span id="currentStatusBadge" class="status-badge published">已發布</span>
         <strong id="displayTitle">未命名文章</strong>
-        <span id="saveStatus" style="font-size: 0.72rem; color: var(--text-muted-color);"></span>
+        <span id="saveStatus" style="font-size: 0.7rem; color: var(--text-muted-color);"></span>
       </div>
 
       <div class="topbar-actions">
-        <!-- GitHub Actions Live Deployment Status Pill -->
-        <a id="actionsStatusPill" href="https://github.com/DL049/DL049.github.io/actions" target="_blank" class="stat-pill actions-pill" title="點擊查看 GitHub Actions 線上部署詳情">
+        <!-- Linter Diagnostic Pill -->
+        <button id="linterPill" class="stat-pill actions-pill" onclick="openLinterReport()" title="點擊查看 LaTeX 語法與圖片連結健康檢查報告">
+          <span class="dot-green" id="linterDot"></span>
+          <span id="linterText">語法正常</span>
+        </button>
+
+        <!-- GitHub Actions Live Status Pill -->
+        <a id="actionsStatusPill" href="https://github.com/DL049/DL049.github.io/actions" target="_blank" class="stat-pill actions-pill" title="GitHub Actions 線上部署進度">
           <span class="dot-green" id="actionsDot"></span>
           <span id="actionsText">線上已同步</span>
         </a>
@@ -1353,7 +959,15 @@
           <span id="readingTime">1 分鐘</span>
         </div>
 
-        <button class="btn btn-delete" onclick="deleteCurrentPost()" id="btnDelete" title="刪除此文章/草稿">
+        <button class="btn" onclick="openGitHistoryModal()" title="查看此文章的 Git 歷史版本與還原">
+          <i class="fa-solid fa-clock-rotate-left"></i> 歷史
+        </button>
+
+        <button class="btn" onclick="exportToPdfHandout()" title="將當前文章與公式匯出為精美 PDF 講義">
+          <i class="fa-solid fa-file-pdf" style="color: #ef4444;"></i> PDF
+        </button>
+
+        <button class="btn btn-delete" onclick="deleteCurrentPost()" id="btnDelete" title="刪除">
           <i class="fa-regular fa-trash-can"></i>
         </button>
 
@@ -1366,7 +980,7 @@
         </button>
 
         <button class="btn btn-publish" id="btnPublishGithub" onclick="publishToGithub()">
-          <i class="fa-solid fa-cloud-arrow-up"></i> 推送至 GitHub
+          <i class="fa-solid fa-cloud-arrow-up"></i> 推送上線
         </button>
       </div>
     </header>
@@ -1380,8 +994,8 @@
       </div>
     </div>
 
-    <!-- Metadata Bar -->
-    <div class="meta-bar">
+    <!-- Metadata Bar (Hidden when editing About Page) -->
+    <div class="meta-bar" id="postMetaBar">
       <div class="meta-field">
         <label>文章標題</label>
         <input type="text" id="fmTitle" placeholder="例如：投影學的數學建模：通用投影" oninput="onTitleChange()">
@@ -1419,29 +1033,28 @@
         </label>
         <label class="chirpy-checkbox" title="將此文章固定在部落格首頁最頂端">
           <input type="checkbox" id="fmPin" onchange="hasUnsavedChanges = true">
-          <span>📌 首頁置頂 (pin)</span>
+          <span>📌 首頁置頂</span>
         </label>
         <label class="chirpy-checkbox">
           <input type="checkbox" id="fmMath" checked onchange="renderPreview()">
-          <span>🧮 LaTeX 公式</span>
+          <span>🧮 LaTeX</span>
         </label>
-        <label class="chirpy-checkbox" title="開啟 Mermaid 流程圖與架構圖支援">
+        <label class="chirpy-checkbox">
           <input type="checkbox" id="fmMermaid" onchange="renderPreview()">
-          <span>📊 Mermaid 圖表</span>
+          <span>📊 Mermaid</span>
         </label>
         <label class="chirpy-checkbox">
           <input type="checkbox" id="fmToc" checked>
-          <span>📑 顯示目錄</span>
+          <span>📑 目錄</span>
         </label>
         <button class="btn" style="padding: 2px 8px; font-size: 0.72rem; margin-left: auto;" onclick="toggleAdvancedMeta()">
-          <i class="fa-solid fa-sliders"></i> 封面圖與摘要
+          <i class="fa-solid fa-sliders"></i> 封面與摘要
         </button>
       </div>
 
-      <!-- Collapsible Cover Image & Description Row -->
       <div class="meta-advanced" id="metaAdvanced">
         <div class="meta-field" style="grid-column: span 2;">
-          <label>文章摘要 / 副標題 (Description — 顯示於首頁文章卡片與 SEO)</label>
+          <label>文章摘要 / 副標題 (Description)</label>
           <input type="text" id="fmDescription" placeholder="簡短描述這篇文章的核心內容..." oninput="hasUnsavedChanges = true">
         </div>
         <div class="meta-field">
@@ -1454,7 +1067,7 @@
       </div>
     </div>
 
-    <!-- Rich Toolbar -->
+    <!-- Engineering & Writing Toolbar -->
     <div class="editor-toolbar">
       <button class="tool-btn" onclick="insertSyntax('**', '**')" title="粗體 (Ctrl+B)"><i class="fa-solid fa-bold"></i></button>
       <button class="tool-btn" onclick="insertSyntax('*', '*')" title="斜體 (Ctrl+I)"><i class="fa-solid fa-italic"></i></button>
@@ -1462,60 +1075,58 @@
       <button class="tool-btn" onclick="insertSyntax('### ', '')" title="標題 3">H3</button>
       <div class="tool-sep"></div>
 
-      <!-- Math Symbols Palette Button -->
-      <button class="tool-btn" id="btnMathPalette" onclick="toggleMathPalette()" title="開啟 LaTeX 數學公式與矩陣百寶箱">
+      <!-- Math & Engineering Power Tools -->
+      <button class="tool-btn" id="btnMathPalette" onclick="toggleMathPalette()" title="開啟 LaTeX 數學公式百寶箱">
         <i class="fa-solid fa-square-root-variable" style="color: #c084fc;"></i> 公式百寶箱
       </button>
-      <button class="tool-btn" onclick="insertSyntax('\\[\n', '\n\\]')" title="插入區塊公式 (Ctrl+M)">\[ \]</button>
-      <button class="tool-btn" onclick="insertSyntax('\\( ', ' \\)')" title="插入行內公式">\( \)</button>
-      <div class="tool-sep"></div>
-
-      <!-- Chirpy 4 Prompts Buttons -->
-      <button class="tool-btn" onclick="insertChirpyPrompt('tip')" title="插入綠色技巧提示框 (prompt-tip)">
-        <i class="fa-solid fa-lightbulb" style="color: #10b981;"></i>
+      <button class="tool-btn" onclick="openMatrixBuilder()" title="開啟互動式矩陣與表格視覺產生器">
+        <i class="fa-solid fa-table-cells" style="color: #60a5fa;"></i> 矩陣/表格產生器
       </button>
-      <button class="tool-btn" onclick="insertChirpyPrompt('info')" title="插入藍色資訊框 (prompt-info)">
-        <i class="fa-solid fa-circle-info" style="color: #3b82f6;"></i>
+      <button class="tool-btn" onclick="openPlotterModal()" title="開啟內建數學函數繪圖器 (直接生成曲線圖插入文章)">
+        <i class="fa-solid fa-chart-line" style="color: #34d399;"></i> 函數繪圖
       </button>
-      <button class="tool-btn" onclick="insertChirpyPrompt('warning')" title="插入黃色警告框 (prompt-warning)">
-        <i class="fa-solid fa-triangle-exclamation" style="color: #f59e0b;"></i>
+      <button class="tool-btn" onclick="openSketchpadModal()" title="開啟工程草圖與自由體圖 (FBD) 手繪白板">
+        <i class="fa-solid fa-compass-drafting" style="color: #f59e0b;"></i> 工程白板
       </button>
-      <button class="tool-btn" onclick="insertChirpyPrompt('danger')" title="插入紅色危險提示框 (prompt-danger)">
-        <i class="fa-solid fa-skull-crossbones" style="color: #ef4444;"></i>
+      <button class="tool-btn" onclick="openSimTemplateMenu()" title="插入可互動的 3D 幾何投影或物理模擬 Canvas 元件">
+        <i class="fa-solid fa-cube" style="color: #f472b6;"></i> 互動模擬器
       </button>
       <div class="tool-sep"></div>
 
-      <!-- Code, Mermaid, Table, Image -->
+      <!-- Chirpy 4 Prompts -->
+      <button class="tool-btn" onclick="insertChirpyPrompt('tip')" title="綠色技巧提示框 (prompt-tip)"><i class="fa-solid fa-lightbulb" style="color: #10b981;"></i></button>
+      <button class="tool-btn" onclick="insertChirpyPrompt('info')" title="藍色資訊框 (prompt-info)"><i class="fa-solid fa-circle-info" style="color: #3b82f6;"></i></button>
+      <button class="tool-btn" onclick="insertChirpyPrompt('warning')" title="黃色警告框 (prompt-warning)"><i class="fa-solid fa-triangle-exclamation" style="color: #f59e0b;"></i></button>
+      <button class="tool-btn" onclick="insertChirpyPrompt('danger')" title="紅色危險提示框 (prompt-danger)"><i class="fa-solid fa-skull-crossbones" style="color: #ef4444;"></i></button>
+      <div class="tool-sep"></div>
+
+      <!-- Code, Mermaid, Image -->
       <button class="tool-btn" onclick="insertSyntax('```python\n', '\n```')" title="程式碼區塊 (Ctrl+K)"><i class="fa-solid fa-file-code"></i></button>
       <button class="tool-btn" onclick="insertMermaidTemplate()" title="插入 Mermaid 流程圖"><i class="fa-solid fa-diagram-project" style="color: #38bdf8;"></i></button>
-      <button class="tool-btn" onclick="insertTable()" title="插入表格"><i class="fa-solid fa-table"></i></button>
       <button class="tool-btn" onclick="openImageUploadDialog()" title="上傳圖片 (支援直接 Ctrl+V 貼上)"><i class="fa-regular fa-image"></i></button>
-      <button class="tool-btn" onclick="insertSyntax('[連結文字](', 'https://)')" title="超連結"><i class="fa-solid fa-link"></i></button>
 
       <div style="flex: 1;"></div>
 
-      <!-- Editor Features Toggles: Intellisense, Sync Scroll, Outline, View Modes -->
-      <button class="tool-btn active" id="btnIntellisenseToggle" onclick="toggleIntellisense()" title="開啟/關閉 IDE 自動語法推薦 (輸入 \ 或 / 觸發，或按 Ctrl+Space)">
+      <!-- Right Toggles -->
+      <button class="tool-btn active" id="btnIntellisenseToggle" onclick="toggleIntellisense()" title="開啟/關閉 IDE 自動語法推薦 (輸入 \ 或 / 觸發)">
         <i class="fa-solid fa-wand-magic-sparkles"></i> 語法推薦
       </button>
-
       <button class="tool-btn active" id="btnSyncScroll" onclick="toggleSyncScroll()" title="開啟/關閉左右雙欄同步滾動">
         <i class="fa-solid fa-link"></i> 同步滾動
       </button>
-
       <button class="tool-btn" id="btnOutlineToggle" onclick="toggleOutlineDrawer()" title="顯示/隱藏文章標題大綱導航">
         <i class="fa-solid fa-list-check"></i> 大綱
       </button>
 
       <div class="view-switch">
-        <button class="view-btn active" id="viewDual" onclick="setViewMode('dual')" title="雙欄對照模式">◫ 雙欄</button>
-        <button class="view-btn" id="viewEditor" onclick="setViewMode('editor')" title="專注純寫作模式">✍️ 寫作</button>
-        <button class="view-btn" id="viewPreview" onclick="setViewMode('preview')" title="全寬沉浸預覽模式">📖 預覽</button>
+        <button class="view-btn active" id="viewDual" onclick="setViewMode('dual')">◫ 雙欄</button>
+        <button class="view-btn" id="viewEditor" onclick="setViewMode('editor')">✍️ 寫作</button>
+        <button class="view-btn" id="viewPreview" onclick="setViewMode('preview')">📖 預覽</button>
       </div>
 
       <input type="file" id="imageFileInput" accept="image/*" style="display: none;" onchange="handleFileInput(event)">
 
-      <!-- Floating Math Palette Popover -->
+      <!-- Floating Math Palette -->
       <div class="floating-palette" id="mathPalette">
         <div class="palette-tabs">
           <button class="palette-tab active" onclick="switchMathTab('struct', this)">常用結構</button>
@@ -1530,17 +1141,15 @@
 
     <!-- Dual Workspace -->
     <div class="workspace" id="workspace">
-      <!-- Editor Pane -->
       <div class="pane editor-pane">
         <div id="caretMirror"></div>
         <textarea id="editorTextarea" class="editor-textarea" placeholder="在此輸入 Markdown 內容...
-💡 提示：
-  • 輸入 \ 可自動觸發 LaTeX 語法推薦（如 \frac, \bmatrix, \alpha）
-  • 輸入 / 可觸發區塊快速指令（如 /math, /matrix, /tip, /mermaid）
-  • 直接按 Ctrl+V 可將剪貼簿截圖自動上傳並插入" oninput="onContentChange()"></textarea>
+💡 快捷提示：
+  • 輸入 \ 自動觸發 LaTeX 語法推薦（如 \frac, \bmatrix, \alpha）
+  • 輸入 / 觸發區塊指令與您的自訂語法片段（如 /math, /matrix, /tip）
+  • 直接按 Ctrl+V 貼上剪貼簿圖片，或將電腦上的 .md / 圖片檔直接拖進視窗" oninput="onContentChange()"></textarea>
       </div>
 
-      <!-- Chirpy Preview Pane -->
       <div class="pane preview-pane" id="previewPane">
         <div class="chirpy-content" id="previewContent"></div>
       </div>
@@ -1565,17 +1174,191 @@
     <div class="intellisense-list" id="intellisenseList"></div>
   </div>
 
-  <!-- Media Library Modal -->
+  <!-- ===============================================================
+       Modal 1: Interactive Matrix & Table Visual Builder (#1)
+  ================================================================ -->
+  <div class="modal-overlay" id="matrixBuilderModal">
+    <div class="modal-card wide">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-table-cells" style="color: #60a5fa; margin-right: 6px;"></i> 互動式矩陣與表格視覺產生器</h3>
+        <button class="sidebar-btn" onclick="closeMatrixBuilder()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap;">
+        <div class="meta-field" style="width: 90px;">
+          <label>列數 (Rows)</label>
+          <input type="number" id="matRows" value="3" min="1" max="10" onchange="rebuildMatrixGrid()">
+        </div>
+        <div class="meta-field" style="width: 90px;">
+          <label>行數 (Cols)</label>
+          <input type="number" id="matCols" value="3" min="1" max="10" onchange="rebuildMatrixGrid()">
+        </div>
+        <div class="meta-field" style="flex: 1; min-width: 180px;">
+          <label>輸出格式</label>
+          <select id="matType" onchange="updateMatrixBuilderPreview()">
+            <option value="bmatrix">方括號矩陣 [ ] (bmatrix)</option>
+            <option value="pmatrix">圓括號矩陣 ( ) (pmatrix)</option>
+            <option value="vmatrix">行列式 | | (vmatrix)</option>
+            <option value="Bmatrix">大括號矩陣 { } (Bmatrix)</option>
+            <option value="table">Markdown 數據表格 (| ... |)</option>
+          </select>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button class="btn" onclick="fillMatrixPreset('identity')" title="對角線填 1，其餘填 0">單位矩陣 $I$</button>
+          <button class="btn" onclick="fillMatrixPreset('zeros')">零矩陣 $0$</button>
+          <button class="btn" onclick="fillMatrixPreset('symbolic')" title="填入 a_{ij}">符號 $a_{ij}$</button>
+          <button class="btn" onclick="transposeMatrixGrid()" title="行列互換轉置">轉置 $A^T$</button>
+        </div>
+      </div>
+
+      <div class="matrix-grid-container">
+        <div class="matrix-grid" id="matrixGrid"></div>
+      </div>
+
+      <div style="background: var(--main-bg); border: 1px solid var(--main-border-color); border-radius: 8px; padding: 12px; min-height: 90px; display: flex; align-items: center; justify-content: center;" id="matrixLivePreview"></div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 12px;">
+        <button class="btn" onclick="closeMatrixBuilder()">取消</button>
+        <button class="btn btn-publish" onclick="insertGeneratedMatrix()">
+          <i class="fa-solid fa-check"></i> 插入至編輯器游標處
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===============================================================
+       Modal 2: Interactive Math Function Plotter (#2)
+  ================================================================ -->
+  <div class="modal-overlay" id="plotterModal">
+    <div class="modal-card wide">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-chart-line" style="color: #34d399; margin-right: 6px;"></i> 內建數學函數繪圖器 (Function Plotter)</h3>
+        <button class="sidebar-btn" onclick="closePlotterModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 8px;">
+        <div class="meta-field">
+          <label style="color: #60a5fa;">函數 $f_1(x)$ (支援 sin, cos, exp, sqrt, ^)</label>
+          <input type="text" id="plotF1" value="sin(x) * exp(-0.15*x)" oninput="drawFunctionPlot()">
+        </div>
+        <div class="meta-field">
+          <label style="color: #f59e0b;">函數 $f_2(x)$ (選填，留空不畫)</label>
+          <input type="text" id="plotF2" value="cos(x) * exp(-0.15*x)" oninput="drawFunctionPlot()">
+        </div>
+        <div class="meta-field">
+          <label style="color: #10b981;">函數 $f_3(x)$ (選填，留空不畫)</label>
+          <input type="text" id="plotF3" placeholder="例如: x^2 / 10 - 2" oninput="drawFunctionPlot()">
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px;">
+        <div class="meta-field">
+          <label>$x_{\min}$</label>
+          <input type="number" id="plotXMin" value="-2" step="1" oninput="drawFunctionPlot()">
+        </div>
+        <div class="meta-field">
+          <label>$x_{\max}$</label>
+          <input type="number" id="plotXMax" value="15" step="1" oninput="drawFunctionPlot()">
+        </div>
+        <div class="meta-field" style="grid-column: span 2;">
+          <label>圖表標題 (Title)</label>
+          <input type="text" id="plotTitle" value="二階阻尼振盪函數響應曲線" oninput="drawFunctionPlot()">
+        </div>
+      </div>
+
+      <div style="background: #151518; border: 1px solid var(--main-border-color); border-radius: 8px; padding: 8px; text-align: center;">
+        <canvas id="plotCanvas" width="760" height="380" style="max-width: 100%; height: auto; border-radius: 6px;"></canvas>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 12px;">
+        <button class="btn" onclick="closePlotterModal()">取消</button>
+        <button class="btn btn-publish" onclick="exportCanvasAndInsert('plotCanvas', '函數圖')">
+          <i class="fa-solid fa-camera"></i> 轉存為高畫質圖片並插入文章
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===============================================================
+       Modal 3: Engineering Sketchpad / Free-Body Diagram Canvas (#3)
+  ================================================================ -->
+  <div class="modal-overlay" id="sketchpadModal">
+    <div class="modal-card wide">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-compass-drafting" style="color: #f59e0b; margin-right: 6px;"></i> 工程草圖與自由體圖 (FBD) 手繪白板</h3>
+        <button class="sidebar-btn" onclick="closeSketchpadModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <!-- Sketchpad Toolbar -->
+      <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; padding: 6px; background: var(--highlight-bg-color); border-radius: 8px;">
+        <button class="tool-btn active" id="sketchTool_arrow" onclick="setSketchTool('arrow')"><i class="fa-solid fa-arrow-right-long"></i> 力學向量箭頭</button>
+        <button class="tool-btn" id="sketchTool_line" onclick="setSketchTool('line')"><i class="fa-solid fa-slash"></i> 直線</button>
+        <button class="tool-btn" id="sketchTool_rect" onclick="setSketchTool('rect')"><i class="fa-regular fa-square"></i> 剛體/矩形</button>
+        <button class="tool-btn" id="sketchTool_circle" onclick="setSketchTool('circle')"><i class="fa-regular fa-circle"></i> 圓形/滑輪</button>
+        <button class="tool-btn" id="sketchTool_pen" onclick="setSketchTool('pen')"><i class="fa-solid fa-pen"></i> 手繪筆</button>
+        <button class="tool-btn" id="sketchTool_text" onclick="setSketchTool('text')"><i class="fa-solid fa-font"></i> 標註文字</button>
+        <button class="tool-btn" onclick="stampCoordinateAxes()" title="在畫布中心蓋上正交 X-Y 座標系"><i class="fa-solid fa-arrows-up-down-left-right"></i> +座標軸</button>
+        <div class="tool-sep"></div>
+        <input type="color" id="sketchColor" value="#60a5fa" style="width: 28px; height: 26px; border: none; background: transparent; cursor: pointer;" title="線條顏色">
+        <select id="sketchWidth" style="background: var(--input-bg); color: var(--text-color); border: 1px solid var(--main-border-color); border-radius: 4px; padding: 3px 6px; font-size: 0.75rem;">
+          <option value="2">細線 (2px)</option>
+          <option value="3" selected>標準 (3px)</option>
+          <option value="5">粗線 (5px)</option>
+        </select>
+        <label class="chirpy-checkbox" style="font-size: 0.74rem;">
+          <input type="checkbox" id="sketchDashed"> 虛線
+        </label>
+        <div style="flex: 1;"></div>
+        <button class="btn" onclick="undoSketch()"><i class="fa-solid fa-rotate-left"></i> 復原</button>
+        <button class="btn btn-delete" onclick="clearSketchCanvas()"><i class="fa-solid fa-trash"></i> 清空</button>
+      </div>
+
+      <div style="background: #141417; border: 1px solid var(--main-border-color); border-radius: 8px; padding: 6px; text-align: center;">
+        <canvas id="sketchCanvas" width="760" height="400" style="max-width: 100%; height: auto; cursor: crosshair; border-radius: 6px;"></canvas>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+        <button class="btn" onclick="closeSketchpadModal()">取消</button>
+        <button class="btn btn-publish" onclick="exportCanvasAndInsert('sketchCanvas', '工程示意圖')">
+          <i class="fa-solid fa-camera"></i> 轉存圖片並插入文章
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===============================================================
+       Modal 4: Git Version History Time Machine (#9)
+  ================================================================ -->
+  <div class="modal-overlay" id="historyModal">
+    <div class="modal-card wide">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-clock-rotate-left" style="color: #c084fc; margin-right: 6px;"></i> 文章 Git 歷史版本時光機</h3>
+        <button class="sidebar-btn" onclick="closeGitHistoryModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div style="display: flex; gap: 12px; height: 420px; overflow: hidden;">
+        <div id="historyCommitList" style="width: 270px; border-right: 1px solid var(--main-border-color); overflow-y: auto; padding-right: 8px; display: flex; flex-direction: column; gap: 6px;"></div>
+        <div style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
+          <div style="font-size: 0.78rem; color: var(--text-muted-color); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+            <span id="historyPreviewLabel">請從左側點選任一歷史 Commit 查看當時內容</span>
+            <button class="btn btn-publish" id="btnRestoreCommit" style="display: none; padding: 4px 10px; font-size: 0.75rem;" onclick="restoreHistoricalVersion()">
+              <i class="fa-solid fa-rotate-left"></i> 還原此版本至編輯器
+            </button>
+          </div>
+          <textarea id="historyPreviewText" readonly style="flex: 1; width: 100%; background: var(--highlight-bg-color); border: 1px solid var(--main-border-color); border-radius: 8px; padding: 12px; color: var(--text-color); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; resize: none; outline: none;"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===============================================================
+       Modal 5: Media Library (#7)
+  ================================================================ -->
   <div class="modal-overlay" id="mediaModal">
     <div class="modal-card wide">
       <div class="modal-header">
         <h3><i class="fa-regular fa-images" style="margin-right: 6px;"></i> 圖片媒體庫管理 (`assets/img/posts/`)</h3>
         <button class="sidebar-btn" onclick="closeMediaLibrary()"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 10px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
         <div style="display: flex; gap: 6px;">
-          <button class="btn" id="mediaFilterAll" onclick="filterMediaList('all')">全部圖片</button>
-          <button class="btn" id="mediaFilterUnused" onclick="filterMediaList('unused')">⚠️ 僅顯示未引用圖片</button>
+          <button class="btn" onclick="filterMediaList('all')">全部圖片</button>
+          <button class="btn" onclick="filterMediaList('unused')">⚠️ 僅顯示未引用圖片</button>
         </div>
         <button class="btn btn-publish" onclick="document.getElementById('imageFileInput').click()">
           <i class="fa-solid fa-upload"></i> 上傳新圖片
@@ -1585,11 +1368,13 @@
     </div>
   </div>
 
-  <!-- Settings Modal (GitHub & Keybindings) -->
+  <!-- ===============================================================
+       Modal 6: Settings (GitHub, Site _config.yml, Custom Snippets, Shortcuts)
+  ================================================================ -->
   <div class="modal-overlay" id="settingsModal">
-    <div class="modal-card">
+    <div class="modal-card wide">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-sliders" style="margin-right: 6px;"></i> 後台設定</h3>
+        <h3><i class="fa-solid fa-sliders" style="margin-right: 6px;"></i> 系統與個人化工作站設定</h3>
         <button class="sidebar-btn" onclick="closeSettings()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -1597,12 +1382,18 @@
         <button class="modal-tab-btn active" id="modalTabGithub" onclick="switchSettingsTab('github')">
           <i class="fa-brands fa-github"></i> GitHub 發布設定
         </button>
+        <button class="modal-tab-btn" id="modalTabSite" onclick="switchSettingsTab('site')">
+          <i class="fa-solid fa-globe"></i> 網站基本資料 (`_config.yml`)
+        </button>
+        <button class="modal-tab-btn" id="modalTabSnippets" onclick="switchSettingsTab('snippets')">
+          <i class="fa-solid fa-bolt"></i> 自訂語法片段庫 (Snippets)
+        </button>
         <button class="modal-tab-btn" id="modalTabShortcuts" onclick="switchSettingsTab('shortcuts')">
-          <i class="fa-solid fa-keyboard"></i> 鍵盤快捷鍵自訂
+          <i class="fa-solid fa-keyboard"></i> 鍵盤快捷鍵
         </button>
       </div>
 
-      <!-- Settings Panel 1: GitHub -->
+      <!-- Tab 1: GitHub -->
       <div id="settingsPanelGithub" style="display: flex; flex-direction: column; gap: 12px;">
         <div class="meta-field">
           <label>GitHub 儲存庫 (User/Repo)</label>
@@ -1611,26 +1402,95 @@
         <div class="meta-field">
           <label>Personal Access Token (PAT)</label>
           <input type="password" id="cfgToken" placeholder="ghp_xxxxxxxxxxxx">
-          <span style="font-size: 0.72rem; color: var(--text-muted-color); margin-top: 3px;">
-            Token 僅儲存在本機 `admin/config.json`（已受 `.gitignore` 保護，絕不外洩）。
-          </span>
+          <span style="font-size: 0.72rem; color: var(--text-muted-color);">Token 僅儲存在本機 `admin/config.json`（已受 `.gitignore` 保護）。</span>
         </div>
         <div class="log-box" id="gitStatusBox">正在讀取 Git 狀態...</div>
         <div style="display: flex; justify-content: flex-end; gap: 10px;">
-          <button class="btn" onclick="closeSettings()">取消</button>
-          <button class="btn btn-publish" onclick="saveGithubSettings()">儲存設定</button>
+          <button class="btn" onclick="closeSettings()">關閉</button>
+          <button class="btn btn-publish" onclick="saveGithubSettings()">儲存 GitHub 設定</button>
         </div>
       </div>
 
-      <!-- Settings Panel 2: Shortcuts -->
+      <!-- Tab 2: Site Config (_config.yml) (#8) -->
+      <div id="settingsPanelSite" style="display: none; flex-direction: column; gap: 10px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div class="meta-field">
+            <label>部落格主標題 (`title`)</label>
+            <input type="text" id="siteTitle" placeholder="D-Lib">
+          </div>
+          <div class="meta-field">
+            <label>時區設定 (`timezone`)</label>
+            <input type="text" id="siteTimezone" placeholder="Asia/Kuching">
+          </div>
+          <div class="meta-field" style="grid-column: span 2;">
+            <label>網站副標題 / 簽名 (`tagline`)</label>
+            <input type="text" id="siteTagline" placeholder="這裏會放各種奇奇怪怪的東西">
+          </div>
+          <div class="meta-field">
+            <label>作者姓名 (`social.name`)</label>
+            <input type="text" id="siteAuthorName" placeholder="Delon Lee">
+          </div>
+          <div class="meta-field">
+            <label>聯絡信箱 (`social.email`)</label>
+            <input type="text" id="siteAuthorEmail" placeholder="delonleeqiqi@gmail.com">
+          </div>
+          <div class="meta-field" style="grid-column: span 2;">
+            <label>大頭貼網址或路徑 (`avatar`)</label>
+            <input type="text" id="siteAvatar" placeholder="https://avatars.githubusercontent.com/...">
+          </div>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px;">
+          <button class="btn" onclick="closeSettings()">取消</button>
+          <button class="btn btn-publish" onclick="saveSiteConfig()">寫入 `_config.yml`</button>
+        </div>
+      </div>
+
+      <!-- Tab 3: Custom User Snippets (#6) -->
+      <div id="settingsPanelSnippets" style="display: none; flex-direction: column; gap: 10px;">
+        <div style="font-size: 0.76rem; color: var(--text-muted-color);">
+          新增您專屬的快捷語法片段（以 `/` 或 `\` 開頭）。在展開內容中放入 `|` 符號可指定插入後游標自動停留的位置！
+        </div>
+        <div style="display: grid; grid-template-columns: 120px 160px 1fr auto; gap: 8px; align-items: flex-end; background: var(--highlight-bg-color); padding: 10px; border-radius: 8px;">
+          <div class="meta-field">
+            <label>觸發指令</label>
+            <input type="text" id="newSnipTrigger" placeholder="例如: /proj">
+          </div>
+          <div class="meta-field">
+            <label>簡短說明</label>
+            <input type="text" id="newSnipDesc" placeholder="4x4 齊次投影矩陣">
+          </div>
+          <div class="meta-field">
+            <label>展開內容 (支援多行與 | 游標標記)</label>
+            <textarea id="newSnipInsert" rows="2" placeholder="\[\n\begin{bmatrix} | \end{bmatrix}\n\]"></textarea>
+          </div>
+          <button class="btn btn-publish" style="height: 36px;" onclick="addCustomSnippet()">
+            <i class="fa-solid fa-plus"></i> 新增
+          </button>
+        </div>
+        <div style="max-height: 220px; overflow-y: auto;">
+          <table class="shortcut-table">
+            <thead>
+              <tr style="color: var(--text-muted-color); font-size: 0.74rem;">
+                <th>觸發指令</th>
+                <th>說明</th>
+                <th>展開內容預覽</th>
+                <th style="width: 60px;">操作</th>
+              </tr>
+            </thead>
+            <tbody id="customSnippetsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 4: Keyboard Shortcuts -->
       <div id="settingsPanelShortcuts" style="display: none; flex-direction: column; gap: 10px;">
         <div style="font-size: 0.78rem; color: var(--text-muted-color);">
           點擊下方按鍵組合即可進入錄製模式，按下鍵盤上的組合鍵即可自訂。
         </div>
-        <div style="max-height: 280px; overflow-y: auto;">
+        <div style="max-height: 260px; overflow-y: auto;">
           <table class="shortcut-table">
             <thead>
-              <tr style="text-align: left; color: var(--text-muted-color); font-size: 0.74rem;">
+              <tr style="color: var(--text-muted-color); font-size: 0.74rem;">
                 <th>功能操作</th>
                 <th>綁定按鍵</th>
               </tr>
@@ -1652,6 +1512,7 @@
     // -----------------------------------------------------------------
     let posts = [];
     let currentPost = null;
+    let isEditingAbout = false;
     let currentFilter = 'all';
     let isJekyllRunning = false;
     let hasUnsavedChanges = false;
@@ -1660,30 +1521,28 @@
     let isSelectingCover = false;
     let mediaItems = [];
     let mediaFilterMode = 'all';
+    let currentLinterIssues = [];
+    let linterTimer = null;
 
-    // -----------------------------------------------------------------
-    // IDE Intellisense Dictionary (LaTeX, Slash Snippets, Chirpy, Code)
-    // Use `|` to mark where the cursor should land after insertion!
-    // -----------------------------------------------------------------
-    const INTELLISENSE_ITEMS = [
-      // --- Slash Block Snippets (/...) ---
+    // Built-in IDE Intellisense Dictionary
+    const BASE_INTELLISENSE_ITEMS = [
       { trigger: '/math', kind: 'Snippet', kindClass: 'kind-snip', label: '/math', desc: 'LaTeX 獨立公式區塊 \\[ ... \\]', insert: '\\[\n  |\n\\]' },
       { trigger: '/inline', kind: 'Snippet', kindClass: 'kind-snip', label: '/inline', desc: 'LaTeX 行內公式 \\( ... \\)', insert: '\\( | \\)' },
       { trigger: '/matrix', kind: 'Snippet', kindClass: 'kind-snip', label: '/matrix', desc: '3×3 方括號矩陣 bmatrix', insert: '\\[\n\\begin{bmatrix}\n  a_{11} & a_{12} & a_{13} \\\\\n  a_{21} & a_{22} & a_{23} \\\\\n  a_{31} & a_{32} & a_{33}\n\\end{bmatrix}\n\\]' },
       { trigger: '/align', kind: 'Snippet', kindClass: 'kind-snip', label: '/align', desc: '多行等號對齊推導 aligned', insert: '\\[\n\\begin{aligned}\n  f(x) &= | \\\\\n  &= \n\\end{aligned}\n\\]' },
       { trigger: '/cases', kind: 'Snippet', kindClass: 'kind-snip', label: '/cases', desc: '分段條件函數 cases', insert: '\\[\nf(x) = \\begin{cases}\n  | & \\text{if } x > 0 \\\\\n  0 & \\text{otherwise}\n\\end{cases}\n\\]' },
+      { trigger: '/sim3d', kind: 'Snippet', kindClass: 'kind-custom', label: '/sim3d', desc: '🎮 插入 3D 幾何投影互動旋轉模擬器', insert: '__SIM3D__' },
+      { trigger: '/simwave', kind: 'Snippet', kindClass: 'kind-custom', label: '/simwave', desc: '🎮 插入二階阻尼振動互動模擬器', insert: '__SIMWAVE__' },
       { trigger: '/tip', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '/tip', desc: '🟢 Chirpy 技巧提示框 (prompt-tip)', insert: '> |\n{: .prompt-tip }' },
       { trigger: '/info', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '/info', desc: '🔵 Chirpy 資訊說明框 (prompt-info)', insert: '> |\n{: .prompt-info }' },
       { trigger: '/warning', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '/warning', desc: '🟡 Chirpy 注意警告框 (prompt-warning)', insert: '> |\n{: .prompt-warning }' },
       { trigger: '/danger', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '/danger', desc: '🔴 Chirpy 危險警告框 (prompt-danger)', insert: '> |\n{: .prompt-danger }' },
       { trigger: '/mermaid', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '/mermaid', desc: '📊 Mermaid 流程圖區塊', insert: '```mermaid\nflowchart LR\n  A["起點"] --> B{"判斷條件"}\n  B -- 是 --> C["結果 1"]\n  B -- 否 --> D["結果 2"]\n```' },
-      { trigger: '/sequence', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '/sequence', desc: '📊 Mermaid 時序圖區塊', insert: '```mermaid\nsequenceDiagram\n  participant A as 客戶端\n  participant B as 伺服器\n  A->>B: 發送請求\n  B-->>A: 返回結果\n```' },
       { trigger: '/table', kind: 'Snippet', kindClass: 'kind-snip', label: '/table', desc: '插入 3×3 Markdown 表格', insert: '| 欄位 1 | 欄位 2 | 欄位 3 |\n| :--- | :--- | :--- |\n| | | |\n| | | |' },
-      { trigger: '/code', kind: 'Code', kindClass: 'kind-code', label: '/code', desc: '插入程式碼區塊', insert: '```python\n|\n```' },
-      { trigger: '/img', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '/img', desc: '插入帶寬度與陰影的 Chirpy 圖片', insert: '![圖片說明](|){: width="600" .shadow }' },
+      { trigger: '/code', kind: 'Snippet', kindClass: 'kind-snip', label: '/code', desc: '插入程式碼區塊', insert: '```python\n|\n```' },
       { trigger: '/fold', kind: 'Snippet', kindClass: 'kind-snip', label: '/fold', desc: '可折疊內容區塊 <details>', insert: '<details>\n<summary>點擊展開詳細推導</summary>\n\n|\n\n</details>' },
 
-      // --- LaTeX Commands (\...) ---
+      // LaTeX Commands (\...)
       { trigger: '\\frac', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\frac{a}{b}', desc: '分式 a/b', insert: '\\frac{|}{}' },
       { trigger: '\\sqrt', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\sqrt{x}', desc: '平方根 √x', insert: '\\sqrt{|}' },
       { trigger: '\\sum', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\sum_{i=1}^{n}', desc: '連加求和 Σ', insert: '\\sum_{i=1}^{n} |' },
@@ -1701,11 +1560,8 @@
       { trigger: '\\tag', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\tag{1}', desc: '公式右側編號 (1)', insert: '\\tag{|}' },
       { trigger: '\\text', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\text{...}', desc: '公式內純文字', insert: '\\text{|}' },
       { trigger: '\\mathbf', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\mathbf{v}', desc: '粗體向量/矩陣字體', insert: '\\mathbf{|}' },
-      { trigger: '\\mathcal', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\mathcal{L}', desc: '花體字 (如拉氏轉換)', insert: '\\mathcal{|}' },
-      { trigger: '\\mathbb', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\mathbb{R}', desc: '空心粗體 (實數集 ℝ)', insert: '\\mathbb{|}' },
       { trigger: '\\vec', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\vec{v}', desc: '向量頂部箭頭 v⃗', insert: '\\vec{|}' },
       { trigger: '\\hat', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\hat{u}', desc: '單位向量帽號 û', insert: '\\hat{|}' },
-      { trigger: '\\overline', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\overline{AB}', desc: '頂部橫線 (線段/共軛)', insert: '\\overline{|}' },
       { trigger: '\\left(', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\left( ... \\right)', desc: '自適應高度圓括號', insert: '\\left( | \\right)' },
       { trigger: '\\left[', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\left[ ... \\right]', desc: '自適應高度方括號', insert: '\\left[ | \\right]' },
       { trigger: '\\alpha', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\alpha', desc: '希臘字母 α', insert: '\\alpha' },
@@ -1713,15 +1569,14 @@
       { trigger: '\\gamma', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\gamma', desc: '希臘字母 γ', insert: '\\gamma' },
       { trigger: '\\delta', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\delta', desc: '希臘字母 δ', insert: '\\delta' },
       { trigger: '\\Delta', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\Delta', desc: '增量 / 判別式 Δ', insert: '\\Delta' },
-      { trigger: '\\epsilon', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\epsilon', desc: '希臘字母 ϵ', insert: '\\epsilon' },
       { trigger: '\\theta', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\theta', desc: '角度 θ', insert: '\\theta' },
       { trigger: '\\lambda', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\lambda', desc: '特徵值 / 波長 λ', insert: '\\lambda' },
-      { trigger: '\\mu', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\mu', desc: '期望值 / 摩擦係數 μ', insert: '\\mu' },
+      { trigger: '\\mu', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\mu', desc: '摩擦係數 / 期望值 μ', insert: '\\mu' },
       { trigger: '\\pi', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\pi', desc: '圓周率 π', insert: '\\pi' },
       { trigger: '\\rho', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\rho', desc: '密度 / 曲率半徑 ρ', insert: '\\rho' },
-      { trigger: '\\sigma', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\sigma', desc: '標準差 / 應力 σ', insert: '\\sigma' },
+      { trigger: '\\sigma', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\sigma', desc: '應力 / 標準差 σ', insert: '\\sigma' },
       { trigger: '\\phi', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\phi', desc: '角度 / 相位 ϕ', insert: '\\phi' },
-      { trigger: '\\omega', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\omega', desc: '角頻率 ω', insert: '\\omega' },
+      { trigger: '\\omega', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\omega', desc: '角速度 / 角頻率 ω', insert: '\\omega' },
       { trigger: '\\Omega', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\Omega', desc: '歐姆 / 定義域 Ω', insert: '\\Omega' },
       { trigger: '\\nabla', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\nabla', desc: '梯度算子 ∇', insert: '\\nabla' },
       { trigger: '\\infty', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\infty', desc: '無窮大 ∞', insert: '\\infty' },
@@ -1730,25 +1585,11 @@
       { trigger: '\\neq', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\neq', desc: '不等於 ≠', insert: '\\neq' },
       { trigger: '\\leq', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\leq', desc: '小於等於 ≤', insert: '\\leq' },
       { trigger: '\\geq', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\geq', desc: '大於等於 ≥', insert: '\\geq' },
-      { trigger: '\\times', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\times', desc: '叉乘 / 乘號 ×', insert: '\\times' },
+      { trigger: '\\times', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\times', desc: '叉乘 ×', insert: '\\times' },
       { trigger: '\\cdot', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\cdot', desc: '點乘 ·', insert: '\\cdot' },
-      { trigger: '\\pm', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\pm', desc: '正負號 ±', insert: '\\pm' },
-      { trigger: '\\in', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\in', desc: '屬於 ∈', insert: '\\in' },
-      { trigger: '\\forall', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\forall', desc: '對所有 ∀', insert: '\\forall' },
-      { trigger: '\\exists', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\exists', desc: '存在 ∃', insert: '\\exists' },
-      { trigger: '\\rightarrow', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\rightarrow', desc: '右箭頭 →', insert: '\\rightarrow' },
-      { trigger: '\\Rightarrow', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\Rightarrow', desc: '推導出 ⇒', insert: '\\Rightarrow' },
-      { trigger: '\\iff', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\iff', desc: '當且僅當 ⟺', insert: '\\iff' },
-
-      // --- Chirpy Kramdown Modifiers ({:...) ---
-      { trigger: '{:tip', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '{: .prompt-tip }', desc: '套用綠色提示框樣式', insert: '{: .prompt-tip }' },
-      { trigger: '{:info', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '{: .prompt-info }', desc: '套用藍色資訊框樣式', insert: '{: .prompt-info }' },
-      { trigger: '{:warning', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '{: .prompt-warning }', desc: '套用黃色警告框樣式', insert: '{: .prompt-warning }' },
-      { trigger: '{:danger', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '{: .prompt-danger }', desc: '套用紅色危險框樣式', insert: '{: .prompt-danger }' },
-      { trigger: '{:shadow', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '{: .w-75 .shadow }', desc: '圖片 75% 寬度 + 立體陰影', insert: '{: .w-75 .shadow }' }
+      { trigger: '\\Rightarrow', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\Rightarrow', desc: '推導出 ⇒', insert: '\\Rightarrow' }
     ];
 
-    // Math Palette Categories for Toolbar Click
     const MATH_PALETTE_DATA = {
       struct: [
         { sym: 'a/b', lbl: '分式 \\frac', tpl: '\\frac{|}{}' },
@@ -1808,7 +1649,6 @@
       ]
     };
 
-    // Default Shortcuts
     const DEFAULT_SHORTCUTS = {
       save: { name: '儲存文章 / 草稿', key: 's', ctrl: true, alt: false, shift: false },
       publish: { name: '推送至 GitHub', key: 'p', ctrl: true, alt: false, shift: true },
@@ -1821,12 +1661,12 @@
     };
 
     let userShortcuts = { ...DEFAULT_SHORTCUTS };
+    let customSnippets = [];
     let recordingAction = null;
 
-    // Intellisense runtime state
     let activeMatches = [];
     let selectedMatchIdx = 0;
-    let currentTriggerRange = null; // { start, end }
+    let currentTriggerRange = null;
 
     // -----------------------------------------------------------------
     // Theme & Mermaid Init
@@ -1834,11 +1674,7 @@
     const savedTheme = localStorage.getItem('dlib-admin-theme') || 'dark';
     document.documentElement.setAttribute('data-mode', savedTheme);
 
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: savedTheme === 'dark' ? 'dark' : 'default',
-      securityLevel: 'loose'
-    });
+    mermaid.initialize({ startOnLoad: false, theme: savedTheme === 'dark' ? 'dark' : 'default', securityLevel: 'loose' });
 
     function toggleThemeMode() {
       const html = document.documentElement;
@@ -1846,21 +1682,16 @@
       const next = current === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-mode', next);
       localStorage.setItem('dlib-admin-theme', next);
-      
-      const themeLink = document.getElementById('highlightTheme');
-      themeLink.href = next === 'light'
+      document.getElementById('highlightTheme').href = next === 'light'
         ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css'
         : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';
-
       mermaid.initialize({ startOnLoad: false, theme: next === 'dark' ? 'dark' : 'default' });
       renderPreview();
     }
 
     marked.setOptions({
       highlight: function(code, lang) {
-        if (lang && hljs.getLanguage(lang)) {
-          return hljs.highlight(code, { language: lang }).value;
-        }
+        if (lang && hljs.getLanguage(lang)) return hljs.highlight(code, { language: lang }).value;
         return hljs.highlightAuto(code).value;
       },
       breaks: true
@@ -1871,22 +1702,1091 @@
     // -----------------------------------------------------------------
     window.addEventListener('DOMContentLoaded', async () => {
       loadSavedShortcuts();
+      loadCustomSnippets();
       setupGlobalKeybindings();
       setupPasteHandler();
+      setupDragAndDropImport();
       setupSyncScrolling();
       setupIntellisenseEvents();
+      initSketchpadEvents();
       switchMathTab('struct');
 
       await loadPosts();
       await checkPreviewStatus();
       await checkActionsStatus();
+      await refreshSiteBranding();
 
       setInterval(tickAutosave, 5000);
       setInterval(checkActionsStatus, 15000);
     });
 
     // -----------------------------------------------------------------
-    // 1. Synchronized Split-Pane Scrolling
+    // #6 Custom User Snippets System
+    // -----------------------------------------------------------------
+    function loadCustomSnippets() {
+      const raw = localStorage.getItem('dlib_custom_snippets');
+      if (raw) {
+        try { customSnippets = JSON.parse(raw); } catch (e) { customSnippets = []; }
+      } else {
+        // Default sample custom snippet for engineering projection
+        customSnippets = [
+          {
+            trigger: '/proj4',
+            desc: '4×4 齊次座標投影變換矩陣',
+            insert: '\\[\n\\mathbf{P} = \\begin{bmatrix}\n  1 & 0 & 0 & 0 \\\\\n  0 & 1 & 0 & 0 \\\\\n  0 & 0 & 1 & 0 \\\\\n  0 & 0 & -1/d & 1\n\\end{bmatrix}\n\\]'
+          }
+        ];
+        saveCustomSnippets();
+      }
+    }
+
+    function saveCustomSnippets() {
+      localStorage.setItem('dlib_custom_snippets', JSON.stringify(customSnippets));
+    }
+
+    function getAllIntellisenseItems() {
+      const customFormatted = customSnippets.map(s => ({
+        trigger: s.trigger,
+        kind: 'Custom',
+        kindClass: 'kind-custom',
+        label: s.trigger,
+        desc: s.desc,
+        insert: s.insert
+      }));
+      return [...customFormatted, ...BASE_INTELLISENSE_ITEMS];
+    }
+
+    function renderCustomSnippetsTable() {
+      const tbody = document.getElementById('customSnippetsTableBody');
+      if (!tbody) return;
+      if (customSnippets.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color: var(--text-muted-color); padding: 14px;">尚未新增自訂片段</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = customSnippets.map((s, i) => `
+        <tr>
+          <td style="font-family: 'JetBrains Mono', monospace; color: #f472b6; font-weight: 600;">${escapeHtml(s.trigger)}</td>
+          <td>${escapeHtml(s.desc)}</td>
+          <td><code style="font-size: 0.72rem; color: var(--text-muted-color);">${escapeHtml(s.insert.slice(0, 50))}${s.insert.length > 50 ? '...' : ''}</code></td>
+          <td>
+            <button class="btn btn-delete" style="padding: 2px 6px; font-size: 0.7rem;" onclick="removeCustomSnippet(${i})">刪除</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function addCustomSnippet() {
+      let trigger = document.getElementById('newSnipTrigger').value.trim();
+      const desc = document.getElementById('newSnipDesc').value.trim() || '自訂語法片段';
+      const insert = document.getElementById('newSnipInsert').value;
+
+      if (!trigger || !insert) {
+        Swal.fire('提示', '請填寫觸發指令與展開內容', 'info');
+        return;
+      }
+      if (!trigger.startsWith('/') && !trigger.startsWith('\\')) {
+        trigger = '/' + trigger;
+      }
+
+      customSnippets.unshift({ trigger, desc, insert });
+      saveCustomSnippets();
+      renderCustomSnippetsTable();
+
+      document.getElementById('newSnipTrigger').value = '';
+      document.getElementById('newSnipDesc').value = '';
+      document.getElementById('newSnipInsert').value = '';
+    }
+
+    function removeCustomSnippet(idx) {
+      customSnippets.splice(idx, 1);
+      saveCustomSnippets();
+      renderCustomSnippetsTable();
+    }
+
+    // -----------------------------------------------------------------
+    // #1 Interactive Matrix & Table Visual Builder
+    // -----------------------------------------------------------------
+    function openMatrixBuilder() {
+      document.getElementById('matrixBuilderModal').classList.add('active');
+      rebuildMatrixGrid();
+    }
+
+    function closeMatrixBuilder() {
+      document.getElementById('matrixBuilderModal').classList.remove('active');
+    }
+
+    function rebuildMatrixGrid() {
+      const r = Math.min(10, Math.max(1, parseInt(document.getElementById('matRows').value) || 3));
+      const c = Math.min(10, Math.max(1, parseInt(document.getElementById('matCols').value) || 3));
+      const grid = document.getElementById('matrixGrid');
+      grid.style.gridTemplateColumns = `repeat(${c}, 1fr)`;
+
+      const oldVals = {};
+      grid.querySelectorAll('.matrix-cell').forEach(inp => {
+        oldVals[`${inp.dataset.r}_${inp.dataset.c}`] = inp.value;
+      });
+
+      let html = '';
+      for (let i = 0; i < r; i++) {
+        for (let j = 0; j < c; j++) {
+          const defaultVal = oldVals[`${i}_${j}`] !== undefined ? oldVals[`${i}_${j}`] : (i === j ? '1' : '0');
+          html += `<input type="text" class="matrix-cell" data-r="${i}" data-c="${j}" value="${escapeHtml(defaultVal)}" oninput="updateMatrixBuilderPreview()">`;
+        }
+      }
+      grid.innerHTML = html;
+      updateMatrixBuilderPreview();
+    }
+
+    function fillMatrixPreset(preset) {
+      const r = parseInt(document.getElementById('matRows').value) || 3;
+      const c = parseInt(document.getElementById('matCols').value) || 3;
+      document.querySelectorAll('#matrixGrid .matrix-cell').forEach(inp => {
+        const i = parseInt(inp.dataset.r);
+        const j = parseInt(inp.dataset.c);
+        if (preset === 'identity') inp.value = (i === j) ? '1' : '0';
+        else if (preset === 'zeros') inp.value = '0';
+        else if (preset === 'symbolic') inp.value = `a_{${i + 1}${j + 1}}`;
+      });
+      updateMatrixBuilderPreview();
+    }
+
+    function transposeMatrixGrid() {
+      const rEl = document.getElementById('matRows');
+      const cEl = document.getElementById('matCols');
+      const oldR = parseInt(rEl.value) || 3;
+      const oldC = parseInt(cEl.value) || 3;
+
+      const vals = {};
+      document.querySelectorAll('#matrixGrid .matrix-cell').forEach(inp => {
+        vals[`${inp.dataset.r}_${inp.dataset.c}`] = inp.value;
+      });
+
+      rEl.value = oldC;
+      cEl.value = oldR;
+      const grid = document.getElementById('matrixGrid');
+      grid.style.gridTemplateColumns = `repeat(${oldR}, 1fr)`;
+
+      let html = '';
+      for (let i = 0; i < oldC; i++) {
+        for (let j = 0; j < oldR; j++) {
+          const v = vals[`${j}_${i}`] || '0';
+          html += `<input type="text" class="matrix-cell" data-r="${i}" data-c="${j}" value="${escapeHtml(v)}" oninput="updateMatrixBuilderPreview()">`;
+        }
+      }
+      grid.innerHTML = html;
+      updateMatrixBuilderPreview();
+    }
+
+    function buildMatrixCodeString() {
+      const r = parseInt(document.getElementById('matRows').value) || 3;
+      const c = parseInt(document.getElementById('matCols').value) || 3;
+      const type = document.getElementById('matType').value;
+
+      const rowsData = [];
+      for (let i = 0; i < r; i++) {
+        const row = [];
+        for (let j = 0; j < c; j++) {
+          const cell = document.querySelector(`#matrixGrid .matrix-cell[data-r="${i}"][data-c="${j}"]`);
+          row.push(cell ? cell.value.trim() : '0');
+        }
+        rowsData.push(row);
+      }
+
+      if (type === 'table') {
+        const header = '| ' + rowsData[0].join(' | ') + ' |';
+        const sep = '| ' + rowsData[0].map(() => ':---:').join(' | ') + ' |';
+        const body = rowsData.slice(1).map(row => '| ' + row.join(' | ') + ' |').join('\n');
+        return `\n${header}\n${sep}${body ? '\n' + body : ''}\n`;
+      } else {
+        const body = rowsData.map(row => '  ' + row.join(' & ')).join(' \\\\\n');
+        return `\\[\n\\begin{${type}}\n${body}\n\\end{${type}}\n\\]`;
+      }
+    }
+
+    function updateMatrixBuilderPreview() {
+      const code = buildMatrixCodeString();
+      const type = document.getElementById('matType').value;
+      const previewBox = document.getElementById('matrixLivePreview');
+
+      if (type === 'table') {
+        previewBox.innerHTML = `<div class="chirpy-content" style="width:100%;">${marked.parse(code)}</div>`;
+      } else {
+        const innerLatex = code.replace(/^\\\[\s*|\s*\\\]$/g, '');
+        try {
+          previewBox.innerHTML = katex.renderToString(innerLatex, { displayMode: true, throwOnError: false });
+        } catch (e) {
+          previewBox.innerText = code;
+        }
+      }
+    }
+
+    function insertGeneratedMatrix() {
+      const code = buildMatrixCodeString();
+      insertSyntax(code + '\n', '');
+      closeMatrixBuilder();
+    }
+
+    // -----------------------------------------------------------------
+    // #2 Built-in Interactive Math Function Plotter
+    // -----------------------------------------------------------------
+    function openPlotterModal() {
+      document.getElementById('plotterModal').classList.add('active');
+      drawFunctionPlot();
+    }
+
+    function closePlotterModal() {
+      document.getElementById('plotterModal').classList.remove('active');
+    }
+
+    function evalMathExpr(exprStr, xVal) {
+      if (!exprStr || !exprStr.trim()) return NaN;
+      let s = exprStr.trim()
+        .replace(/\^/g, '**')
+        .replace(/\bsin\b/g, 'Math.sin')
+        .replace(/\bcos\b/g, 'Math.cos')
+        .replace(/\btan\b/g, 'Math.tan')
+        .replace(/\basin\b/g, 'Math.asin')
+        .replace(/\bacos\b/g, 'Math.acos')
+        .replace(/\batan\b/g, 'Math.atan')
+        .replace(/\bexp\b/g, 'Math.exp')
+        .replace(/\bln\b/g, 'Math.log')
+        .replace(/\blog\b/g, 'Math.log10')
+        .replace(/\bsqrt\b/g, 'Math.sqrt')
+        .replace(/\babs\b/g, 'Math.abs')
+        .replace(/\bpi\b/gi, 'Math.PI')
+        .replace(/\be\b/g, 'Math.E');
+      try {
+        const fn = new Function('x', `return (${s});`);
+        return fn(xVal);
+      } catch (e) {
+        return NaN;
+      }
+    }
+
+    function drawFunctionPlot() {
+      const canvas = document.getElementById('plotCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width;
+      const H = canvas.height;
+
+      const xMin = parseFloat(document.getElementById('plotXMin').value) ?? -5;
+      const xMax = parseFloat(document.getElementById('plotXMax').value) ?? 10;
+      if (xMax <= xMin) return;
+
+      const f1 = document.getElementById('plotF1').value.trim();
+      const f2 = document.getElementById('plotF2').value.trim();
+      const f3 = document.getElementById('plotF3').value.trim();
+      const title = document.getElementById('plotTitle').value.trim();
+
+      const funcs = [
+        { expr: f1, color: '#60a5fa', label: `f₁(x) = ${f1}` },
+        { expr: f2, color: '#f59e0b', label: `f₂(x) = ${f2}` },
+        { expr: f3, color: '#10b981', label: `f₃(x) = ${f3}` }
+      ].filter(f => f.expr);
+
+      // Sample points to find Y bounds
+      const N = 500;
+      let yMin = Infinity, yMax = -Infinity;
+      const series = funcs.map(f => {
+        const pts = [];
+        for (let i = 0; i <= N; i++) {
+          const x = xMin + (xMax - xMin) * (i / N);
+          const y = evalMathExpr(f.expr, x);
+          if (Number.isFinite(y) && Math.abs(y) < 1e4) {
+            if (y < yMin) yMin = y;
+            if (y > yMax) yMax = y;
+            pts.push({ x, y });
+          } else {
+            pts.push({ x, y: null });
+          }
+        }
+        return { ...f, pts };
+      });
+
+      if (!Number.isFinite(yMin) || !Number.isFinite(yMax)) { yMin = -2; yMax = 2; }
+      if (Math.abs(yMax - yMin) < 1e-6) { yMin -= 1; yMax += 1; }
+      const yPad = (yMax - yMin) * 0.15;
+      yMin -= yPad;
+      yMax += yPad;
+
+      const padL = 55, padR = 25, padT = 42, padB = 40;
+      const plotW = W - padL - padR;
+      const plotH = H - padT - padB;
+
+      const toScreenX = x => padL + ((x - xMin) / (xMax - xMin)) * plotW;
+      const toScreenY = y => padT + (1 - (y - yMin) / (yMax - yMin)) * plotH;
+
+      // Background
+      ctx.fillStyle = '#18181c';
+      ctx.fillRect(0, 0, W, H);
+
+      // Grid lines
+      ctx.strokeStyle = '#2a2b30';
+      ctx.lineWidth = 1;
+      ctx.fillStyle = '#888';
+      ctx.font = '11px JetBrains Mono, monospace';
+
+      for (let i = 0; i <= 8; i++) {
+        const gx = padL + (plotW * i) / 8;
+        const valX = xMin + ((xMax - xMin) * i) / 8;
+        ctx.beginPath(); ctx.moveTo(gx, padT); ctx.lineTo(gx, padT + plotH); ctx.stroke();
+        ctx.textAlign = 'center';
+        ctx.fillText(valX.toFixed(1), gx, H - 15);
+      }
+      for (let i = 0; i <= 6; i++) {
+        const gy = padT + (plotH * i) / 6;
+        const valY = yMax - ((yMax - yMin) * i) / 6;
+        ctx.beginPath(); ctx.moveTo(padL, gy); ctx.lineTo(padL + plotW, gy); ctx.stroke();
+        ctx.textAlign = 'right';
+        ctx.fillText(valY.toFixed(2), padL - 8, gy + 4);
+      }
+
+      // Main X=0, Y=0 Axes
+      ctx.strokeStyle = '#555';
+      ctx.lineWidth = 1.5;
+      if (yMin <= 0 && yMax >= 0) {
+        const y0 = toScreenY(0);
+        ctx.beginPath(); ctx.moveTo(padL, y0); ctx.lineTo(padL + plotW, y0); ctx.stroke();
+      }
+      if (xMin <= 0 && xMax >= 0) {
+        const x0 = toScreenX(0);
+        ctx.beginPath(); ctx.moveTo(x0, padT); ctx.lineTo(x0, padT + plotH); ctx.stroke();
+      }
+
+      // Title
+      if (title) {
+        ctx.fillStyle = '#e5e7eb';
+        ctx.font = 'bold 14px Lato, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(title, W / 2, 24);
+      }
+
+      // Plot Curves
+      series.forEach((s, idx) => {
+        ctx.strokeStyle = s.color;
+        ctx.lineWidth = 2.4;
+        ctx.beginPath();
+        let drawing = false;
+        s.pts.forEach(p => {
+          if (p.y === null) {
+            drawing = false;
+          } else {
+            const sx = toScreenX(p.x);
+            const sy = toScreenY(p.y);
+            if (!drawing) { ctx.moveTo(sx, sy); drawing = true; }
+            else ctx.lineTo(sx, sy);
+          }
+        });
+        ctx.stroke();
+
+        // Legend
+        ctx.fillStyle = s.color;
+        ctx.font = '11px JetBrains Mono, monospace';
+        ctx.textAlign = 'left';
+        ctx.fillText(`■ ${s.label}`, padL + 12 + idx * 210, padT + 18);
+      });
+    }
+
+    // -----------------------------------------------------------------
+    // #3 Engineering Sketchpad / Free-Body Diagram Canvas
+    // -----------------------------------------------------------------
+    let sketchTool = 'arrow';
+    let sketchHistory = [];
+    let isDrawingSketch = false;
+    let sketchStartX = 0, sketchStartY = 0;
+    let sketchSnapshot = null;
+
+    function openSketchpadModal() {
+      document.getElementById('sketchpadModal').classList.add('active');
+      if (sketchHistory.length === 0) {
+        clearSketchCanvas();
+      }
+    }
+
+    function closeSketchpadModal() {
+      document.getElementById('sketchpadModal').classList.remove('active');
+    }
+
+    function setSketchTool(tool) {
+      sketchTool = tool;
+      document.querySelectorAll('[id^="sketchTool_"]').forEach(b => b.classList.remove('active'));
+      const btn = document.getElementById(`sketchTool_${tool}`);
+      if (btn) btn.classList.add('active');
+    }
+
+    function drawSketchGridBackground(ctx, W, H) {
+      ctx.fillStyle = '#16161a';
+      ctx.fillRect(0, 0, W, H);
+      ctx.strokeStyle = '#22232a';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < W; x += 25) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+      }
+      for (let y = 0; y < H; y += 25) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+    }
+
+    function clearSketchCanvas() {
+      const canvas = document.getElementById('sketchCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      drawSketchGridBackground(ctx, canvas.width, canvas.height);
+      sketchHistory = [ctx.getImageData(0, 0, canvas.width, canvas.height)];
+    }
+
+    function undoSketch() {
+      if (sketchHistory.length > 1) {
+        sketchHistory.pop();
+        const canvas = document.getElementById('sketchCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.putImageData(sketchHistory[sketchHistory.length - 1], 0, 0);
+      }
+    }
+
+    function drawArrow(ctx, x1, y1, x2, y2) {
+      const headLen = 13;
+      const angle = Math.atan2(y2 - y1, x2 - x1);
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+
+      ctx.setLineDash([]);
+      ctx.beginPath();
+      ctx.moveTo(x2, y2);
+      ctx.lineTo(x2 - headLen * Math.cos(angle - Math.PI / 6), y2 - headLen * Math.sin(angle - Math.PI / 6));
+      ctx.lineTo(x2 - headLen * Math.cos(angle + Math.PI / 6), y2 - headLen * Math.sin(angle + Math.PI / 6));
+      ctx.closePath();
+      ctx.fillStyle = ctx.strokeStyle;
+      ctx.fill();
+    }
+
+    function stampCoordinateAxes() {
+      const canvas = document.getElementById('sketchCanvas');
+      const ctx = canvas.getContext('2d');
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      ctx.save();
+      ctx.strokeStyle = '#9ca3af';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([]);
+      drawArrow(ctx, cx - 120, cy, cx + 120, cy);
+      drawArrow(ctx, cx, cy + 120, cx, cy - 120);
+      ctx.fillStyle = '#e5e7eb';
+      ctx.font = 'italic bold 15px serif';
+      ctx.fillText('x', cx + 128, cy + 5);
+      ctx.fillText('y', cx - 5, cy - 128);
+      ctx.fillText('O', cx - 18, cy + 18);
+      ctx.restore();
+      sketchHistory.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+    }
+
+    function initSketchpadEvents() {
+      const canvas = document.getElementById('sketchCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      const getCoords = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        return {
+          x: (e.clientX - rect.left) * scaleX,
+          y: (e.clientY - rect.top) * scaleY
+        };
+      };
+
+      canvas.addEventListener('mousedown', (e) => {
+        const { x, y } = getCoords(e);
+        const color = document.getElementById('sketchColor').value;
+        const width = parseInt(document.getElementById('sketchWidth').value) || 3;
+        const dashed = document.getElementById('sketchDashed').checked;
+
+        if (sketchTool === 'text') {
+          const txt = prompt('請輸入要標註的文字或力學符號（如 F_N, mg, θ, A）：');
+          if (txt) {
+            ctx.save();
+            ctx.fillStyle = color;
+            ctx.font = 'bold 16px "JetBrains Mono", serif';
+            ctx.fillText(txt, x, y);
+            ctx.restore();
+            sketchHistory.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+          }
+          return;
+        }
+
+        isDrawingSketch = true;
+        sketchStartX = x;
+        sketchStartY = y;
+        sketchSnapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        ctx.lineCap = 'round';
+        ctx.setLineDash(dashed ? [6, 6] : []);
+
+        if (sketchTool === 'pen') {
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+        }
+      });
+
+      canvas.addEventListener('mousemove', (e) => {
+        if (!isDrawingSketch) return;
+        const { x, y } = getCoords(e);
+
+        if (sketchTool === 'pen') {
+          ctx.lineTo(x, y);
+          ctx.stroke();
+          return;
+        }
+
+        ctx.putImageData(sketchSnapshot, 0, 0);
+        const dashed = document.getElementById('sketchDashed').checked;
+        ctx.setLineDash(dashed ? [6, 6] : []);
+
+        if (sketchTool === 'line') {
+          ctx.beginPath(); ctx.moveTo(sketchStartX, sketchStartY); ctx.lineTo(x, y); ctx.stroke();
+        } else if (sketchTool === 'arrow') {
+          drawArrow(ctx, sketchStartX, sketchStartY, x, y);
+        } else if (sketchTool === 'rect') {
+          ctx.strokeRect(sketchStartX, sketchStartY, x - sketchStartX, y - sketchStartY);
+        } else if (sketchTool === 'circle') {
+          const r = Math.hypot(x - sketchStartX, y - sketchStartY);
+          ctx.beginPath(); ctx.arc(sketchStartX, sketchStartY, r, 0, Math.PI * 2); ctx.stroke();
+        }
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDrawingSketch) {
+          isDrawingSketch = false;
+          sketchHistory.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+        }
+      });
+    }
+
+    async function exportCanvasAndInsert(canvasId, label) {
+      const canvas = document.getElementById(canvasId);
+      const dataUrl = canvas.toDataURL('image/png');
+      const prefix = canvasId === 'plotCanvas' ? 'plot.png' : 'sketch.png';
+
+      try {
+        const res = await fetch('/api/upload-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ data: dataUrl, filename: prefix })
+        });
+        const data = await res.json();
+        if (data.success) {
+          insertSyntax(`\n![${label}](${data.url})\n`, '');
+          closePlotterModal();
+          closeSketchpadModal();
+          Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: `${label}已自動存檔並插入文章！`, timer: 2000, showConfirmButton: false });
+        }
+      } catch (err) {
+        Swal.fire('錯誤', err.message, 'error');
+      }
+    }
+
+    // -----------------------------------------------------------------
+    // #4 Real-Time LaTeX & Broken Image Linter
+    // -----------------------------------------------------------------
+    function scheduleLinterCheck() {
+      clearTimeout(linterTimer);
+      linterTimer = setTimeout(runDocumentLinter, 600);
+    }
+
+    async function runDocumentLinter() {
+      const text = document.getElementById('editorTextarea').value;
+      const lines = text.split('\n');
+      const issues = [];
+
+      // 1. Check \begin{env} vs \end{env} balance
+      const envStack = [];
+      let openBlockMathLine = null;
+      let inCodeBlock = false;
+      const imagePathsToCheck = [];
+
+      lines.forEach((line, idx) => {
+        const lineNum = idx + 1;
+        if (line.trim().startsWith('```')) {
+          inCodeBlock = !inCodeBlock;
+          return;
+        }
+        if (inCodeBlock) return;
+
+        // Check \[ and \]
+        const opens = (line.match(/\\{1,2}\[/g) || []).length;
+        const closes = (line.match(/\\{1,2}\]/g) || []).length;
+        if (opens > closes) {
+          if (openBlockMathLine !== null) {
+            issues.push({ line: openBlockMathLine, msg: `第 ${openBlockMathLine} 行的 \\[ 公式塊可能未正確閉合 \\]` });
+          }
+          openBlockMathLine = lineNum;
+        } else if (closes > opens) {
+          if (openBlockMathLine === null) {
+            issues.push({ line: lineNum, msg: `第 ${lineNum} 行發現多餘的 \\] 閉合符號` });
+          } else {
+            openBlockMathLine = null;
+          }
+        }
+
+        // Check \begin{...} and \end{...}
+        const beginRegex = /\\{1,2}begin\{([a-zA-Z0-9*]+)\}/g;
+        const endRegex = /\\{1,2}end\{([a-zA-Z0-9*]+)\}/g;
+        let m;
+        while ((m = beginRegex.exec(line)) !== null) {
+          envStack.push({ env: m[1], line: lineNum });
+        }
+        while ((m = endRegex.exec(line)) !== null) {
+          const endEnv = m[1];
+          if (envStack.length === 0) {
+            issues.push({ line: lineNum, msg: `第 ${lineNum} 行：發現未配對的 \\end{${endEnv}}` });
+          } else {
+            const last = envStack.pop();
+            if (last.env !== endEnv) {
+              issues.push({ line: lineNum, msg: `第 ${last.line} 行的 \\begin{${last.env}} 與第 ${lineNum} 行的 \\end{${endEnv}} 不匹配` });
+            }
+          }
+        }
+
+        // Collect local /assets/ image links
+        const imgRegex = /\!\[[^\]]*\]\(([^\)]+)\)/g;
+        while ((m = imgRegex.exec(line)) !== null) {
+          const url = m[1].trim();
+          if (url.startsWith('/assets/')) {
+            imagePathsToCheck.push({ url, line: lineNum });
+          }
+        }
+      });
+
+      if (openBlockMathLine !== null) {
+        issues.push({ line: openBlockMathLine, msg: `第 ${openBlockMathLine} 行開啟的 \\[ 數學公式塊尚未閉合 \\]` });
+      }
+      envStack.forEach(item => {
+        issues.push({ line: item.line, msg: `第 ${item.line} 行開啟的 \\begin{${item.env}} 缺少對應的 \\end{${item.env}}` });
+      });
+
+      // Check local images on disk
+      if (imagePathsToCheck.length > 0) {
+        try {
+          const res = await fetch('/api/check-links', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ paths: imagePathsToCheck.map(i => i.url) })
+          });
+          const data = await res.json();
+          if (data.success && Array.isArray(data.missing)) {
+            imagePathsToCheck.forEach(item => {
+              if (data.missing.includes(item.url)) {
+                issues.push({ line: item.line, msg: `第 ${item.line} 行：找不到本地圖片檔案 ${item.url}` });
+              }
+            });
+          }
+        } catch (e) {}
+      }
+
+      currentLinterIssues = issues;
+      const dot = document.getElementById('linterDot');
+      const txt = document.getElementById('linterText');
+      if (issues.length === 0) {
+        dot.className = 'dot-green';
+        txt.innerText = '語法正常';
+      } else {
+        dot.className = 'dot-yellow';
+        txt.innerText = `${issues.length} 個語法提醒`;
+      }
+    }
+
+    function openLinterReport() {
+      if (currentLinterIssues.length === 0) {
+        Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: '✨ LaTeX 語法與圖片連結檢查全部通過！', timer: 2000, showConfirmButton: false });
+        return;
+      }
+      const listHtml = currentLinterIssues.map(iss => `
+        <div style="text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--main-border-color); cursor: pointer; font-size: 0.82rem;"
+             onclick="Swal.close(); jumpToEditorLine(${iss.line});">
+          <span style="color: #f59e0b; font-weight: bold;">[第 ${iss.line} 行]</span> ${escapeHtml(iss.msg)}
+        </div>
+      `).join('');
+
+      Swal.fire({
+        title: '🩺 語法與連結健康診斷報告',
+        html: `<div style="max-height: 260px; overflow-y: auto;">${listHtml}</div><div style="font-size:0.74rem; color:var(--text-muted-color); margin-top:8px;">點擊任一項目可直接跳轉至對應行號</div>`,
+        confirmButtonText: '關閉'
+      });
+    }
+
+    function jumpToEditorLine(lineNum) {
+      const textarea = document.getElementById('editorTextarea');
+      const lines = textarea.value.split('\n');
+      let charPos = 0;
+      for (let i = 0; i < Math.min(lineNum - 1, lines.length); i++) {
+        charPos += lines[i].length + 1;
+      }
+      jumpToEditorPosition(charPos, lineNum - 1);
+    }
+
+    // -----------------------------------------------------------------
+    // #8 About Page (_tabs/about.md) & Site Config (_config.yml)
+    // -----------------------------------------------------------------
+    async function loadAboutPage() {
+      if (hasUnsavedChanges) saveSnapshotToStorage();
+      isEditingAbout = true;
+      currentPost = { filename: '__ABOUT__', isDraft: false };
+
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tabAbout').classList.add('active');
+      document.getElementById('postMetaBar').style.display = 'none';
+      document.getElementById('btnDelete').style.display = 'none';
+      document.getElementById('btnToggleDraft').style.display = 'none';
+
+      document.getElementById('breadcrumbFolder').innerHTML = '<i class="fa-solid fa-user-graduate"></i> _tabs';
+      document.getElementById('currentStatusBadge').className = 'status-badge published';
+      document.getElementById('currentStatusBadge').innerHTML = '個人履歷頁';
+      document.getElementById('displayTitle').innerText = '關於我 (about.md)';
+      document.getElementById('btnSave').innerHTML = '<i class="fa-regular fa-floppy-disk"></i> 儲存關於我';
+
+      try {
+        const res = await fetch('/api/about');
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('editorTextarea').value = data.content || '';
+          onContentChange();
+          hasUnsavedChanges = false;
+        }
+      } catch (err) {
+        Swal.fire('錯誤', err.message, 'error');
+      }
+    }
+
+    async function refreshSiteBranding() {
+      try {
+        const res = await fetch('/api/site-config');
+        const data = await res.json();
+        if (data.success && data.siteConfig) {
+          const sc = data.siteConfig;
+          if (sc.title) document.getElementById('sidebarTitle').innerText = sc.title;
+          if (sc.tagline) document.getElementById('sidebarSubtitle').innerText = sc.tagline;
+          if (sc.avatar) document.getElementById('sidebarAvatar').src = sc.avatar;
+        }
+      } catch (e) {}
+    }
+
+    async function loadSiteConfigIntoModal() {
+      try {
+        const res = await fetch('/api/site-config');
+        const data = await res.json();
+        if (data.success && data.siteConfig) {
+          const sc = data.siteConfig;
+          document.getElementById('siteTitle').value = sc.title || '';
+          document.getElementById('siteTagline').value = sc.tagline || '';
+          document.getElementById('siteTimezone').value = sc.timezone || '';
+          document.getElementById('siteAuthorName').value = sc.authorName || '';
+          document.getElementById('siteAuthorEmail').value = sc.authorEmail || '';
+          document.getElementById('siteAvatar').value = sc.avatar || '';
+        }
+      } catch (e) {}
+    }
+
+    async function saveSiteConfig() {
+      const payload = {
+        title: document.getElementById('siteTitle').value.trim(),
+        tagline: document.getElementById('siteTagline').value.trim(),
+        timezone: document.getElementById('siteTimezone').value.trim(),
+        authorName: document.getElementById('siteAuthorName').value.trim(),
+        authorEmail: document.getElementById('siteAuthorEmail').value.trim(),
+        avatar: document.getElementById('siteAvatar').value.trim()
+      };
+      const res = await fetch('/api/site-config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        await refreshSiteBranding();
+        Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: '網站基本設定已寫入 _config.yml！', timer: 2000, showConfirmButton: false });
+        closeSettings();
+      } else {
+        Swal.fire('失敗', data.error, 'error');
+      }
+    }
+
+    // -----------------------------------------------------------------
+    // #9 Git Version History Time Machine
+    // -----------------------------------------------------------------
+    let selectedCommitContent = null;
+    async function openGitHistoryModal() {
+      if (!currentPost || !currentPost.filename) return;
+      document.getElementById('historyModal').classList.add('active');
+      const listEl = document.getElementById('historyCommitList');
+      const previewEl = document.getElementById('historyPreviewText');
+      document.getElementById('btnRestoreCommit').style.display = 'none';
+      previewEl.value = '';
+      listEl.innerHTML = `<div style="padding: 12px; color: var(--text-muted-color); font-size: 0.78rem;">正在讀取 Git 歷史紀錄...</div>`;
+
+      try {
+        const res = await fetch(`/api/git/history?file=${encodeURIComponent(currentPost.filename)}`);
+        const data = await res.json();
+        if (!data.success || !data.commits || data.commits.length === 0) {
+          listEl.innerHTML = `<div style="padding: 12px; color: var(--text-muted-color); font-size: 0.78rem;">此檔案尚無已提交的 Git 歷史紀錄</div>`;
+          return;
+        }
+        listEl.innerHTML = data.commits.map(c => `
+          <div class="post-card" style="border: 1px solid var(--main-border-color);" onclick="previewCommitFile('${c.hash}', '${escapeHtml(c.date)}')">
+            <div style="font-size: 0.78rem; font-weight: 600; color: var(--link-color); font-family: 'JetBrains Mono', monospace;">#${c.hash} · ${escapeHtml(c.date)}</div>
+            <div style="font-size: 0.74rem; color: var(--text-color); margin-top: 3px;">${escapeHtml(c.message)}</div>
+          </div>
+        `).join('');
+      } catch (err) {
+        listEl.innerHTML = `<div style="color: #ef4444;">讀取失敗</div>`;
+      }
+    }
+
+    function closeGitHistoryModal() {
+      document.getElementById('historyModal').classList.remove('active');
+    }
+
+    async function previewCommitFile(hash, dateStr) {
+      const res = await fetch(`/api/git/file-at-commit?hash=${encodeURIComponent(hash)}&file=${encodeURIComponent(currentPost.filename)}`);
+      const data = await res.json();
+      if (data.success) {
+        selectedCommitContent = data.content;
+        document.getElementById('historyPreviewLabel').innerText = `正在預覽版本 #${hash} (${dateStr})`;
+        document.getElementById('historyPreviewText').value = data.content;
+        document.getElementById('btnRestoreCommit').style.display = 'inline-flex';
+      }
+    }
+
+    function restoreHistoricalVersion() {
+      if (selectedCommitContent === null) return;
+      document.getElementById('editorTextarea').value = selectedCommitContent;
+      onContentChange();
+      closeGitHistoryModal();
+      Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: '已將該歷史版本內容還原至編輯器！', timer: 2000, showConfirmButton: false });
+    }
+
+    // -----------------------------------------------------------------
+    // #11 Export to Clean Academic PDF Handout & Drag-and-Drop Import
+    // -----------------------------------------------------------------
+    function exportToPdfHandout() {
+      const title = isEditingAbout ? '關於我 (About)' : (document.getElementById('fmTitle').value || '未命名文章');
+      const date = isEditingAbout ? '' : (document.getElementById('fmDate').value || '');
+      const renderedHtml = document.getElementById('previewContent').innerHTML;
+
+      const win = window.open('', '_blank');
+      win.document.write(`
+        <!DOCTYPE html>
+        <html lang="zh-TW">
+        <head>
+          <meta charset="UTF-8">
+          <title>${escapeHtml(title)} — PDF 講義</title>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+          <style>
+            body {
+              font-family: "Source Sans 3", "Noto Serif TC", "Microsoft JhengHei", sans-serif;
+              color: #1f2937;
+              max-width: 800px;
+              margin: 0 auto;
+              padding: 36px 28px;
+              line-height: 1.75;
+            }
+            .doc-header {
+              border-bottom: 2px solid #111827;
+              padding-bottom: 14px;
+              margin-bottom: 24px;
+            }
+            .doc-title { font-size: 2rem; font-weight: 800; color: #111827; margin: 0 0 6px 0; }
+            .doc-meta { font-size: 0.85rem; color: #6b7280; }
+            h1, h2, h3, h4 { color: #111827; margin-top: 1.6rem; margin-bottom: 0.6rem; }
+            h2 { border-bottom: 1px solid #e5e7eb; padding-bottom: 4px; }
+            pre { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; overflow-x: auto; }
+            code { font-family: "JetBrains Mono", Consolas, monospace; font-size: 0.88rem; background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+            pre code { background: transparent; padding: 0; }
+            blockquote, .prompt-box { border-left: 4px solid #3b82f6; background: #f8fafc; padding: 10px 16px; margin: 14px 0; border-radius: 0 6px 6px 0; }
+            table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+            th, td { border: 1px solid #d1d5db; padding: 8px 12px; text-align: left; }
+            th { background: #f3f4f6; }
+            img { max-width: 100%; height: auto; display: block; margin: 14px auto; }
+            .katex-display { margin: 1.2rem 0; overflow-x: auto; }
+            @media print {
+              body { padding: 0; }
+              pre, blockquote, table, .katex-display, img { page-break-inside: avoid; }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="doc-header">
+            <h1 class="doc-title">${escapeHtml(title)}</h1>
+            <div class="doc-meta">D-Lib (Delon Lee) ${date ? '· ' + escapeHtml(date.split(' ')[0]) : ''}</div>
+          </div>
+          <div class="doc-content">${renderedHtml}</div>
+          <script>
+            window.onload = function() {
+              setTimeout(function() { window.print(); }, 400);
+            };
+          <\/script>
+        </body>
+        </html>
+      `);
+      win.document.close();
+    }
+
+    function setupDragAndDropImport() {
+      const overlay = document.getElementById('dropOverlay');
+      window.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        overlay.classList.add('active');
+      });
+      window.addEventListener('dragleave', (e) => {
+        if (e.relatedTarget === null) overlay.classList.remove('active');
+      });
+      window.addEventListener('drop', async (e) => {
+        e.preventDefault();
+        overlay.classList.remove('active');
+        const files = e.dataTransfer.files;
+        if (!files || files.length === 0) return;
+        const file = files[0];
+
+        if (file.type.startsWith('image/')) {
+          await uploadAndInsertImage(file);
+        } else if (file.name.endsWith('.md') || file.name.endsWith('.txt') || file.name.endsWith('.tex')) {
+          const text = await file.text();
+          const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+          if (match) {
+            document.getElementById('editorTextarea').value = match[2];
+          } else {
+            document.getElementById('editorTextarea').value = text;
+          }
+          onContentChange();
+          Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: `已成功匯入檔案：${file.name}`, timer: 2000, showConfirmButton: false });
+        }
+      });
+    }
+
+    // -----------------------------------------------------------------
+    // #13 Interactive HTML / 3D Canvas Simulation Widget Templates
+    // -----------------------------------------------------------------
+    function getSim3DTemplate() {
+      const uid = 'sim3d_' + Math.random().toString(36).substring(2, 7);
+      return `\n<!-- 3D 幾何投影互動旋轉實驗室 -->
+<div style="background:#18181c; border:1px solid #2e2f34; border-radius:10px; padding:14px; margin:1.2rem 0; text-align:center;">
+  <div style="font-size:0.85rem; color:#ccc; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+    <strong>🎮 3D 剛體通用投影互動模擬器 (支援滑鼠拖曳旋轉)</strong>
+    <label style="font-size:0.78rem; cursor:pointer;">
+      <input type="checkbox" id="${uid}_persp" checked> 透視投影 (Perspective) / 正投影 (Orthographic)
+    </label>
+  </div>
+  <canvas id="${uid}" width="520" height="300" style="max-width:100%; background:#111115; border-radius:8px; cursor:grab;"></canvas>
+</div>
+<script>
+(function(){
+  const c = document.getElementById('${uid}');
+  if(!c) return;
+  const ctx = c.getContext('2d');
+  const chk = document.getElementById('${uid}_persp');
+  let rx = 0.4, ry = 0.6, dragging = false, lx = 0, ly = 0;
+  const verts = [[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]];
+  const edges = [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+  function draw(){
+    ctx.fillStyle = '#111115'; ctx.fillRect(0,0,c.width,c.height);
+    const cx = c.width/2, cy = c.height/2;
+    const proj = verts.map(([x,y,z]) => {
+      let x1 = x*Math.cos(ry) - z*Math.sin(ry), z1 = x*Math.sin(ry) + z*Math.cos(ry);
+      let y2 = y*Math.cos(rx) - z1*Math.sin(rx), z2 = y*Math.sin(rx) + z1*Math.cos(rx);
+      let scale = (chk && chk.checked) ? (240 / (4 - z2)) : 70;
+      return [cx + x1*scale, cy + y2*scale];
+    });
+    ctx.strokeStyle = '#60a5fa'; ctx.lineWidth = 2.2;
+    edges.forEach(([i,j]) => {
+      ctx.beginPath(); ctx.moveTo(proj[i][0], proj[i][1]); ctx.lineTo(proj[j][0], proj[j][1]); ctx.stroke();
+    });
+    proj.forEach(([px,py]) => {
+      ctx.fillStyle = '#f59e0b'; ctx.beginPath(); ctx.arc(px,py,3.5,0,Math.PI*2); ctx.fill();
+    });
+  }
+  c.onmousedown = e => { dragging=true; lx=e.clientX; ly=e.clientY; };
+  window.addEventListener('mouseup', () => dragging=false);
+  c.onmousemove = e => { if(!dragging)return; ry += (e.clientX-lx)*0.012; rx += (e.clientY-ly)*0.012; lx=e.clientX; ly=e.clientY; draw(); };
+  if(chk) chk.onchange = draw;
+  draw();
+})();
+<\/script>\n`;
+    }
+
+    function getSimWaveTemplate() {
+      const uid = 'simwave_' + Math.random().toString(36).substring(2, 7);
+      return `\n<!-- 二階阻尼系統時域響應互動模擬 -->
+<div style="background:#18181c; border:1px solid #2e2f34; border-radius:10px; padding:14px; margin:1.2rem 0;">
+  <div style="font-size:0.85rem; color:#ccc; margin-bottom:8px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+    <strong>🎮 二階質量-彈簧-阻尼系統響應模擬</strong>
+    <div>
+      阻尼比 ζ: <input type="range" id="${uid}_zeta" min="0.02" max="1.5" step="0.02" value="0.2" style="vertical-align:middle;">
+      <span id="${uid}_val" style="font-family:monospace; color:#60a5fa;">0.20</span>
+    </div>
+  </div>
+  <canvas id="${uid}" width="560" height="240" style="max-width:100%; background:#111115; border-radius:8px; display:block; margin:0 auto;"></canvas>
+</div>
+<script>
+(function(){
+  const c = document.getElementById('${uid}');
+  const slider = document.getElementById('${uid}_zeta');
+  const label = document.getElementById('${uid}_val');
+  if(!c || !slider) return;
+  const ctx = c.getContext('2d');
+  function render(){
+    const z = parseFloat(slider.value);
+    label.innerText = z.toFixed(2);
+    ctx.fillStyle = '#111115'; ctx.fillRect(0,0,c.width,c.height);
+    const cy = c.height/2;
+    ctx.strokeStyle = '#333'; ctx.beginPath(); ctx.moveTo(20,cy); ctx.lineTo(c.width-20,cy); ctx.stroke();
+    ctx.strokeStyle = '#34d399'; ctx.lineWidth = 2.2; ctx.beginPath();
+    for(let i=0; i<=400; i++){
+      const t = (i/400)*16;
+      let y = 0;
+      if(z < 1){
+        const wd = Math.sqrt(1 - z*z);
+        y = Math.exp(-z*t) * (Math.cos(wd*t) + (z/wd)*Math.sin(wd*t));
+      } else {
+        y = (1 + t)*Math.exp(-t);
+      }
+      const px = 20 + (i/400)*(c.width-40);
+      const py = cy - y*85;
+      if(i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+  }
+  slider.oninput = render;
+  render();
+})();
+<\/script>\n`;
+    }
+
+    function openSimTemplateMenu() {
+      Swal.fire({
+        title: '🎮 插入文章內嵌互動式模擬器',
+        html: `
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px;">
+            <button class="btn btn-publish" style="padding:12px; justify-content:center;" onclick="Swal.close(); insertSyntax(getSim3DTemplate(), '');">
+              <i class="fa-solid fa-cube"></i> 插入「3D 剛體通用投影旋轉模擬器」 (讀者可拖曳旋轉)
+            </button>
+            <button class="btn" style="padding:12px; justify-content:center;" onclick="Swal.close(); insertSyntax(getSimWaveTemplate(), '');">
+              <i class="fa-solid fa-wave-square"></i> 插入「二階質量-彈簧-阻尼系統互動模擬器」 (含滑桿調節)
+            </button>
+          </div>
+        `,
+        showConfirmButton: false,
+        showCancelButton: true,
+        cancelButtonText: '關閉'
+      });
+    }
+
+    // -----------------------------------------------------------------
+    // Synchronized Split-Pane Scrolling
     // -----------------------------------------------------------------
     function setupSyncScrolling() {
       const editor = document.getElementById('editorTextarea');
@@ -1918,7 +2818,7 @@
     }
 
     // -----------------------------------------------------------------
-    // 2. IDE Intellisense / Auto-Completion System
+    // IDE Intellisense Events
     // -----------------------------------------------------------------
     function toggleIntellisense() {
       intellisenseEnabled = !intellisenseEnabled;
@@ -1928,7 +2828,6 @@
 
     function setupIntellisenseEvents() {
       const textarea = document.getElementById('editorTextarea');
-
       textarea.addEventListener('input', () => {
         if (!intellisenseEnabled) return;
         evaluateIntellisenseTrigger();
@@ -1938,13 +2837,11 @@
         const popup = document.getElementById('intellisensePopup');
         const isOpen = popup.classList.contains('active');
 
-        // Manual summon with Ctrl + Space
         if ((e.ctrlKey || e.metaKey) && e.code === 'Space') {
           e.preventDefault();
           evaluateIntellisenseTrigger(true);
           return;
         }
-
         if (!isOpen) return;
 
         if (e.key === 'ArrowDown') {
@@ -1965,9 +2862,7 @@
       });
 
       document.addEventListener('click', (e) => {
-        if (!e.target.closest('#intellisensePopup')) {
-          closeIntellisense();
-        }
+        if (!e.target.closest('#intellisensePopup')) closeIntellisense();
         if (!e.target.closest('#mathPalette') && !e.target.closest('#btnMathPalette')) {
           document.getElementById('mathPalette').classList.remove('active');
         }
@@ -1979,9 +2874,7 @@
       const pos = textarea.selectionStart;
       const textBefore = textarea.value.slice(0, pos);
 
-      // Match `\command`, `/command` (at start of line or after whitespace), or `{:modifier`
-      const match = textBefore.match(/(\\[a-zA-Z0-9(\[]*|(?:\s|^)\/[a-zA-Z0-9]*|\{:[a-zA-Z0-9]*)$/);
-
+      const match = textBefore.match(/(\\[a-zA-Z0-9(\[]*|(?:\s|^)\/[a-zA-Z0-9]*)$/);
       if (!match && !forceAll) {
         closeIntellisense();
         return;
@@ -1990,7 +2883,8 @@
       let token = match ? match[0].trimStart() : '';
       const tokenStart = match ? pos - token.length : pos;
 
-      activeMatches = INTELLISENSE_ITEMS.filter(item => {
+      const allDict = getAllIntellisenseItems();
+      activeMatches = allDict.filter(item => {
         if (!token) return true;
         return item.trigger.toLowerCase().startsWith(token.toLowerCase()) ||
                item.label.toLowerCase().includes(token.toLowerCase());
@@ -2012,9 +2906,7 @@
       const mirror = document.getElementById('caretMirror');
       const popup = document.getElementById('intellisensePopup');
       mirror.style.width = textarea.clientWidth + 'px';
-
-      const textBefore = escapeHtml(textarea.value.substring(0, caretPos));
-      mirror.innerHTML = textBefore + '<span id="caretMarker">|</span>';
+      mirror.innerHTML = escapeHtml(textarea.value.substring(0, caretPos)) + '<span id="caretMarker">|</span>';
 
       const marker = document.getElementById('caretMarker');
       const taRect = textarea.getBoundingClientRect();
@@ -2022,11 +2914,8 @@
       const leftOffset = marker.offsetLeft;
 
       let screenTop = taRect.top + topOffset + 26;
-      let screenLeft = taRect.left + Math.min(leftOffset, textarea.clientWidth - 350);
-
-      if (screenTop + 260 > window.innerHeight) {
-        screenTop = taRect.top + topOffset - 260;
-      }
+      let screenLeft = taRect.left + Math.min(leftOffset, textarea.clientWidth - 360);
+      if (screenTop + 260 > window.innerHeight) screenTop = taRect.top + topOffset - 260;
 
       popup.style.top = `${Math.max(10, screenTop)}px`;
       popup.style.left = `${Math.max(10, screenLeft)}px`;
@@ -2055,8 +2944,12 @@
       const before = textarea.value.slice(0, currentTriggerRange.start);
       const after = textarea.value.slice(currentTriggerRange.end);
 
-      const cursorMarkerIdx = item.insert.indexOf('|');
-      const cleanInsert = item.insert.replace('|', '');
+      let insertText = item.insert;
+      if (insertText === '__SIM3D__') insertText = getSim3DTemplate();
+      if (insertText === '__SIMWAVE__') insertText = getSimWaveTemplate();
+
+      const cursorMarkerIdx = insertText.indexOf('|');
+      const cleanInsert = insertText.replace('|', '');
 
       textarea.value = before + cleanInsert + after;
       textarea.focus();
@@ -2067,7 +2960,6 @@
 
       textarea.selectionStart = newCursorPos;
       textarea.selectionEnd = newCursorPos;
-
       closeIntellisense();
       onContentChange();
     }
@@ -2078,11 +2970,9 @@
     }
 
     // -----------------------------------------------------------------
-    // 3. Math Symbols & Matrix Palette
+    // Math Palette & Outline TOC
     // -----------------------------------------------------------------
-    function toggleMathPalette() {
-      document.getElementById('mathPalette').classList.toggle('active');
-    }
+    function toggleMathPalette() { document.getElementById('mathPalette').classList.toggle('active'); }
 
     function switchMathTab(tabKey, btnEl) {
       if (btnEl) {
@@ -2108,13 +2998,8 @@
       const selected = textarea.value.substring(start, end);
 
       let tpl = item.tpl;
-      let cursorOffset;
-      if (tpl.includes('|')) {
-        cursorOffset = tpl.indexOf('|');
-        tpl = tpl.replace('|', selected);
-      } else {
-        cursorOffset = tpl.length;
-      }
+      let cursorOffset = tpl.includes('|') ? tpl.indexOf('|') : tpl.length;
+      tpl = tpl.replace('|', selected);
 
       textarea.value = textarea.value.substring(0, start) + tpl + textarea.value.substring(end);
       textarea.focus();
@@ -2123,51 +3008,35 @@
       onContentChange();
     }
 
-    // -----------------------------------------------------------------
-    // 4. Outline TOC Navigation & View Mode Switcher
-    // -----------------------------------------------------------------
     function toggleOutlineDrawer() {
       const drawer = document.getElementById('outlineDrawer');
-      const btn = document.getElementById('btnOutlineToggle');
       drawer.classList.toggle('active');
-      btn.classList.toggle('active', drawer.classList.contains('active'));
-      if (drawer.classList.contains('active')) {
-        renderOutlineTOC();
-      }
+      document.getElementById('btnOutlineToggle').classList.toggle('active', drawer.classList.contains('active'));
+      if (drawer.classList.contains('active')) renderOutlineTOC();
     }
 
     function renderOutlineTOC() {
       const drawer = document.getElementById('outlineDrawer');
       if (!drawer.classList.contains('active')) return;
-
       const listEl = document.getElementById('outlineList');
-      const text = document.getElementById('editorTextarea').value;
-      const lines = text.split('\n');
+      const lines = document.getElementById('editorTextarea').value.split('\n');
       const headings = [];
       let inCodeBlock = false;
-
       let charIndex = 0;
+
       lines.forEach((line, lineIdx) => {
         if (line.trim().startsWith('```')) inCodeBlock = !inCodeBlock;
         if (!inCodeBlock) {
           const m = line.match(/^(#{1,4})\s+(.+)$/);
-          if (m) {
-            headings.push({
-              level: m[1].length,
-              title: m[2].trim(),
-              lineIdx,
-              charPos: charIndex
-            });
-          }
+          if (m) headings.push({ level: m[1].length, title: m[2].trim(), lineIdx, charPos: charIndex });
         }
         charIndex += line.length + 1;
       });
 
       if (headings.length === 0) {
-        listEl.innerHTML = `<div style="padding: 12px; font-size: 0.75rem; color: var(--text-muted-color);">文章尚無標題 (# ~ ####)</div>`;
+        listEl.innerHTML = `<div style="padding: 12px; font-size: 0.75rem; color: var(--text-muted-color);">文章尚無標題</div>`;
         return;
       }
-
       listEl.innerHTML = headings.map(h => `
         <div class="outline-item lvl-${h.level}" onclick="jumpToEditorPosition(${h.charPos}, ${h.lineIdx})">
           ${escapeHtml(h.title)}
@@ -2179,7 +3048,6 @@
       const textarea = document.getElementById('editorTextarea');
       textarea.focus();
       textarea.setSelectionRange(charPos, charPos);
-      // Approximate scroll position based on line height (1.65 * 14.4px ≈ 23.76px)
       textarea.scrollTop = Math.max(0, lineIdx * 23.76 - 80);
     }
 
@@ -2188,18 +3056,15 @@
       ws.classList.remove('mode-editor', 'mode-preview');
       if (mode === 'editor') ws.classList.add('mode-editor');
       if (mode === 'preview') ws.classList.add('mode-preview');
-
       document.getElementById('viewDual').classList.toggle('active', mode === 'dual');
       document.getElementById('viewEditor').classList.toggle('active', mode === 'editor');
       document.getElementById('viewPreview').classList.toggle('active', mode === 'preview');
     }
 
-    function toggleAdvancedMeta() {
-      document.getElementById('metaAdvanced').classList.toggle('open');
-    }
+    function toggleAdvancedMeta() { document.getElementById('metaAdvanced').classList.toggle('open'); }
 
     // -----------------------------------------------------------------
-    // 5. Post Loading, Filtering & Selection
+    // Post Loading & Selection
     // -----------------------------------------------------------------
     async function loadPosts() {
       try {
@@ -2211,21 +3076,18 @@
           renderPostList();
           renderCategorySuggestions();
           renderTagSuggestions();
-
-          if (posts.length > 0 && !currentPost) {
-            selectPost(posts[0].filename);
-          }
+          if (posts.length > 0 && !currentPost) selectPost(posts[0].filename);
         }
-      } catch (err) {
-        console.error('Failed to load posts:', err);
-      }
+      } catch (err) {}
     }
 
     function updateBadges(stats) {
       if (!stats) {
-        const publishedCount = posts.filter(p => !p.isDraft).length;
-        const draftsCount = posts.filter(p => p.isDraft).length;
-        stats = { total: posts.length, published: publishedCount, drafts: draftsCount };
+        stats = {
+          total: posts.length,
+          published: posts.filter(p => !p.isDraft).length,
+          drafts: posts.filter(p => p.isDraft).length
+        };
       }
       document.getElementById('badgeAll').innerText = stats.total;
       document.getElementById('badgePublished').innerText = stats.published;
@@ -2234,6 +3096,9 @@
     }
 
     function setPostFilter(filter) {
+      isEditingAbout = false;
+      document.getElementById('postMetaBar').style.display = 'grid';
+      document.getElementById('btnToggleDraft').style.display = 'inline-flex';
       currentFilter = filter;
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       if (filter === 'all') document.getElementById('tabAll').classList.add('active');
@@ -2247,7 +3112,6 @@
     function renderPostList() {
       const listEl = document.getElementById('postList');
       listEl.innerHTML = '';
-
       const query = document.getElementById('searchInput').value.toLowerCase().trim();
 
       const filtered = posts.filter(p => {
@@ -2262,21 +3126,20 @@
 
       filtered.forEach(p => {
         const div = document.createElement('div');
-        div.className = `post-card ${currentPost && currentPost.filename === p.filename ? 'active' : ''}`;
+        div.className = `post-card ${!isEditingAbout && currentPost && currentPost.filename === p.filename ? 'active' : ''}`;
         div.onclick = () => selectPost(p.filename);
 
         const pinHtml = p.pin ? `<i class="fa-solid fa-thumbtack pin-icon" title="已置頂"></i>` : '';
         const statusBadge = p.isDraft
           ? `<span class="status-badge draft"><i class="fa-solid fa-pen-ruler"></i> 草稿</span>`
           : `<span class="status-badge published"><i class="fa-solid fa-check"></i> 已發布</span>`;
-
         const tagsHtml = (p.tags || []).slice(0, 2).map(t => `<span class="chirpy-tag">#${t}</span>`).join(' ');
 
         div.innerHTML = `
           <div class="post-card-title">${pinHtml}<span>${escapeHtml(p.title)}</span></div>
           <div class="post-card-meta">
             ${statusBadge}
-            <span><i class="fa-regular fa-calendar" style="margin-right: 2px;"></i>${p.date ? p.date.split(' ')[0] : p.filename.slice(0, 10)}</span>
+            <span>${p.date ? p.date.split(' ')[0] : p.filename.slice(0, 10)}</span>
             <div style="flex: 1;"></div>
             ${tagsHtml}
           </div>
@@ -2287,6 +3150,10 @@
 
     async function selectPost(filename) {
       if (hasUnsavedChanges) saveSnapshotToStorage();
+      isEditingAbout = false;
+      document.getElementById('postMetaBar').style.display = 'grid';
+      document.getElementById('btnToggleDraft').style.display = 'inline-flex';
+      document.getElementById('tabAbout').classList.remove('active');
 
       try {
         const res = await fetch(`/api/posts/${encodeURIComponent(filename)}`);
@@ -2326,6 +3193,7 @@
       calculateStats();
       renderPreview();
       renderOutlineTOC();
+      scheduleLinterCheck();
       hasUnsavedChanges = false;
       document.getElementById('saveStatus').innerText = '';
     }
@@ -2361,6 +3229,9 @@
     }
 
     function createNewDraft() {
+      isEditingAbout = false;
+      document.getElementById('postMetaBar').style.display = 'grid';
+      document.getElementById('btnToggleDraft').style.display = 'inline-flex';
       const now = new Date();
       const dateStr = formatDate(now);
       const slug = `new-draft-${Math.random().toString(36).substring(2, 6)}`;
@@ -2389,9 +3260,27 @@
     }
 
     // -----------------------------------------------------------------
-    // 6. Save, Toggle Draft, Delete
+    // Save Post or About Page
     // -----------------------------------------------------------------
     async function saveCurrentPost(silent = false) {
+      if (isEditingAbout) {
+        const res = await fetch('/api/about', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content: document.getElementById('editorTextarea').value })
+        });
+        const data = await res.json();
+        if (data.success) {
+          hasUnsavedChanges = false;
+          document.getElementById('saveStatus').innerText = `已儲存 (${new Date().toLocaleTimeString()})`;
+          if (!silent) {
+            Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: '「關於我 (about.md)」已儲存！', timer: 1800, showConfirmButton: false });
+          }
+          return true;
+        }
+        return false;
+      }
+
       const title = document.getElementById('fmTitle').value.trim() || '未命名文章';
       let filename = document.getElementById('fmFilename').value.trim();
       const isDraft = document.getElementById('fmIsDraft').checked;
@@ -2479,10 +3368,7 @@
       });
       if (!confirm.isConfirmed) return;
 
-      if (!targetIsDraft) {
-        // Update date to current time so it's fresh
-        document.getElementById('fmDate').value = formatDate(new Date());
-      }
+      if (!targetIsDraft) document.getElementById('fmDate').value = formatDate(new Date());
       document.getElementById('fmIsDraft').checked = targetIsDraft;
       const saved = await saveCurrentPost(false);
       if (saved && !targetIsDraft) {
@@ -2499,7 +3385,7 @@
     }
 
     async function deleteCurrentPost() {
-      if (!currentPost || !currentPost.filename) return;
+      if (!currentPost || !currentPost.filename || isEditingAbout) return;
       const confirm = await Swal.fire({
         title: '確定要刪除嗎？',
         text: `將永久移除檔案: ${currentPost.filename}`,
@@ -2511,30 +3397,25 @@
       });
       if (!confirm.isConfirmed) return;
 
-      try {
-        const res = await fetch(`/api/posts/${encodeURIComponent(currentPost.filename)}`, { method: 'DELETE' });
-        const data = await res.json();
-        if (data.success) {
-          clearAutosaveSnapshot(currentPost.filename);
-          currentPost = null;
-          await loadPosts();
-          if (posts.length === 0) createNewDraft();
-        }
-      } catch (err) {
-        Swal.fire('錯誤', err.message, 'error');
+      const res = await fetch(`/api/posts/${encodeURIComponent(currentPost.filename)}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (data.success) {
+        clearAutosaveSnapshot(currentPost.filename);
+        currentPost = null;
+        await loadPosts();
+        if (posts.length === 0) createNewDraft();
       }
     }
 
     // -----------------------------------------------------------------
-    // 7. Live Preview: Markdown + KaTeX + Chirpy 4 Prompts + Mermaid
+    // Live Preview: Markdown + KaTeX + Chirpy Prompts + Mermaid + Interactive Scripts
     // -----------------------------------------------------------------
     async function renderPreview() {
       let rawMarkdown = document.getElementById('editorTextarea').value;
       const previewEl = document.getElementById('previewContent');
-      const enableMath = document.getElementById('fmMath').checked && typeof katex !== 'undefined';
+      const enableMath = (isEditingAbout || document.getElementById('fmMath').checked) && typeof katex !== 'undefined';
 
-      // Auto-detect mermaid blocks and check fmMermaid automatically if present
-      if (/```mermaid[\s\S]*?```/.test(rawMarkdown)) {
+      if (/```mermaid[\s\S]*?```/.test(rawMarkdown) && !isEditingAbout) {
         document.getElementById('fmMermaid').checked = true;
       }
 
@@ -2542,7 +3423,6 @@
       const codeBlocks = [];
       const mermaidBlocks = [];
 
-      // Extract Mermaid blocks first
       rawMarkdown = rawMarkdown.replace(/```mermaid\r?\n([\s\S]*?)```/g, (match, code) => {
         const id = `MERMAIDBLOCKPLACEHOLDER${mermaidBlocks.length}END`;
         mermaidBlocks.push(code.trim());
@@ -2599,7 +3479,6 @@
         });
       }
 
-      // Support both Chirpy Kramdown `{: .prompt-tip }` and GitHub `> [!TIP]`
       rawMarkdown = rawMarkdown.replace(/^((?:>.*\r?\n?)+)\{:\s*\.prompt-(tip|info|warning|danger)\s*\}/gm, (m, quoteBlock, type) => {
         const inner = quoteBlock.replace(/^>\s?/gm, '').trim();
         return `<div class="prompt-box prompt-${type}">${marked.parseInline(inner)}</div>\n`;
@@ -2612,35 +3491,27 @@
         return `<div class="prompt-box prompt-${mapType}">${marked.parseInline(clean)}</div>\n`;
       });
 
-      // Strip Kramdown image modifiers like {: width="600" .shadow } so marked renders clean image
       rawMarkdown = rawMarkdown.replace(/(\!\[[^\]]*\]\([^\)]+\))\{:[^\}]+\}/g, '$1');
 
       let html = marked.parse(rawMarkdown);
 
-      // Restore KaTeX math
       if (enableMath && mathBlocks.length > 0) {
         mathBlocks.forEach((item, i) => {
           const token = item.display ? `MATHBLOCKPLACEHOLDER${i}END` : `MATHINLINEPLACEHOLDER${i}END`;
           let renderedMath;
           try {
-            renderedMath = katex.renderToString(item.code, {
-              displayMode: item.display,
-              throwOnError: false
-            });
+            renderedMath = katex.renderToString(item.code, { displayMode: item.display, throwOnError: false });
           } catch (e) {
             renderedMath = `<span style="color:#ef4444;">[LaTeX 錯誤: ${escapeHtml(e.message)}]</span>`;
           }
-
           if (item.display) {
-            html = html.replace(`<p>${token}</p>`, `<div class="katex-display">${renderedMath}</div>`);
-            html = html.replace(token, `<div class="katex-display">${renderedMath}</div>`);
+            html = html.replace(`<p>${token}</p>`, `<div class="katex-display">${renderedMath}</div>`).replace(token, `<div class="katex-display">${renderedMath}</div>`);
           } else {
             html = html.replace(token, renderedMath);
           }
         });
       }
 
-      // Restore Mermaid diagrams
       if (mermaidBlocks.length > 0) {
         mermaidBlocks.forEach((code, i) => {
           const token = `MERMAIDBLOCKPLACEHOLDER${i}END`;
@@ -2651,10 +3522,15 @@
 
       previewEl.innerHTML = html;
 
+      // Execute interactive simulation <script> tags inside preview
+      previewEl.querySelectorAll('script').forEach(oldScript => {
+        const newScript = document.createElement('script');
+        newScript.textContent = oldScript.textContent;
+        oldScript.parentNode.replaceChild(newScript, oldScript);
+      });
+
       if (mermaidBlocks.length > 0 && typeof mermaid !== 'undefined') {
-        try {
-          await mermaid.run({ nodes: previewEl.querySelectorAll('.mermaid') });
-        } catch (e) {}
+        try { await mermaid.run({ nodes: previewEl.querySelectorAll('.mermaid') }); } catch (e) {}
       }
     }
 
@@ -2665,12 +3541,11 @@
 
     function insertMermaidTemplate() {
       document.getElementById('fmMermaid').checked = true;
-      const tpl = '\n```mermaid\nflowchart LR\n  A["輸入數據"] --> B["矩陣變換 M"]\n  B --> C["投影座標 (u, v)"]\n```\n';
-      insertSyntax(tpl, '');
+      insertSyntax('\n```mermaid\nflowchart LR\n  A["輸入數據"] --> B["矩陣變換 M"]\n  B --> C["投影座標 (u, v)"]\n```\n', '');
     }
 
     // -----------------------------------------------------------------
-    // 8. Media Library Manager Modal
+    // Media Library Manager
     // -----------------------------------------------------------------
     async function openMediaLibrary(selectForCover = false) {
       isSelectingCover = selectForCover;
@@ -2686,15 +3561,11 @@
     async function loadMediaList() {
       const grid = document.getElementById('mediaGrid');
       grid.innerHTML = `<div style="padding: 20px; color: var(--text-muted-color);">正在掃描媒體庫...</div>`;
-      try {
-        const res = await fetch('/api/images');
-        const data = await res.json();
-        if (data.success) {
-          mediaItems = data.images || [];
-          renderMediaGrid();
-        }
-      } catch (err) {
-        grid.innerHTML = `<div style="color: #ef4444;">讀取失敗: ${escapeHtml(err.message)}</div>`;
+      const res = await fetch('/api/images');
+      const data = await res.json();
+      if (data.success) {
+        mediaItems = data.images || [];
+        renderMediaGrid();
       }
     }
 
@@ -2705,10 +3576,7 @@
 
     function renderMediaGrid() {
       const grid = document.getElementById('mediaGrid');
-      const filtered = mediaItems.filter(img => {
-        if (mediaFilterMode === 'unused') return img.usedIn.length === 0;
-        return true;
-      });
+      const filtered = mediaItems.filter(img => mediaFilterMode === 'unused' ? img.usedIn.length === 0 : true);
 
       if (filtered.length === 0) {
         grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 36px; color: var(--text-muted-color);">目前沒有符合條件的圖片</div>`;
@@ -2719,7 +3587,7 @@
         const kb = (img.size / 1024).toFixed(1) + ' KB';
         const usedCount = img.usedIn.length;
         const usageTag = usedCount > 0
-          ? `<span class="media-usage-tag used" title="引用於: ${escapeHtml(img.usedIn.map(u => u.title).join(', '))}">已引用 (${usedCount})</span>`
+          ? `<span class="media-usage-tag used">已引用 (${usedCount})</span>`
           : `<span class="media-usage-tag unused">未引用</span>`;
 
         return `
@@ -2735,15 +3603,9 @@
                 <span>${kb}</span>
               </div>
               <div class="media-actions">
-                <button onclick="useMediaImage('${img.url}')" title="插入當前文章或設為封面">
-                  <i class="fa-solid fa-plus"></i> ${isSelectingCover ? '設為封面' : '插入'}
-                </button>
-                <button onclick="copyMediaUrl('${img.url}')" title="複製圖片路徑">
-                  <i class="fa-regular fa-copy"></i> 路徑
-                </button>
-                <button onclick="deleteMediaImage('${img.url}')" style="color: #ef4444;" title="永久刪除此圖片">
-                  <i class="fa-regular fa-trash-can"></i>
-                </button>
+                <button onclick="useMediaImage('${img.url}')"><i class="fa-solid fa-plus"></i> ${isSelectingCover ? '設為封面' : '插入'}</button>
+                <button onclick="copyMediaUrl('${img.url}')"><i class="fa-regular fa-copy"></i> 路徑</button>
+                <button onclick="deleteMediaImage('${img.url}')" style="color: #ef4444;"><i class="fa-regular fa-trash-can"></i></button>
               </div>
             </div>
           </div>
@@ -2757,7 +3619,6 @@
         document.getElementById('metaAdvanced').classList.add('open');
         hasUnsavedChanges = true;
         closeMediaLibrary();
-        Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: '已設定為文章封面圖！', timer: 1500, showConfirmButton: false });
       } else {
         insertSyntax(`![圖片說明](${url})\n`, '');
         closeMediaLibrary();
@@ -2780,22 +3641,17 @@
         cancelButtonText: '取消'
       });
       if (!confirm.isConfirmed) return;
-
       const res = await fetch('/api/images', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url })
       });
       const data = await res.json();
-      if (data.success) {
-        await loadMediaList();
-      } else {
-        Swal.fire('刪除失敗', data.error, 'error');
-      }
+      if (data.success) await loadMediaList();
     }
 
     // -----------------------------------------------------------------
-    // 9. Git Pull & GitHub Actions Live Deployment Tracker
+    // Git Pull & GitHub Actions Live Tracker
     // -----------------------------------------------------------------
     async function gitPullRemote() {
       Swal.fire({
@@ -2805,11 +3661,7 @@
           const res = await fetch('/api/git/pull', { method: 'POST' });
           const data = await res.json();
           await loadPosts();
-          Swal.fire({
-            icon: data.success ? 'success' : 'warning',
-            title: data.success ? '同步完成' : '同步提示',
-            html: `<div class="log-box">${escapeHtml(data.log)}</div>`
-          });
+          Swal.fire({ icon: data.success ? 'success' : 'warning', title: '同步完成', html: `<div class="log-box">${escapeHtml(data.log)}</div>` });
         }
       });
     }
@@ -2820,36 +3672,27 @@
         const res = await fetch('/api/actions/status');
         const data = await res.json();
         if (!data.success || !data.run) return;
-
         const run = data.run;
         const dot = document.getElementById('actionsDot');
         const txt = document.getElementById('actionsText');
-        const pill = document.getElementById('actionsStatusPill');
-        pill.href = run.html_url || 'https://github.com/DL049/DL049.github.io/actions';
+        document.getElementById('actionsStatusPill').href = run.html_url || 'https://github.com/DL049/DL049.github.io/actions';
 
         if (run.status === 'in_progress' || run.status === 'queued') {
           dot.className = 'dot-yellow';
-          txt.innerText = 'GitHub 編譯部署中...';
+          txt.innerText = 'GitHub 編譯中...';
           lastRunStatus = 'building';
           setTimeout(checkActionsStatus, 4000);
         } else if (run.status === 'completed') {
           if (run.conclusion === 'success') {
             dot.className = 'dot-green';
-            txt.innerText = '線上已部署更新';
+            txt.innerText = '線上已部署';
             if (lastRunStatus === 'building') {
-              Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'success',
-                title: '🎉 GitHub Actions 編譯完成！新內容已正式上線！',
-                timer: 4000,
-                showConfirmButton: false
-              });
+              Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: '🎉 GitHub Actions 編譯完成！新內容已上線！', timer: 4000, showConfirmButton: false });
             }
             lastRunStatus = 'success';
           } else {
             dot.className = 'dot-red';
-            txt.innerText = '部署失敗 (點擊查看)';
+            txt.innerText = '部署失敗';
             lastRunStatus = 'failed';
           }
         }
@@ -2857,41 +3700,27 @@
     }
 
     // -----------------------------------------------------------------
-    // Word Count, Suggestions, Clipboard Upload, Autosave & Shortcuts
+    // Helpers: Stats, Suggestions, Upload, Autosave, Shortcuts
     // -----------------------------------------------------------------
     function calculateStats() {
       const text = document.getElementById('editorTextarea').value || '';
       const cjkChars = (text.match(/[\u4e00-\u9fa5\u0800-\u4e00\uac00-\ud7a3]/g) || []).length;
       const nonCjkText = text.replace(/[\u4e00-\u9fa5\u0800-\u4e00\uac00-\ud7a3]/g, ' ');
       const words = (nonCjkText.match(/[a-zA-Z0-9_\-]+/g) || []).length;
-
       const totalCount = cjkChars + words;
       document.getElementById('wordCount').innerText = `${totalCount.toLocaleString()} 字`;
-      const minutes = Math.max(1, Math.ceil(totalCount / 350));
-      document.getElementById('readingTime').innerText = `${minutes} 分鐘`;
-    }
-
-    function getAllCategories() {
-      const set = new Set();
-      posts.forEach(p => (p.categories || []).forEach(c => set.add(c)));
-      return Array.from(set);
-    }
-
-    function getAllTags() {
-      const set = new Set();
-      posts.forEach(p => (p.tags || []).forEach(t => set.add(t)));
-      return Array.from(set);
+      document.getElementById('readingTime').innerText = `${Math.max(1, Math.ceil(totalCount / 350))} 分鐘`;
     }
 
     function renderCategorySuggestions() {
       const container = document.getElementById('catSuggestions');
       if (!container) return;
-      const all = getAllCategories();
+      const set = new Set();
+      posts.forEach(p => (p.categories || []).forEach(c => set.add(c)));
       const selected = document.getElementById('fmCategories').value.split(',').map(s => s.trim().toLowerCase());
-      container.innerHTML = all.map(cat => {
-        const isSelected = selected.includes(cat.toLowerCase());
-        return `<span class="chip" onclick="toggleCategory('${escapeHtml(cat)}')">${isSelected ? '✓ ' : ''}${escapeHtml(cat)}</span>`;
-      }).join('');
+      container.innerHTML = Array.from(set).map(cat => `
+        <span class="chip" onclick="toggleCategory('${escapeHtml(cat)}')">${selected.includes(cat.toLowerCase()) ? '✓ ' : ''}${escapeHtml(cat)}</span>
+      `).join('');
     }
 
     function toggleCategory(cat) {
@@ -2907,12 +3736,12 @@
     function renderTagSuggestions() {
       const container = document.getElementById('tagSuggestions');
       if (!container) return;
-      const all = getAllTags();
+      const set = new Set();
+      posts.forEach(p => (p.tags || []).forEach(t => set.add(t)));
       const selected = document.getElementById('fmTags').value.split(',').map(s => s.trim().toLowerCase());
-      container.innerHTML = all.map(t => {
-        const isSelected = selected.includes(t.toLowerCase());
-        return `<span class="chip" onclick="toggleTag('${escapeHtml(t)}')">${isSelected ? '✓ ' : ''}#${escapeHtml(t)}</span>`;
-      }).join('');
+      container.innerHTML = Array.from(set).map(t => `
+        <span class="chip" onclick="toggleTag('${escapeHtml(t)}')">${selected.includes(t.toLowerCase()) ? '✓ ' : ''}#${escapeHtml(t)}</span>
+      `).join('');
     }
 
     function toggleTag(tag) {
@@ -2932,8 +3761,7 @@
         for (let item of items) {
           if (item.kind === 'file' && item.type.startsWith('image/')) {
             e.preventDefault();
-            const file = item.getAsFile();
-            await uploadAndInsertImage(file);
+            await uploadAndInsertImage(item.getAsFile());
             break;
           }
         }
@@ -2951,12 +3779,11 @@
             <button class="btn" onclick="Swal.close(); openMediaLibrary(false);" style="justify-content: center; padding: 10px;">
               <i class="fa-regular fa-images"></i> 從現有媒體庫挑選
             </button>
-            <div style="font-size: 0.76rem; color: var(--text-muted-color); text-align: center;">或者輸入網路圖片網址：</div>
-            <input type="text" id="externalImageUrl" class="search-input" placeholder="https://example.com/image.png">
+            <input type="text" id="externalImageUrl" class="search-input" placeholder="或貼上外部圖片網址 https://...">
           </div>
         `,
         showCancelButton: true,
-        confirmButtonText: '插入網址圖片',
+        confirmButtonText: '插入網址',
         cancelButtonText: '取消',
         preConfirm: () => {
           const url = document.getElementById('externalImageUrl').value.trim();
@@ -2970,16 +3797,13 @@
       if (!file) return;
       await uploadAndInsertImage(file);
       event.target.value = '';
-      if (document.getElementById('mediaModal').classList.contains('active')) {
-        await loadMediaList();
-      }
+      if (document.getElementById('mediaModal').classList.contains('active')) await loadMediaList();
     }
 
     async function uploadAndInsertImage(file) {
       const textarea = document.getElementById('editorTextarea');
       const placeholder = `![正在上傳圖片 ${file.name || ''}...]()`;
       const isMediaModalOpen = document.getElementById('mediaModal').classList.contains('active');
-
       if (!isMediaModalOpen) insertSyntax(placeholder, '');
 
       const reader = new FileReader();
@@ -2999,32 +3823,25 @@
             Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: '圖片上傳成功！', showConfirmButton: false, timer: 1800 });
           } else {
             if (!isMediaModalOpen) textarea.value = textarea.value.replace(placeholder, '');
-            Swal.fire('上傳失敗', data.error, 'error');
           }
         } catch (err) {
           if (!isMediaModalOpen) textarea.value = textarea.value.replace(placeholder, '');
-          Swal.fire('上傳出錯', err.message, 'error');
         }
       };
       reader.readAsDataURL(file);
     }
 
-    function tickAutosave() {
-      if (!hasUnsavedChanges || !currentPost) return;
-      saveSnapshotToStorage();
-    }
+    function tickAutosave() { if (hasUnsavedChanges && currentPost) saveSnapshotToStorage(); }
 
     function saveSnapshotToStorage() {
       if (!currentPost) return;
-      const key = `dlib_autosave_${currentPost.filename}`;
-      localStorage.setItem(key, JSON.stringify({
+      localStorage.setItem(`dlib_autosave_${currentPost.filename}`, JSON.stringify({
         filename: currentPost.filename,
         title: document.getElementById('fmTitle').value,
         content: document.getElementById('editorTextarea').value,
-        isDraft: document.getElementById('fmIsDraft').checked,
         timestamp: Date.now()
       }));
-      document.getElementById('saveStatus').innerText = `本地快照已備份 (${new Date().toLocaleTimeString()})`;
+      document.getElementById('saveStatus').innerText = `快照已備份 (${new Date().toLocaleTimeString()})`;
     }
 
     function checkAutosaveSnapshot(filename) {
@@ -3036,9 +3853,7 @@
         if (data.content && data.content.trim() !== document.getElementById('editorTextarea').value.trim()) {
           document.getElementById('autosaveTime').innerText = new Date(data.timestamp).toLocaleTimeString();
           banner.classList.add('active');
-        } else {
-          banner.classList.remove('active');
-        }
+        } else banner.classList.remove('active');
       } catch (e) { banner.classList.remove('active'); }
     }
 
@@ -3058,17 +3873,11 @@
     }
 
     function dismissAutosave() { document.getElementById('autosaveBanner').classList.remove('active'); }
-    function clearAutosaveSnapshot(filename) {
-      localStorage.removeItem(`dlib_autosave_${filename}`);
-      dismissAutosave();
-    }
+    function clearAutosaveSnapshot(filename) { localStorage.removeItem(`dlib_autosave_${filename}`); dismissAutosave(); }
 
-    // Keyboard Shortcuts
     function loadSavedShortcuts() {
       const saved = localStorage.getItem('dlib_shortcuts');
-      if (saved) {
-        try { userShortcuts = Object.assign({}, DEFAULT_SHORTCUTS, JSON.parse(saved)); } catch (e) {}
-      }
+      if (saved) { try { userShortcuts = Object.assign({}, DEFAULT_SHORTCUTS, JSON.parse(saved)); } catch (e) {} }
     }
 
     function saveShortcutsToStorage() { localStorage.setItem('dlib_shortcuts', JSON.stringify(userShortcuts)); }
@@ -3121,29 +3930,24 @@
           renderShortcutTable();
           return;
         }
-
         for (const [action, s] of Object.entries(userShortcuts)) {
           if (!!s.ctrl === !!(e.ctrlKey || e.metaKey) &&
               !!s.alt === !!e.altKey &&
               !!s.shift === !!e.shiftKey &&
               s.key.toLowerCase() === e.key.toLowerCase()) {
             e.preventDefault();
-            executeShortcutAction(action);
+            if (action === 'save') saveCurrentPost(false);
+            else if (action === 'publish') publishToGithub();
+            else if (action === 'newPost') createNewDraft();
+            else if (action === 'bold') insertSyntax('**', '**');
+            else if (action === 'italic') insertSyntax('*', '*');
+            else if (action === 'math') insertSyntax('\\[\n', '\n\\]');
+            else if (action === 'code') insertSyntax('```\n', '\n```');
+            else if (action === 'search') document.getElementById('searchInput').focus();
             break;
           }
         }
       });
-    }
-
-    function executeShortcutAction(action) {
-      if (action === 'save') saveCurrentPost(false);
-      else if (action === 'publish') publishToGithub();
-      else if (action === 'newPost') createNewDraft();
-      else if (action === 'bold') insertSyntax('**', '**');
-      else if (action === 'italic') insertSyntax('*', '*');
-      else if (action === 'math') insertSyntax('\\[\n', '\n\\]');
-      else if (action === 'code') insertSyntax('```\n', '\n```');
-      else if (action === 'search') document.getElementById('searchInput').focus();
     }
 
     function onContentChange() {
@@ -3151,6 +3955,7 @@
       calculateStats();
       renderPreview();
       renderOutlineTOC();
+      scheduleLinterCheck();
     }
 
     function onTitleChange() {
@@ -3188,23 +3993,16 @@
       const end = textarea.selectionEnd;
       const text = textarea.value;
       const selected = text.substring(start, end);
-
-      const replacement = before + (selected || '') + after;
-      textarea.value = text.substring(0, start) + replacement + text.substring(end);
+      textarea.value = text.substring(0, start) + before + selected + after + text.substring(end);
       textarea.focus();
       textarea.selectionStart = start + before.length;
       textarea.selectionEnd = start + before.length + selected.length;
       onContentChange();
     }
 
-    function insertTable() {
-      insertSyntax('\n| 欄位 1 | 欄位 2 | 欄位 3 |\n| :--- | :--- | :--- |\n| 項目 A | 內容 1 | 數值 |\n| 項目 B | 內容 2 | 數值 |\n\n', '');
-    }
-
     // Publish to GitHub
     async function publishToGithub() {
       await saveCurrentPost(true);
-
       const cfgRes = await fetch('/api/config');
       const cfgData = await cfgRes.json();
       if (!cfgData.hasToken) {
@@ -3215,47 +4013,39 @@
           showCancelButton: true,
           confirmButtonText: '前往設定'
         });
-        if (ask.isConfirmed) openSettings();
+        if (ask.isConfirmed) openSettings('github');
         return;
       }
 
       Swal.fire({
         title: '正在推送到 GitHub...',
-        html: `<div class="log-box" id="publishLog">正在執行 git add / commit / push...</div>`,
+        html: `<div class="log-box">正在執行 git add / commit / push...</div>`,
         allowOutsideClick: false,
         showConfirmButton: false,
         didOpen: async () => {
           Swal.showLoading();
-          try {
-            const res = await fetch('/api/publish', { method: 'POST' });
-            const data = await res.json();
-            if (data.success) {
-              lastRunStatus = 'building';
-              setTimeout(checkActionsStatus, 2500);
-              Swal.fire({
-                icon: 'success',
-                title: '🚀 已成功推送至 GitHub！',
-                html: `
-                  <p style="font-size: 0.85rem; color: var(--text-muted-color);">
-                    右上角狀態列將自動監控 GitHub Actions 編譯進度，完成後會即時通知您！
-                  </p>
-                `,
-                timer: 2800
-              });
-            } else {
-              Swal.fire({ icon: 'error', title: '推送失敗', html: `<div class="log-box">${escapeHtml(data.log || data.error)}</div>` });
-            }
-          } catch (err) {
-            Swal.fire('錯誤', err.message, 'error');
+          const res = await fetch('/api/publish', { method: 'POST' });
+          const data = await res.json();
+          if (data.success) {
+            lastRunStatus = 'building';
+            setTimeout(checkActionsStatus, 2500);
+            Swal.fire({
+              icon: 'success',
+              title: '🚀 已成功推送至 GitHub！',
+              html: `<p style="font-size: 0.85rem; color: var(--text-muted-color);">右上角狀態列將自動監控 GitHub Actions 編譯進度，完成後會即時通知您！</p>`,
+              timer: 2600
+            });
+          } else {
+            Swal.fire({ icon: 'error', title: '推送失敗', html: `<div class="log-box">${escapeHtml(data.log || data.error)}</div>` });
           }
         }
       });
     }
 
     // Settings Modal
-    async function openSettings() {
+    async function openSettings(defaultTab = 'github') {
       document.getElementById('settingsModal').classList.add('active');
-      switchSettingsTab('github');
+      switchSettingsTab(defaultTab);
       const cfgRes = await fetch('/api/config');
       const cfg = await cfgRes.json();
       if (cfg.success) {
@@ -3269,15 +4059,18 @@
           document.getElementById('gitStatusBox').innerText = `分支: ${git.branch}\n最新 Commit: ${git.lastCommit}\n未提交變更:\n${git.changes || '(無未提交變更)'}`;
         }
       } catch (e) {}
-      renderShortcutTable();
     }
 
     function switchSettingsTab(tab) {
-      document.getElementById('modalTabGithub').classList.toggle('active', tab === 'github');
-      document.getElementById('modalTabShortcuts').classList.toggle('active', tab !== 'github');
-      document.getElementById('settingsPanelGithub').style.display = tab === 'github' ? 'flex' : 'none';
-      document.getElementById('settingsPanelShortcuts').style.display = tab === 'github' ? 'none' : 'flex';
-      if (tab !== 'github') renderShortcutTable();
+      ['github', 'site', 'snippets', 'shortcuts'].forEach(t => {
+        const btn = document.getElementById('modalTab' + t.charAt(0).toUpperCase() + t.slice(1));
+        const panel = document.getElementById('settingsPanel' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (btn) btn.classList.toggle('active', t === tab);
+        if (panel) panel.style.display = (t === tab) ? 'flex' : 'none';
+      });
+      if (tab === 'site') loadSiteConfigIntoModal();
+      if (tab === 'snippets') renderCustomSnippetsTable();
+      if (tab === 'shortcuts') renderShortcutTable();
     }
 
     function closeSettings() {
@@ -3307,8 +4100,7 @@
         const res = await fetch('/api/preview/status');
         const data = await res.json();
         isJekyllRunning = data.running;
-        const btn = document.getElementById('btnPreviewToggle');
-        btn.innerHTML = data.running
+        document.getElementById('btnPreviewToggle').innerHTML = data.running
           ? `<i class="fa-solid fa-stop" style="color: #ef4444;"></i>`
           : `<i class="fa-solid fa-play" style="color: #10b981;"></i>`;
       } catch (e) {}

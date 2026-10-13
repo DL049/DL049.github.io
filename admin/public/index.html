@@ -13,13 +13,13 @@
   <!-- FontAwesome 6 (Chirpy's exact icon system) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Markdown, KaTeX & Highlight.js -->
+  <!-- Markdown, KaTeX, Highlight.js & Mermaid.js -->
   <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" id="highlightTheme">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
 
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -61,9 +61,16 @@
       --tb-border-color: var(--tb-odd-bg);
       --avatar-border-color: rgb(206, 206, 206, 0.9);
       --input-bg: #151517;
-      --topbar-bg: rgba(27, 27, 30, 0.75);
+      --topbar-bg: rgba(27, 27, 30, 0.85);
+      /* Chirpy 4 Prompt Colors (Dark) */
       --prompt-tip-bg: rgba(22, 60, 36, 0.64);
-      --prompt-tip-color: #0fa40f;
+      --prompt-tip-color: #15d615;
+      --prompt-info-bg: rgba(7, 59, 104, 0.8);
+      --prompt-info-color: #0075d1;
+      --prompt-warning-bg: rgba(90, 69, 3, 0.88);
+      --prompt-warning-color: #ef9c03;
+      --prompt-danger-bg: rgba(86, 28, 8, 0.8);
+      --prompt-danger-color: #df3c30;
       --draft-color: #f59e0b;
       --draft-bg: rgba(245, 158, 11, 0.15);
       --published-color: #3b82f6;
@@ -99,9 +106,16 @@
       --tb-border-color: #eaeaea;
       --avatar-border-color: #ffffff;
       --input-bg: #f8fafc;
-      --topbar-bg: rgba(255, 255, 255, 0.85);
+      --topbar-bg: rgba(255, 255, 255, 0.88);
+      /* Chirpy 4 Prompt Colors (Light) */
       --prompt-tip-bg: rgba(123, 247, 144, 0.2);
       --prompt-tip-color: #03b303;
+      --prompt-info-bg: #e1f5fe;
+      --prompt-info-color: #0070cb;
+      --prompt-warning-bg: rgb(255, 243, 205);
+      --prompt-warning-color: #ef9c03;
+      --prompt-danger-bg: rgb(248, 215, 218, 0.56);
+      --prompt-danger-color: #df3c30;
       --draft-color: #d97706;
       --draft-bg: rgba(217, 119, 6, 0.12);
       --published-color: #2563eb;
@@ -127,7 +141,7 @@
        Sidebar (Matches Chirpy)
     ------------------------------------------------------------- */
     .sidebar {
-      width: 320px;
+      width: 310px;
       background: var(--sidebar-bg);
       border-right: 1px solid var(--sidebar-border-color);
       display: flex;
@@ -137,21 +151,21 @@
     }
 
     .profile-wrapper {
-      padding: 24px 20px 16px;
+      padding: 20px 18px 14px;
       text-align: center;
       border-bottom: 1px solid var(--sidebar-border-color);
     }
     .profile-avatar {
-      width: 68px;
-      height: 68px;
+      width: 62px;
+      height: 62px;
       border-radius: 50%;
       border: 2px solid var(--avatar-border-color);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       object-fit: cover;
     }
     .site-title {
       font-family: 'Lato', sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: var(--heading-color);
       letter-spacing: 0.5px;
@@ -159,34 +173,59 @@
       display: block;
     }
     .site-subtitle {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--sidebar-muted-color);
-      margin-top: 4px;
+      margin-top: 3px;
     }
 
     .sidebar-actions {
-      padding: 12px 14px 8px;
+      padding: 10px 14px 8px;
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
+    .sidebar-btn-row {
+      display: flex;
+      gap: 6px;
+    }
+
     .btn-chirpy-new {
+      flex: 1;
       background: var(--link-color);
       color: #ffffff;
       border: none;
       border-radius: 8px;
-      padding: 8px 14px;
+      padding: 8px 12px;
       font-weight: 600;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       transition: opacity 0.2s;
     }
     .btn-chirpy-new:hover { opacity: 0.9; }
+
+    .btn-chirpy-media {
+      background: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--sidebar-border-color);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s;
+    }
+    .btn-chirpy-media:hover {
+      background: var(--sidebar-hover-bg);
+      color: var(--heading-color);
+    }
 
     .search-wrapper {
       position: relative;
@@ -225,7 +264,7 @@
       background: transparent;
       border: none;
       color: var(--sidebar-muted-color);
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 600;
       border-radius: 6px;
       cursor: pointer;
@@ -245,7 +284,7 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.15);
     }
     .tab-badge {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       padding: 1px 5px;
       border-radius: 10px;
       background: var(--sidebar-hover-bg);
@@ -268,7 +307,7 @@
       background: transparent;
       border: 1px solid transparent;
       border-radius: 8px;
-      padding: 10px 12px;
+      padding: 9px 11px;
       cursor: pointer;
       transition: all 0.15s ease;
       position: relative;
@@ -282,21 +321,27 @@
       box-shadow: var(--card-shadow);
     }
     .post-card-title {
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       font-weight: 600;
       color: var(--heading-color);
       margin-bottom: 5px;
       line-height: 1.35;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    .pin-icon {
+      color: #f59e0b;
+      font-size: 0.75rem;
+      margin-top: 3px;
+      flex-shrink: 0;
+      transform: rotate(45deg);
     }
     .post-card-meta {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.72rem;
+      gap: 5px;
+      font-size: 0.7rem;
       color: var(--sidebar-muted-color);
       flex-wrap: wrap;
     }
@@ -328,23 +373,23 @@
       color: var(--sidebar-muted-color);
       border-radius: 4px;
       padding: 0 4px;
-      font-size: 0.68rem;
+      font-size: 0.66rem;
     }
 
     .sidebar-bottom {
-      padding: 10px 16px;
+      padding: 9px 14px;
       border-top: 1px solid var(--sidebar-border-color);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--sidebar-muted-color);
     }
     .sidebar-btn {
       background: transparent;
       border: none;
       color: var(--sidebar-muted-color);
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       cursor: pointer;
       padding: 4px 6px;
       border-radius: 6px;
@@ -369,8 +414,8 @@
 
     /* Topbar */
     .topbar {
-      height: 52px;
-      padding: 0 20px;
+      height: 50px;
+      padding: 0 18px;
       border-bottom: 1px solid var(--main-border-color);
       background: var(--topbar-bg);
       backdrop-filter: blur(8px);
@@ -378,12 +423,13 @@
       align-items: center;
       justify-content: space-between;
       flex-shrink: 0;
+      gap: 10px;
     }
     .breadcrumb {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.84rem;
+      gap: 7px;
+      font-size: 0.82rem;
       color: var(--text-muted-color);
       overflow: hidden;
       text-overflow: ellipsis;
@@ -392,36 +438,51 @@
     .breadcrumb strong {
       color: var(--heading-color);
       font-weight: 600;
+      max-width: 240px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .topbar-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      flex-shrink: 0;
     }
 
-    /* Word Count & Read Time pill */
+    /* Pills: Word Count & GitHub Actions Status */
     .stat-pill {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
+      gap: 5px;
+      font-size: 0.73rem;
       color: var(--text-muted-color);
       background: var(--input-bg);
-      padding: 4px 10px;
+      padding: 4px 9px;
       border-radius: 20px;
       border: 1px solid var(--main-border-color);
-      margin-right: 6px;
+      text-decoration: none;
     }
+    .actions-pill {
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .actions-pill:hover {
+      border-color: var(--link-color);
+      color: var(--heading-color);
+    }
+    .dot-green { width: 7px; height: 7px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .dot-yellow { width: 7px; height: 7px; border-radius: 50%; background: #f59e0b; display: inline-block; animation: pulse 1s infinite; }
+    .dot-red { width: 7px; height: 7px; border-radius: 50%; background: #ef4444; display: inline-block; }
 
     .btn {
-      padding: 6px 12px;
+      padding: 5px 11px;
       border-radius: 6px;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       border: 1px solid var(--btn-border-color);
       background: var(--card-bg);
       color: var(--text-color);
@@ -452,22 +513,22 @@
 
     /* Metadata Bar */
     .meta-bar {
-      padding: 12px 20px;
+      padding: 10px 18px;
       background: var(--sidebar-bg);
       border-bottom: 1px solid var(--main-border-color);
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px 14px;
-      font-size: 0.8rem;
+      gap: 8px 12px;
+      font-size: 0.78rem;
     }
     .meta-field {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 3px;
     }
     .meta-field label {
       color: var(--text-muted-color);
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -477,27 +538,24 @@
       background: var(--input-bg);
       border: 1px solid var(--main-border-color);
       border-radius: 6px;
-      padding: 6px 8px;
+      padding: 5px 8px;
       color: var(--text-color);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       outline: none;
     }
-    .meta-field input:focus, .meta-field select:focus {
-      border-color: var(--link-color);
-    }
+    .meta-field input:focus { border-color: var(--link-color); }
 
-    /* Suggestions container */
     .suggestion-chips {
       display: flex;
       gap: 4px;
       flex-wrap: wrap;
-      margin-top: 4px;
-      max-height: 48px;
+      margin-top: 2px;
+      max-height: 24px;
       overflow-y: auto;
     }
     .chip {
-      font-size: 0.7rem;
-      padding: 1px 6px;
+      font-size: 0.68rem;
+      padding: 0px 5px;
       border-radius: 4px;
       background: var(--inline-code-bg);
       color: var(--text-muted-color);
@@ -509,23 +567,37 @@
     .chip:hover {
       color: var(--link-color);
       border-color: var(--link-color);
-      background: var(--sidebar-hover-bg);
     }
 
     .meta-options {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       align-items: center;
-      padding-top: 4px;
+      flex-wrap: wrap;
+      padding-top: 2px;
     }
     .chirpy-checkbox {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.78rem;
+      gap: 5px;
+      font-size: 0.76rem;
       cursor: pointer;
       user-select: none;
       color: var(--text-color);
+    }
+
+    /* Collapsible Advanced Meta Row */
+    .meta-advanced {
+      grid-column: span 4;
+      display: none;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px 12px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--main-border-color);
+      margin-top: 2px;
+    }
+    .meta-advanced.open {
+      display: grid;
     }
 
     /* Autosave notification bar */
@@ -533,52 +605,161 @@
       display: none;
       background: rgba(245, 158, 11, 0.12);
       border-bottom: 1px solid rgba(245, 158, 11, 0.3);
-      padding: 6px 20px;
-      font-size: 0.78rem;
+      padding: 5px 18px;
+      font-size: 0.76rem;
       color: var(--draft-color);
       align-items: center;
       justify-content: space-between;
     }
-    .autosave-banner.active {
-      display: flex;
-    }
+    .autosave-banner.active { display: flex; }
 
     /* Editor Toolbar */
     .editor-toolbar {
-      padding: 6px 20px;
+      padding: 5px 18px;
       background: var(--main-bg);
       border-bottom: 1px solid var(--main-border-color);
       display: flex;
       align-items: center;
       gap: 3px;
-      overflow-x: auto;
+      position: relative;
+      flex-wrap: wrap;
     }
     .tool-btn {
       background: transparent;
-      border: none;
+      border: 1px solid transparent;
       color: var(--text-muted-color);
-      padding: 6px 9px;
-      border-radius: 4px;
+      padding: 5px 8px;
+      border-radius: 5px;
       cursor: pointer;
-      font-size: 0.82rem;
-      display: flex;
+      font-size: 0.8rem;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 4px;
       transition: all 0.15s;
     }
     .tool-btn:hover { background: var(--card-hover-bg); color: var(--heading-color); }
+    .tool-btn.active {
+      background: var(--published-bg);
+      color: var(--link-color);
+      border-color: rgba(138, 180, 248, 0.3);
+    }
     .tool-sep {
       width: 1px;
       height: 16px;
       background: var(--main-border-color);
-      margin: 0 4px;
+      margin: 0 3px;
     }
 
-    /* Dual Workspace */
+    /* View Mode Segmented Control */
+    .view-switch {
+      display: inline-flex;
+      background: var(--input-bg);
+      border: 1px solid var(--main-border-color);
+      border-radius: 6px;
+      padding: 2px;
+      gap: 2px;
+    }
+    .view-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted-color);
+      font-size: 0.73rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .view-btn.active {
+      background: var(--card-bg);
+      color: var(--link-color);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    /* Floating Popovers: Math Palette & Prompt Menu */
+    .floating-palette {
+      position: absolute;
+      top: 40px;
+      left: 160px;
+      width: 460px;
+      max-width: 92vw;
+      background: var(--sidebar-bg);
+      border: 1px solid var(--main-border-color);
+      border-radius: 10px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.55);
+      z-index: 60;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .floating-palette.active { display: flex; }
+    .palette-tabs {
+      display: flex;
+      background: var(--highlight-bg-color);
+      border-bottom: 1px solid var(--main-border-color);
+      padding: 4px 8px;
+      gap: 4px;
+    }
+    .palette-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted-color);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .palette-tab.active {
+      background: var(--card-bg);
+      color: var(--link-color);
+    }
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      padding: 12px;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+    .math-item-btn {
+      background: var(--input-bg);
+      border: 1px solid var(--main-border-color);
+      border-radius: 6px;
+      padding: 8px 6px;
+      color: var(--heading-color);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+    .math-item-btn:hover {
+      border-color: var(--link-color);
+      background: var(--card-hover-bg);
+      transform: translateY(-1px);
+    }
+    .math-item-btn .sym {
+      font-size: 1rem;
+      font-family: 'JetBrains Mono', serif;
+      color: var(--link-color);
+    }
+    .math-item-btn .lbl {
+      font-size: 0.68rem;
+      color: var(--text-muted-color);
+    }
+
+    /* -------------------------------------------------------------
+       Dual Workspace + TOC Outline Drawer
+    ------------------------------------------------------------- */
     .workspace {
       flex: 1;
       display: flex;
       overflow: hidden;
+      position: relative;
     }
     .pane {
       flex: 1;
@@ -604,12 +785,160 @@
       line-height: 1.65;
     }
 
+    /* View Mode Overrides */
+    .workspace.mode-editor .preview-pane { display: none; }
+    .workspace.mode-editor .editor-pane { border-right: none; max-width: 960px; margin: 0 auto; }
+    .workspace.mode-preview .editor-pane { display: none; }
+
+    /* Outline TOC Drawer */
+    .outline-drawer {
+      width: 240px;
+      background: var(--sidebar-bg);
+      border-left: 1px solid var(--main-border-color);
+      display: none;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+    .outline-drawer.active { display: flex; }
+    .outline-header {
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--heading-color);
+      border-bottom: 1px solid var(--main-border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .outline-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .outline-item {
+      font-size: 0.78rem;
+      color: var(--text-muted-color);
+      padding: 5px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all 0.12s;
+      border-left: 2px solid transparent;
+    }
+    .outline-item:hover {
+      background: var(--sidebar-hover-bg);
+      color: var(--link-color);
+      border-left-color: var(--link-color);
+    }
+    .outline-item.lvl-1 { font-weight: 700; color: var(--heading-color); }
+    .outline-item.lvl-2 { padding-left: 14px; }
+    .outline-item.lvl-3 { padding-left: 26px; font-size: 0.74rem; }
+    .outline-item.lvl-4 { padding-left: 36px; font-size: 0.72rem; }
+
+    /* -------------------------------------------------------------
+       IDE Intellisense / Syntax Auto-Completion Popup
+    ------------------------------------------------------------- */
+    .intellisense-popup {
+      position: fixed;
+      width: 340px;
+      max-height: 250px;
+      background: var(--sidebar-bg);
+      border: 1px solid var(--link-color);
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65);
+      z-index: 999;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .intellisense-popup.active { display: flex; }
+    .intellisense-header {
+      padding: 4px 10px;
+      background: var(--highlight-bg-color);
+      border-bottom: 1px solid var(--main-border-color);
+      font-size: 0.68rem;
+      color: var(--text-muted-color);
+      display: flex;
+      justify-content: space-between;
+    }
+    .intellisense-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 4px;
+    }
+    .intellisense-item {
+      padding: 6px 10px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .intellisense-item.selected,
+    .intellisense-item:hover {
+      background: var(--published-bg);
+      color: var(--heading-color);
+    }
+    .intellisense-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+    .intellisense-kind {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      flex-shrink: 0;
+    }
+    .kind-latex { background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35); }
+    .kind-snip { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.35); }
+    .kind-chirpy { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+    .kind-code { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .intellisense-cmd {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      color: var(--heading-color);
+    }
+    .intellisense-desc {
+      font-size: 0.73rem;
+      color: var(--text-muted-color);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Hidden Mirror Div for Caret Coordinate Calculation */
+    #caretMirror {
+      position: absolute;
+      top: 0;
+      left: 0;
+      visibility: hidden;
+      pointer-events: none;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      padding: 20px 24px;
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      overflow: hidden;
+    }
+
     /* -------------------------------------------------------------
        Chirpy Post Content Preview Styling (Exact Replica)
     ------------------------------------------------------------- */
     .preview-pane {
       background: var(--main-bg);
-      padding: 30px 42px;
+      padding: 28px 40px;
     }
     .chirpy-content {
       color: var(--text-color);
@@ -651,25 +980,30 @@
       display: block;
     }
 
-    /* Chirpy Prompt box */
+    /* Chirpy 4 Prompt Boxes (Exact Replica) */
     .prompt-box {
       border-left: 0;
       position: relative;
       padding: 0.85rem 1rem 0.85rem 3rem;
       border-radius: 8px;
       margin: 1.2rem 0;
-      background-color: var(--prompt-tip-bg);
       color: var(--text-color);
     }
     .prompt-box::before {
-      content: "\f0eb";
       font-family: "Font Awesome 6 Free";
       font-weight: 900;
       position: absolute;
-      left: 1rem;
+      left: 1.1rem;
       top: 0.85rem;
-      color: var(--prompt-tip-color);
     }
+    .prompt-tip { background-color: var(--prompt-tip-bg); }
+    .prompt-tip::before { content: "\f0eb"; color: var(--prompt-tip-color); }
+    .prompt-info { background-color: var(--prompt-info-bg); }
+    .prompt-info::before { content: "\f06a"; color: var(--prompt-info-color); }
+    .prompt-warning { background-color: var(--prompt-warning-bg); }
+    .prompt-warning::before { content: "\f06a"; color: var(--prompt-warning-color); }
+    .prompt-danger { background-color: var(--prompt-danger-bg); }
+    .prompt-danger::before { content: "\f071"; color: var(--prompt-danger-color); }
 
     /* Chirpy Code block with header */
     .chirpy-content pre {
@@ -729,16 +1063,26 @@
       padding: 10px 0;
       text-align: center;
     }
-    .katex {
-      font-size: 1.08em;
-      line-height: 1.2;
+    .katex { font-size: 1.08em; line-height: 1.2; }
+
+    /* Mermaid Container */
+    .mermaid-wrapper {
+      background: var(--card-bg);
+      border: 1px solid var(--main-border-color);
+      border-radius: 10px;
+      padding: 16px;
+      margin: 1.2rem 0;
+      text-align: center;
+      overflow-x: auto;
     }
 
-    /* Modal Styling */
+    /* -------------------------------------------------------------
+       Modals (Settings & Media Library)
+    ------------------------------------------------------------- */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.72);
       backdrop-filter: blur(4px);
       display: flex;
       align-items: center;
@@ -753,16 +1097,20 @@
       background: var(--sidebar-bg);
       border: 1px solid var(--main-border-color);
       border-radius: 12px;
-      width: 540px;
+      width: 560px;
       max-width: 92vw;
-      padding: 24px;
+      max-height: 88vh;
+      padding: 22px;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
     }
+    .modal-card.wide { width: 820px; }
     .modal-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     /* Modal Tabs */
@@ -770,25 +1118,100 @@
       display: flex;
       gap: 6px;
       border-bottom: 1px solid var(--main-border-color);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .modal-tab-btn {
-      padding: 8px 12px;
+      padding: 7px 12px;
       background: transparent;
       border: none;
       border-bottom: 2px solid transparent;
       color: var(--text-muted-color);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.15s;
     }
     .modal-tab-btn.active {
       color: var(--link-color);
       border-bottom-color: var(--link-color);
+    }
+
+    /* Media Library Grid */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 12px;
+      overflow-y: auto;
+      padding: 4px;
+      max-height: 55vh;
+    }
+    .media-card {
+      background: var(--card-bg);
+      border: 1px solid var(--main-border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .media-thumb-wrap {
+      height: 115px;
+      background: var(--highlight-bg-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .media-thumb-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .media-usage-tag {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+    .media-usage-tag.used { background: rgba(16, 185, 129, 0.85); color: #fff; }
+    .media-usage-tag.unused { background: rgba(245, 158, 11, 0.85); color: #fff; }
+    .media-info {
+      padding: 8px;
+      font-size: 0.72rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .media-name {
+      font-weight: 600;
+      color: var(--heading-color);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .media-actions {
+      display: flex;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .media-actions button {
+      flex: 1;
+      padding: 4px;
+      font-size: 0.7rem;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid var(--btn-border-color);
+      background: var(--input-bg);
+      color: var(--text-color);
+    }
+    .media-actions button:hover {
+      border-color: var(--link-color);
+      color: var(--link-color);
     }
 
     .log-box {
@@ -798,11 +1221,11 @@
       padding: 12px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.78rem;
-      max-height: 180px;
+      max-height: 160px;
       overflow-y: auto;
       white-space: pre-wrap;
       color: var(--text-muted-color);
-      margin: 10px 0;
+      margin: 8px 0;
     }
 
     /* Shortcuts Settings Table */
@@ -812,7 +1235,7 @@
       font-size: 0.82rem;
     }
     .shortcut-table td {
-      padding: 8px 6px;
+      padding: 7px 6px;
       border-bottom: 1px solid var(--main-border-color);
     }
     .key-badge {
@@ -824,14 +1247,9 @@
       border: 1px solid var(--main-border-color);
       color: var(--heading-color);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.15s;
-    }
-    .key-badge:hover {
-      border-color: var(--link-color);
-      background: var(--sidebar-hover-bg);
     }
     .key-badge.recording {
       border-color: #f59e0b;
@@ -840,7 +1258,7 @@
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
+      50% { opacity: 0.4; }
     }
   </style>
 </head>
@@ -850,17 +1268,22 @@
   <aside class="sidebar">
     <div class="profile-wrapper">
       <img src="https://avatars.githubusercontent.com/u/75907889?v=4" class="profile-avatar" alt="avatar">
-      <a href="/" class="site-title">D-Lib</a>
+      <a href="https://dl049.github.io" target="_blank" class="site-title">D-Lib</a>
       <p class="site-subtitle">這裏會放各種奇奇怪怪的東西</p>
     </div>
 
     <div class="sidebar-actions">
-      <button class="btn-chirpy-new" onclick="createNewDraft()">
-        <i class="fa-solid fa-feather-pointed"></i> 寫新文章 (草稿)
-      </button>
+      <div class="sidebar-btn-row">
+        <button class="btn-chirpy-new" onclick="createNewDraft()">
+          <i class="fa-solid fa-feather-pointed"></i> 寫新草稿
+        </button>
+        <button class="btn-chirpy-media" onclick="openMediaLibrary()" title="瀏覽與管理所有已上傳的圖片">
+          <i class="fa-regular fa-images"></i> 媒體庫
+        </button>
+      </div>
       <div class="search-wrapper">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input type="text" id="searchInput" class="search-input" placeholder="搜尋標題、標籤..." oninput="filterPosts()">
+        <input type="text" id="searchInput" class="search-input" placeholder="搜尋標題、標籤、分類..." oninput="filterPosts()">
       </div>
     </div>
 
@@ -878,15 +1301,18 @@
     </div>
 
     <!-- Post list cards -->
-    <div class="post-list" id="postList">
-      <!-- Injected by JavaScript -->
-    </div>
+    <div class="post-list" id="postList"></div>
 
     <!-- Chirpy Signature Bottom Bar -->
     <div class="sidebar-bottom">
-      <button class="sidebar-btn" id="modeToggle" onclick="toggleThemeMode()" title="切換深色 / 淺色模式">
-        <i class="fa-solid fa-circle-half-stroke"></i>
-      </button>
+      <div style="display: flex; gap: 4px; align-items: center;">
+        <button class="sidebar-btn" id="modeToggle" onclick="toggleThemeMode()" title="切換深色 / 淺色模式">
+          <i class="fa-solid fa-circle-half-stroke"></i>
+        </button>
+        <button class="sidebar-btn" onclick="gitPullRemote()" title="從 GitHub 拉取最新變更 (git pull)">
+          <i class="fa-solid fa-cloud-arrow-down"></i>
+        </button>
+      </div>
       <span id="postCount">0 篇文章</span>
       <div style="display: flex; gap: 4px;">
         <button class="sidebar-btn" onclick="toggleJekyllPreview()" id="btnPreviewToggle" title="啟動/關閉本地 Jekyll 全站預覽 (支援草稿)">
@@ -904,37 +1330,42 @@
     <!-- Frosted Topbar -->
     <header class="topbar">
       <div class="breadcrumb">
-        <span id="breadcrumbFolder"><i class="fa-regular fa-folder-open"></i> POSTS</span>
+        <span id="breadcrumbFolder"><i class="fa-regular fa-folder-open"></i> _posts</span>
         <span>/</span>
         <span id="currentStatusBadge" class="status-badge published">已發布</span>
         <strong id="displayTitle">未命名文章</strong>
-        <span id="saveStatus" style="font-size: 0.72rem; color: var(--text-muted-color); margin-left: 6px;"></span>
+        <span id="saveStatus" style="font-size: 0.72rem; color: var(--text-muted-color);"></span>
       </div>
 
       <div class="topbar-actions">
+        <!-- GitHub Actions Live Deployment Status Pill -->
+        <a id="actionsStatusPill" href="https://github.com/DL049/DL049.github.io/actions" target="_blank" class="stat-pill actions-pill" title="點擊查看 GitHub Actions 線上部署詳情">
+          <span class="dot-green" id="actionsDot"></span>
+          <span id="actionsText">線上已同步</span>
+        </a>
+
         <!-- Word Count & Reading Time -->
         <div class="stat-pill" title="即時字數統計與預估閱讀時間">
           <i class="fa-solid fa-pen-nib"></i>
           <span id="wordCount">0 字</span>
-          <span style="opacity: 0.4;">|</span>
+          <span style="opacity: 0.35;">|</span>
           <i class="fa-regular fa-clock"></i>
           <span id="readingTime">1 分鐘</span>
         </div>
 
         <button class="btn btn-delete" onclick="deleteCurrentPost()" id="btnDelete" title="刪除此文章/草稿">
-          <i class="fa-regular fa-trash-can"></i> 刪除
+          <i class="fa-regular fa-trash-can"></i>
         </button>
 
-        <!-- Dynamic Action Buttons -->
         <button class="btn" id="btnSave" onclick="saveCurrentPost(false)">
           <i class="fa-regular fa-floppy-disk"></i> 儲存
         </button>
 
-        <button class="btn" id="btnToggleDraft" onclick="togglePostDraftStatus()" title="切換草稿與正式文章狀態">
+        <button class="btn" id="btnToggleDraft" onclick="togglePostDraftStatus()">
           <i class="fa-solid fa-arrows-rotate"></i> 轉為正式
         </button>
 
-        <button class="btn btn-publish" id="btnPublishGithub" onclick="publishToGithub()" title="推送變更至 GitHub (觸發自動部署)">
+        <button class="btn btn-publish" id="btnPublishGithub" onclick="publishToGithub()">
           <i class="fa-solid fa-cloud-arrow-up"></i> 推送至 GitHub
         </button>
       </div>
@@ -942,7 +1373,7 @@
 
     <!-- Autosave Restore Banner -->
     <div class="autosave-banner" id="autosaveBanner">
-      <span><i class="fa-solid fa-clock-rotate-left" style="margin-right: 6px;"></i> 檢測到有未儲存的本機快照備份 (<span id="autosaveTime"></span>)</span>
+      <span><i class="fa-solid fa-clock-rotate-left" style="margin-right: 6px;"></i> 檢測到未儲存的本機快照備份 (<span id="autosaveTime"></span>)</span>
       <div style="display: flex; gap: 8px;">
         <button class="btn" style="padding: 2px 8px; font-size: 0.72rem;" onclick="restoreAutosave()">立即恢復</button>
         <button class="btn" style="padding: 2px 8px; font-size: 0.72rem;" onclick="dismissAutosave()">忽略</button>
@@ -962,79 +1393,197 @@
       </div>
 
       <div class="meta-field">
-        <label>
-          分類 (逗號分隔)
-        </label>
+        <label>分類 (逗號分隔)</label>
         <input type="text" id="fmCategories" placeholder="Derivation" oninput="renderCategorySuggestions()">
         <div class="suggestion-chips" id="catSuggestions"></div>
       </div>
 
       <div class="meta-field">
-        <label>
-          標籤 (逗號分隔)
-        </label>
+        <label>標籤 (逗號分隔)</label>
         <input type="text" id="fmTags" placeholder="mathematic, graphic" oninput="renderTagSuggestions()">
         <div class="suggestion-chips" id="tagSuggestions"></div>
       </div>
 
-      <div class="meta-field" style="grid-column: span 2;">
+      <div class="meta-field">
         <label>發布日期</label>
-        <div style="display: flex; gap: 8px;">
+        <div style="display: flex; gap: 6px;">
           <input type="text" id="fmDate" style="flex: 1;" placeholder="YYYY-MM-DD HH:mm:ss +0800">
-          <button class="btn" style="padding: 4px 12px; font-size: 0.75rem;" onclick="setCurrentTime()">現在</button>
+          <button class="btn" style="padding: 3px 8px; font-size: 0.72rem;" onclick="setCurrentTime()">現在</button>
         </div>
       </div>
 
-      <div class="meta-options" style="grid-column: span 2;">
+      <div class="meta-options" style="grid-column: span 3;">
         <label class="chirpy-checkbox">
           <input type="checkbox" id="fmIsDraft" onchange="onDraftCheckboxChange()">
-          <strong>存為草稿 (存放於 _drafts，不上線)</strong>
+          <strong style="color: var(--draft-color);">📝 草稿 (_drafts)</strong>
+        </label>
+        <label class="chirpy-checkbox" title="將此文章固定在部落格首頁最頂端">
+          <input type="checkbox" id="fmPin" onchange="hasUnsavedChanges = true">
+          <span>📌 首頁置頂 (pin)</span>
         </label>
         <label class="chirpy-checkbox">
           <input type="checkbox" id="fmMath" checked onchange="renderPreview()">
-          LaTeX 數學公式 (math: true)
+          <span>🧮 LaTeX 公式</span>
+        </label>
+        <label class="chirpy-checkbox" title="開啟 Mermaid 流程圖與架構圖支援">
+          <input type="checkbox" id="fmMermaid" onchange="renderPreview()">
+          <span>📊 Mermaid 圖表</span>
         </label>
         <label class="chirpy-checkbox">
           <input type="checkbox" id="fmToc" checked>
-          顯示目錄 (toc: true)
+          <span>📑 顯示目錄</span>
         </label>
+        <button class="btn" style="padding: 2px 8px; font-size: 0.72rem; margin-left: auto;" onclick="toggleAdvancedMeta()">
+          <i class="fa-solid fa-sliders"></i> 封面圖與摘要
+        </button>
+      </div>
+
+      <!-- Collapsible Cover Image & Description Row -->
+      <div class="meta-advanced" id="metaAdvanced">
+        <div class="meta-field" style="grid-column: span 2;">
+          <label>文章摘要 / 副標題 (Description — 顯示於首頁文章卡片與 SEO)</label>
+          <input type="text" id="fmDescription" placeholder="簡短描述這篇文章的核心內容..." oninput="hasUnsavedChanges = true">
+        </div>
+        <div class="meta-field">
+          <label>封面預覽圖路徑 (Cover Image)</label>
+          <div style="display: flex; gap: 6px;">
+            <input type="text" id="fmImage" style="flex: 1;" placeholder="/assets/img/posts/..." oninput="hasUnsavedChanges = true">
+            <button class="btn" style="padding: 3px 8px; font-size: 0.72rem;" onclick="openMediaLibrary(true)">選擇</button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Toolbar -->
+    <!-- Rich Toolbar -->
     <div class="editor-toolbar">
       <button class="tool-btn" onclick="insertSyntax('**', '**')" title="粗體 (Ctrl+B)"><i class="fa-solid fa-bold"></i></button>
       <button class="tool-btn" onclick="insertSyntax('*', '*')" title="斜體 (Ctrl+I)"><i class="fa-solid fa-italic"></i></button>
+      <button class="tool-btn" onclick="insertSyntax('## ', '')" title="標題 2">H2</button>
+      <button class="tool-btn" onclick="insertSyntax('### ', '')" title="標題 3">H3</button>
       <div class="tool-sep"></div>
-      <button class="tool-btn" onclick="insertSyntax('## ', '')" title="標題 2"><i class="fa-solid fa-heading"></i>2</button>
-      <button class="tool-btn" onclick="insertSyntax('### ', '')" title="標題 3"><i class="fa-solid fa-heading"></i>3</button>
+
+      <!-- Math Symbols Palette Button -->
+      <button class="tool-btn" id="btnMathPalette" onclick="toggleMathPalette()" title="開啟 LaTeX 數學公式與矩陣百寶箱">
+        <i class="fa-solid fa-square-root-variable" style="color: #c084fc;"></i> 公式百寶箱
+      </button>
+      <button class="tool-btn" onclick="insertSyntax('\\[\n', '\n\\]')" title="插入區塊公式 (Ctrl+M)">\[ \]</button>
+      <button class="tool-btn" onclick="insertSyntax('\\( ', ' \\)')" title="插入行內公式">\( \)</button>
       <div class="tool-sep"></div>
-      <button class="tool-btn" onclick="insertSyntax('> ', '')" title="引用"><i class="fa-solid fa-quote-left"></i></button>
-      <button class="tool-btn" onclick="insertSyntax('`', '`')" title="行內程式碼"><i class="fa-solid fa-code"></i></button>
-      <button class="tool-btn" onclick="insertSyntax('```\n', '\n```')" title="程式碼區塊 (Ctrl+K)"><i class="fa-solid fa-file-code"></i></button>
-      <button class="tool-btn" onclick="insertSyntax('\\[\n', '\n\\]')" title="LaTeX 數學公式區塊 (Ctrl+M)"><i class="fa-solid fa-square-root-variable"></i></button>
+
+      <!-- Chirpy 4 Prompts Buttons -->
+      <button class="tool-btn" onclick="insertChirpyPrompt('tip')" title="插入綠色技巧提示框 (prompt-tip)">
+        <i class="fa-solid fa-lightbulb" style="color: #10b981;"></i>
+      </button>
+      <button class="tool-btn" onclick="insertChirpyPrompt('info')" title="插入藍色資訊框 (prompt-info)">
+        <i class="fa-solid fa-circle-info" style="color: #3b82f6;"></i>
+      </button>
+      <button class="tool-btn" onclick="insertChirpyPrompt('warning')" title="插入黃色警告框 (prompt-warning)">
+        <i class="fa-solid fa-triangle-exclamation" style="color: #f59e0b;"></i>
+      </button>
+      <button class="tool-btn" onclick="insertChirpyPrompt('danger')" title="插入紅色危險提示框 (prompt-danger)">
+        <i class="fa-solid fa-skull-crossbones" style="color: #ef4444;"></i>
+      </button>
       <div class="tool-sep"></div>
-      <button class="tool-btn" onclick="insertSyntax('- ', '')" title="無序清單"><i class="fa-solid fa-list-ul"></i></button>
+
+      <!-- Code, Mermaid, Table, Image -->
+      <button class="tool-btn" onclick="insertSyntax('```python\n', '\n```')" title="程式碼區塊 (Ctrl+K)"><i class="fa-solid fa-file-code"></i></button>
+      <button class="tool-btn" onclick="insertMermaidTemplate()" title="插入 Mermaid 流程圖"><i class="fa-solid fa-diagram-project" style="color: #38bdf8;"></i></button>
+      <button class="tool-btn" onclick="insertTable()" title="插入表格"><i class="fa-solid fa-table"></i></button>
+      <button class="tool-btn" onclick="openImageUploadDialog()" title="上傳圖片 (支援直接 Ctrl+V 貼上)"><i class="fa-regular fa-image"></i></button>
       <button class="tool-btn" onclick="insertSyntax('[連結文字](', 'https://)')" title="超連結"><i class="fa-solid fa-link"></i></button>
-      <button class="tool-btn" onclick="openImageUploadDialog()" title="插入/上傳圖片 (亦支援直接 Ctrl+V 貼上截圖)"><i class="fa-regular fa-image"></i></button>
-      <button class="tool-btn" onclick="insertTable()" title="表格"><i class="fa-solid fa-table"></i></button>
-      <button class="tool-btn" onclick="insertSyntax('> [!TIP]\n> ', '')" title="提示框 (Prompt Tip)"><i class="fa-regular fa-lightbulb"></i></button>
+
+      <div style="flex: 1;"></div>
+
+      <!-- Editor Features Toggles: Intellisense, Sync Scroll, Outline, View Modes -->
+      <button class="tool-btn active" id="btnIntellisenseToggle" onclick="toggleIntellisense()" title="開啟/關閉 IDE 自動語法推薦 (輸入 \ 或 / 觸發，或按 Ctrl+Space)">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> 語法推薦
+      </button>
+
+      <button class="tool-btn active" id="btnSyncScroll" onclick="toggleSyncScroll()" title="開啟/關閉左右雙欄同步滾動">
+        <i class="fa-solid fa-link"></i> 同步滾動
+      </button>
+
+      <button class="tool-btn" id="btnOutlineToggle" onclick="toggleOutlineDrawer()" title="顯示/隱藏文章標題大綱導航">
+        <i class="fa-solid fa-list-check"></i> 大綱
+      </button>
+
+      <div class="view-switch">
+        <button class="view-btn active" id="viewDual" onclick="setViewMode('dual')" title="雙欄對照模式">◫ 雙欄</button>
+        <button class="view-btn" id="viewEditor" onclick="setViewMode('editor')" title="專注純寫作模式">✍️ 寫作</button>
+        <button class="view-btn" id="viewPreview" onclick="setViewMode('preview')" title="全寬沉浸預覽模式">📖 預覽</button>
+      </div>
+
       <input type="file" id="imageFileInput" accept="image/*" style="display: none;" onchange="handleFileInput(event)">
+
+      <!-- Floating Math Palette Popover -->
+      <div class="floating-palette" id="mathPalette">
+        <div class="palette-tabs">
+          <button class="palette-tab active" onclick="switchMathTab('struct', this)">常用結構</button>
+          <button class="palette-tab" onclick="switchMathTab('matrix', this)">矩陣 / 方程組</button>
+          <button class="palette-tab" onclick="switchMathTab('calc', this)">微積分 / 算子</button>
+          <button class="palette-tab" onclick="switchMathTab('greek', this)">希臘字母 / 符號</button>
+          <button class="sidebar-btn" style="margin-left: auto; font-size: 0.8rem;" onclick="toggleMathPalette()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="palette-grid" id="mathPaletteGrid"></div>
+      </div>
     </div>
 
     <!-- Dual Workspace -->
-    <div class="workspace">
-      <!-- Editor -->
+    <div class="workspace" id="workspace">
+      <!-- Editor Pane -->
       <div class="pane editor-pane">
-        <textarea id="editorTextarea" class="editor-textarea" placeholder="在此輸入 Markdown 內容... (支援直接 Ctrl+V 貼上截圖自動上傳)" oninput="onContentChange()"></textarea>
+        <div id="caretMirror"></div>
+        <textarea id="editorTextarea" class="editor-textarea" placeholder="在此輸入 Markdown 內容...
+💡 提示：
+  • 輸入 \ 可自動觸發 LaTeX 語法推薦（如 \frac, \bmatrix, \alpha）
+  • 輸入 / 可觸發區塊快速指令（如 /math, /matrix, /tip, /mermaid）
+  • 直接按 Ctrl+V 可將剪貼簿截圖自動上傳並插入" oninput="onContentChange()"></textarea>
       </div>
 
-      <!-- Chirpy Preview -->
+      <!-- Chirpy Preview Pane -->
       <div class="pane preview-pane" id="previewPane">
         <div class="chirpy-content" id="previewContent"></div>
       </div>
+
+      <!-- Outline TOC Drawer -->
+      <aside class="outline-drawer" id="outlineDrawer">
+        <div class="outline-header">
+          <span><i class="fa-solid fa-bars-staggered" style="margin-right: 6px;"></i> 文章大綱導航</span>
+          <button class="sidebar-btn" onclick="toggleOutlineDrawer()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="outline-list" id="outlineList"></div>
+      </aside>
     </div>
   </main>
+
+  <!-- IDE Intellisense Floating Popup -->
+  <div class="intellisense-popup" id="intellisensePopup">
+    <div class="intellisense-header">
+      <span><i class="fa-solid fa-bolt" style="color: #f59e0b;"></i> 智能語法推薦</span>
+      <span>↑↓ 選擇 · Tab/Enter 插入 · Esc 關閉</span>
+    </div>
+    <div class="intellisense-list" id="intellisenseList"></div>
+  </div>
+
+  <!-- Media Library Modal -->
+  <div class="modal-overlay" id="mediaModal">
+    <div class="modal-card wide">
+      <div class="modal-header">
+        <h3><i class="fa-regular fa-images" style="margin-right: 6px;"></i> 圖片媒體庫管理 (`assets/img/posts/`)</h3>
+        <button class="sidebar-btn" onclick="closeMediaLibrary()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 10px;">
+        <div style="display: flex; gap: 6px;">
+          <button class="btn" id="mediaFilterAll" onclick="filterMediaList('all')">全部圖片</button>
+          <button class="btn" id="mediaFilterUnused" onclick="filterMediaList('unused')">⚠️ 僅顯示未引用圖片</button>
+        </div>
+        <button class="btn btn-publish" onclick="document.getElementById('imageFileInput').click()">
+          <i class="fa-solid fa-upload"></i> 上傳新圖片
+        </button>
+      </div>
+      <div class="media-grid" id="mediaGrid"></div>
+    </div>
+  </div>
 
   <!-- Settings Modal (GitHub & Keybindings) -->
   <div class="modal-overlay" id="settingsModal">
@@ -1044,7 +1593,6 @@
         <button class="sidebar-btn" onclick="closeSettings()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <!-- Modal Tabs -->
       <div class="modal-tabs">
         <button class="modal-tab-btn active" id="modalTabGithub" onclick="switchSettingsTab('github')">
           <i class="fa-brands fa-github"></i> GitHub 發布設定
@@ -1063,36 +1611,34 @@
         <div class="meta-field">
           <label>Personal Access Token (PAT)</label>
           <input type="password" id="cfgToken" placeholder="ghp_xxxxxxxxxxxx">
-          <span style="font-size: 0.73rem; color: var(--text-muted-color); margin-top: 4px;">
-            Token 僅儲存在本機 `admin/config.json`（已受 `.gitignore` 保護，絕不上傳公開）。
+          <span style="font-size: 0.72rem; color: var(--text-muted-color); margin-top: 3px;">
+            Token 僅儲存在本機 `admin/config.json`（已受 `.gitignore` 保護，絕不外洩）。
           </span>
         </div>
         <div class="log-box" id="gitStatusBox">正在讀取 Git 狀態...</div>
-        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
           <button class="btn" onclick="closeSettings()">取消</button>
-          <button class="btn btn-publish" onclick="saveGithubSettings()">儲存 GitHub 設定</button>
+          <button class="btn btn-publish" onclick="saveGithubSettings()">儲存設定</button>
         </div>
       </div>
 
       <!-- Settings Panel 2: Shortcuts -->
-      <div id="settingsPanelShortcuts" style="display: none; flex-direction: column; gap: 12px;">
-        <div style="font-size: 0.8rem; color: var(--text-muted-color); margin-bottom: 6px;">
-          點擊下方按鍵組合即可進入錄製模式，按下鍵盤上的組合鍵（如 Ctrl + S）即可自訂。
+      <div id="settingsPanelShortcuts" style="display: none; flex-direction: column; gap: 10px;">
+        <div style="font-size: 0.78rem; color: var(--text-muted-color);">
+          點擊下方按鍵組合即可進入錄製模式，按下鍵盤上的組合鍵即可自訂。
         </div>
         <div style="max-height: 280px; overflow-y: auto;">
           <table class="shortcut-table">
             <thead>
-              <tr style="text-align: left; color: var(--text-muted-color); font-size: 0.75rem;">
-                <th style="padding-bottom: 6px;">功能操作</th>
-                <th style="padding-bottom: 6px;">綁定按鍵</th>
+              <tr style="text-align: left; color: var(--text-muted-color); font-size: 0.74rem;">
+                <th>功能操作</th>
+                <th>綁定按鍵</th>
               </tr>
             </thead>
-            <tbody id="shortcutTableBody">
-              <!-- Rendered by JS -->
-            </tbody>
+            <tbody id="shortcutTableBody"></tbody>
           </table>
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+        <div style="display: flex; justify-content: space-between; margin-top: 8px;">
           <button class="btn" onclick="resetDefaultShortcuts()">恢復預設值</button>
           <button class="btn btn-publish" onclick="closeSettings()">完成</button>
         </div>
@@ -1102,16 +1648,167 @@
 
   <script>
     // -----------------------------------------------------------------
-    // State Management
+    // Core State
     // -----------------------------------------------------------------
     let posts = [];
     let currentPost = null;
-    let currentFilter = 'all'; // 'all' | 'published' | 'drafts'
+    let currentFilter = 'all';
     let isJekyllRunning = false;
     let hasUnsavedChanges = false;
-    let autosaveTimer = null;
+    let syncScrollEnabled = true;
+    let intellisenseEnabled = true;
+    let isSelectingCover = false;
+    let mediaItems = [];
+    let mediaFilterMode = 'all';
 
-    // Default Shortcuts definition
+    // -----------------------------------------------------------------
+    // IDE Intellisense Dictionary (LaTeX, Slash Snippets, Chirpy, Code)
+    // Use `|` to mark where the cursor should land after insertion!
+    // -----------------------------------------------------------------
+    const INTELLISENSE_ITEMS = [
+      // --- Slash Block Snippets (/...) ---
+      { trigger: '/math', kind: 'Snippet', kindClass: 'kind-snip', label: '/math', desc: 'LaTeX 獨立公式區塊 \\[ ... \\]', insert: '\\[\n  |\n\\]' },
+      { trigger: '/inline', kind: 'Snippet', kindClass: 'kind-snip', label: '/inline', desc: 'LaTeX 行內公式 \\( ... \\)', insert: '\\( | \\)' },
+      { trigger: '/matrix', kind: 'Snippet', kindClass: 'kind-snip', label: '/matrix', desc: '3×3 方括號矩陣 bmatrix', insert: '\\[\n\\begin{bmatrix}\n  a_{11} & a_{12} & a_{13} \\\\\n  a_{21} & a_{22} & a_{23} \\\\\n  a_{31} & a_{32} & a_{33}\n\\end{bmatrix}\n\\]' },
+      { trigger: '/align', kind: 'Snippet', kindClass: 'kind-snip', label: '/align', desc: '多行等號對齊推導 aligned', insert: '\\[\n\\begin{aligned}\n  f(x) &= | \\\\\n  &= \n\\end{aligned}\n\\]' },
+      { trigger: '/cases', kind: 'Snippet', kindClass: 'kind-snip', label: '/cases', desc: '分段條件函數 cases', insert: '\\[\nf(x) = \\begin{cases}\n  | & \\text{if } x > 0 \\\\\n  0 & \\text{otherwise}\n\\end{cases}\n\\]' },
+      { trigger: '/tip', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '/tip', desc: '🟢 Chirpy 技巧提示框 (prompt-tip)', insert: '> |\n{: .prompt-tip }' },
+      { trigger: '/info', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '/info', desc: '🔵 Chirpy 資訊說明框 (prompt-info)', insert: '> |\n{: .prompt-info }' },
+      { trigger: '/warning', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '/warning', desc: '🟡 Chirpy 注意警告框 (prompt-warning)', insert: '> |\n{: .prompt-warning }' },
+      { trigger: '/danger', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '/danger', desc: '🔴 Chirpy 危險警告框 (prompt-danger)', insert: '> |\n{: .prompt-danger }' },
+      { trigger: '/mermaid', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '/mermaid', desc: '📊 Mermaid 流程圖區塊', insert: '```mermaid\nflowchart LR\n  A["起點"] --> B{"判斷條件"}\n  B -- 是 --> C["結果 1"]\n  B -- 否 --> D["結果 2"]\n```' },
+      { trigger: '/sequence', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '/sequence', desc: '📊 Mermaid 時序圖區塊', insert: '```mermaid\nsequenceDiagram\n  participant A as 客戶端\n  participant B as 伺服器\n  A->>B: 發送請求\n  B-->>A: 返回結果\n```' },
+      { trigger: '/table', kind: 'Snippet', kindClass: 'kind-snip', label: '/table', desc: '插入 3×3 Markdown 表格', insert: '| 欄位 1 | 欄位 2 | 欄位 3 |\n| :--- | :--- | :--- |\n| | | |\n| | | |' },
+      { trigger: '/code', kind: 'Code', kindClass: 'kind-code', label: '/code', desc: '插入程式碼區塊', insert: '```python\n|\n```' },
+      { trigger: '/img', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '/img', desc: '插入帶寬度與陰影的 Chirpy 圖片', insert: '![圖片說明](|){: width="600" .shadow }' },
+      { trigger: '/fold', kind: 'Snippet', kindClass: 'kind-snip', label: '/fold', desc: '可折疊內容區塊 <details>', insert: '<details>\n<summary>點擊展開詳細推導</summary>\n\n|\n\n</details>' },
+
+      // --- LaTeX Commands (\...) ---
+      { trigger: '\\frac', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\frac{a}{b}', desc: '分式 a/b', insert: '\\frac{|}{}' },
+      { trigger: '\\sqrt', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\sqrt{x}', desc: '平方根 √x', insert: '\\sqrt{|}' },
+      { trigger: '\\sum', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\sum_{i=1}^{n}', desc: '連加求和 Σ', insert: '\\sum_{i=1}^{n} |' },
+      { trigger: '\\prod', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\prod_{i=1}^{n}', desc: '連乘積 Π', insert: '\\prod_{i=1}^{n} |' },
+      { trigger: '\\int', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\int_{a}^{b}', desc: '定積分 ∫', insert: '\\int_{a}^{b} | \\,dx' },
+      { trigger: '\\oint', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\oint', desc: '環路積分 ∮', insert: '\\oint |' },
+      { trigger: '\\lim', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\lim_{x \\to \\infty}', desc: '極限 lim', insert: '\\lim_{x \\to \\infty} |' },
+      { trigger: '\\partial', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\partial', desc: '偏微分符號 ∂', insert: '\\partial |' },
+      { trigger: '\\pdiff', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\frac{\\partial y}{\\partial x}', desc: '偏導數分式 ∂y/∂x', insert: '\\frac{\\partial |}{\\partial x}' },
+      { trigger: '\\bmatrix', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\begin{bmatrix}', desc: '方括號矩陣 [ ]', insert: '\\begin{bmatrix}\n  | & \\\\\n  & \n\\end{bmatrix}' },
+      { trigger: '\\pmatrix', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\begin{pmatrix}', desc: '圓括號矩陣 ( )', insert: '\\begin{pmatrix}\n  | & \\\\\n  & \n\\end{pmatrix}' },
+      { trigger: '\\vmatrix', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\begin{vmatrix}', desc: '行列式 | |', insert: '\\begin{vmatrix}\n  | & \\\\\n  & \n\\end{vmatrix}' },
+      { trigger: '\\aligned', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\begin{aligned}', desc: '多行公式對齊環境', insert: '\\begin{aligned}\n  | &= \\\\\n  &= \n\\end{aligned}' },
+      { trigger: '\\cases', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\begin{cases}', desc: '分段條件聯立環境', insert: '\\begin{cases}\n  | \\\\\n  \n\\end{cases}' },
+      { trigger: '\\tag', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\tag{1}', desc: '公式右側編號 (1)', insert: '\\tag{|}' },
+      { trigger: '\\text', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\text{...}', desc: '公式內純文字', insert: '\\text{|}' },
+      { trigger: '\\mathbf', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\mathbf{v}', desc: '粗體向量/矩陣字體', insert: '\\mathbf{|}' },
+      { trigger: '\\mathcal', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\mathcal{L}', desc: '花體字 (如拉氏轉換)', insert: '\\mathcal{|}' },
+      { trigger: '\\mathbb', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\mathbb{R}', desc: '空心粗體 (實數集 ℝ)', insert: '\\mathbb{|}' },
+      { trigger: '\\vec', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\vec{v}', desc: '向量頂部箭頭 v⃗', insert: '\\vec{|}' },
+      { trigger: '\\hat', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\hat{u}', desc: '單位向量帽號 û', insert: '\\hat{|}' },
+      { trigger: '\\overline', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\overline{AB}', desc: '頂部橫線 (線段/共軛)', insert: '\\overline{|}' },
+      { trigger: '\\left(', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\left( ... \\right)', desc: '自適應高度圓括號', insert: '\\left( | \\right)' },
+      { trigger: '\\left[', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\left[ ... \\right]', desc: '自適應高度方括號', insert: '\\left[ | \\right]' },
+      { trigger: '\\alpha', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\alpha', desc: '希臘字母 α', insert: '\\alpha' },
+      { trigger: '\\beta', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\beta', desc: '希臘字母 β', insert: '\\beta' },
+      { trigger: '\\gamma', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\gamma', desc: '希臘字母 γ', insert: '\\gamma' },
+      { trigger: '\\delta', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\delta', desc: '希臘字母 δ', insert: '\\delta' },
+      { trigger: '\\Delta', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\Delta', desc: '增量 / 判別式 Δ', insert: '\\Delta' },
+      { trigger: '\\epsilon', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\epsilon', desc: '希臘字母 ϵ', insert: '\\epsilon' },
+      { trigger: '\\theta', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\theta', desc: '角度 θ', insert: '\\theta' },
+      { trigger: '\\lambda', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\lambda', desc: '特徵值 / 波長 λ', insert: '\\lambda' },
+      { trigger: '\\mu', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\mu', desc: '期望值 / 摩擦係數 μ', insert: '\\mu' },
+      { trigger: '\\pi', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\pi', desc: '圓周率 π', insert: '\\pi' },
+      { trigger: '\\rho', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\rho', desc: '密度 / 曲率半徑 ρ', insert: '\\rho' },
+      { trigger: '\\sigma', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\sigma', desc: '標準差 / 應力 σ', insert: '\\sigma' },
+      { trigger: '\\phi', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\phi', desc: '角度 / 相位 ϕ', insert: '\\phi' },
+      { trigger: '\\omega', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\omega', desc: '角頻率 ω', insert: '\\omega' },
+      { trigger: '\\Omega', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\Omega', desc: '歐姆 / 定義域 Ω', insert: '\\Omega' },
+      { trigger: '\\nabla', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\nabla', desc: '梯度算子 ∇', insert: '\\nabla' },
+      { trigger: '\\infty', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\infty', desc: '無窮大 ∞', insert: '\\infty' },
+      { trigger: '\\approx', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\approx', desc: '約等於 ≈', insert: '\\approx' },
+      { trigger: '\\equiv', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\equiv', desc: '恆等於 ≡', insert: '\\equiv' },
+      { trigger: '\\neq', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\neq', desc: '不等於 ≠', insert: '\\neq' },
+      { trigger: '\\leq', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\leq', desc: '小於等於 ≤', insert: '\\leq' },
+      { trigger: '\\geq', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\geq', desc: '大於等於 ≥', insert: '\\geq' },
+      { trigger: '\\times', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\times', desc: '叉乘 / 乘號 ×', insert: '\\times' },
+      { trigger: '\\cdot', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\cdot', desc: '點乘 ·', insert: '\\cdot' },
+      { trigger: '\\pm', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\pm', desc: '正負號 ±', insert: '\\pm' },
+      { trigger: '\\in', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\in', desc: '屬於 ∈', insert: '\\in' },
+      { trigger: '\\forall', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\forall', desc: '對所有 ∀', insert: '\\forall' },
+      { trigger: '\\exists', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\exists', desc: '存在 ∃', insert: '\\exists' },
+      { trigger: '\\rightarrow', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\rightarrow', desc: '右箭頭 →', insert: '\\rightarrow' },
+      { trigger: '\\Rightarrow', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\Rightarrow', desc: '推導出 ⇒', insert: '\\Rightarrow' },
+      { trigger: '\\iff', kind: 'LaTeX', kindClass: 'kind-latex', label: '\\iff', desc: '當且僅當 ⟺', insert: '\\iff' },
+
+      // --- Chirpy Kramdown Modifiers ({:...) ---
+      { trigger: '{:tip', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '{: .prompt-tip }', desc: '套用綠色提示框樣式', insert: '{: .prompt-tip }' },
+      { trigger: '{:info', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '{: .prompt-info }', desc: '套用藍色資訊框樣式', insert: '{: .prompt-info }' },
+      { trigger: '{:warning', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '{: .prompt-warning }', desc: '套用黃色警告框樣式', insert: '{: .prompt-warning }' },
+      { trigger: '{:danger', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '{: .prompt-danger }', desc: '套用紅色危險框樣式', insert: '{: .prompt-danger }' },
+      { trigger: '{:shadow', kind: 'Chirpy', kindClass: 'kind-chirpy', label: '{: .w-75 .shadow }', desc: '圖片 75% 寬度 + 立體陰影', insert: '{: .w-75 .shadow }' }
+    ];
+
+    // Math Palette Categories for Toolbar Click
+    const MATH_PALETTE_DATA = {
+      struct: [
+        { sym: 'a/b', lbl: '分式 \\frac', tpl: '\\frac{|}{}' },
+        { sym: '√x', lbl: '根號 \\sqrt', tpl: '\\sqrt{|}' },
+        { sym: 'xⁿ', lbl: '上標次方', tpl: '^{|}' },
+        { sym: 'xᵢ', lbl: '下標索引', tpl: '_{|}' },
+        { sym: '( )', lbl: '自適應圓括號', tpl: '\\left( | \\right)' },
+        { sym: '[ ]', lbl: '自適應方括號', tpl: '\\left[ | \\right]' },
+        { sym: 'v⃗', lbl: '向量箭頭 \\vec', tpl: '\\vec{|}' },
+        { sym: 'û', lbl: '單位向量 \\hat', tpl: '\\hat{|}' },
+        { sym: '𝐀', lbl: '粗體矩陣 \\mathbf', tpl: '\\mathbf{|}' },
+        { sym: '(1.1)', lbl: '公式編號 \\tag', tpl: '\\tag{|}' },
+        { sym: 'text', lbl: '公式內文字', tpl: '\\text{|}' },
+        { sym: 'ℝ', lbl: '實數集 \\mathbb', tpl: '\\mathbb{R}' }
+      ],
+      matrix: [
+        { sym: '[ 2×2 ]', lbl: '2×2 方括號矩陣', tpl: '\\begin{bmatrix}\n  | & \\\\\n  & \n\\end{bmatrix}' },
+        { sym: '[ 3×3 ]', lbl: '3×3 方括號矩陣', tpl: '\\begin{bmatrix}\n  a_{11} & a_{12} & a_{13} \\\\\n  a_{21} & a_{22} & a_{23} \\\\\n  a_{31} & a_{32} & a_{33}\n\\end{bmatrix}' },
+        { sym: '( 2×2 )', lbl: '2×2 圓括號矩陣', tpl: '\\begin{pmatrix}\n  | & \\\\\n  & \n\\end{pmatrix}' },
+        { sym: '| A |', lbl: '行列式 vmatrix', tpl: '\\begin{vmatrix}\n  | & \\\\\n  & \n\\end{vmatrix}' },
+        { sym: 'aligned', lbl: '多行等號對齊', tpl: '\\begin{aligned}\n  | &= \\\\\n  &= \n\\end{aligned}' },
+        { sym: 'cases', lbl: '分段函數 / 聯立', tpl: '\\begin{cases}\n  | & \\text{if } \\\\\n  & \\text{otherwise}\n\\end{cases}' },
+        { sym: '[x y z]ᵀ', lbl: '行向量轉置', tpl: '\\begin{bmatrix} x & y & z \\end{bmatrix}^{T}' },
+        { sym: '⋯ ⋮ ⋱', lbl: '矩陣省略號', tpl: '\\cdots & \\vdots & \\ddots' }
+      ],
+      calc: [
+        { sym: '∑', lbl: '求和 \\sum', tpl: '\\sum_{i=1}^{n} |' },
+        { sym: '∏', lbl: '連乘 \\prod', tpl: '\\prod_{i=1}^{n} |' },
+        { sym: '∫', lbl: '定積分 \\int', tpl: '\\int_{a}^{b} | \\,dx' },
+        { sym: '∬', lbl: '雙重積分 \\iint', tpl: '\\iint_{D} | \\,dx\\,dy' },
+        { sym: '∮', lbl: '環路積分 \\oint', tpl: '\\oint_{C} |' },
+        { sym: '∂/∂x', lbl: '偏微分分式', tpl: '\\frac{\\partial |}{\\partial x}' },
+        { sym: 'd/dx', lbl: '常微分分式', tpl: '\\frac{d |}{dx}' },
+        { sym: 'lim', lbl: '極限 \\lim', tpl: '\\lim_{x \\to \\infty} |' },
+        { sym: '∇', lbl: '梯度 \\nabla', tpl: '\\nabla |' },
+        { sym: '∂', lbl: '偏導符號', tpl: '\\partial ' },
+        { sym: '∞', lbl: '無窮大', tpl: '\\infty ' },
+        { sym: 'Δ', lbl: '變化量 \\Delta', tpl: '\\Delta ' }
+      ],
+      greek: [
+        { sym: 'α', lbl: '\\alpha', tpl: '\\alpha ' },
+        { sym: 'β', lbl: '\\beta', tpl: '\\beta ' },
+        { sym: 'γ', lbl: '\\gamma', tpl: '\\gamma ' },
+        { sym: 'θ', lbl: '\\theta', tpl: '\\theta ' },
+        { sym: 'λ', lbl: '\\lambda', tpl: '\\lambda ' },
+        { sym: 'μ', lbl: '\\mu', tpl: '\\mu ' },
+        { sym: 'π', lbl: '\\pi', tpl: '\\pi ' },
+        { sym: 'σ', lbl: '\\sigma', tpl: '\\sigma ' },
+        { sym: 'ϕ', lbl: '\\phi', tpl: '\\phi ' },
+        { sym: 'ω', lbl: '\\omega', tpl: '\\omega ' },
+        { sym: '≈', lbl: '\\approx', tpl: '\\approx ' },
+        { sym: '≡', lbl: '\\equiv', tpl: '\\equiv ' },
+        { sym: '≠', lbl: '\\neq', tpl: '\\neq ' },
+        { sym: '≤', lbl: '\\leq', tpl: '\\leq ' },
+        { sym: '≥', lbl: '\\geq', tpl: '\\geq ' },
+        { sym: '⇒', lbl: '\\Rightarrow', tpl: '\\Rightarrow ' }
+      ]
+    };
+
+    // Default Shortcuts
     const DEFAULT_SHORTCUTS = {
       save: { name: '儲存文章 / 草稿', key: 's', ctrl: true, alt: false, shift: false },
       publish: { name: '推送至 GitHub', key: 'p', ctrl: true, alt: false, shift: true },
@@ -1126,9 +1823,23 @@
     let userShortcuts = { ...DEFAULT_SHORTCUTS };
     let recordingAction = null;
 
+    // Intellisense runtime state
+    let activeMatches = [];
+    let selectedMatchIdx = 0;
+    let currentTriggerRange = null; // { start, end }
+
     // -----------------------------------------------------------------
-    // Theme Management
+    // Theme & Mermaid Init
     // -----------------------------------------------------------------
+    const savedTheme = localStorage.getItem('dlib-admin-theme') || 'dark';
+    document.documentElement.setAttribute('data-mode', savedTheme);
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: savedTheme === 'dark' ? 'dark' : 'default',
+      securityLevel: 'loose'
+    });
+
     function toggleThemeMode() {
       const html = document.documentElement;
       const current = html.getAttribute('data-mode') || 'dark';
@@ -1137,17 +1848,14 @@
       localStorage.setItem('dlib-admin-theme', next);
       
       const themeLink = document.getElementById('highlightTheme');
-      if (next === 'light') {
-        themeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css';
-      } else {
-        themeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';
-      }
+      themeLink.href = next === 'light'
+        ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css'
+        : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';
+
+      mermaid.initialize({ startOnLoad: false, theme: next === 'dark' ? 'dark' : 'default' });
+      renderPreview();
     }
 
-    const savedTheme = localStorage.getItem('dlib-admin-theme') || 'dark';
-    document.documentElement.setAttribute('data-mode', savedTheme);
-
-    // Marked.js config
     marked.setOptions({
       highlight: function(code, lang) {
         if (lang && hljs.getLanguage(lang)) {
@@ -1165,16 +1873,333 @@
       loadSavedShortcuts();
       setupGlobalKeybindings();
       setupPasteHandler();
+      setupSyncScrolling();
+      setupIntellisenseEvents();
+      switchMathTab('struct');
 
       await loadPosts();
       await checkPreviewStatus();
+      await checkActionsStatus();
 
-      // Start autosave ticker (every 5 seconds)
-      autosaveTimer = setInterval(tickAutosave, 5000);
+      setInterval(tickAutosave, 5000);
+      setInterval(checkActionsStatus, 15000);
     });
 
     // -----------------------------------------------------------------
-    // Post Loading & Filtering
+    // 1. Synchronized Split-Pane Scrolling
+    // -----------------------------------------------------------------
+    function setupSyncScrolling() {
+      const editor = document.getElementById('editorTextarea');
+      const preview = document.getElementById('previewPane');
+      let syncingFromEditor = false;
+      let syncingFromPreview = false;
+
+      editor.addEventListener('scroll', () => {
+        closeIntellisense();
+        if (!syncScrollEnabled || syncingFromPreview) return;
+        syncingFromEditor = true;
+        const percentage = editor.scrollTop / Math.max(1, editor.scrollHeight - editor.clientHeight);
+        preview.scrollTop = percentage * (preview.scrollHeight - preview.clientHeight);
+        setTimeout(() => { syncingFromEditor = false; }, 40);
+      });
+
+      preview.addEventListener('scroll', () => {
+        if (!syncScrollEnabled || syncingFromEditor) return;
+        syncingFromPreview = true;
+        const percentage = preview.scrollTop / Math.max(1, preview.scrollHeight - preview.clientHeight);
+        editor.scrollTop = percentage * (editor.scrollHeight - editor.clientHeight);
+        setTimeout(() => { syncingFromPreview = false; }, 40);
+      });
+    }
+
+    function toggleSyncScroll() {
+      syncScrollEnabled = !syncScrollEnabled;
+      document.getElementById('btnSyncScroll').classList.toggle('active', syncScrollEnabled);
+    }
+
+    // -----------------------------------------------------------------
+    // 2. IDE Intellisense / Auto-Completion System
+    // -----------------------------------------------------------------
+    function toggleIntellisense() {
+      intellisenseEnabled = !intellisenseEnabled;
+      document.getElementById('btnIntellisenseToggle').classList.toggle('active', intellisenseEnabled);
+      if (!intellisenseEnabled) closeIntellisense();
+    }
+
+    function setupIntellisenseEvents() {
+      const textarea = document.getElementById('editorTextarea');
+
+      textarea.addEventListener('input', () => {
+        if (!intellisenseEnabled) return;
+        evaluateIntellisenseTrigger();
+      });
+
+      textarea.addEventListener('keydown', (e) => {
+        const popup = document.getElementById('intellisensePopup');
+        const isOpen = popup.classList.contains('active');
+
+        // Manual summon with Ctrl + Space
+        if ((e.ctrlKey || e.metaKey) && e.code === 'Space') {
+          e.preventDefault();
+          evaluateIntellisenseTrigger(true);
+          return;
+        }
+
+        if (!isOpen) return;
+
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          selectedMatchIdx = (selectedMatchIdx + 1) % activeMatches.length;
+          renderIntellisenseList();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          selectedMatchIdx = (selectedMatchIdx - 1 + activeMatches.length) % activeMatches.length;
+          renderIntellisenseList();
+        } else if (e.key === 'Enter' || e.key === 'Tab') {
+          e.preventDefault();
+          applyIntellisenseItem(activeMatches[selectedMatchIdx]);
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          closeIntellisense();
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('#intellisensePopup')) {
+          closeIntellisense();
+        }
+        if (!e.target.closest('#mathPalette') && !e.target.closest('#btnMathPalette')) {
+          document.getElementById('mathPalette').classList.remove('active');
+        }
+      });
+    }
+
+    function evaluateIntellisenseTrigger(forceAll = false) {
+      const textarea = document.getElementById('editorTextarea');
+      const pos = textarea.selectionStart;
+      const textBefore = textarea.value.slice(0, pos);
+
+      // Match `\command`, `/command` (at start of line or after whitespace), or `{:modifier`
+      const match = textBefore.match(/(\\[a-zA-Z0-9(\[]*|(?:\s|^)\/[a-zA-Z0-9]*|\{:[a-zA-Z0-9]*)$/);
+
+      if (!match && !forceAll) {
+        closeIntellisense();
+        return;
+      }
+
+      let token = match ? match[0].trimStart() : '';
+      const tokenStart = match ? pos - token.length : pos;
+
+      activeMatches = INTELLISENSE_ITEMS.filter(item => {
+        if (!token) return true;
+        return item.trigger.toLowerCase().startsWith(token.toLowerCase()) ||
+               item.label.toLowerCase().includes(token.toLowerCase());
+      }).slice(0, 12);
+
+      if (activeMatches.length === 0) {
+        closeIntellisense();
+        return;
+      }
+
+      currentTriggerRange = { start: tokenStart, end: pos };
+      selectedMatchIdx = 0;
+      positionIntellisensePopup(textarea, pos);
+      renderIntellisenseList();
+      document.getElementById('intellisensePopup').classList.add('active');
+    }
+
+    function positionIntellisensePopup(textarea, caretPos) {
+      const mirror = document.getElementById('caretMirror');
+      const popup = document.getElementById('intellisensePopup');
+      mirror.style.width = textarea.clientWidth + 'px';
+
+      const textBefore = escapeHtml(textarea.value.substring(0, caretPos));
+      mirror.innerHTML = textBefore + '<span id="caretMarker">|</span>';
+
+      const marker = document.getElementById('caretMarker');
+      const taRect = textarea.getBoundingClientRect();
+      const topOffset = marker.offsetTop - textarea.scrollTop;
+      const leftOffset = marker.offsetLeft;
+
+      let screenTop = taRect.top + topOffset + 26;
+      let screenLeft = taRect.left + Math.min(leftOffset, textarea.clientWidth - 350);
+
+      if (screenTop + 260 > window.innerHeight) {
+        screenTop = taRect.top + topOffset - 260;
+      }
+
+      popup.style.top = `${Math.max(10, screenTop)}px`;
+      popup.style.left = `${Math.max(10, screenLeft)}px`;
+    }
+
+    function renderIntellisenseList() {
+      const listEl = document.getElementById('intellisenseList');
+      listEl.innerHTML = activeMatches.map((item, idx) => `
+        <div class="intellisense-item ${idx === selectedMatchIdx ? 'selected' : ''}"
+             onmousedown="event.preventDefault(); applyIntellisenseItem(activeMatches[${idx}])">
+          <div class="intellisense-left">
+            <span class="intellisense-kind ${item.kindClass}">${item.kind}</span>
+            <span class="intellisense-cmd">${escapeHtml(item.label)}</span>
+          </div>
+          <span class="intellisense-desc">${escapeHtml(item.desc)}</span>
+        </div>
+      `).join('');
+
+      const selectedEl = listEl.querySelector('.intellisense-item.selected');
+      if (selectedEl) selectedEl.scrollIntoView({ block: 'nearest' });
+    }
+
+    function applyIntellisenseItem(item) {
+      if (!item || !currentTriggerRange) return;
+      const textarea = document.getElementById('editorTextarea');
+      const before = textarea.value.slice(0, currentTriggerRange.start);
+      const after = textarea.value.slice(currentTriggerRange.end);
+
+      const cursorMarkerIdx = item.insert.indexOf('|');
+      const cleanInsert = item.insert.replace('|', '');
+
+      textarea.value = before + cleanInsert + after;
+      textarea.focus();
+
+      const newCursorPos = cursorMarkerIdx !== -1
+        ? currentTriggerRange.start + cursorMarkerIdx
+        : currentTriggerRange.start + cleanInsert.length;
+
+      textarea.selectionStart = newCursorPos;
+      textarea.selectionEnd = newCursorPos;
+
+      closeIntellisense();
+      onContentChange();
+    }
+
+    function closeIntellisense() {
+      document.getElementById('intellisensePopup').classList.remove('active');
+      currentTriggerRange = null;
+    }
+
+    // -----------------------------------------------------------------
+    // 3. Math Symbols & Matrix Palette
+    // -----------------------------------------------------------------
+    function toggleMathPalette() {
+      document.getElementById('mathPalette').classList.toggle('active');
+    }
+
+    function switchMathTab(tabKey, btnEl) {
+      if (btnEl) {
+        document.querySelectorAll('.palette-tab').forEach(b => b.classList.remove('active'));
+        btnEl.classList.add('active');
+      }
+      const grid = document.getElementById('mathPaletteGrid');
+      const items = MATH_PALETTE_DATA[tabKey] || [];
+      grid.innerHTML = items.map((item, i) => `
+        <button class="math-item-btn" onclick="insertTemplateWithCursor('${tabKey}', ${i})">
+          <span class="sym">${escapeHtml(item.sym)}</span>
+          <span class="lbl">${escapeHtml(item.lbl)}</span>
+        </button>
+      `).join('');
+    }
+
+    function insertTemplateWithCursor(tabKey, idx) {
+      const item = MATH_PALETTE_DATA[tabKey][idx];
+      if (!item) return;
+      const textarea = document.getElementById('editorTextarea');
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const selected = textarea.value.substring(start, end);
+
+      let tpl = item.tpl;
+      let cursorOffset;
+      if (tpl.includes('|')) {
+        cursorOffset = tpl.indexOf('|');
+        tpl = tpl.replace('|', selected);
+      } else {
+        cursorOffset = tpl.length;
+      }
+
+      textarea.value = textarea.value.substring(0, start) + tpl + textarea.value.substring(end);
+      textarea.focus();
+      textarea.selectionStart = start + cursorOffset + (selected ? selected.length : 0);
+      textarea.selectionEnd = textarea.selectionStart;
+      onContentChange();
+    }
+
+    // -----------------------------------------------------------------
+    // 4. Outline TOC Navigation & View Mode Switcher
+    // -----------------------------------------------------------------
+    function toggleOutlineDrawer() {
+      const drawer = document.getElementById('outlineDrawer');
+      const btn = document.getElementById('btnOutlineToggle');
+      drawer.classList.toggle('active');
+      btn.classList.toggle('active', drawer.classList.contains('active'));
+      if (drawer.classList.contains('active')) {
+        renderOutlineTOC();
+      }
+    }
+
+    function renderOutlineTOC() {
+      const drawer = document.getElementById('outlineDrawer');
+      if (!drawer.classList.contains('active')) return;
+
+      const listEl = document.getElementById('outlineList');
+      const text = document.getElementById('editorTextarea').value;
+      const lines = text.split('\n');
+      const headings = [];
+      let inCodeBlock = false;
+
+      let charIndex = 0;
+      lines.forEach((line, lineIdx) => {
+        if (line.trim().startsWith('```')) inCodeBlock = !inCodeBlock;
+        if (!inCodeBlock) {
+          const m = line.match(/^(#{1,4})\s+(.+)$/);
+          if (m) {
+            headings.push({
+              level: m[1].length,
+              title: m[2].trim(),
+              lineIdx,
+              charPos: charIndex
+            });
+          }
+        }
+        charIndex += line.length + 1;
+      });
+
+      if (headings.length === 0) {
+        listEl.innerHTML = `<div style="padding: 12px; font-size: 0.75rem; color: var(--text-muted-color);">文章尚無標題 (# ~ ####)</div>`;
+        return;
+      }
+
+      listEl.innerHTML = headings.map(h => `
+        <div class="outline-item lvl-${h.level}" onclick="jumpToEditorPosition(${h.charPos}, ${h.lineIdx})">
+          ${escapeHtml(h.title)}
+        </div>
+      `).join('');
+    }
+
+    function jumpToEditorPosition(charPos, lineIdx) {
+      const textarea = document.getElementById('editorTextarea');
+      textarea.focus();
+      textarea.setSelectionRange(charPos, charPos);
+      // Approximate scroll position based on line height (1.65 * 14.4px ≈ 23.76px)
+      textarea.scrollTop = Math.max(0, lineIdx * 23.76 - 80);
+    }
+
+    function setViewMode(mode) {
+      const ws = document.getElementById('workspace');
+      ws.classList.remove('mode-editor', 'mode-preview');
+      if (mode === 'editor') ws.classList.add('mode-editor');
+      if (mode === 'preview') ws.classList.add('mode-preview');
+
+      document.getElementById('viewDual').classList.toggle('active', mode === 'dual');
+      document.getElementById('viewEditor').classList.toggle('active', mode === 'editor');
+      document.getElementById('viewPreview').classList.toggle('active', mode === 'preview');
+    }
+
+    function toggleAdvancedMeta() {
+      document.getElementById('metaAdvanced').classList.toggle('open');
+    }
+
+    // -----------------------------------------------------------------
+    // 5. Post Loading, Filtering & Selection
     // -----------------------------------------------------------------
     async function loadPosts() {
       try {
@@ -1217,9 +2242,7 @@
       renderPostList();
     }
 
-    function filterPosts() {
-      renderPostList();
-    }
+    function filterPosts() { renderPostList(); }
 
     function renderPostList() {
       const listEl = document.getElementById('postList');
@@ -1228,16 +2251,13 @@
       const query = document.getElementById('searchInput').value.toLowerCase().trim();
 
       const filtered = posts.filter(p => {
-        // Tab filter
         if (currentFilter === 'published' && p.isDraft) return false;
         if (currentFilter === 'drafts' && !p.isDraft) return false;
-
-        // Search query
         if (!query) return true;
         return p.title.toLowerCase().includes(query) ||
                p.filename.toLowerCase().includes(query) ||
-               p.tags.some(t => t.toLowerCase().includes(query)) ||
-               p.categories.some(c => c.toLowerCase().includes(query));
+               (p.tags || []).some(t => t.toLowerCase().includes(query)) ||
+               (p.categories || []).some(c => c.toLowerCase().includes(query));
       });
 
       filtered.forEach(p => {
@@ -1245,17 +2265,18 @@
         div.className = `post-card ${currentPost && currentPost.filename === p.filename ? 'active' : ''}`;
         div.onclick = () => selectPost(p.filename);
 
+        const pinHtml = p.pin ? `<i class="fa-solid fa-thumbtack pin-icon" title="已置頂"></i>` : '';
         const statusBadge = p.isDraft
           ? `<span class="status-badge draft"><i class="fa-solid fa-pen-ruler"></i> 草稿</span>`
           : `<span class="status-badge published"><i class="fa-solid fa-check"></i> 已發布</span>`;
 
-        const tagsHtml = p.tags.slice(0, 3).map(t => `<span class="chirpy-tag">#${t}</span>`).join(' ');
+        const tagsHtml = (p.tags || []).slice(0, 2).map(t => `<span class="chirpy-tag">#${t}</span>`).join(' ');
 
         div.innerHTML = `
-          <div class="post-card-title">${escapeHtml(p.title)}</div>
+          <div class="post-card-title">${pinHtml}<span>${escapeHtml(p.title)}</span></div>
           <div class="post-card-meta">
             ${statusBadge}
-            <span><i class="fa-regular fa-calendar" style="margin-left: 2px; margin-right: 2px;"></i>${p.date ? p.date.split(' ')[0] : p.filename.slice(0, 10)}</span>
+            <span><i class="fa-regular fa-calendar" style="margin-right: 2px;"></i>${p.date ? p.date.split(' ')[0] : p.filename.slice(0, 10)}</span>
             <div style="flex: 1;"></div>
             ${tagsHtml}
           </div>
@@ -1264,14 +2285,8 @@
       });
     }
 
-    // -----------------------------------------------------------------
-    // Post Selection & Editor Sync
-    // -----------------------------------------------------------------
     async function selectPost(filename) {
-      if (hasUnsavedChanges) {
-        // autosave is running, save snapshot silently
-        saveSnapshotToStorage();
-      }
+      if (hasUnsavedChanges) saveSnapshotToStorage();
 
       try {
         const res = await fetch(`/api/posts/${encodeURIComponent(filename)}`);
@@ -1298,14 +2313,19 @@
       document.getElementById('fmCategories').value = Array.isArray(fm.categories) ? fm.categories.join(', ') : (fm.categories || '');
       document.getElementById('fmTags').value = Array.isArray(fm.tags) ? fm.tags.join(', ') : (fm.tags || '');
       document.getElementById('fmDate').value = fm.date || '';
+      document.getElementById('fmDescription').value = fm.description || '';
+      document.getElementById('fmImage').value = fm.image || '';
       document.getElementById('fmIsDraft').checked = isDraft;
+      document.getElementById('fmPin').checked = !!fm.pin;
       document.getElementById('fmMath').checked = fm.math !== false;
+      document.getElementById('fmMermaid').checked = !!fm.mermaid;
       document.getElementById('fmToc').checked = fm.toc !== false;
       document.getElementById('editorTextarea').value = post.content || '';
 
       updateUIStatus(isDraft);
       calculateStats();
       renderPreview();
+      renderOutlineTOC();
       hasUnsavedChanges = false;
       document.getElementById('saveStatus').innerText = '';
     }
@@ -1320,7 +2340,7 @@
         badge.className = 'status-badge draft';
         badge.innerHTML = '<i class="fa-solid fa-pen-ruler"></i> 草稿';
         breadcrumbFolder.innerHTML = '<i class="fa-regular fa-folder"></i> _drafts';
-        btnToggle.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> 發布為正式文章';
+        btnToggle.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> 轉為正式文章';
         btnToggle.className = 'btn btn-publish';
         btnSave.className = 'btn btn-save-draft';
         btnSave.innerHTML = '<i class="fa-regular fa-floppy-disk"></i> 儲存草稿';
@@ -1328,7 +2348,7 @@
         badge.className = 'status-badge published';
         badge.innerHTML = '<i class="fa-solid fa-check"></i> 已發布';
         breadcrumbFolder.innerHTML = '<i class="fa-regular fa-folder-open"></i> _posts';
-        btnToggle.innerHTML = '<i class="fa-solid fa-box-archive"></i> 撤回至草稿箱';
+        btnToggle.innerHTML = '<i class="fa-solid fa-box-archive"></i> 撤回至草稿';
         btnToggle.className = 'btn';
         btnSave.className = 'btn';
         btnSave.innerHTML = '<i class="fa-regular fa-floppy-disk"></i> 儲存修改';
@@ -1336,14 +2356,10 @@
     }
 
     function onDraftCheckboxChange() {
-      const isDraft = document.getElementById('fmIsDraft').checked;
-      updateUIStatus(isDraft);
+      updateUIStatus(document.getElementById('fmIsDraft').checked);
       hasUnsavedChanges = true;
     }
 
-    // -----------------------------------------------------------------
-    // Create Draft / Post
-    // -----------------------------------------------------------------
     function createNewDraft() {
       const now = new Date();
       const dateStr = formatDate(now);
@@ -1357,8 +2373,12 @@
           date: dateStr,
           categories: ['General'],
           tags: ['notes'],
+          pin: false,
           math: true,
-          toc: true
+          mermaid: false,
+          toc: true,
+          description: '',
+          image: ''
         },
         content: '## 前言\n\n在此開始撰寫您的草稿內容...\n'
       };
@@ -1369,96 +2389,7 @@
     }
 
     // -----------------------------------------------------------------
-    // Word Count & Estimated Reading Time
-    // -----------------------------------------------------------------
-    function calculateStats() {
-      const text = document.getElementById('editorTextarea').value || '';
-      
-      // Match CJK characters (Chinese, Japanese, Korean)
-      const cjkChars = (text.match(/[\u4e00-\u9fa5\u0800-\u4e00\uac00-\ud7a3]/g) || []).length;
-      // Match Latin/alphanumeric words
-      const nonCjkText = text.replace(/[\u4e00-\u9fa5\u0800-\u4e00\uac00-\ud7a3]/g, ' ');
-      const words = (nonCjkText.match(/[a-zA-Z0-9_\-]+/g) || []).length;
-
-      const totalCount = cjkChars + words;
-      document.getElementById('wordCount').innerText = `${totalCount.toLocaleString()} 字`;
-
-      // Reading speed: ~350 characters/words per minute
-      const minutes = Math.max(1, Math.ceil(totalCount / 350));
-      document.getElementById('readingTime').innerText = `${minutes} 分鐘`;
-    }
-
-    // -----------------------------------------------------------------
-    // Category & Tag Auto-Suggestions
-    // -----------------------------------------------------------------
-    function getAllCategories() {
-      const set = new Set();
-      posts.forEach(p => (p.categories || []).forEach(c => set.add(c)));
-      return Array.from(set);
-    }
-
-    function getAllTags() {
-      const set = new Set();
-      posts.forEach(p => (p.tags || []).forEach(t => set.add(t)));
-      return Array.from(set);
-    }
-
-    function renderCategorySuggestions() {
-      const container = document.getElementById('catSuggestions');
-      if (!container) return;
-      const all = getAllCategories();
-      const currentVal = document.getElementById('fmCategories').value;
-      const selected = currentVal.split(',').map(s => s.trim().toLowerCase());
-
-      container.innerHTML = all.map(cat => {
-        const isSelected = selected.includes(cat.toLowerCase());
-        return `<span class="chip" onclick="toggleCategory('${escapeHtml(cat)}')">${isSelected ? '✓ ' : ''}${escapeHtml(cat)}</span>`;
-      }).join('');
-    }
-
-    function toggleCategory(cat) {
-      const input = document.getElementById('fmCategories');
-      const items = input.value.split(',').map(s => s.trim()).filter(Boolean);
-      const index = items.findIndex(i => i.toLowerCase() === cat.toLowerCase());
-      if (index >= 0) {
-        items.splice(index, 1);
-      } else {
-        items.push(cat);
-      }
-      input.value = items.join(', ');
-      renderCategorySuggestions();
-      hasUnsavedChanges = true;
-    }
-
-    function renderTagSuggestions() {
-      const container = document.getElementById('tagSuggestions');
-      if (!container) return;
-      const all = getAllTags();
-      const currentVal = document.getElementById('fmTags').value;
-      const selected = currentVal.split(',').map(s => s.trim().toLowerCase());
-
-      container.innerHTML = all.map(t => {
-        const isSelected = selected.includes(t.toLowerCase());
-        return `<span class="chip" onclick="toggleTag('${escapeHtml(t)}')">${isSelected ? '✓ ' : ''}#${escapeHtml(t)}</span>`;
-      }).join('');
-    }
-
-    function toggleTag(tag) {
-      const input = document.getElementById('fmTags');
-      const items = input.value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
-      const index = items.indexOf(tag.toLowerCase());
-      if (index >= 0) {
-        items.splice(index, 1);
-      } else {
-        items.push(tag.toLowerCase());
-      }
-      input.value = items.join(', ');
-      renderTagSuggestions();
-      hasUnsavedChanges = true;
-    }
-
-    // -----------------------------------------------------------------
-    // Save Post / Draft API
+    // 6. Save, Toggle Draft, Delete
     // -----------------------------------------------------------------
     async function saveCurrentPost(silent = false) {
       const title = document.getElementById('fmTitle').value.trim() || '未命名文章';
@@ -1471,15 +2402,8 @@
       }
       if (!filename.endsWith('.md')) filename += '.md';
 
-      const categories = document.getElementById('fmCategories').value
-        .split(',')
-        .map(s => s.trim())
-        .filter(Boolean);
-
-      const tags = document.getElementById('fmTags').value
-        .split(',')
-        .map(s => s.trim().toLowerCase())
-        .filter(Boolean);
+      const categories = document.getElementById('fmCategories').value.split(',').map(s => s.trim()).filter(Boolean);
+      const tags = document.getElementById('fmTags').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
 
       const payload = {
         originalFilename: currentPost ? currentPost.filename : null,
@@ -1488,9 +2412,13 @@
         frontmatter: {
           title,
           date: document.getElementById('fmDate').value.trim() || formatDate(new Date()),
+          description: document.getElementById('fmDescription').value.trim(),
+          image: document.getElementById('fmImage').value.trim(),
           categories,
           tags,
+          pin: document.getElementById('fmPin').checked,
           math: document.getElementById('fmMath').checked,
+          mermaid: document.getElementById('fmMermaid').checked,
           toc: document.getElementById('fmToc').checked
         },
         content: document.getElementById('editorTextarea').value
@@ -1521,7 +2449,7 @@
               icon: 'success',
               title: isDraft ? '草稿已儲存！' : '文章已儲存至 _posts！',
               showConfirmButton: false,
-              timer: 2000
+              timer: 1800
             });
           }
           return true;
@@ -1539,64 +2467,48 @@
       const isDraft = document.getElementById('fmIsDraft').checked;
       const targetIsDraft = !isDraft;
 
-      if (!targetIsDraft) {
-        // Draft -> Published
-        const confirm = await Swal.fire({
-          title: '確定要將草稿轉為正式文章嗎？',
-          text: '文章將從 _drafts 移動至 _posts，並自動加上日期前綴。',
-          icon: 'question',
-          showCancelButton: true,
-          confirmButtonText: '確定發布為正式',
-          cancelButtonText: '取消'
-        });
-        if (!confirm.isConfirmed) return;
-      } else {
-        // Published -> Draft
-        const confirm = await Swal.fire({
-          title: '確定要撤回文章到草稿箱嗎？',
-          text: '文章將從 _posts 移動至 _drafts，推送後線上將不再顯示此文章。',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: '確定撤回為草稿',
-          cancelButtonText: '取消'
-        });
-        if (!confirm.isConfirmed) return;
-      }
+      const confirm = await Swal.fire({
+        title: targetIsDraft ? '撤回文章到草稿箱？' : '發布草稿為正式文章？',
+        text: targetIsDraft
+          ? '文章將從 _posts 移至 _drafts，推送後線上將不再顯示。'
+          : '文章將移至 _posts 並自動更新發布時間為現在。',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: targetIsDraft ? '確定撤回' : '確定轉為正式',
+        cancelButtonText: '取消'
+      });
+      if (!confirm.isConfirmed) return;
 
+      if (!targetIsDraft) {
+        // Update date to current time so it's fresh
+        document.getElementById('fmDate').value = formatDate(new Date());
+      }
       document.getElementById('fmIsDraft').checked = targetIsDraft;
       const saved = await saveCurrentPost(false);
       if (saved && !targetIsDraft) {
         const askPush = await Swal.fire({
-          title: '🎉 文章已發布到本地 _posts！',
-          text: '是否立即推送變更至 GitHub 讓網站自動更新上線？',
+          title: '🎉 已移入正式文章庫 (_posts)！',
+          text: '是否立即推送至 GitHub 讓網站編譯上線？',
           icon: 'success',
           showCancelButton: true,
-          confirmButtonText: '立即推送到 GitHub',
+          confirmButtonText: '立即推送上線',
           cancelButtonText: '稍後手動推送'
         });
-        if (askPush.isConfirmed) {
-          publishToGithub();
-        }
+        if (askPush.isConfirmed) publishToGithub();
       }
     }
 
-    // -----------------------------------------------------------------
-    // Delete Post / Draft
-    // -----------------------------------------------------------------
     async function deleteCurrentPost() {
       if (!currentPost || !currentPost.filename) return;
-
       const confirm = await Swal.fire({
-        title: '確定要刪除這篇文章嗎？',
-        text: `將永久刪除檔案: ${currentPost.filename}`,
+        title: '確定要刪除嗎？',
+        text: `將永久移除檔案: ${currentPost.filename}`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#ef4444',
-        cancelButtonColor: '#334155',
         confirmButtonText: '確定刪除',
         cancelButtonText: '取消'
       });
-
       if (!confirm.isConfirmed) return;
 
       try {
@@ -1604,12 +2516,9 @@
         const data = await res.json();
         if (data.success) {
           clearAutosaveSnapshot(currentPost.filename);
-          Swal.fire('已刪除', '檔案已成功移除', 'success');
           currentPost = null;
           await loadPosts();
           if (posts.length === 0) createNewDraft();
-        } else {
-          Swal.fire('刪除失敗', data.error, 'error');
         }
       } catch (err) {
         Swal.fire('錯誤', err.message, 'error');
@@ -1617,8 +2526,405 @@
     }
 
     // -----------------------------------------------------------------
-    // Image Upload API (Clipboard Paste & File Picker)
+    // 7. Live Preview: Markdown + KaTeX + Chirpy 4 Prompts + Mermaid
     // -----------------------------------------------------------------
+    async function renderPreview() {
+      let rawMarkdown = document.getElementById('editorTextarea').value;
+      const previewEl = document.getElementById('previewContent');
+      const enableMath = document.getElementById('fmMath').checked && typeof katex !== 'undefined';
+
+      // Auto-detect mermaid blocks and check fmMermaid automatically if present
+      if (/```mermaid[\s\S]*?```/.test(rawMarkdown)) {
+        document.getElementById('fmMermaid').checked = true;
+      }
+
+      const mathBlocks = [];
+      const codeBlocks = [];
+      const mermaidBlocks = [];
+
+      // Extract Mermaid blocks first
+      rawMarkdown = rawMarkdown.replace(/```mermaid\r?\n([\s\S]*?)```/g, (match, code) => {
+        const id = `MERMAIDBLOCKPLACEHOLDER${mermaidBlocks.length}END`;
+        mermaidBlocks.push(code.trim());
+        return id;
+      });
+
+      function cleanFormula(formula) {
+        let f = formula.trim();
+        f = f.replace(/\\+$/, '');
+        f = f.replace(/\\\\([a-zA-Z]+)/g, '\\$1');
+        f = f.replace(/\\\\\\\\/g, '\\\\');
+        return f;
+      }
+
+      if (enableMath) {
+        rawMarkdown = rawMarkdown.replace(/```[\s\S]*?```/g, match => {
+          const id = `CODEBLOCKPLACEHOLDER${codeBlocks.length}END`;
+          codeBlocks.push(match);
+          return id;
+        });
+
+        rawMarkdown = rawMarkdown.replace(/`[^`\n]+`/g, match => {
+          const id = `CODEBLOCKPLACEHOLDER${codeBlocks.length}END`;
+          codeBlocks.push(match);
+          return id;
+        });
+
+        rawMarkdown = rawMarkdown.replace(/\\{1,2}\[([\s\S]*?)\\{1,2}\]/g, (match, code) => {
+          const id = `MATHBLOCKPLACEHOLDER${mathBlocks.length}END`;
+          mathBlocks.push({ code: cleanFormula(code), display: true });
+          return id;
+        });
+
+        rawMarkdown = rawMarkdown.replace(/\$\$([\s\S]*?)\$\$/g, (match, code) => {
+          const id = `MATHBLOCKPLACEHOLDER${mathBlocks.length}END`;
+          mathBlocks.push({ code: cleanFormula(code), display: true });
+          return id;
+        });
+
+        rawMarkdown = rawMarkdown.replace(/\\{1,2}\(([\s\S]*?)\\{1,2}\)/g, (match, code) => {
+          const id = `MATHINLINEPLACEHOLDER${mathBlocks.length}END`;
+          mathBlocks.push({ code: cleanFormula(code), display: false });
+          return id;
+        });
+
+        rawMarkdown = rawMarkdown.replace(/\$([^\$\n]+?)\$/g, (match, code) => {
+          const id = `MATHINLINEPLACEHOLDER${mathBlocks.length}END`;
+          mathBlocks.push({ code: cleanFormula(code), display: false });
+          return id;
+        });
+
+        codeBlocks.forEach((code, i) => {
+          rawMarkdown = rawMarkdown.replace(`CODEBLOCKPLACEHOLDER${i}END`, code);
+        });
+      }
+
+      // Support both Chirpy Kramdown `{: .prompt-tip }` and GitHub `> [!TIP]`
+      rawMarkdown = rawMarkdown.replace(/^((?:>.*\r?\n?)+)\{:\s*\.prompt-(tip|info|warning|danger)\s*\}/gm, (m, quoteBlock, type) => {
+        const inner = quoteBlock.replace(/^>\s?/gm, '').trim();
+        return `<div class="prompt-box prompt-${type}">${marked.parseInline(inner)}</div>\n`;
+      });
+
+      rawMarkdown = rawMarkdown.replace(/^>\s*\[!(TIP|INFO|NOTE|WARNING|DANGER|CAUTION)\]\s*\r?\n((?:>.*\r?\n?)*)/gim, (m, rawType, body) => {
+        const clean = body.replace(/^>\s?/gm, '').trim();
+        const t = rawType.toLowerCase();
+        const mapType = (t === 'note' || t === 'info') ? 'info' : (t === 'caution' || t === 'danger') ? 'danger' : t;
+        return `<div class="prompt-box prompt-${mapType}">${marked.parseInline(clean)}</div>\n`;
+      });
+
+      // Strip Kramdown image modifiers like {: width="600" .shadow } so marked renders clean image
+      rawMarkdown = rawMarkdown.replace(/(\!\[[^\]]*\]\([^\)]+\))\{:[^\}]+\}/g, '$1');
+
+      let html = marked.parse(rawMarkdown);
+
+      // Restore KaTeX math
+      if (enableMath && mathBlocks.length > 0) {
+        mathBlocks.forEach((item, i) => {
+          const token = item.display ? `MATHBLOCKPLACEHOLDER${i}END` : `MATHINLINEPLACEHOLDER${i}END`;
+          let renderedMath;
+          try {
+            renderedMath = katex.renderToString(item.code, {
+              displayMode: item.display,
+              throwOnError: false
+            });
+          } catch (e) {
+            renderedMath = `<span style="color:#ef4444;">[LaTeX 錯誤: ${escapeHtml(e.message)}]</span>`;
+          }
+
+          if (item.display) {
+            html = html.replace(`<p>${token}</p>`, `<div class="katex-display">${renderedMath}</div>`);
+            html = html.replace(token, `<div class="katex-display">${renderedMath}</div>`);
+          } else {
+            html = html.replace(token, renderedMath);
+          }
+        });
+      }
+
+      // Restore Mermaid diagrams
+      if (mermaidBlocks.length > 0) {
+        mermaidBlocks.forEach((code, i) => {
+          const token = `MERMAIDBLOCKPLACEHOLDER${i}END`;
+          const mermaidHtml = `<div class="mermaid-wrapper"><pre class="mermaid">${escapeHtml(code)}</pre></div>`;
+          html = html.replace(`<p>${token}</p>`, mermaidHtml).replace(token, mermaidHtml);
+        });
+      }
+
+      previewEl.innerHTML = html;
+
+      if (mermaidBlocks.length > 0 && typeof mermaid !== 'undefined') {
+        try {
+          await mermaid.run({ nodes: previewEl.querySelectorAll('.mermaid') });
+        } catch (e) {}
+      }
+    }
+
+    function insertChirpyPrompt(type) {
+      const labels = { tip: '技巧提示內容...', info: '補充資訊內容...', warning: '注意警告內容...', danger: '重要危險提醒...' };
+      insertSyntax(`> ${labels[type] || ''}\n{: .prompt-${type} }\n`, '');
+    }
+
+    function insertMermaidTemplate() {
+      document.getElementById('fmMermaid').checked = true;
+      const tpl = '\n```mermaid\nflowchart LR\n  A["輸入數據"] --> B["矩陣變換 M"]\n  B --> C["投影座標 (u, v)"]\n```\n';
+      insertSyntax(tpl, '');
+    }
+
+    // -----------------------------------------------------------------
+    // 8. Media Library Manager Modal
+    // -----------------------------------------------------------------
+    async function openMediaLibrary(selectForCover = false) {
+      isSelectingCover = selectForCover;
+      document.getElementById('mediaModal').classList.add('active');
+      await loadMediaList();
+    }
+
+    function closeMediaLibrary() {
+      document.getElementById('mediaModal').classList.remove('active');
+      isSelectingCover = false;
+    }
+
+    async function loadMediaList() {
+      const grid = document.getElementById('mediaGrid');
+      grid.innerHTML = `<div style="padding: 20px; color: var(--text-muted-color);">正在掃描媒體庫...</div>`;
+      try {
+        const res = await fetch('/api/images');
+        const data = await res.json();
+        if (data.success) {
+          mediaItems = data.images || [];
+          renderMediaGrid();
+        }
+      } catch (err) {
+        grid.innerHTML = `<div style="color: #ef4444;">讀取失敗: ${escapeHtml(err.message)}</div>`;
+      }
+    }
+
+    function filterMediaList(mode) {
+      mediaFilterMode = mode;
+      renderMediaGrid();
+    }
+
+    function renderMediaGrid() {
+      const grid = document.getElementById('mediaGrid');
+      const filtered = mediaItems.filter(img => {
+        if (mediaFilterMode === 'unused') return img.usedIn.length === 0;
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 36px; color: var(--text-muted-color);">目前沒有符合條件的圖片</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(img => {
+        const kb = (img.size / 1024).toFixed(1) + ' KB';
+        const usedCount = img.usedIn.length;
+        const usageTag = usedCount > 0
+          ? `<span class="media-usage-tag used" title="引用於: ${escapeHtml(img.usedIn.map(u => u.title).join(', '))}">已引用 (${usedCount})</span>`
+          : `<span class="media-usage-tag unused">未引用</span>`;
+
+        return `
+          <div class="media-card">
+            <div class="media-thumb-wrap">
+              <img src="${img.url}" alt="${escapeHtml(img.filename)}" loading="lazy">
+              ${usageTag}
+            </div>
+            <div class="media-info">
+              <div class="media-name" title="${escapeHtml(img.url)}">${escapeHtml(img.filename)}</div>
+              <div style="color: var(--text-muted-color); display: flex; justify-content: space-between;">
+                <span>${escapeHtml(img.folder)}</span>
+                <span>${kb}</span>
+              </div>
+              <div class="media-actions">
+                <button onclick="useMediaImage('${img.url}')" title="插入當前文章或設為封面">
+                  <i class="fa-solid fa-plus"></i> ${isSelectingCover ? '設為封面' : '插入'}
+                </button>
+                <button onclick="copyMediaUrl('${img.url}')" title="複製圖片路徑">
+                  <i class="fa-regular fa-copy"></i> 路徑
+                </button>
+                <button onclick="deleteMediaImage('${img.url}')" style="color: #ef4444;" title="永久刪除此圖片">
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function useMediaImage(url) {
+      if (isSelectingCover) {
+        document.getElementById('fmImage').value = url;
+        document.getElementById('metaAdvanced').classList.add('open');
+        hasUnsavedChanges = true;
+        closeMediaLibrary();
+        Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: '已設定為文章封面圖！', timer: 1500, showConfirmButton: false });
+      } else {
+        insertSyntax(`![圖片說明](${url})\n`, '');
+        closeMediaLibrary();
+      }
+    }
+
+    function copyMediaUrl(url) {
+      navigator.clipboard.writeText(url);
+      Swal.fire({ toast: true, position: 'top-end', icon: 'info', title: '已複製路徑: ' + url, timer: 1500, showConfirmButton: false });
+    }
+
+    async function deleteMediaImage(url) {
+      const confirm = await Swal.fire({
+        title: '確定刪除此圖片？',
+        text: url,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        confirmButtonText: '確定刪除',
+        cancelButtonText: '取消'
+      });
+      if (!confirm.isConfirmed) return;
+
+      const res = await fetch('/api/images', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url })
+      });
+      const data = await res.json();
+      if (data.success) {
+        await loadMediaList();
+      } else {
+        Swal.fire('刪除失敗', data.error, 'error');
+      }
+    }
+
+    // -----------------------------------------------------------------
+    // 9. Git Pull & GitHub Actions Live Deployment Tracker
+    // -----------------------------------------------------------------
+    async function gitPullRemote() {
+      Swal.fire({
+        title: '正在同步遠端儲存庫 (git pull)...',
+        didOpen: async () => {
+          Swal.showLoading();
+          const res = await fetch('/api/git/pull', { method: 'POST' });
+          const data = await res.json();
+          await loadPosts();
+          Swal.fire({
+            icon: data.success ? 'success' : 'warning',
+            title: data.success ? '同步完成' : '同步提示',
+            html: `<div class="log-box">${escapeHtml(data.log)}</div>`
+          });
+        }
+      });
+    }
+
+    let lastRunStatus = null;
+    async function checkActionsStatus() {
+      try {
+        const res = await fetch('/api/actions/status');
+        const data = await res.json();
+        if (!data.success || !data.run) return;
+
+        const run = data.run;
+        const dot = document.getElementById('actionsDot');
+        const txt = document.getElementById('actionsText');
+        const pill = document.getElementById('actionsStatusPill');
+        pill.href = run.html_url || 'https://github.com/DL049/DL049.github.io/actions';
+
+        if (run.status === 'in_progress' || run.status === 'queued') {
+          dot.className = 'dot-yellow';
+          txt.innerText = 'GitHub 編譯部署中...';
+          lastRunStatus = 'building';
+          setTimeout(checkActionsStatus, 4000);
+        } else if (run.status === 'completed') {
+          if (run.conclusion === 'success') {
+            dot.className = 'dot-green';
+            txt.innerText = '線上已部署更新';
+            if (lastRunStatus === 'building') {
+              Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: '🎉 GitHub Actions 編譯完成！新內容已正式上線！',
+                timer: 4000,
+                showConfirmButton: false
+              });
+            }
+            lastRunStatus = 'success';
+          } else {
+            dot.className = 'dot-red';
+            txt.innerText = '部署失敗 (點擊查看)';
+            lastRunStatus = 'failed';
+          }
+        }
+      } catch (e) {}
+    }
+
+    // -----------------------------------------------------------------
+    // Word Count, Suggestions, Clipboard Upload, Autosave & Shortcuts
+    // -----------------------------------------------------------------
+    function calculateStats() {
+      const text = document.getElementById('editorTextarea').value || '';
+      const cjkChars = (text.match(/[\u4e00-\u9fa5\u0800-\u4e00\uac00-\ud7a3]/g) || []).length;
+      const nonCjkText = text.replace(/[\u4e00-\u9fa5\u0800-\u4e00\uac00-\ud7a3]/g, ' ');
+      const words = (nonCjkText.match(/[a-zA-Z0-9_\-]+/g) || []).length;
+
+      const totalCount = cjkChars + words;
+      document.getElementById('wordCount').innerText = `${totalCount.toLocaleString()} 字`;
+      const minutes = Math.max(1, Math.ceil(totalCount / 350));
+      document.getElementById('readingTime').innerText = `${minutes} 分鐘`;
+    }
+
+    function getAllCategories() {
+      const set = new Set();
+      posts.forEach(p => (p.categories || []).forEach(c => set.add(c)));
+      return Array.from(set);
+    }
+
+    function getAllTags() {
+      const set = new Set();
+      posts.forEach(p => (p.tags || []).forEach(t => set.add(t)));
+      return Array.from(set);
+    }
+
+    function renderCategorySuggestions() {
+      const container = document.getElementById('catSuggestions');
+      if (!container) return;
+      const all = getAllCategories();
+      const selected = document.getElementById('fmCategories').value.split(',').map(s => s.trim().toLowerCase());
+      container.innerHTML = all.map(cat => {
+        const isSelected = selected.includes(cat.toLowerCase());
+        return `<span class="chip" onclick="toggleCategory('${escapeHtml(cat)}')">${isSelected ? '✓ ' : ''}${escapeHtml(cat)}</span>`;
+      }).join('');
+    }
+
+    function toggleCategory(cat) {
+      const input = document.getElementById('fmCategories');
+      const items = input.value.split(',').map(s => s.trim()).filter(Boolean);
+      const idx = items.findIndex(i => i.toLowerCase() === cat.toLowerCase());
+      if (idx >= 0) items.splice(idx, 1); else items.push(cat);
+      input.value = items.join(', ');
+      renderCategorySuggestions();
+      hasUnsavedChanges = true;
+    }
+
+    function renderTagSuggestions() {
+      const container = document.getElementById('tagSuggestions');
+      if (!container) return;
+      const all = getAllTags();
+      const selected = document.getElementById('fmTags').value.split(',').map(s => s.trim().toLowerCase());
+      container.innerHTML = all.map(t => {
+        const isSelected = selected.includes(t.toLowerCase());
+        return `<span class="chip" onclick="toggleTag('${escapeHtml(t)}')">${isSelected ? '✓ ' : ''}#${escapeHtml(t)}</span>`;
+      }).join('');
+    }
+
+    function toggleTag(tag) {
+      const input = document.getElementById('fmTags');
+      const items = input.value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+      const idx = items.indexOf(tag.toLowerCase());
+      if (idx >= 0) items.splice(idx, 1); else items.push(tag.toLowerCase());
+      input.value = items.join(', ');
+      renderTagSuggestions();
+      hasUnsavedChanges = true;
+    }
+
     function setupPasteHandler() {
       const textarea = document.getElementById('editorTextarea');
       textarea.addEventListener('paste', async (e) => {
@@ -1636,13 +2942,16 @@
 
     function openImageUploadDialog() {
       Swal.fire({
-        title: '插入圖片',
+        title: '插入或管理圖片',
         html: `
           <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
             <button class="btn btn-publish" onclick="document.getElementById('imageFileInput').click(); Swal.close();" style="justify-content: center; padding: 10px;">
               <i class="fa-solid fa-arrow-up-from-bracket"></i> 選擇本機圖片上傳
             </button>
-            <div style="font-size: 0.78rem; color: var(--text-muted-color); text-align: center;">或者輸入網路圖片網址：</div>
+            <button class="btn" onclick="Swal.close(); openMediaLibrary(false);" style="justify-content: center; padding: 10px;">
+              <i class="fa-regular fa-images"></i> 從現有媒體庫挑選
+            </button>
+            <div style="font-size: 0.76rem; color: var(--text-muted-color); text-align: center;">或者輸入網路圖片網址：</div>
             <input type="text" id="externalImageUrl" class="search-input" placeholder="https://example.com/image.png">
           </div>
         `,
@@ -1651,70 +2960,55 @@
         cancelButtonText: '取消',
         preConfirm: () => {
           const url = document.getElementById('externalImageUrl').value.trim();
-          if (url) {
-            insertSyntax(`![圖片說明](${url})`, '');
-          }
+          if (url) insertSyntax(`![圖片說明](${url})`, '');
         }
       });
     }
 
     async function handleFileInput(event) {
       const file = event.target.files[0];
-      if (file) {
-        await uploadAndInsertImage(file);
-        event.target.value = '';
+      if (!file) return;
+      await uploadAndInsertImage(file);
+      event.target.value = '';
+      if (document.getElementById('mediaModal').classList.contains('active')) {
+        await loadMediaList();
       }
     }
 
     async function uploadAndInsertImage(file) {
       const textarea = document.getElementById('editorTextarea');
       const placeholder = `![正在上傳圖片 ${file.name || ''}...]()`;
-      const startPos = textarea.selectionStart;
+      const isMediaModalOpen = document.getElementById('mediaModal').classList.contains('active');
 
-      // Insert placeholder
-      insertSyntax(placeholder, '');
+      if (!isMediaModalOpen) insertSyntax(placeholder, '');
 
-      // Convert file to Base64
       const reader = new FileReader();
       reader.onload = async (e) => {
-        const base64Data = e.target.result;
         try {
           const res = await fetch('/api/upload-image', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ data: base64Data, filename: file.name })
+            body: JSON.stringify({ data: e.target.result, filename: file.name })
           });
           const data = await res.json();
           if (data.success) {
-            // Replace placeholder with final markdown
-            const currentContent = textarea.value;
-            const markdownImg = `![${file.name || '圖片說明'}](${data.url})\n`;
-            textarea.value = currentContent.replace(placeholder, markdownImg);
-            onContentChange();
-
-            Swal.fire({
-              toast: true,
-              position: 'top-end',
-              icon: 'success',
-              title: '圖片上傳完成並自動插入！',
-              showConfirmButton: false,
-              timer: 2000
-            });
+            if (!isMediaModalOpen) {
+              textarea.value = textarea.value.replace(placeholder, `![${file.name || '圖片說明'}](${data.url})\n`);
+              onContentChange();
+            }
+            Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: '圖片上傳成功！', showConfirmButton: false, timer: 1800 });
           } else {
-            textarea.value = textarea.value.replace(placeholder, '');
+            if (!isMediaModalOpen) textarea.value = textarea.value.replace(placeholder, '');
             Swal.fire('上傳失敗', data.error, 'error');
           }
         } catch (err) {
-          textarea.value = textarea.value.replace(placeholder, '');
+          if (!isMediaModalOpen) textarea.value = textarea.value.replace(placeholder, '');
           Swal.fire('上傳出錯', err.message, 'error');
         }
       };
       reader.readAsDataURL(file);
     }
 
-    // -----------------------------------------------------------------
-    // Autosave Snapshot (LocalStorage)
-    // -----------------------------------------------------------------
     function tickAutosave() {
       if (!hasUnsavedChanges || !currentPost) return;
       saveSnapshotToStorage();
@@ -1723,106 +3017,85 @@
     function saveSnapshotToStorage() {
       if (!currentPost) return;
       const key = `dlib_autosave_${currentPost.filename}`;
-      const snapshot = {
+      localStorage.setItem(key, JSON.stringify({
         filename: currentPost.filename,
         title: document.getElementById('fmTitle').value,
         content: document.getElementById('editorTextarea').value,
         isDraft: document.getElementById('fmIsDraft').checked,
         timestamp: Date.now()
-      };
-      localStorage.setItem(key, JSON.stringify(snapshot));
-      document.getElementById('saveStatus').innerText = `本地快照已自動備份 (${new Date().toLocaleTimeString()})`;
+      }));
+      document.getElementById('saveStatus').innerText = `本地快照已備份 (${new Date().toLocaleTimeString()})`;
     }
 
     function checkAutosaveSnapshot(filename) {
       const banner = document.getElementById('autosaveBanner');
-      const key = `dlib_autosave_${filename}`;
-      const raw = localStorage.getItem(key);
-      if (!raw) {
-        banner.classList.remove('active');
-        return;
-      }
-
+      const raw = localStorage.getItem(`dlib_autosave_${filename}`);
+      if (!raw) { banner.classList.remove('active'); return; }
       try {
         const data = JSON.parse(raw);
-        // If content differs from what was just loaded
-        const currentContent = document.getElementById('editorTextarea').value;
-        if (data.content && data.content.trim() !== currentContent.trim()) {
+        if (data.content && data.content.trim() !== document.getElementById('editorTextarea').value.trim()) {
           document.getElementById('autosaveTime').innerText = new Date(data.timestamp).toLocaleTimeString();
           banner.classList.add('active');
         } else {
           banner.classList.remove('active');
         }
-      } catch (e) {
-        banner.classList.remove('active');
-      }
+      } catch (e) { banner.classList.remove('active'); }
     }
 
     function restoreAutosave() {
       if (!currentPost) return;
-      const key = `dlib_autosave_${currentPost.filename}`;
-      const raw = localStorage.getItem(key);
+      const raw = localStorage.getItem(`dlib_autosave_${currentPost.filename}`);
       if (!raw) return;
-
       try {
         const data = JSON.parse(raw);
         if (data.content) {
           document.getElementById('editorTextarea').value = data.content;
           if (data.title) document.getElementById('fmTitle').value = data.title;
-          if (data.isDraft !== undefined) document.getElementById('fmIsDraft').checked = data.isDraft;
           onContentChange();
           dismissAutosave();
-          Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: '已成功從本機快照恢復！', timer: 2000, showConfirmButton: false });
         }
       } catch (e) {}
     }
 
-    function dismissAutosave() {
-      document.getElementById('autosaveBanner').classList.remove('active');
-    }
-
+    function dismissAutosave() { document.getElementById('autosaveBanner').classList.remove('active'); }
     function clearAutosaveSnapshot(filename) {
       localStorage.removeItem(`dlib_autosave_${filename}`);
-      document.getElementById('autosaveBanner').classList.remove('active');
+      dismissAutosave();
     }
 
-    // -----------------------------------------------------------------
-    // Keyboard Shortcuts System & Customization
-    // -----------------------------------------------------------------
+    // Keyboard Shortcuts
     function loadSavedShortcuts() {
       const saved = localStorage.getItem('dlib_shortcuts');
       if (saved) {
-        try {
-          userShortcuts = Object.assign({}, DEFAULT_SHORTCUTS, JSON.parse(saved));
-        } catch (e) {}
+        try { userShortcuts = Object.assign({}, DEFAULT_SHORTCUTS, JSON.parse(saved)); } catch (e) {}
       }
     }
 
-    function saveShortcutsToStorage() {
-      localStorage.setItem('dlib_shortcuts', JSON.stringify(userShortcuts));
-    }
+    function saveShortcutsToStorage() { localStorage.setItem('dlib_shortcuts', JSON.stringify(userShortcuts)); }
 
     function resetDefaultShortcuts() {
       userShortcuts = JSON.parse(JSON.stringify(DEFAULT_SHORTCUTS));
       saveShortcutsToStorage();
       renderShortcutTable();
-      Swal.fire({ toast: true, position: 'top-end', icon: 'info', title: '快捷鍵已恢復為預設配置', timer: 1500, showConfirmButton: false });
     }
 
     function renderShortcutTable() {
       const tbody = document.getElementById('shortcutTableBody');
       tbody.innerHTML = '';
-
       for (const [actionKey, shortcut] of Object.entries(userShortcuts)) {
         const tr = document.createElement('tr');
-        const keyLabel = formatShortcutLabel(shortcut);
         const isRec = recordingAction === actionKey;
+        const parts = [];
+        if (shortcut.ctrl) parts.push('Ctrl');
+        if (shortcut.alt) parts.push('Alt');
+        if (shortcut.shift) parts.push('Shift');
+        parts.push(shortcut.key.toUpperCase());
 
         tr.innerHTML = `
           <td style="color: var(--heading-color);">${escapeHtml(shortcut.name)}</td>
           <td>
-            <button class="key-badge ${isRec ? 'recording' : ''}" onclick="startRecordingKey('${actionKey}')">
-              ${isRec ? '<i class="fa-solid fa-circle-dot" style="margin-right: 4px;"></i>請按鍵盤...' : keyLabel}
+            <button class="key-badge ${isRec ? 'recording' : ''}" onclick="recordingAction='${actionKey}'; renderShortcutTable();">
+              ${isRec ? '請按鍵盤...' : parts.join(' + ')}
             </button>
           </td>
         `;
@@ -1830,30 +3103,12 @@
       }
     }
 
-    function formatShortcutLabel(s) {
-      const parts = [];
-      if (s.ctrl) parts.push('Ctrl');
-      if (s.alt) parts.push('Alt');
-      if (s.shift) parts.push('Shift');
-      parts.push(s.key.toUpperCase());
-      return parts.join(' + ');
-    }
-
-    function startRecordingKey(actionKey) {
-      recordingAction = actionKey;
-      renderShortcutTable();
-    }
-
     function setupGlobalKeybindings() {
       window.addEventListener('keydown', (e) => {
-        // If in recording mode
         if (recordingAction) {
           e.preventDefault();
           e.stopPropagation();
-
-          // Ignore modifier-only presses
           if (['Control', 'Alt', 'Shift', 'Meta'].includes(e.key)) return;
-
           userShortcuts[recordingAction] = {
             name: userShortcuts[recordingAction].name,
             key: e.key.toLowerCase(),
@@ -1861,21 +3116,17 @@
             alt: e.altKey,
             shift: e.shiftKey
           };
-
           recordingAction = null;
           saveShortcutsToStorage();
           renderShortcutTable();
           return;
         }
 
-        // Match shortcuts
         for (const [action, s] of Object.entries(userShortcuts)) {
-          const matchCtrl = !!s.ctrl === !!(e.ctrlKey || e.metaKey);
-          const matchAlt = !!s.alt === !!e.altKey;
-          const matchShift = !!s.shift === !!e.shiftKey;
-          const matchKey = s.key.toLowerCase() === e.key.toLowerCase();
-
-          if (matchCtrl && matchAlt && matchShift && matchKey) {
+          if (!!s.ctrl === !!(e.ctrlKey || e.metaKey) &&
+              !!s.alt === !!e.altKey &&
+              !!s.shift === !!e.shiftKey &&
+              s.key.toLowerCase() === e.key.toLowerCase()) {
             e.preventDefault();
             executeShortcutAction(action);
             break;
@@ -1885,164 +3136,37 @@
     }
 
     function executeShortcutAction(action) {
-      switch (action) {
-        case 'save':
-          saveCurrentPost(false);
-          break;
-        case 'publish':
-          publishToGithub();
-          break;
-        case 'newPost':
-          createNewDraft();
-          break;
-        case 'bold':
-          insertSyntax('**', '**');
-          break;
-        case 'italic':
-          insertSyntax('*', '*');
-          break;
-        case 'math':
-          insertSyntax('\\[\n', '\n\\]');
-          break;
-        case 'code':
-          insertSyntax('```\n', '\n```');
-          break;
-        case 'search':
-          document.getElementById('searchInput').focus();
-          break;
-      }
-    }
-
-    // -----------------------------------------------------------------
-    // Live KaTeX Math & Markdown Rendering (Preserves Kramdown Compatibility)
-    // -----------------------------------------------------------------
-    function renderPreview() {
-      let rawMarkdown = document.getElementById('editorTextarea').value;
-      const previewEl = document.getElementById('previewContent');
-      const enableMath = document.getElementById('fmMath').checked && typeof katex !== 'undefined';
-
-      // Convert Chirpy tip prompts
-      rawMarkdown = rawMarkdown.replace(/^>\s*\[!TIP\]\s*\n((?:>.*\n?)*)/gm, (match, p1) => {
-        const clean = p1.replace(/^>\s?/gm, '');
-        return `<div class="prompt-box">${clean}</div>\n`;
-      });
-
-      const mathBlocks = [];
-      const codeBlocks = [];
-
-      function cleanFormula(formula) {
-        let f = formula.trim();
-        f = f.replace(/\\+$/, '');
-        f = f.replace(/\\\\([a-zA-Z]+)/g, '\\$1');
-        f = f.replace(/\\\\\\\\/g, '\\\\');
-        return f;
-      }
-
-      if (enableMath) {
-        // Protect multi-line code blocks
-        rawMarkdown = rawMarkdown.replace(/```[\s\S]*?```/g, match => {
-          const id = `CODEBLOCKPLACEHOLDER${codeBlocks.length}END`;
-          codeBlocks.push(match);
-          return id;
-        });
-
-        // Protect inline code
-        rawMarkdown = rawMarkdown.replace(/`[^`\n]+`/g, match => {
-          const id = `CODEBLOCKPLACEHOLDER${codeBlocks.length}END`;
-          codeBlocks.push(match);
-          return id;
-        });
-
-        // Extract Block Math: \\[ ... \\]
-        rawMarkdown = rawMarkdown.replace(/\\{1,2}\[([\s\S]*?)\\{1,2}\]/g, (match, code) => {
-          const id = `MATHBLOCKPLACEHOLDER${mathBlocks.length}END`;
-          mathBlocks.push({ code: cleanFormula(code), display: true });
-          return id;
-        });
-
-        // Extract Block Math: $$ ... $$
-        rawMarkdown = rawMarkdown.replace(/\$\$([\s\S]*?)\$\$/g, (match, code) => {
-          const id = `MATHBLOCKPLACEHOLDER${mathBlocks.length}END`;
-          mathBlocks.push({ code: cleanFormula(code), display: true });
-          return id;
-        });
-
-        // Extract Inline Math: \\( ... \\)
-        rawMarkdown = rawMarkdown.replace(/\\{1,2}\(([\s\S]*?)\\{1,2}\)/g, (match, code) => {
-          const id = `MATHINLINEPLACEHOLDER${mathBlocks.length}END`;
-          mathBlocks.push({ code: cleanFormula(code), display: false });
-          return id;
-        });
-
-        // Extract Inline Math: $ ... $
-        rawMarkdown = rawMarkdown.replace(/\$([^\$\n]+?)\$/g, (match, code) => {
-          const id = `MATHINLINEPLACEHOLDER${mathBlocks.length}END`;
-          mathBlocks.push({ code: cleanFormula(code), display: false });
-          return id;
-        });
-
-        // Restore code blocks for marked
-        codeBlocks.forEach((code, i) => {
-          rawMarkdown = rawMarkdown.replace(`CODEBLOCKPLACEHOLDER${i}END`, code);
-        });
-      }
-
-      let html = marked.parse(rawMarkdown);
-
-      if (enableMath && mathBlocks.length > 0) {
-        mathBlocks.forEach((item, i) => {
-          const token = item.display ? `MATHBLOCKPLACEHOLDER${i}END` : `MATHINLINEPLACEHOLDER${i}END`;
-          let renderedMath;
-          try {
-            renderedMath = katex.renderToString(item.code, {
-              displayMode: item.display,
-              throwOnError: false
-            });
-          } catch (e) {
-            renderedMath = `<span style="color:#ef4444;">[LaTeX 格式錯誤: ${escapeHtml(e.message)}]</span>`;
-          }
-
-          if (item.display) {
-            html = html.replace(`<p>${token}</p>`, `<div class="katex-display">${renderedMath}</div>`);
-            html = html.replace(token, `<div class="katex-display">${renderedMath}</div>`);
-          } else {
-            html = html.replace(token, renderedMath);
-          }
-        });
-      }
-
-      previewEl.innerHTML = html;
+      if (action === 'save') saveCurrentPost(false);
+      else if (action === 'publish') publishToGithub();
+      else if (action === 'newPost') createNewDraft();
+      else if (action === 'bold') insertSyntax('**', '**');
+      else if (action === 'italic') insertSyntax('*', '*');
+      else if (action === 'math') insertSyntax('\\[\n', '\n\\]');
+      else if (action === 'code') insertSyntax('```\n', '\n```');
+      else if (action === 'search') document.getElementById('searchInput').focus();
     }
 
     function onContentChange() {
       hasUnsavedChanges = true;
       calculateStats();
       renderPreview();
+      renderOutlineTOC();
     }
 
     function onTitleChange() {
       const title = document.getElementById('fmTitle').value;
       document.getElementById('displayTitle').innerText = title || '未命名文章';
-
       const filenameEl = document.getElementById('fmFilename');
       const isDraft = document.getElementById('fmIsDraft').checked;
       if (!currentPost || currentPost.filename.includes('new-draft') || currentPost.filename.includes('new-post')) {
         const slug = slugify(title);
-        if (isDraft) {
-          filenameEl.value = `${slug || 'draft'}.md`;
-        } else {
-          const dayPrefix = formatDate(new Date()).split(' ')[0];
-          filenameEl.value = `${dayPrefix}-${slug || 'post'}.md`;
-        }
+        filenameEl.value = isDraft ? `${slug || 'draft'}.md` : `${formatDate(new Date()).split(' ')[0]}-${slug || 'post'}.md`;
       }
       hasUnsavedChanges = true;
     }
 
     function slugify(text) {
-      return text
-        .toString()
-        .toLowerCase()
-        .trim()
+      return text.toString().toLowerCase().trim()
         .replace(/\s+/g, '-')
         .replace(/[^\w\u4e00-\u9fa5-]+/g, '')
         .replace(/--+/g, '-');
@@ -2050,13 +3174,7 @@
 
     function formatDate(d) {
       const pad = n => String(n).padStart(2, '0');
-      const year = d.getFullYear();
-      const month = pad(d.getMonth() + 1);
-      const day = pad(d.getDate());
-      const hours = pad(d.getHours());
-      const mins = pad(d.getMinutes());
-      const secs = pad(d.getSeconds());
-      return `${year}-${month}-${day} ${hours}:${mins}:${secs} +0800`;
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())} +0800`;
     }
 
     function setCurrentTime() {
@@ -2064,9 +3182,6 @@
       hasUnsavedChanges = true;
     }
 
-    // -----------------------------------------------------------------
-    // Toolbar Helpers
-    // -----------------------------------------------------------------
     function insertSyntax(before, after) {
       const textarea = document.getElementById('editorTextarea');
       const start = textarea.selectionStart;
@@ -2074,23 +3189,19 @@
       const text = textarea.value;
       const selected = text.substring(start, end);
 
-      const replacement = before + (selected || '範例內容') + after;
+      const replacement = before + (selected || '') + after;
       textarea.value = text.substring(0, start) + replacement + text.substring(end);
       textarea.focus();
       textarea.selectionStart = start + before.length;
-      textarea.selectionEnd = start + before.length + (selected ? selected.length : 4);
-
+      textarea.selectionEnd = start + before.length + selected.length;
       onContentChange();
     }
 
     function insertTable() {
-      const tableTpl = '\n| 欄位 1 | 欄位 2 | 欄位 3 |\n| :--- | :--- | :--- |\n| 項目 A | 內容 1 | 數值 |\n| 項目 B | 內容 2 | 數值 |\n\n';
-      insertSyntax(tableTpl, '');
+      insertSyntax('\n| 欄位 1 | 欄位 2 | 欄位 3 |\n| :--- | :--- | :--- |\n| 項目 A | 內容 1 | 數值 |\n| 項目 B | 內容 2 | 數值 |\n\n', '');
     }
 
-    // -----------------------------------------------------------------
-    // Publish to GitHub Workflow
-    // -----------------------------------------------------------------
+    // Publish to GitHub
     async function publishToGithub() {
       await saveCurrentPost(true);
 
@@ -2099,24 +3210,18 @@
       if (!cfgData.hasToken) {
         const ask = await Swal.fire({
           title: '尚未配置 GitHub Token',
-          html: `推送到 GitHub 需要 Personal Access Token 授權。<br>您是否要現在設定？`,
+          text: '推送到 GitHub 需要 Personal Access Token 授權，是否現在設定？',
           icon: 'info',
           showCancelButton: true,
-          confirmButtonText: '前往設定 Token',
-          cancelButtonText: '稍後再說'
+          confirmButtonText: '前往設定'
         });
         if (ask.isConfirmed) openSettings();
         return;
       }
 
       Swal.fire({
-        title: '正在發布到 GitHub...',
-        html: `
-          <div style="font-size: 0.88rem; color: var(--text-muted-color); margin-bottom: 12px;">
-            正在執行 Git 暫存、建立 Commit 並推送到遠端儲存庫...
-          </div>
-          <div class="log-box" id="publishLog">執行中...</div>
-        `,
+        title: '正在推送到 GitHub...',
+        html: `<div class="log-box" id="publishLog">正在執行 git add / commit / push...</div>`,
         allowOutsideClick: false,
         showConfirmButton: false,
         didOpen: async () => {
@@ -2124,30 +3229,21 @@
           try {
             const res = await fetch('/api/publish', { method: 'POST' });
             const data = await res.json();
-            const logBox = document.getElementById('publishLog');
-            if (logBox) logBox.innerText = data.log || '';
-
             if (data.success) {
+              lastRunStatus = 'building';
+              setTimeout(checkActionsStatus, 2500);
               Swal.fire({
                 icon: 'success',
-                title: '🎉 發布成功！',
+                title: '🚀 已成功推送至 GitHub！',
                 html: `
-                  <p>文章與圖片已順利推送到 GitHub！</p>
-                  <p style="font-size: 0.82rem; color: var(--text-muted-color); margin-top: 8px;">
-                    GitHub Actions 將在 1~2 分鐘內自動完成編譯上線。草稿 (_drafts) 則安全保留於庫中，不會向外洩露。
+                  <p style="font-size: 0.85rem; color: var(--text-muted-color);">
+                    右上角狀態列將自動監控 GitHub Actions 編譯進度，完成後會即時通知您！
                   </p>
-                  <div style="margin-top: 16px; display: flex; gap: 10px; justify-content: center;">
-                    <a href="https://${cfgData.repo}" target="_blank" class="btn btn-publish" style="text-decoration: none;">訪問線上網站</a>
-                    <a href="https://github.com/${cfgData.repo}/actions" target="_blank" class="btn" style="text-decoration: none;">查看部署進度</a>
-                  </div>
-                `
+                `,
+                timer: 2800
               });
             } else {
-              Swal.fire({
-                icon: 'error',
-                title: '發布失敗',
-                html: `<div class="log-box">${escapeHtml(data.log || data.error)}</div>`
-              });
+              Swal.fire({ icon: 'error', title: '推送失敗', html: `<div class="log-box">${escapeHtml(data.log || data.error)}</div>` });
             }
           } catch (err) {
             Swal.fire('錯誤', err.message, 'error');
@@ -2156,52 +3252,32 @@
       });
     }
 
-    // -----------------------------------------------------------------
-    // Settings Modal (GitHub & Shortcuts)
-    // -----------------------------------------------------------------
+    // Settings Modal
     async function openSettings() {
       document.getElementById('settingsModal').classList.add('active');
       switchSettingsTab('github');
-
       const cfgRes = await fetch('/api/config');
       const cfg = await cfgRes.json();
       if (cfg.success) {
         document.getElementById('cfgRepo').value = cfg.repo || 'DL049/DL049.github.io';
-        if (cfg.hasToken) {
-          document.getElementById('cfgToken').placeholder = `已配置 (${cfg.maskedToken})`;
-        }
+        if (cfg.hasToken) document.getElementById('cfgToken').placeholder = `已配置 (${cfg.maskedToken})`;
       }
-
       try {
         const gitRes = await fetch('/api/git/status');
         const git = await gitRes.json();
-        const box = document.getElementById('gitStatusBox');
         if (git.success) {
-          box.innerText = `分支: ${git.branch}\n最新 Commit: ${git.lastCommit}\n未提交變更:\n${git.changes || '(無未提交變更)'}`;
+          document.getElementById('gitStatusBox').innerText = `分支: ${git.branch}\n最新 Commit: ${git.lastCommit}\n未提交變更:\n${git.changes || '(無未提交變更)'}`;
         }
       } catch (e) {}
-
       renderShortcutTable();
     }
 
     function switchSettingsTab(tab) {
-      const tabGit = document.getElementById('modalTabGithub');
-      const tabShort = document.getElementById('modalTabShortcuts');
-      const panelGit = document.getElementById('settingsPanelGithub');
-      const panelShort = document.getElementById('settingsPanelShortcuts');
-
-      if (tab === 'github') {
-        tabGit.classList.add('active');
-        tabShort.classList.remove('active');
-        panelGit.style.display = 'flex';
-        panelShort.style.display = 'none';
-      } else {
-        tabShort.classList.add('active');
-        tabGit.classList.remove('active');
-        panelShort.style.display = 'flex';
-        panelGit.style.display = 'none';
-        renderShortcutTable();
-      }
+      document.getElementById('modalTabGithub').classList.toggle('active', tab === 'github');
+      document.getElementById('modalTabShortcuts').classList.toggle('active', tab !== 'github');
+      document.getElementById('settingsPanelGithub').style.display = tab === 'github' ? 'flex' : 'none';
+      document.getElementById('settingsPanelShortcuts').style.display = tab === 'github' ? 'none' : 'flex';
+      if (tab !== 'github') renderShortcutTable();
     }
 
     function closeSettings() {
@@ -2212,67 +3288,46 @@
     async function saveGithubSettings() {
       const repo = document.getElementById('cfgRepo').value.trim();
       const token = document.getElementById('cfgToken').value.trim();
-
       const payload = { repo };
       if (token) payload.githubToken = token;
-
-      try {
-        const res = await fetch('/api/config', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-        if (data.success) {
-          Swal.fire('成功', 'GitHub 設定已儲存', 'success');
-          closeSettings();
-        }
-      } catch (err) {
-        Swal.fire('錯誤', err.message, 'error');
+      const res = await fetch('/api/config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        Swal.fire('成功', '設定已儲存', 'success');
+        closeSettings();
       }
     }
 
-    // -----------------------------------------------------------------
-    // Jekyll Serve Controller
-    // -----------------------------------------------------------------
     async function checkPreviewStatus() {
       try {
         const res = await fetch('/api/preview/status');
         const data = await res.json();
-        updatePreviewBtn(data.running);
+        isJekyllRunning = data.running;
+        const btn = document.getElementById('btnPreviewToggle');
+        btn.innerHTML = data.running
+          ? `<i class="fa-solid fa-stop" style="color: #ef4444;"></i>`
+          : `<i class="fa-solid fa-play" style="color: #10b981;"></i>`;
       } catch (e) {}
-    }
-
-    function updatePreviewBtn(running) {
-      isJekyllRunning = running;
-      const btn = document.getElementById('btnPreviewToggle');
-      if (running) {
-        btn.innerHTML = `<i class="fa-solid fa-stop" style="color: #ef4444;"></i>`;
-        btn.title = '停止本地 Jekyll 預覽服務';
-      } else {
-        btn.innerHTML = `<i class="fa-solid fa-play" style="color: #10b981;"></i>`;
-        btn.title = '啟動本地 Jekyll 預覽服務 (包含草稿預覽 http://localhost:4000)';
-      }
     }
 
     async function toggleJekyllPreview() {
       const endpoint = isJekyllRunning ? '/api/preview/stop' : '/api/preview/start';
-      try {
-        const res = await fetch(endpoint, { method: 'POST' });
-        const data = await res.json();
-        if (data.success) {
-          await checkPreviewStatus();
-          if (!isJekyllRunning) {
-            Swal.fire({
-              icon: 'info',
-              title: 'Jekyll 預覽已啟動',
-              html: `正在本地啟動 Jekyll 服務（已開啟草稿預覽 --drafts），請訪問：<br><a href="http://127.0.0.1:4000" target="_blank" style="color: var(--link-color); font-weight: bold;">http://127.0.0.1:4000</a>`,
-              timer: 5000
-            });
-          }
+      const res = await fetch(endpoint, { method: 'POST' });
+      const data = await res.json();
+      if (data.success) {
+        await checkPreviewStatus();
+        if (isJekyllRunning) {
+          Swal.fire({
+            icon: 'info',
+            title: 'Jekyll 全站預覽已啟動',
+            html: `請訪問：<a href="http://127.0.0.1:4000" target="_blank" style="color: var(--link-color);">http://127.0.0.1:4000</a>`,
+            timer: 4000
+          });
         }
-      } catch (err) {
-        Swal.fire('錯誤', err.message, 'error');
       }
     }
 

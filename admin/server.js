@@ -1,4 +1,5 @@
 const http = require('http');
+const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const { exec, spawn } = require('child_process');
@@ -51,20 +52,38 @@ function parsePost(raw) {
   const frontmatter = {};
 
   const lines = fmRaw.split(/\r?\n/);
-  for (let line of lines) {
-    line = line.trim();
-    if (!line || line.startsWith('#')) continue;
+  let currentBlockKey = null;
 
+  for (let rawLine of lines) {
+    if (!rawLine.trim() || rawLine.trim().startsWith('#')) continue;
+
+    // Handle indented sub-properties (e.g. image:\n  path: /assets/...)
+    if (/^\s+/.test(rawLine) && currentBlockKey === 'image') {
+      const subColon = rawLine.indexOf(':');
+      if (subColon !== -1) {
+        const subKey = rawLine.slice(0, subColon).trim();
+        const subVal = rawLine.slice(subColon + 1).trim().replace(/^['"]|['"]$/g, '');
+        if (subKey === 'path') {
+          frontmatter.image = subVal;
+        }
+      }
+      continue;
+    }
+
+    const line = rawLine.trim();
     const colonIdx = line.indexOf(':');
     if (colonIdx === -1) continue;
 
     const key = line.slice(0, colonIdx).trim();
     let val = line.slice(colonIdx + 1).trim();
+    currentBlockKey = key;
 
     // Strip inline comments if not part of a URL
     if (val.includes(' #') && !val.includes('http')) {
       val = val.split(' #')[0].trim();
     }
+
+    if (!val) continue;
 
     if (val.startsWith('[') && val.endsWith(']')) {
       const items = val
@@ -107,7 +126,12 @@ function formatPost(frontmatter, content) {
     fmLines.push(`tags: [${cleanTags.join(', ')}]`);
   }
 
+  if (frontmatter.pin) fmLines.push(`pin: true`);
+  if (frontmatter.image && String(frontmatter.image).trim()) {
+    fmLines.push(`image: ${String(frontmatter.image).trim()}`);
+  }
   fmLines.push(`math: ${frontmatter.math ? 'true' : 'false'}`);
+  if (frontmatter.mermaid) fmLines.push(`mermaid: true`);
   fmLines.push(`toc: ${frontmatter.toc !== false ? 'true' : 'false'}`);
   fmLines.push('---');
 
@@ -126,6 +150,36 @@ function runCmd(command, cwd = ROOT_DIR) {
         error: error ? error.message : null
       });
     });
+  });
+}
+
+// Helper: HTTPS JSON GET request (for GitHub API)
+function fetchGithubJson(apiPath, token) {
+  return new Promise((resolve, reject) => {
+    const headers = {
+      'User-Agent': 'DLib-Blog-Admin/2.0',
+      'Accept': 'application/vnd.github.v3+json'
+    };
+    if (token) {
+      headers['Authorization'] = `token ${token}`;
+    }
+    const req = https.get({
+      hostname: 'api.github.com',
+      path: apiPath,
+      headers
+    }, (res) => {
+      let raw = '';
+      res.on('data', chunk => { raw += chunk; });
+      res.on('end', () => {
+        try {
+          resolve({ status: res.statusCode, data: JSON.parse(raw) });
+        } catch (e) {
+          resolve({ status: res.statusCode, data: {} });
+        }
+      });
+    });
+    req.on('error', err => reject(err));
+    req.end();
   });
 }
 
@@ -164,12 +218,16 @@ function scanMarkdownDir(dir, isDraft) {
         isDraft,
         title: frontmatter.title || file.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, ''),
         date: frontmatter.date || '',
-        categories: frontmatter.categories || [],
-        tags: frontmatter.tags || [],
+        categories: Array.isArray(frontmatter.categories) ? frontmatter.categories : (frontmatter.categories ? [frontmatter.categories] : []),
+        tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : (frontmatter.tags ? [frontmatter.tags] : []),
+        pin: !!frontmatter.pin,
         math: !!frontmatter.math,
+        mermaid: !!frontmatter.mermaid,
         toc: frontmatter.toc !== false,
+        image: frontmatter.image || '',
         description: frontmatter.description || '',
         excerpt,
+        rawContent: raw,
         mtime: stat.mtime
       });
     } catch (e) {
@@ -177,6 +235,31 @@ function scanMarkdownDir(dir, isDraft) {
     }
   }
   return list;
+}
+
+// Scan images in assets/img/posts recursively
+function scanAllImages(dir, baseFolder = '') {
+  if (!fs.existsSync(dir)) return [];
+  let results = [];
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    const relFolder = baseFolder ? `${baseFolder}/${entry.name}` : entry.name;
+    if (entry.isDirectory()) {
+      results = results.concat(scanAllImages(fullPath, relFolder));
+    } else if (/\.(png|jpe?g|gif|webp|svg)$/i.test(entry.name)) {
+      const stat = fs.statSync(fullPath);
+      const webUrl = `/assets/img/posts/${relFolder.replace(/\\/g, '/')}`;
+      results.push({
+        url: webUrl,
+        filename: entry.name,
+        folder: baseFolder || 'root',
+        size: stat.size,
+        mtime: stat.mtime
+      });
+    }
+  }
+  return results;
 }
 
 // HTTP Server
@@ -218,12 +301,13 @@ const server = http.createServer(async (req, res) => {
   // 1. List Posts (Both Published and Drafts)
   if (method === 'GET' && pathname === '/api/posts') {
     try {
-      const publishedPosts = scanMarkdownDir(POSTS_DIR, false);
-      const draftPosts = scanMarkdownDir(DRAFTS_DIR, true);
+      const publishedPosts = scanMarkdownDir(POSTS_DIR, false).map(({ rawContent, ...rest }) => rest);
+      const draftPosts = scanMarkdownDir(DRAFTS_DIR, true).map(({ rawContent, ...rest }) => rest);
       const allPosts = [...publishedPosts, ...draftPosts];
 
-      // Sort by date or filename descending
+      // Sort: Pinned first, then by date or filename descending
       allPosts.sort((a, b) => {
+        if (a.pin !== b.pin) return a.pin ? -1 : 1;
         if (a.date && b.date) return b.date.localeCompare(a.date);
         return b.filename.localeCompare(a.filename);
       });
@@ -354,7 +438,6 @@ const server = http.createServer(async (req, res) => {
         return json({ success: false, error: '未提供圖片數據' }, 400);
       }
 
-      // Determine date subfolder YYYYMM
       const now = new Date();
       const yyyymm = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}`;
       const targetSubDir = path.join(IMG_DIR, yyyymm);
@@ -362,7 +445,6 @@ const server = http.createServer(async (req, res) => {
         fs.mkdirSync(targetSubDir, { recursive: true });
       }
 
-      // Determine file extension and decode base64
       let ext = '.png';
       let buffer;
       const dataUriMatch = rawData.match(/^data:image\/([a-zA-Z0-9-+.]+);base64,(.+)$/);
@@ -382,7 +464,6 @@ const server = http.createServer(async (req, res) => {
         buffer = Buffer.from(rawData, 'base64');
       }
 
-      // Generate unique safe filename
       const timestamp = Date.now();
       const randomStr = Math.random().toString(36).substring(2, 7);
       const safeFilename = `img_${timestamp}_${randomStr}${ext}`;
@@ -396,6 +477,52 @@ const server = http.createServer(async (req, res) => {
         url: publicUrl,
         filename: safeFilename
       });
+    } catch (err) {
+      return json({ success: false, error: err.message }, 500);
+    }
+  }
+
+  // 5b. Media Library: List all images & check usage across posts
+  if (method === 'GET' && pathname === '/api/images') {
+    try {
+      const images = scanAllImages(IMG_DIR);
+      const allDocs = [
+        ...scanMarkdownDir(POSTS_DIR, false),
+        ...scanMarkdownDir(DRAFTS_DIR, true)
+      ];
+
+      const enriched = images.map(img => {
+        const usedIn = allDocs
+          .filter(doc => doc.rawContent.includes(img.url) || doc.image === img.url)
+          .map(doc => ({ filename: doc.filename, title: doc.title, isDraft: doc.isDraft }));
+        return { ...img, usedIn };
+      });
+
+      // Sort newest first
+      enriched.sort((a, b) => new Date(b.mtime) - new Date(a.mtime));
+      return json({ success: true, images: enriched });
+    } catch (err) {
+      return json({ success: false, error: err.message }, 500);
+    }
+  }
+
+  // 5c. Media Library: Delete image
+  if (method === 'DELETE' && pathname === '/api/images') {
+    try {
+      const data = await getBody();
+      const url = data.url || '';
+      if (!url.startsWith('/assets/img/posts/')) {
+        return json({ success: false, error: '不允許刪除非文章圖片目錄的檔案' }, 403);
+      }
+      const targetFile = path.join(ROOT_DIR, url.replace(/\//g, path.sep));
+      if (!targetFile.startsWith(IMG_DIR)) {
+        return json({ success: false, error: '路徑越權' }, 403);
+      }
+      if (fs.existsSync(targetFile)) {
+        fs.unlinkSync(targetFile);
+        return json({ success: true });
+      }
+      return json({ success: false, error: '圖片檔案不存在' }, 404);
     } catch (err) {
       return json({ success: false, error: err.message }, 500);
     }
@@ -425,7 +552,7 @@ const server = http.createServer(async (req, res) => {
     return json({ success: true });
   }
 
-  // 7. Git Status
+  // 7. Git Status & Git Pull
   if (method === 'GET' && pathname === '/api/git/status') {
     const statusRes = await runCmd('git status -s');
     const logRes = await runCmd('git log -1 --pretty=format:"%h - %s (%cr)"');
@@ -440,19 +567,59 @@ const server = http.createServer(async (req, res) => {
     });
   }
 
-  // 8. Publish to GitHub
+  if (method === 'POST' && pathname === '/api/git/pull') {
+    const cfg = readConfig();
+    let pullCmd = 'git pull --rebase origin main';
+    if (cfg.githubToken && cfg.githubToken.trim()) {
+      const repoUrl = `https://${cfg.githubToken}@github.com/${cfg.repo || 'DL049/DL049.github.io'}.git`;
+      pullCmd = `git pull --rebase ${repoUrl} main`;
+    }
+    const resPull = await runCmd(pullCmd);
+    const cleanLog = (resPull.stdout || resPull.stderr || '').replace(new RegExp(cfg.githubToken || '___', 'g'), '***');
+    return json({
+      success: resPull.success,
+      log: cleanLog || '已是最新狀態'
+    });
+  }
+
+  // 8. GitHub Actions Live Status
+  if (method === 'GET' && pathname === '/api/actions/status') {
+    const cfg = readConfig();
+    const repo = cfg.repo || 'DL049/DL049.github.io';
+    try {
+      const result = await fetchGithubJson(`/repos/${repo}/actions/runs?per_page=3`, cfg.githubToken);
+      if (result.status === 200 && result.data && Array.isArray(result.data.workflow_runs)) {
+        const latest = result.data.workflow_runs[0];
+        return json({
+          success: true,
+          run: latest ? {
+            id: latest.id,
+            name: latest.name,
+            status: latest.status,
+            conclusion: latest.conclusion,
+            created_at: latest.created_at,
+            updated_at: latest.updated_at,
+            html_url: latest.html_url
+          } : null
+        });
+      }
+      return json({ success: false, error: '無法取得 Actions 狀態' });
+    } catch (err) {
+      return json({ success: false, error: err.message });
+    }
+  }
+
+  // 9. Publish to GitHub
   if (method === 'POST' && pathname === '/api/publish') {
     const cfg = readConfig();
     const logs = [];
 
-    // Step 1: git add
     logs.push('[1/3] 正在暫存變更 (git add .)...');
     const addRes = await runCmd('git add .');
     if (!addRes.success) {
       return json({ success: false, error: 'git add 失敗', log: addRes.stderr || addRes.stdout });
     }
 
-    // Step 2: git commit
     logs.push('[2/3] 正在建立 Commit...');
     const statusCheck = await runCmd('git status --porcelain');
     if (statusCheck.stdout.trim()) {
@@ -466,7 +633,6 @@ const server = http.createServer(async (req, res) => {
       logs.push('沒有需要 Commit 的新變更，直接進行推送。');
     }
 
-    // Step 3: git push
     logs.push('[3/3] 正在推送到 GitHub...');
     let pushCmd = 'git push origin main';
 
@@ -477,7 +643,7 @@ const server = http.createServer(async (req, res) => {
 
     const pushRes = await runCmd(pushCmd);
     if (!pushRes.success) {
-      let cleanErr = (pushRes.stderr || pushRes.stdout || pushRes.error || '').replace(new RegExp(cfg.githubToken, 'g'), '***TOKEN***');
+      let cleanErr = (pushRes.stderr || pushRes.stdout || pushRes.error || '').replace(new RegExp(cfg.githubToken || '___', 'g'), '***TOKEN***');
       logs.push(`推送失敗: ${cleanErr}`);
       return json({
         success: false,
@@ -486,6 +652,7 @@ const server = http.createServer(async (req, res) => {
       });
     }
 
+    await runCmd('git update-ref refs/remotes/origin/main HEAD');
     logs.push('🎉 成功推送到 GitHub！GitHub Actions 將自動開始構建與發布。');
     return json({
       success: true,
@@ -493,7 +660,7 @@ const server = http.createServer(async (req, res) => {
     });
   }
 
-  // 9. Preview Toggle (Jekyll Serve with --drafts flag)
+  // 10. Preview Toggle (Jekyll Serve with --drafts flag)
   if (method === 'POST' && pathname === '/api/preview/start') {
     if (jekyllProcess) {
       return json({ success: true, message: '預覽服務已在運行中' });
@@ -534,7 +701,7 @@ const server = http.createServer(async (req, res) => {
     return json({ success: true, running: !!jekyllProcess, url: 'http://127.0.0.1:4000' });
   }
 
-  // 10. Static File Serving (Admin UI) & Assets Serving
+  // 11. Static File Serving (Admin UI) & Assets Serving
   let filePath;
   if (pathname.startsWith('/assets/')) {
     filePath = path.join(ROOT_DIR, pathname);
@@ -548,7 +715,6 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(200, { 'Content-Type': contentType });
     fs.createReadStream(filePath).pipe(res);
   } else {
-    // SPA fallback
     const fallbackPath = path.join(PUBLIC_DIR, 'index.html');
     if (fs.existsSync(fallbackPath)) {
       res.writeHead(200, { 'Content-Type': 'text/html; charset=UTF-8' });
@@ -562,7 +728,7 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`===============================================`);
-  console.log(`  D-Lib 部落格管理後台 (升級版) 已成功啟動！`);
+  console.log(`  D-Lib 部落格管理後台 (Phase 2 旗艦版) 已啟動！`);
   console.log(`  管理後台網址: http://localhost:${PORT}`);
   console.log(`  按 Ctrl + C 可關閉服務`);
   console.log(`===============================================`);

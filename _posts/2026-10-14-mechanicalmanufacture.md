@@ -8,12 +8,13 @@ toc: true
 ---
 
 # 機械製造 (Mechanical Manufacturing) 期中題庫完整解答 (Midterm 1)
-## Bilingual Comprehensive Exam Preparation Guide (中英雙語對照標準解答)
+## Bilingual Comprehensive Exam Preparation Guide (中英雙語對照標準解答 - 純條列無表格相容版)
 
 > **Course**: ME2500 機械製造 (MANUFACTURING PROCESSES)  
 > **Instructor**: Prof. Chunhui Chung (鍾春暉 教授)  
 > **Scope**: Chapter 0 (Introduction) to Chapter 11 (Metal-Casting Processes) — Total 58 Questions  
-> **Reference**: Serope Kalpakjian & Steven R. Schmid, *Manufacturing Engineering and Technology*, Lecture Slides (`MFG_chap 0` ~ `MFG_chap 11`)
+> **Reference**: Serope Kalpakjian & Steven R. Schmid, *Manufacturing Engineering and Technology*, Lecture Slides (`MFG_chap 0` ~ `MFG_chap 11`)  
+> **Format Note**: 全文採用純條列與分項結構化排版（完全無表格語法），相容於各類閱讀器、Word 匯入與手寫考試作答格式。
 
 ---
 
@@ -41,14 +42,14 @@ toc: true
 - **對應簡報**：`MFG_chap 0` Slide 4, 8; Kalpakjian General Introduction
 - **Model Answer for Exam (英文標準作答)**:
   The major trends in modern manufacturing include:
-  1. **Green and Sustainable Manufacturing**: Emphasizing environmental protection, energy efficiency, reduction of hazardous waste, carbon footprint reduction, and extensive recycling/remanufacturing.
+  1. **Green and Sustainable Manufacturing**: Emphasizing environmental protection, energy efficiency, reduction of hazardous waste, carbon footprint reduction, and extensive recycling and remanufacturing.
   2. **Smart Manufacturing and Industry 4.0 / Automation**: Integrating the Industrial Internet of Things (IoT), artificial intelligence (AI), big data analytics, robotics, and cyber-physical systems (CPS) with digital twins for autonomous process control and real-time quality monitoring.
   3. **Advanced Materials and Advanced Processes**: Increasing adoption of high-performance composites, nanomaterials, shape-memory alloys, ultra-high-strength steels, alongside additive manufacturing (3D printing), laser machining, and electrical discharge machining (EDM).
   4. **Mass Customization and Shorter Product Lifecycles**: Transitioning from mass standardization to flexible manufacturing systems (FMS) to deliver personalized products with rapid time-to-market.
   5. **Lean Manufacturing and Total Quality Management (TQM)**: Continuous waste elimination, Six Sigma, and zero-defect initiatives to control total manufacturing costs (which account for ~40% of product selling price).
   6. **Resilient Global Supply Chains**: Enhancing supply chain visibility and agility through nearshoring, reshoring, and localized production networks to mitigate global disruption risks.
 - **中文觀念解析**：
-  現代製造業著重於永續綠色低碳、高度自動化與智慧決策（工業 4.0）、新穎材料與積層製造技術結合、小批量高彈性客製化，以及精實生產控制成本（製造成本約佔售價 40%）。
+  現代製造業著重於六大核心：綠色永續與低碳排、智慧製造與自動化（工業 4.0、物聯網、AI）、先進材料與積層製造、小批量高彈性客製化與產品週期縮短、精實生產控制成本（製造成本約占售價 40%），以及區域化敏捷供應鏈。
 
 ---
 
@@ -59,16 +60,18 @@ toc: true
 - **對應簡報**：`MFG_chap 1` Slide 6, 7
 - **Model Answer for Exam (英文標準作答)**:
   1. **Ionic Bond**:
-     - *Mechanism*: Formed by the complete transfer of one or more valence electrons from an electropositive atom (metal) to an electronegative atom (nonmetal), creating cations and anions held together by strong electrostatic Coulomb attraction (e.g., $\text{NaCl}$).
-     - *Properties*: High bond strength, high melting point, and high hardness; but brittle (lacks ductility) and acts as an electrical and thermal insulator at room temperature.
+     - **Mechanism**: Formed by the complete transfer of one or more valence electrons from an electropositive atom (metal) to an electronegative atom (nonmetal), creating cations and anions held together by strong electrostatic Coulomb attraction (e.g., NaCl).
+     - **Properties**: High bond strength, high melting point, and high hardness; but brittle (lacks ductility) and acts as an electrical and thermal insulator at room temperature.
   2. **Covalent Bond**:
-     - *Mechanism*: Formed when adjacent atoms share pairs of valence electrons to achieve stable electron configurations (e.g., diamond, silicon, and the carbon backbone of polymers).
-     - *Properties*: Highly directional, extremely high bond energy, very high hardness and melting point, brittle, and low electrical conductivity.
+     - **Mechanism**: Formed when adjacent atoms share pairs of valence electrons to achieve stable octet electron configurations (e.g., diamond, silicon, and the carbon backbone of polymers).
+     - **Properties**: Highly directional, extremely high bond energy, very high hardness and melting point, brittle, and low electrical conductivity.
   3. **Metallic Bond**:
-     - *Mechanism*: Valence electrons are delocalized and shared by all positive ion cores, forming a continuous "sea of electrons" that holds the lattice together (e.g., copper, aluminum, iron).
-     - *Properties*: Non-directional bonding allows atomic planes to slip without cleavage, imparting high ductility and formability, along with excellent thermal and electrical conductivities.
+     - **Mechanism**: Valence electrons are delocalized and shared among all positive ion cores, forming a continuous "sea of electrons" that holds the lattice together (e.g., copper, aluminum, iron).
+     - **Properties**: Non-directional bonding allows atomic planes to slip without cleavage, imparting high ductility and formability, along with excellent thermal and electrical conductivities.
 - **中文觀念解析**：
-  離子鍵為電荷轉移的靜電引力（硬而脆、絕緣）；共價鍵為共用電子對（具強方向性、超高硬度、脆性）；金屬鍵為自由電子海（非方向性、高延展性、導電導熱俱佳）。
+  - 離子鍵：電子完全轉移形成陰陽離子，依靠靜電引力結合（硬而脆、無自由電子故絕緣）。
+  - 共價鍵：相鄰原子共用價電子對，具強方向性（硬度與熔點極高，但呈脆性且導電差）。
+  - 金屬鍵：價電子脫離束縛形成自由電子海（非方向性，滑移不易斷鍵故具高延展性，導電導熱優異）。
 
 ---
 
@@ -82,7 +85,7 @@ toc: true
     $$\sigma = K \varepsilon^n$$
     where $\sigma$ is true flow stress, $\varepsilon$ is true strain, $K$ is the strength coefficient, and $n$ is the strain-hardening exponent ($0 < n < 1$).
 - **中文觀念解析**：
-  金屬在常溫冷加工塑性變形時，內部差排大量增生並互相纏結形成阻礙，使差排後續滑移阻力增大，宏觀表現為降伏強度與硬度隨應變增加而上升，延展性降低。
+  金屬在常溫冷加工塑性變形時，內部差排大量增生並互相糾結阻礙滑移，宏觀表現為材料的降伏強度與硬度隨塑性應變增加而顯著提高，延展性降低。
 
 ---
 
@@ -92,13 +95,13 @@ toc: true
 - **Model Answer for Exam (英文標準作答)**:
   - **Definition**: Grain boundaries are narrow transition interfaces (planar imperfections) that separate individual crystalline grains having different crystallographic orientations, formed when randomly oriented crystals impinge during solidification.
   - **Effects on Mechanical Properties**:
-    1. *Barrier to Dislocation Slip*: Because slip planes and directions change abruptly across boundaries, and the boundary atomic arrangement is disordered, dislocations cannot cross freely and pile up at grain boundaries.
-    2. *Hall-Petch Strengthening*: Finer grains produce more grain boundary area per unit volume, which increases yield strength and hardness at room temperature according to the Hall-Petch equation:
+    1. **Barrier to Dislocation Slip**: Because slip planes and directions change abruptly across boundaries, and the boundary atomic arrangement is disordered, dislocations cannot cross freely and pile up at grain boundaries.
+    2. **Hall-Petch Strengthening**: Finer grains produce more grain boundary area per unit volume, which increases yield strength and hardness at room temperature according to the Hall-Petch equation:
        $$\sigma_y = \sigma_0 + \frac{k_y}{\sqrt{d}}$$
-       where $d$ is the average grain diameter. Grain refinement is the only mechanism that simultaneously increases strength and toughness.
-    3. *Chemical & High-Temperature Behavior*: Grain boundaries have higher energy, making them susceptible to corrosion (intergranular corrosion) and diffusion; at high temperatures, grain boundary sliding can cause creep deformation.
+       where $d$ is the average grain diameter. Grain refinement is the only strengthening mechanism that simultaneously increases strength and toughness.
+    3. **Chemical & High-Temperature Behavior**: Grain boundaries have higher energy, making them susceptible to corrosion (intergranular corrosion) and atomic diffusion; at high temperatures, grain boundary sliding can cause creep deformation.
 - **中文觀念解析**：
-  晶界為不同結晶方位晶粒間的交界面（面缺陷），會阻礙差排滑移；晶粒越細小，晶界面積越多，常溫強度與韌性越高（霍爾-佩奇效應）。
+  晶界為不同結晶方位晶粒之間的過渡界面（面缺陷），能有效阻礙差排滑移；晶粒越細小，晶界面積越多，常溫降伏強度與韌性越高（霍爾-佩奇效應）。
 
 ---
 
@@ -109,27 +112,29 @@ toc: true
 
 #### (1) Body-Centered Cubic (BCC) Structure:
 1. **Lattice Parameter ($a$) and Atomic Radius ($R$)**:
-   - Atoms touch along the **body diagonal**:
-     $$\sqrt{3} a = 4R \implies a = \frac{4R}{\sqrt{3}}$$
+   Atoms touch along the body diagonal:
+   $$\sqrt{3} a = 4R \implies a = \frac{4R}{\sqrt{3}}$$
 2. **Number of Atoms per Unit Cell ($N_{\text{BCC}}$)**:
-   - 8 corner atoms $\times \frac{1}{8} + 1$ center atom $\times 1 = 2\text{ atoms}$.
+   $$N_{\text{BCC}} = 8 \times \left(\frac{1}{8}\right) + 1 = 2\text{ atoms}$$
 3. **Volumes**:
-   - Volume of atoms: $V_{\text{atoms}} = 2 \times \left(\frac{4}{3}\pi R^3\right) = \frac{8}{3}\pi R^3$
-   - Volume of unit cell: $V_{\text{cell}} = a^3 = \left(\frac{4R}{\sqrt{3}}\right)^3 = \frac{64 R^3}{3\sqrt{3}}$
+   - Volume of atoms:
+     $$V_{\text{atoms}} = 2 \times \left(\frac{4}{3}\pi R^3\right) = \frac{8}{3}\pi R^3$$
+   - Volume of unit cell:
+     $$V_{\text{cell}} = a^3 = \left(\frac{4R}{\sqrt{3}}\right)^3 = \frac{64 R^3}{3\sqrt{3}}$$
 4. **Atomic Packing Factor (APF)**:
    $$\text{APF}_{\text{BCC}} = \frac{V_{\text{atoms}}}{V_{\text{cell}}} = \frac{\frac{8}{3}\pi R^3}{\frac{64 R^3}{3\sqrt{3}}} = \frac{\pi \sqrt{3}}{8} \approx \frac{3.14159 \times 1.73205}{8} \approx \mathbf{0.6802} \approx \mathbf{0.68} \quad (68\%)$$
 
----
-
 #### (2) Face-Centered Cubic (FCC) Structure:
 1. **Lattice Parameter ($a$) and Atomic Radius ($R$)**:
-   - Atoms touch along the **face diagonal**:
-     $$\sqrt{2} a = 4R \implies a = \frac{4R}{\sqrt{2}} = 2\sqrt{2}R$$
+   Atoms touch along the face diagonal:
+   $$\sqrt{2} a = 4R \implies a = \frac{4R}{\sqrt{2}} = 2\sqrt{2}R$$
 2. **Number of Atoms per Unit Cell ($N_{\text{FCC}}$)**:
-   - 8 corner atoms $\times \frac{1}{8} + 6$ face-center atoms $\times \frac{1}{2} = 1 + 3 = 4\text{ atoms}$.
+   $$N_{\text{FCC}} = 8 \times \left(\frac{1}{8}\right) + 6 \times \left(\frac{1}{2}\right) = 1 + 3 = 4\text{ atoms}$$
 3. **Volumes**:
-   - Volume of atoms: $V_{\text{atoms}} = 4 \times \left(\frac{4}{3}\pi R^3\right) = \frac{16}{3}\pi R^3$
-   - Volume of unit cell: $V_{\text{cell}} = a^3 = (2\sqrt{2}R)^3 = 16\sqrt{2} R^3$
+   - Volume of atoms:
+     $$V_{\text{atoms}} = 4 \times \left(\frac{4}{3}\pi R^3\right) = \frac{16}{3}\pi R^3$$
+   - Volume of unit cell:
+     $$V_{\text{cell}} = a^3 = (2\sqrt{2}R)^3 = 16\sqrt{2} R^3$$
 4. **Atomic Packing Factor (APF)**:
    $$\text{APF}_{\text{FCC}} = \frac{V_{\text{atoms}}}{V_{\text{cell}}} = \frac{\frac{16}{3}\pi R^3}{16\sqrt{2} R^3} = \frac{\pi}{3\sqrt{2}} = \frac{\pi \sqrt{2}}{6} \approx \frac{3.14159 \times 1.41421}{6} \approx \mathbf{0.7405} \approx \mathbf{0.74} \quad (74\%)$$
 *(Note: HCP structure also has an APF of $\frac{\pi}{3\sqrt{2}} \approx 0.74$.)*
@@ -141,32 +146,47 @@ toc: true
 ### 6. Distinguish between engineering stress and true stress.
 - **題目翻譯**：請區別工程應力與真應力。
 - **對應簡報**：`MFG_chap 2` Slide 4, 11
-- **Model Answer for Exam (英文標準作答)**:
-  | Feature | Engineering Stress ($\sigma_e$) | True Stress ($\sigma$) |
-  | :--- | :--- | :--- |
-  | **Definition** | $\sigma_e = \frac{P}{A_0}$ | $\sigma = \frac{P}{A}$ |
-  | **Area Basis** | Based on the **original** cross-sectional area ($A_0$). | Based on the **instantaneous actual** cross-sectional area ($A$). |
-  | **Post-Necking Behavior** | After necking, the curve **artificially drops** because $A_0$ is constant while the load decreases. | Continues to **increase monotonically** until fracture, representing actual material resistance. |
-  | **Relationship** | Prior to necking (constant volume $A_0 l_0 = A l$): $\sigma = \sigma_e (1 + e)$. |
-  | **Application** | Standard mechanical design criteria and engineering safety margins. | Plastic deformation and metal forming analysis (rolling, forging, extrusion). |
+- **Model Answer for Exam (英文標準作答 - 條列式對比)**:
+  #### 1. Engineering Stress (Nominal Stress, $\sigma_e$):
+  - **Definition & Formula**: Defined as the applied load divided by the original cross-sectional area:
+    $$\sigma_e = \frac{P}{A_0}$$
+  - **Cross-Sectional Basis**: Uses fixed initial area $A_0$; does not account for instantaneous reduction in area.
+  - **Post-Necking Behavior**: After necking begins, the engineering stress curve falsely bends downward because load drops while $A_0$ is held constant.
+  - **Relationship**: Prior to necking, $\sigma = \sigma_e (1 + e)$.
+  - **Application**: Used in standard structural design codes, engineering material specifications, and safety factor calculations.
+
+  #### 2. True Stress (Flow Stress, $\sigma$):
+  - **Definition & Formula**: Defined as the applied load divided by the actual instantaneous cross-sectional area:
+    $$\sigma = \frac{P}{A}$$
+  - **Cross-Sectional Basis**: Continuously tracks actual instantaneous area $A$ during deformation.
+  - **Post-Necking Behavior**: Continues to rise monotonically until fracture, accurately representing the true resistance of the material to plastic flow.
+  - **Application**: Essential for plastic deformation mechanics, metal forming operations (rolling, forging, extrusion), and finite element modeling.
 - **中文觀念解析**：
-  工程應力除以初始面積 $A_0$，頸縮後虛假下滑；真應力除以瞬時實際面積 $A$，真實反映材料當下承受的流動應力，單調遞增直至斷裂。
+  - 工程應力是以原始橫截面積 $A_0$ 計算，頸縮後載重下降導致曲線虛假下滑。
+  - 真應力是以瞬時實際橫截面積 $A$ 計算，真實反映材料當下的流動應力，單調遞增直到斷裂。
 
 ---
 
 ### 7. Describe the difference between brittle and ductile fracture.
 - **題目翻譯**：請描述脆性破壞與延性破壞之間的差異。
 - **對應簡報**：`MFG_chap 2` Slide 30, 31, 33, 34
-- **Model Answer for Exam (英文標準作答)**:
-  | Characteristic | Ductile Fracture | Brittle Fracture |
-  | :--- | :--- | :--- |
-  | **Plastic Deformation** | Characterized by **extensive plastic deformation** and necking before failure. | Occurs with **negligible or no plastic deformation** before sudden failure. |
-  | **Energy Absorption (Toughness)** | Absorbs high plastic energy (**high toughness**). | Absorbs minimal energy (**low toughness**). |
-  | **Crack Propagation** | **Stable** crack growth; requires continuous application of force to propagate. | **Unstable and catastrophic**; crack propagates rapidly near the speed of sound. |
-  | **Fracture Surface Appearance** | Dull, fibrous, and dimpled microvoid pattern; classic **cup-and-cone** appearance. | Flat, bright, and granular/crystalline reflective appearance (cleavage). |
-  | **Driving Stress Mechanism** | Governed primarily by **maximum shear stress** along slip planes. | Governed primarily by **maximum normal tensile stress** perpendicular to cleavage planes. |
+- **Model Answer for Exam (英文標準作答 - 條列式對比)**:
+  #### 1. Ductile Fracture:
+  - **Plastic Deformation**: Preceded by extensive plastic deformation and noticeable localized necking before failure.
+  - **Energy Absorption & Toughness**: High energy absorption; exhibits high fracture toughness.
+  - **Crack Propagation**: Stable crack growth; requires continuous application of increasing stress to propagate.
+  - **Fracture Surface Appearance**: Dull, fibrous, and dimpled microvoid pattern; classic "cup-and-cone" macroscopic appearance.
+  - **Stress Mechanism**: Governed primarily by maximum shear stress along slip planes.
+
+  #### 2. Brittle Fracture:
+  - **Plastic Deformation**: Occurs with negligible or no prior plastic deformation; no necking.
+  - **Energy Absorption & Toughness**: Minimal energy absorption; exhibits low fracture toughness.
+  - **Crack Propagation**: Unstable and catastrophic; cracks propagate at speeds approaching the speed of sound.
+  - **Fracture Surface Appearance**: Flat, bright, and crystalline/granular reflective appearance with cleavage facets.
+  - **Stress Mechanism**: Governed primarily by maximum normal tensile stress perpendicular to cleavage planes.
 - **中文觀念解析**：
-  延性破壞有大量塑性變形、頸縮、高韌性、杯錐狀暗色纖維斷口；脆性破壞無塑性變形、裂紋瞬間失穩失控、斷口平整明亮具反光結晶面。
+  - 延性破壞有明顯頸縮與塑性變形、吸收大量能量（高韌性）、杯錐狀纖維斷口，由剪應力主導。
+  - 脆性破壞無塑性變形、吸收能量極少、裂紋失穩超高速擴展、斷口平整明亮具結晶反光，由正拉應力主導。
 
 ---
 
@@ -177,13 +197,13 @@ toc: true
   - **Definition**: Residual stresses are internal stresses that remain locked inside a component after all external loads, forces, and thermal gradients have been completely removed. They arise from non-uniform plastic deformation, uneven thermal cooling (in casting/welding), or phase transformations.
   - **Consequences**: Surface tensile residual stresses reduce fatigue life, promote stress-corrosion cracking (SCC), and cause dimensional instability or warping when material is removed during machining.
   - **Methods to Remove Residual Stresses**:
-    1. *Thermal Method — Stress-Relief Annealing*: Heating the part to a moderate temperature below recrystallization (e.g., $550^\circ\text{C}-650^\circ\text{C}$ for steels), holding to allow stress relaxation via creep and dislocation rearrangement, followed by very slow furnace cooling.
-    2. *Mechanical Methods*:
+    1. **Thermal Method — Stress-Relief Annealing**: Heating the part to a moderate temperature below recrystallization (e.g., $550^\circ\text{C}-650^\circ\text{C}$ for steels), holding to allow stress relaxation via creep and dislocation rearrangement, followed by very slow furnace cooling.
+    2. **Mechanical Methods**:
        - *Stretching / Roller Leveling*: Applying a small, uniform plastic strain (1%–3%) to redistribute and equalize internal stresses.
        - *Shot Peening*: Bombarding the surface with hard media to induce beneficial **compressive residual stresses** that counteract harmful tensile stresses and enhance fatigue resistance.
-    3. *Vibratory Stress Relief (VSR)*: Applying cyclic mechanical vibrations at resonance frequencies to accelerate localized dislocation relaxation.
+    3. **Vibratory Stress Relief (VSR)**: Applying cyclic mechanical vibrations at resonance frequencies to accelerate localized dislocation relaxation.
 - **中文觀念解析**：
-  殘留應力為外力完全去除後工件內部的自我平衡應力，有害拉應力會促使翹曲與疲勞開裂；消除方式包含應力消除退火、機械拉伸整平與珠擊處理（引入殘留壓應力）。
+  殘留應力是工件在無任何外力與溫差下內部自我平衡的應力。消除方式包含：應力消除退火（加熱保溫緩冷鬆弛）、機械拉伸整平，或利用珠擊在表層引入有益的殘留壓應力。
 
 ---
 
@@ -192,12 +212,12 @@ toc: true
 - **對應簡報**：`MFG_chap 2` Slide 4, 11
 - **Model Answer for Exam (英文標準作答)**:
   1. **Definition & Reference Length**:
-     - *Engineering Strain ($e$)*: $e = \frac{l - l_0}{l_0} = \frac{\Delta l}{l_0}$. Normalized with respect to the **fixed original gage length** ($l_0$).
-     - *True Strain ($\varepsilon$)*: $\varepsilon = \int_{l_0}^l \frac{dl}{l} = \ln\left(\frac{l}{l_0}\right) = \ln(1 + e)$. Integrates incremental deformations normalized with respect to the **instantaneous actual length** ($l$).
+     - *Engineering Strain ($e$)*: Defined as $e = \frac{l - l_0}{l_0} = \frac{\Delta l}{l_0}$. Normalized with respect to the **fixed original gage length** ($l_0$).
+     - *True Strain ($\varepsilon$)*: Defined as $\varepsilon = \int_{l_0}^l \frac{dl}{l} = \ln\left(\frac{l}{l_0}\right) = \ln(1 + e)$. Integrates incremental deformations normalized with respect to the **instantaneous actual length** ($l$).
   2. **Additivity**: True strain is strictly additive across multistep deformations ($\varepsilon_{\text{total}} = \varepsilon_1 + \varepsilon_2$), whereas engineering strain is not.
   3. **Small vs. Large Deformations**: In the linear elastic region ($e \ll 1$), $\varepsilon \approx e$; under large plastic deformations, true strain accurately reflects the physical state of strain.
 - **中文觀念解析**：
-  工程應變分母為固定初始標距 $l_0$；真應變分母為瞬時長度 $l$ 並積分累加（$\varepsilon = \ln(1+e)$），具可加性，為大塑性變形成型計算的基礎。
+  工程應變以固定初始標距 $l_0$ 為分母；真應變以瞬時長度 $l$ 為分母進行微元累加積分（$\varepsilon = \ln(1+e)$），具備數學可加性，為大塑性成型計算的標準。
 
 ---
 
@@ -216,7 +236,7 @@ toc: true
      - *In Tension ($e > 0$, $l > l_0$)*: Because instantaneous length $l > l_0$, incremental additions $\frac{dl}{l} < \frac{dl}{l_0}$, yielding $\varepsilon = \ln(1+e) < e$. The gap between $e$ and $\varepsilon$ widens with increasing elongation.
      - *In Compression ($e < 0$, $l < l_0$)*: Let nominal compressive strain be $e_c = -\Delta l / l_0 > 0$. Then $|\varepsilon| = |\ln(1 - e_c)| = e_c + \frac{e_c^2}{2} + \frac{e_c^3}{3} + \dots > e_c$. As the part is flattened, $l \ll l_0$, making increments $|dl|/l \gg |dl|/l_0$. Consequently, true compressive strain grows much faster than engineering compressive strain (e.g., at 80% compression, $e_c = 0.8$, whereas $|\varepsilon| = \ln 5 \approx 1.609$).
 - **中文觀念解析**：
-  泰勒級數展開二階項隨應變增大而急遽放大。拉伸與壓縮皆會發生：拉伸時 $\varepsilon < e$；壓縮時 $|\varepsilon| > e_c$，兩者差距皆隨形變量增大而顯著擴大。
+  泰勒展開式二階項 $e^2/2$ 隨變形增大迅速放大。拉伸與壓縮皆發生：拉伸時 $\varepsilon < e$；壓縮時絕對值 $|\varepsilon| > e_c$，兩者差距皆隨應變增大而急遽拉開。
 
 ---
 
@@ -313,16 +333,25 @@ toc: true
 ### 15. What is the difference between thermal conductivity and thermal expansion?
 - **題目翻譯**：熱傳導率（Thermal conductivity）與熱膨脹（Thermal expansion）有何差異？
 - **對應簡報**：`MFG_chap 3` Slide 7, 8
-- **Model Answer for Exam (英文標準作答)**:
-  | Property | Thermal Conductivity ($k$) | Thermal Expansion ($\alpha$) |
-  | :--- | :--- | :--- |
-  | **Physical Definition** | Measures the **rate at which heat flows within and through a material** under a temperature gradient. | Measures the **rate of relative dimensional expansion or contraction** of a material per unit change in temperature. |
-  | **Governing Formula** | Fourier's Law of Conduction:<br>$q = -k \frac{dT}{dx}$ | Thermal Strain Formula:<br>$\frac{\Delta L}{L_0} = \alpha \Delta T$ |
-  | **Units** | $\text{W}/(\text{m}\cdot\text{K})$ or $\text{Btu}/(\text{hr}\cdot\text{ft}\cdot^\circ\text{F})$ | $1/\text{K}$, $1/^\circ\text{C}$, or $\mu\text{m}/(\text{m}\cdot^\circ\text{C})$ |
-  | **Microscopic Mechanism** | Mediated by **free electron migration** (metals) and **lattice phonon vibrations** (nonmetals). Metallic bonded materials have the highest $k$. | Rising temperature increases atomic vibrational amplitude; asymmetry in interatomic potential wells causes **increased equilibrium interatomic spacing**. |
-  | **Manufacturing Significance** | Critical for cutting tool heat dissipation, radiator fins, casting chilling rates, and heat-affected zone (HAZ) control during welding. | Crucial for thermal clearance in tooling, thermal stress generation, shrinkage allowances in casting molds, and thermal fatigue cracking. |
+- **Model Answer for Exam (英文標準作答 - 條列式對比)**:
+  #### 1. Thermal Conductivity ($k$):
+  - **Physical Definition**: Measures the **rate at which thermal energy (heat) flows within and through a material** under an applied temperature gradient.
+  - **Governing Formula**: Fourier's Law of Conduction:
+    $$q = -k \frac{dT}{dx}$$
+  - **Standard Units**: $\text{W}/(\text{m}\cdot\text{K})$ or $\text{Btu}/(\text{hr}\cdot\text{ft}\cdot^\circ\text{F})$.
+  - **Microscopic Mechanism**: Heat is transported primarily by **free electron migration** in metals and by **lattice phonon vibrations** in nonmetals. Metallic-bonded materials possess the highest $k$.
+  - **Manufacturing Significance**: Critical for heat dissipation in cutting tools, radiator cooling fins, casting mold chilling rates, and controlling heat-affected zones (HAZ) during welding.
+
+  #### 2. Thermal Expansion ($\alpha$):
+  - **Physical Definition**: Measures the **relative rate of dimensional change (expansion or contraction)** in a material per unit change in temperature.
+  - **Governing Formula**: Linear Thermal Strain Relationship:
+    $$\frac{\Delta L}{L_0} = \alpha \Delta T$$
+  - **Standard Units**: $1/\text{K}$, $1/^\circ\text{C}$, or $\mu\text{m}/(\text{m}\cdot^\circ\text{C})$.
+  - **Microscopic Mechanism**: Increasing thermal energy increases atomic vibrational amplitude; asymmetry in the interatomic potential energy well leads to an **increased mean equilibrium interatomic separation**.
+  - **Manufacturing Significance**: Dictates shrinkage allowances in casting pattern design, thermal expansion clearances in tooling, thermal stresses, and resistance to thermal fatigue cracking.
 - **中文觀念解析**：
-  熱傳導率 $k$ 代表材料傳遞熱量的快慢能力；熱膨脹係數 $\alpha$ 代表材料受溫度改變時尺寸形變的敏感程度。
+  - 熱傳導率 $k$ 代表材料傳導熱量的速率快慢（傅立葉定律），金屬靠自由電子傳導效率最高。
+  - 熱膨脹係數 $\alpha$ 代表材料隨溫度升降產生尺寸伸縮的程度，影響鑄造收縮補償與熱應力裂紋。
 
 ---
 
@@ -331,15 +360,15 @@ toc: true
 - **對應簡報**：`MFG_chap 0` Slide 7; `MFG_chap 2` Slide 1; `MFG_chap 3` Slide 1, 2
 - **Model Answer for Exam (英文標準作答)**:
   1. **Mechanical Properties**:
-     - *Fundamental Definition*: Describe how a material responds to **applied external mechanical forces, loads, or stresses** through deformation, yielding, hardening, or fracture.
-     - *Nature*: Inherently **stress-dependent and deformation-driven**, typically measured by destructive testing (e.g., tensile, hardness, impact tests), and strongly influenced by processing history and microstructure.
-     - *Examples*: Yield strength, ultimate tensile strength (UTS), hardness, ductility, Young's modulus, toughness, fatigue limit, and creep strength.
+     - **Fundamental Definition**: Describe how a material responds to **applied external mechanical forces, loads, or stresses** through deformation, yielding, hardening, or fracture.
+     - **Nature**: Inherently **stress-dependent and deformation-driven**, typically measured by destructive testing (e.g., tensile, hardness, impact tests), and strongly influenced by processing history and microstructure.
+     - **Examples**: Yield strength, ultimate tensile strength (UTS), hardness, ductility, Young's modulus, toughness, fatigue limit, and creep strength.
   2. **Physical Properties**:
-     - *Fundamental Definition*: Describe the **intrinsic, constitutive characteristics** of a material governed by its atomic number, electronic configuration, and chemical composition in the **absence of external mechanical loads**.
-     - *Nature*: Non-destructive responses to thermal, electrical, magnetic, and optical fields that do not induce macro-mechanical deformation.
-     - *Examples*: Density, melting point, thermal conductivity, specific heat, coefficient of thermal expansion, electrical resistivity, and magnetic permeability.
+     - **Fundamental Definition**: Describe the **intrinsic, constitutive characteristics** of a material governed by its atomic number, electronic configuration, and chemical composition in the **absence of external mechanical loads**.
+     - **Nature**: Non-destructive responses to thermal, electrical, magnetic, and optical fields that do not induce macro-mechanical deformation.
+     - **Examples**: Density, melting point, thermal conductivity, specific heat, coefficient of thermal expansion, electrical resistivity, and magnetic permeability.
 - **中文觀念解析**：
-  機械性質是材料受「外加機械載重」時的力學變形與破壞反應（破壞性試驗，如強度、硬度、韌性）；物理性質是材料無外力下的內在固有特性（如密度、熔點、熱導率、膨脹係數）。
+  機械性質是材料受「外加機械力」時的變形與破壞響應（破壞性試驗，如強度、硬度、延性）；物理性質是無外力作用下的材料固有特徵（如密度、熔點、導熱率、熱膨脹係數）。
 
 ---
 
@@ -348,16 +377,23 @@ toc: true
 - **對應簡報**：`MFG_chap 3` Slide 3, 4, 5; `MFG_chap 6` Slide 12
 - **Model Answer for Exam (英文標準作答)**:
   - **Answer: (3) Titanium.**
-  - **Quantitative Comparison and Justification**:
-    - The **strength-to-weight ratio (Specific Strength)** is defined as the ratio of tensile strength ($\sigma$) to density ($\rho$): $\text{Specific Strength} = \frac{\sigma}{\rho}$.
-    | Material | Density $\rho$ ($\text{g/cm}^3$) | Typical Tensile Strength $\sigma$ ($\text{MPa}$) | Specific Strength ($\text{kN}\cdot\text{m}/\text{kg}$) |
-    | :--- | :--- | :--- | :--- |
-    | **(1) Copper** | $\approx 8.96$ | $200 - 400$ | $22 - 45$ |
-    | **(2) Structural Steel** | $\approx 7.85$ | $400 - 1000$ | $50 - 130$ |
-    | **(3) Titanium Alloys** | **$\approx 4.51$** | **$300 - 1200$** (e.g., Ti-6Al-4V) | **$180 - 260$ (Highest)** |
-  - **Engineering Significance**: Titanium has a density only ~57% of steel, yet high-strength titanium alloys match the tensile strength of advanced steels. Hence, titanium achieves the highest specific strength among the three, making it the premier choice for aerospace structures, jet engine compressor blades, and race cars.
+  - **Quantitative Justification**:
+    The **strength-to-weight ratio (Specific Strength)** is defined as the ratio of tensile strength ($\sigma$) to density ($\rho$): $\text{Specific Strength} = \frac{\sigma}{\rho}$.
+    - **(1) Copper**:
+      - Density: $\rho \approx 8.96\text{ g/cm}^3$ (heavy metal)
+      - Tensile Strength: $\sigma \approx 200 - 400\text{ MPa}$
+      - Specific Strength: $\approx 22 - 45\text{ kN}\cdot\text{m}/\text{kg}$ (Lowest)
+    - **(2) Structural Steel**:
+      - Density: $\rho \approx 7.85\text{ g/cm}^3$ (high density)
+      - Tensile Strength: $\sigma \approx 400 - 1000\text{ MPa}$
+      - Specific Strength: $\approx 50 - 130\text{ kN}\cdot\text{m}/\text{kg}$ (Moderate)
+    - **(3) Titanium Alloys**:
+      - Density: $\rho \approx \mathbf{4.51\text{ g/cm}^3}$ (lightweight; only ~57% of steel)
+      - Tensile Strength: $\sigma \approx \mathbf{300 - 1200\text{ MPa}}$ (e.g., Ti-6Al-4V exceeds 1000 MPa)
+      - Specific Strength: $\approx \mathbf{180 - 260\text{ kN}\cdot\text{m}/\text{kg}}$ (**Highest**)
+  - **Conclusion**: Titanium achieves by far the highest specific strength among the three, making it the premier choice for aerospace structures, jet engine compressor blades, and high-performance racing vehicles.
 - **中文觀念解析**：
-  比強度定義為強度除以密度（$\sigma/\rho$）。鈦合金密度僅約鋼的 57%（約 $4.51\text{ g/cm}^3$），強度可達 $1000\sim 1200\text{ MPa}$，比強度顯著超越銅與鋼鐵。
+  比強度定義為強度除以密度（$\sigma/\rho$）。鈦合金密度僅約鋼的 57%（約 $4.51\text{ g/cm}^3$），抗拉強度可高達 $1000\sim 1200\text{ MPa}$，比強度顯著超越銅與普通鋼鐵。
 
 ---
 
@@ -368,7 +404,7 @@ toc: true
 - **對應簡報**：`MFG_chap 4` Slide 3, 17, 18, 19, 20, 23, 31, 34
 - **Model Answer for Exam (英文標準作答)**:
   1. **(a) An Alloy**:
-     - A metallic material composed of two or more chemical elements, at least one of which is a metal.
+     - A metallic substance composed of two or more chemical elements, at least one of which is a metal.
      - Can exist as a **solid solution** (substitutional or interstitial) or a **two-phase system**. Alloying impedes dislocation motion, providing substantially higher strength, hardness, and corrosion resistance compared to pure metals.
   2. **(b) Pearlite**:
      - A two-phase lamellar microstructure consisting of **alternating parallel plates of ferrite ($\alpha$) and cementite ($\text{Fe}_3\text{C}$)**.
@@ -385,7 +421,11 @@ toc: true
      - An intermetallic compound containing a fixed stoichiometry of **6.67 wt% C** with an orthorhombic crystal structure.
      - Characterized by being **extremely hard (> 65 HRC) and wear-resistant, but extremely brittle** with virtually zero tensile ductility. Acts as the primary strengthening phase in carbon steels.
 - **中文觀念解析**：
-  合金為多元素金屬固溶或多相物；波來鐵為肥粒鐵與雪明碳鐵之層狀共析產物；沃斯田鐵為高溫 FCC 相（高溶碳量、延性佳、無磁性）；麻田散鐵為急冷無擴散生成的過飽和 BCT 相（極硬且脆）；雪明碳鐵為硬脆化學相（6.67% C）。
+  - 合金：由金屬與其他元素組成，具金屬特性的均勻固體。
+  - 波來鐵：肥粒鐵與雪明碳鐵之層狀共析組織（兼具強度與延性）。
+  - 沃斯田鐵：高溫 FCC 相，溶碳量高達 2.11%，無磁性、延韌性佳。
+  - 麻田散鐵：急冷無擴散相變生成的過飽和 BCT 相，極硬且脆。
+  - 雪明碳鐵：碳化三鐵化合物（6.67% C），硬度極高耐磨但極脆。
 
 ---
 
@@ -394,31 +434,45 @@ toc: true
 - **對應簡報**：`MFG_chap 4` Slide 15, 16 (`p3_img0_xref38.png`)
 - **Model Answer for Exam (英文標準作答)**:
   1. **Coordinates of the Eutectic Point**:
-     - In the Iron-Carbon ($\text{Fe-Fe}_3\text{C}$) phase diagram:
-       - **Composition**: **4.30 wt% Carbon**
-       - **Temperature**: **$1148^\circ\text{C}$**
-     - *(Marked with a red circle at the lowest "V"-shaped valley on Slide 16 / PDF Page 3)*.
+     In the Iron-Carbon ($\text{Fe-Fe}_3\text{C}$) phase diagram:
+     - **Composition**: **4.30 wt% Carbon**
+     - **Temperature**: **$1148^\circ\text{C}$**
+     *(Marked with a red circle at the lowest "V"-shaped intersection on Slide 16 / PDF Page 3)*.
   2. **Physical Meaning of the Eutectic Point**:
-     - *Etymology*: Derived from Greek meaning *"easily melted"*. It defines the unique composition at which the liquid alloy freezes at the **lowest possible melting temperature** in that alloy system.
-     - *Eutectic Invariant Reaction*: Upon cooling across $1148^\circ\text{C}$, a **single homogeneous liquid phase transforms isothermally and simultaneously into two distinct solid phases**:
+     - **Etymology**: Derived from Greek meaning *"easily melted"*. It defines the unique composition at which the liquid alloy freezes at the **lowest possible melting temperature** in that alloy system.
+     - **Eutectic Invariant Reaction**: Upon cooling across $1148^\circ\text{C}$, a **single homogeneous liquid phase transforms isothermally and simultaneously into two distinct solid phases**:
        $$\text{Liquid (4.30\% C)} \xrightarrow{1148^\circ\text{C}} \gamma\text{-Austenite (2.11\% C)} + \text{Cementite } \text{Fe}_3\text{C (6.67\% C)}$$
        This two-phase lamellar eutectic product is known as **Ledeburite (雷氏體)**. It explains why cast irons (typically 2.11%–4.3% C) melt at much lower temperatures ($1148^\circ\text{C}$) than pure iron ($1538^\circ\text{C}$), providing superior fluidity for metal casting.
 - **中文觀念解析**：
-  共晶點位於 4.30% C、$1148^\circ\text{C}$。物理意義為合金熔點最低之處，冷卻時由單一液相恆溫同時轉變為沃斯田鐵與雪明碳鐵兩種固相共生組織（雷氏體）。
+  共晶點位於 4.30% C、$1148^\circ\text{C}$。物理意義為合金熔點最低處，冷卻時由單一液相恆溫同時析出沃斯田鐵與雪明碳鐵共生組織（雷氏體）。
 
 ---
 
 ### 20. Explain the differences of annealing, tempering, and quenching.
 - **題目翻譯**：請詳細說明退火（Annealing）、回火（Tempering）與淬火（Quenching）的差異。
 - **對應簡報**：`MFG_chap 4` Slide 30, 34, 35, 41, 45, 49
-- **Model Answer for Exam (英文標準作答)**:
-  | Heat Treatment | Heating Temperature | Cooling Method | Microstructure Formed | Purpose & Mechanical Property Result |
-  | :--- | :--- | :--- | :--- | :--- |
-  | **Annealing** | Heated above critical temperature ($A_3$ or $A_1$) into austenite, soaked thoroughly. | **Very slow cooling inside the furnace (Furnace Cooling)**. | Equilibrium **ferrite + coarse pearlite / spheroidite**. | Softens steel, **reduces hardness and strength, maximizes ductility and toughness**, relieves internal residual stresses, and refines grains for machining. |
-  | **Quenching** | Austenitized completely above $A_3$ or $A_1$ ($30^\circ\text{C}-50^\circ\text{C}$ above). | **Rapid cooling / severe chill** (in agitated brine, water, or oil). | Diffusionless shear produces **BCT Martensite**. | **Maximizes hardness and wear resistance**; severely embrittles steel and induces high residual stresses (must be followed by tempering). |
-  | **Tempering** | Reheated **below lower critical temperature $A_1$** ($150^\circ\text{C}-650^\circ\text{C}$) after quenching. | Air cooling. | Martensite decomposes into **tempered martensite** (fine carbides in ferrite). | Relieves quenching stresses, reduces excessive brittleness, and **significantly restores impact toughness and ductility** while maintaining high strength. |
+- **Model Answer for Exam (英文標準作答 - 分項結構化對比)**:
+  #### 1. Annealing (退火):
+  - **Heating Temperature**: Heated above critical temperatures ($A_3$ or $A_1$) into the austenite region, followed by extended soaking.
+  - **Cooling Method & Rate**: **Very slow cooling inside the furnace (Furnace Cooling)**.
+  - **Microstructure Formed**: Coarse equilibrium structure of **ferrite + coarse pearlite / spheroidite**.
+  - **Purpose & Result**: Softens the steel, **reduces hardness and strength, maximizes ductility and toughness**, relieves internal residual stresses, and refines grain structure for subsequent cold forming or machining.
+
+  #### 2. Quenching (淬火):
+  - **Heating Temperature**: Fully austenitized above $A_3$ or $A_1$ ($30^\circ\text{C}-50^\circ\text{C}$ above).
+  - **Cooling Method & Rate**: **Rapid cooling / severe chill** by immersing into agitated brine, water, or oil.
+  - **Microstructure Formed**: Diffusionless shear transformation produces **BCT Martensite**.
+  - **Purpose & Result**: **Maximizes hardness and wear resistance**; severely embrittles the steel and induces high internal residual stresses (cannot be put into engineering service without tempering).
+
+  #### 3. Tempering (回火):
+  - **Heating Temperature**: Reheated **below the lower critical temperature $A_1$** ($150^\circ\text{C}-650^\circ\text{C}$) after quenching.
+  - **Cooling Method & Rate**: Cooled in still air (or oil).
+  - **Microstructure Formed**: Martensite decomposes into **tempered martensite** (extremely fine carbide particles dispersed in a ferrite matrix).
+  - **Purpose & Result**: Relieves severe quenching stresses, reduces excessive brittleness, and **significantly restores impact toughness and ductility** while retaining high tensile strength.
 - **中文觀念解析**：
-  退火為高溫後爐冷緩冷（軟化、去應力、提高延性）；淬火為高溫後劇冷水淬/油淬（生成麻田散鐵，硬度極高但硬脆）；回火為淬火後於臨界點以下二次加熱（去淬火內應力，大幅提高韌性）。
+  - 退火：高溫保溫後爐冷（軟化、提高延展性、消除應力）。
+  - 淬火：沃斯田鐵化後急冷水淬/油淬（生成麻田散鐵，硬度極高但脆性大）。
+  - 回火：淬火後在臨界點以下二次加熱空冷（去淬火內應力，大幅提升衝擊韌性）。
 
 ---
 
@@ -439,7 +493,7 @@ toc: true
      - **Carbon Content: Greater than 0.60 wt% C ($> 0.60\%$)** (typically $0.60\% - 1.00\%$, up to $2.11\%$)
      - *Characteristics*: Possesses very high hardness, high tensile strength, and exceptional wear resistance after heat treatment, but lower ductility and poor weldability; used for cutting tools, dies, springs, and high-strength wire.
 - **中文觀念解析**：
-  低碳鋼（$<0.30\%$ C，易沖壓焊接）；中碳鋼（$0.30\%\sim 0.60\%$ C，調質強韌結構件）；高碳鋼（$>0.60\%$ C，高硬耐磨工具彈簧）。
+  低碳鋼（$<0.30\%$ C，延性佳易銲接）；中碳鋼（$0.30\%\sim 0.60\%$ C，調質強韌結構軸類）；高碳鋼（$>0.60\%$ C，淬火高硬耐磨工具彈簧）。
 
 ---
 
@@ -454,7 +508,7 @@ toc: true
      - *Passive Protective Film Formation*: When exposed to oxygen (in air or water), chromium in the steel reacts preferentially to form an **ultra-thin (nanometer-scale), dense, coherent, and chemically stable chromium oxide ($\text{Cr}_2\text{O}_3$) passive film** on the surface.
      - *Self-Healing Capacity*: This impervious passive layer blocks oxygen and moisture from attacking the underlying substrate. If the surface is scratched or mechanically damaged, **the chromium oxide film immediately re-forms (re-passivates) spontaneously in the presence of oxygen**, providing permanent rust protection.
 - **中文觀念解析**：
-  不鏽鋼含有至少 10.5%~12% 鉻。鉻在表面與氧反應自發形成奈米級緻密氧化鉻（$\text{Cr}_2\text{O}_3$）鈍化保護膜；表面受損時能接觸空氣立即自癒再生，因而永保光澤不生鏽。
+  不鏽鋼含有 $\ge 10.5\% \sim 12\%$ 鉻。鉻在表面形成奈米級緻密氧化鉻（$\text{Cr}_2\text{O}_3$）鈍化保護膜；刮傷受損時接觸空氣能自發再生修復，防止鐵基體鏽蝕。
 
 ---
 
@@ -472,7 +526,7 @@ toc: true
   3. **Limestone** ($\text{CaCO}_3$, Calcium Carbonate):
      - *Purpose (Flux & Slag Formation)*: Acts as a chemical **flux**. At high temperatures, it decomposes into calcium oxide ($\text{CaCO}_3 \to \text{CaO} + \text{CO}_2$), which reacts with silica ($\text{SiO}_2$) and alumina impurities in the ore to form a low-melting molten **slag** ($\text{CaO} + \text{SiO}_2 \to \text{CaSiO}_3$). The lighter slag floats atop the molten pig iron, removing impurities and shielding molten iron from oxidation.
 - **中文觀念解析**：
-  鐵礦石提供鐵源；焦炭作為燃料提供熱能並產生 CO 進行還原反應；石灰石分解為 CaO 與酸性雜質二氧化矽結合成低熔點爐渣（去除雜質）。
+  鐵礦石提供鐵素原料；焦炭提供燃燒高溫熱能並產生 CO 還原氧化鐵；石灰石分解為 CaO 與酸性脈石雜質二氧化矽化合成低熔點爐渣浮出分離。
 
 ---
 
@@ -487,7 +541,7 @@ toc: true
     3. *Twinning-Induced Plasticity (TWIP) Steels*: Fully austenitic structure with 17%–20% manganese that undergoes deformation twinning, providing extreme energy absorption.
     4. *Complex-Phase (CP) Grades*: Fine-grained ferrite with a high volume fraction of hard martensite and bainite phases.
 - **中文觀念解析**：
-  AISI 定義極限抗拉強度 UTS 高於 700 MPa 之鋼材即為超高強度鋼（UHSS），包含雙相鋼（DP）、相變誘發塑性鋼（TRIP）、雙晶誘發塑性鋼（TWIP）與複相鋼（CP）。
+  AISI 定義極限抗拉強度 UTS 高於 700 MPa 即為超高強度鋼，包含雙相鋼（DP）、相變誘發塑性鋼（TRIP）、雙晶誘發塑性鋼（TWIP）與複相鋼（CP）。
 
 ---
 
@@ -509,7 +563,7 @@ toc: true
        - High chemical reactivity at elevated temperatures requires expensive vacuum or inert gas shielding during welding and casting.
      - *Cost Sensitivity of Consumer Vehicles*: Mass-market passenger cars prioritize manufacturing economics; conventional cast iron and aluminum alloys provide sufficient performance at a fraction of the cost.
 - **中文觀念解析**：
-  鈦具高比強度、耐中高溫與優異耐蝕性，適合賽車與噴射機；但因克羅爾法提煉極耗能、切削導熱差刀具磨耗快、加工成本高，乘用車難以承擔其昂貴售價。
+  鈦合金具極高比強度、耐中高溫與耐蝕性；未用於大眾乘用車主因是克羅爾法提煉極耗能昂貴、切削導熱極差刀具磨耗劇烈，成本過高。
 
 ---
 
@@ -527,27 +581,43 @@ toc: true
      - *High Thermal Conductivity ($k$)*: Rapidly dissipates heat away from critical areas, reducing steep localized thermal stress gradients.
   6. **Melting and Recrystallization Temperatures**: The operating temperature must remain well below the solidus temperature to preserve structural lattice integrity.
 - **中文觀念解析**：
-  高溫選材需考量：抗潛變能力、抗高溫氧化與熱腐蝕、抗熱震與熱疲勞、微觀組織高溫穩定性、低熱膨脹率與高熱傳導率。
+  高溫選材非強度考量關鍵包括：抗高溫潛變能力、抗高溫氧化與熱腐蝕、抗熱疲勞與抗熱震、顯微組織穩定性、低熱膨脹率與高熱傳導率。
 
 ---
 
 ### 27. Compare steels and aluminum alloys.
 - **題目翻譯**：請全面比較鋼鐵（Steels）與鋁合金（Aluminum alloys）的各項性質。
 - **對應簡報**：`MFG_chap 5` Slide 16; `MFG_chap 6` Slide 3, 4, 5
-- **Model Answer for Exam (英文標準作答)**:
-  | Property / Feature | Steels | Aluminum Alloys |
-  | :--- | :--- | :--- |
-  | **Density ($\rho$)** | High: $\approx \mathbf{7.85\text{ g/cm}^3}$ (heavy). | Low: $\approx \mathbf{2.70\text{ g/cm}^3}$ (lightweight; ~1/3 of steel). |
-  | **Modulus of Elasticity ($E$)** | High: $\approx \mathbf{200 - 210\text{ GPa}}$ (high rigidity). | Low: $\approx \mathbf{69 - 72\text{ GPa}}$ (~1/3 the stiffness of steel). |
-  | **Tensile Strength ($\sigma$)** | Very broad: $\mathbf{300 - 2000+\text{ MPa}}$ (UHSS exceeds 1500 MPa). | Moderate: $\mathbf{100 - 600\text{ MPa}}$ (7075-T6 reaches ~570 MPa). |
-  | **Strength-to-Weight Ratio** | Moderate to high. | **Exceptional**; superior for lightweight vehicular/aerospace structures. |
-  | **Corrosion Resistance** | Plain carbon steel rusts readily without protective coatings or galvanizing. | **High atmospheric resistance** via spontaneous protective $\text{Al}_2\text{O}_3$ film. |
-  | **Thermal & Electrical Conductivity** | Relatively low ($k \approx 15-50\text{ W/m}\cdot\text{K}$). | **Very high** ($k \approx 120-230\text{ W/m}\cdot\text{K}$; 4–5 times that of steel). |
-  | **Fatigue Behavior** | Exhibit a distinct **endurance limit** (infinite fatigue life below limit). | **No true endurance limit**; fatigue failure occurs given sufficient cycles. |
-  | **Formability & Extrusion** | High melting point ($1400-1530^\circ\text{C}$); requires high forging forces. | Low melting point ($660^\circ\text{C}$); **exceptionally easy to extrude, cast, and machine**. |
-  | **Raw Material & Processing Cost** | **Very low and economical**; abundant ore supply. | Higher raw material cost due to energy-intensive bauxite electrolysis. |
+- **Model Answer for Exam (英文標準作答 - 分項結構化對比)**:
+  #### 1. Density and Weight:
+  - **Steels**: High density ($\approx \mathbf{7.85\text{ g/cm}^3}$); heavy structural material.
+  - **Aluminum Alloys**: Low density ($\approx \mathbf{2.70\text{ g/cm}^3}$); lightweight (approximately one-third the weight of steel).
+
+  #### 2. Modulus of Elasticity (Stiffness):
+  - **Steels**: High stiffness ($E \approx \mathbf{200 - 210\text{ GPa}}$).
+  - **Aluminum Alloys**: Moderate stiffness ($E \approx \mathbf{69 - 72\text{ GPa}}$); about one-third that of steel, requiring thicker sections to prevent elastic deflection.
+
+  #### 3. Tensile Strength and Specific Strength:
+  - **Steels**: Very broad strength range ($\mathbf{300 - 2000+\text{ MPa}}$); ultra-high-strength steels offer unmatched absolute strength.
+  - **Aluminum Alloys**: Moderate absolute strength ($\mathbf{100 - 600\text{ MPa}}$); however, **strength-to-weight ratio is exceptional**, often surpassing standard structural steels for automotive and aerospace lightweighting.
+
+  #### 4. Corrosion Resistance:
+  - **Steels**: Plain carbon steel oxidizes and rusts readily in moist environments without paint, electroplating, or galvanizing.
+  - **Aluminum Alloys**: Naturally forms a continuous, self-healing protective $\text{Al}_2\text{O}_3$ oxide film, providing excellent atmospheric corrosion resistance.
+
+  #### 5. Thermal and Electrical Conductivities:
+  - **Steels**: Relatively low thermal conductivity ($k \approx 15-50\text{ W/m}\cdot\text{K}$).
+  - **Aluminum Alloys**: Very high conductivities ($k \approx 120-230\text{ W/m}\cdot\text{K}$); 4 to 5 times higher than steel, ideal for heat exchangers.
+
+  #### 6. Fatigue Behavior:
+  - **Steels**: Exhibit a distinct **fatigue endurance limit**; stresses below this limit result in theoretically infinite life.
+  - **Aluminum Alloys**: **No fatigue limit**; failure will eventually occur under cyclic stresses given enough cycles.
+
+  #### 7. Manufacturing Formability & Cost:
+  - **Steels**: Higher melting temperatures ($1400-1530^\circ\text{C}$); requires high forging forces. Abundant ore supply makes raw materials very economical.
+  - **Aluminum Alloys**: Low melting temperature ($660^\circ\text{C}$); exceptionally easy to extrude into complex profiles, die cast, and machine. Higher initial raw material cost due to energy-intensive smelting.
 - **中文觀念解析**：
-  鋼鐵剛性大（模數 210 GPa）、極限強度高、具明確疲勞極限且成本低；鋁合金密度低（約鋼 1/3）、比強度高、導熱導電佳、耐蝕且成型加工性優異。
+  鋼鐵剛性高（模數 210 GPa）、極限強度高、具明確疲勞極限且成本低；鋁合金密度僅為鋼的 1/3、比強度高、導熱導電極佳、耐蝕且極易擠型成形。
 
 
 ---
@@ -557,14 +627,28 @@ toc: true
 ### 28. Explain the differences between linear, branched, and cross-linked polymers.
 - **題目翻譯**：請詳細解釋線狀（Linear）、分枝狀（Branched）與交聯狀（Cross-linked）高分子聚合物之間的結構與性質差異。
 - **對應簡報**：`MFG_chap 7` Slide 10, 11, 12, 13
-- **Model Answer for Exam (英文標準作答)**:
-  | Polymer Structure | Molecular Architecture | Intermolecular Bonding | Mechanical & Thermal Characteristics |
-  | :--- | :--- | :--- | :--- |
-  | **Linear Polymers** | Repeating monomer units form long, continuous, sequential chainlike backbones (like cooked spaghetti) with no long side branches. | Backbone atoms held by strong covalent bonds; **adjacent chains held only by weak secondary bonds (van der Waals or hydrogen bonds)**. | High chain packing density; melts and flows reversibly upon heating as weak secondary bonds soften; exhibits classic thermoplastic behavior.<br>*Examples*: HDPE, PVC, PMMA, Nylon. |
-  | **Branched Polymers** | Side-branch chains are attached to the main polymer backbone during polymerization. | Secondary bonds between chains; but side branches **increase steric hindrance and prevent tight, orderly chain packing**. | Lower density, lower crystallinity, lower stiffness and tensile strength, and lower melting temperature than linear polymers.<br>*Example*: Low-Density Polyethylene (LDPE). |
-  | **Cross-linked Polymers** | Adjacent polymer chains are interconnected by **strong primary covalent bonds into a 3D network structure**. | Chains are **permanently locked by covalent cross-links**; individual chains cannot slide past one another. | Forms one giant macromolecule; will not melt upon heating (degrades/chars at excessive temperature); exhibits high hardness, stiffness, dimensional stability, and creep resistance.<br>*Examples*: Epoxy, Phenolics, Vulcanized Rubber. |
+- **Model Answer for Exam (英文標準作答 - 分項結構化對比)**:
+  #### 1. Linear Polymers:
+  - **Molecular Architecture**: Monomer units form long, continuous, sequential chainlike backbones (like cooked spaghetti) with no major side branches.
+  - **Intermolecular Bonding**: Covalent bonds along the main chain; **adjacent chains are held together exclusively by weak secondary bonds (van der Waals or hydrogen bonds)**.
+  - **Characteristics**: Allows high chain packing density; melts and flows reversibly upon heating as weak secondary bonds soften; classic thermoplastic behavior.
+  - **Examples**: High-Density Polyethylene (HDPE), Polyvinyl Chloride (PVC), Polymethyl Methacrylate (PMMA), Nylon.
+
+  #### 2. Branched Polymers:
+  - **Molecular Architecture**: Side-branch chains originate from and are attached to the main polymer backbone during polymerization.
+  - **Intermolecular Bonding**: Adjacent chains are held by weak secondary bonds, but side branches **increase steric hindrance and prevent tight, orderly chain packing**.
+  - **Characteristics**: Reduced degree of crystallinity, lower density, lower tensile stiffness and strength, and lower melting temperature than linear polymers; good flowability during molding.
+  - **Example**: Low-Density Polyethylene (LDPE).
+
+  #### 3. Cross-linked Polymers:
+  - **Molecular Architecture**: Adjacent polymer chains are interconnected by **strong primary covalent chemical bonds into a three-dimensional network structure**.
+  - **Intermolecular Bonding**: Chains are **permanently anchored by covalent cross-links**; individual chains cannot slide past one another.
+  - **Characteristics**: Behaves as a single giant macromolecule; will not soften or melt upon heating (irreversibly degrades/chars at high temperature); exhibits high hardness, stiffness, dimensional stability, and creep resistance.
+  - **Examples**: Epoxy, Phenolics (Bakelite), Vulcanized Rubber.
 - **中文觀念解析**：
-  線狀為長條單鏈，靠弱二次鍵結合，加熱易熔融；分枝狀有側鏈阻礙緊密堆疊，結晶度與剛性較低；交聯狀鏈間由強共價鍵橫向鎖定成三維網狀，加熱不熔化，剛硬耐熱。
+  - 線狀：長條主鏈，鏈間靠弱二次鍵結合，加熱易軟化熔融，具熱塑性。
+  - 分枝狀：有側鏈阻礙緊密堆疊，結晶度與剛性較低。
+  - 交聯狀：鏈間以強共價鍵形成三維網狀結構，加熱不熔化只會焦化，高剛性高耐溫。
 
 ---
 
@@ -580,24 +664,36 @@ toc: true
     - Structural engineering plastics (e.g., PMMA, PC, Polystyrene) must have $T_g$ **well above ambient operating temperature** to maintain rigidity and structural strength.
     - Elastomers and rubbers must have $T_g$ **well below ambient operating temperature** (e.g., natural rubber $T_g \approx -70^\circ\text{C}$) to maintain flexibility and elastic resilience.
 - **中文觀念解析**：
-  $T_g$ 是非晶質高分子由低溫「硬脆玻璃態」轉變為高溫「柔軟橡膠態」的臨界特徵溫度。結構塑膠服役溫度須低於 $T_g$；彈性體橡膠服役溫度須高於 $T_g$。
+  $T_g$ 是非晶質聚合物由低溫硬脆玻璃態轉變為高溫柔軟橡膠態的臨界溫度。結構塑料常溫需低於 $T_g$ 以保證剛性；橡膠彈性體常溫需高於 $T_g$ 以保證彈性。
 
 ---
 
 ### 30. What is the difference between thermoplastics and thermosetting plastics?
 - **題目翻譯**：熱塑性塑膠（Thermoplastics）與熱固性塑膠（Thermosets）有何本質上的差異？
 - **對應簡報**：`MFG_chap 7` Slide 22, 23, 31, 32
-- **Model Answer for Exam (英文標準作答)**:
-  | Feature | Thermoplastics | Thermosetting Plastics (Thermosets) |
-  | :--- | :--- | :--- |
-  | **Molecular Structure** | **Linear or branched** long-chain molecules. | **Three-dimensional cross-linked network** (single giant macromolecule). |
-  | **Bonding Mechanism** | Strong covalent bonds along chain; **weak secondary bonds (van der Waals) between chains**. | Strong primary **covalent bonds throughout the entire 3D network**. |
-  | **Thermal Response & Reversibility** | **Softens and melts upon heating; solidifies upon cooling. The process is fully REVERSIBLE.** | **Curing (cross-linking) reaction is IRREVERSIBLE.** Does not melt upon reheating; decomposes/chars at high temperatures. |
-  | **Processing Methods** | Injection molding, extrusion, blow molding, thermoforming. | Compression molding, transfer molding, reaction injection molding (RIM). |
-  | **Mechanical & Chemical Behavior** | Higher ductility, greater impact toughness, lower creep resistance, soluble in specific solvents. | Higher hardness, higher stiffness, superior dimensional stability, **exceptional creep and solvent resistance**. |
-  | **Typical Examples** | PE, PP, PVC, PS, ABS, PC, PET, Nylon. | Epoxy, Phenolic (Bakelite), Polyester, Melamine. |
+- **Model Answer for Exam (英文標準作答 - 分項結構化對比)**:
+  #### 1. Molecular Structure & Bonding:
+  - **Thermoplastics**: Consist of **linear or branched** long chains. Covalent bonds form the backbone, while **weak secondary bonds (van der Waals)** hold adjacent chains together.
+  - **Thermosets**: Consist of a **three-dimensional cross-linked network** formed by strong primary covalent bonds throughout, forming a single giant macromolecule.
+
+  #### 2. Thermal Response & Reversibility:
+  - **Thermoplastics**: **Soften and melt when heated, and solidify when cooled. The process is fully REVERSIBLE**, allowing repeated remelting and reshaping.
+  - **Thermosets**: Curing (cross-linking) is **IRREVERSIBLE**. They do not melt upon reheating; excessive temperature leads to chemical degradation, charring, and thermal decomposition.
+
+  #### 3. Manufacturing Processes:
+  - **Thermoplastics**: Formed by injection molding, extrusion, blow molding, and thermoforming.
+  - **Thermosets**: Formed by compression molding, transfer molding, and reaction injection molding (RIM).
+
+  #### 4. Mechanical & Environmental Properties:
+  - **Thermoplastics**: Higher ductility, greater impact toughness, but lower creep resistance and lower maximum operating temperatures; soluble in specific organic solvents.
+  - **Thermosets**: High hardness, high stiffness, exceptional dimensional stability, **outstanding resistance to creep and chemical solvents**.
+
+  #### 5. Representative Examples:
+  - **Thermoplastics**: Polyethylene (PE), Polypropylene (PP), Polyvinyl Chloride (PVC), Polystyrene (PS), ABS, Polycarbonate (PC), Nylon.
+  - **Thermosets**: Epoxy, Phenolic (Bakelite), Polyester, Melamine.
 - **中文觀念解析**：
-  熱塑性為線狀/分枝狀，靠弱二次鍵結合，受熱可逆熔融成形且易回收；熱固性由共價鍵三維交聯，固化不可逆，受熱不熔化只會焦解碳化。
+  - 熱塑性塑膠：線狀/分枝狀，靠弱二次鍵結合，加熱熔化冷卻固化過程完全可逆，易於回收。
+  - 熱固性塑膠：強共價鍵三維交聯網絡，固化反應不可逆，加熱不熔化只會焦解碳化。
 
 ---
 
@@ -700,7 +796,7 @@ toc: true
 1. **Tensile Strength ($\text{UTS}$)**:
    $$\text{UTS} = 180 \times e^{-5 \times 0.10} = 180 \times e^{-0.5} = 180 \times 0.60653 = \mathbf{109.18\text{ MPa}}$$
 2. **Modulus of Elasticity ($E$)**:
-   - *Using Lecture Slide 15 formula*:
+   - Using Lecture Slide 15 formula:
      $$E = 300 \times \left[1 - 1.9(0.10) + 0.9(0.10)^2\right] = 300 \times [1 - 0.19 + 0.009] = 300 \times 0.819 = \mathbf{245.7\text{ GPa}}$$
    - *(Alternative exponential form $E = E_0 e^{-nP}$: $E = 300 \times e^{-0.5} \approx 181.96\text{ GPa}$)*.
 3. **Thermal Conductivity ($k$)**:
@@ -712,18 +808,16 @@ toc: true
 1. **Tensile Strength ($\text{UTS}$)**:
    $$\text{UTS} = 180 \times e^{-5 \times 0.20} = 180 \times e^{-1.0} = 180 \times 0.36788 = \mathbf{66.22\text{ MPa}}$$
 2. **Modulus of Elasticity ($E$)**:
-   - *Using Lecture Slide 15 formula*:
+   - Using Lecture Slide 15 formula:
      $$E = 300 \times \left[1 - 1.9(0.20) + 0.9(0.20)^2\right] = 300 \times [1 - 0.38 + 0.036] = 300 \times 0.656 = \mathbf{196.8\text{ GPa}}$$
    - *(Alternative exponential form $E = E_0 e^{-nP}$: $E = 300 \times e^{-1.0} \approx 110.36\text{ GPa}$)*.
 3. **Thermal Conductivity ($k$)**:
    $$k = 0.7 \times (1 - 0.20) = 0.7 \times 0.80 = \mathbf{0.56\text{ W}/(\text{m}\cdot\text{K})}$$
 
-#### Summary Table:
-| Porosity $P$ | $\text{UTS}$ ($\text{MPa}$) | $E$ ($\text{GPa}$) [Slide 15 Standard] | $k$ ($\text{W}/(\text{m}\cdot\text{K})$) |
-| :---: | :---: | :---: | :---: |
-| **0% (Dense)** | $180.0$ | $300.0$ | $0.70$ |
-| **10%** | **$109.18$** | **$245.7$** | **$0.63$** |
-| **20%** | **$66.22$** | **$196.8$** | **$0.56$** |
+#### (4) Summary of Calculated Values:
+- **At 0% Porosity (Fully Dense)**: $\text{UTS} = 180.0\text{ MPa}$, $E = 300.0\text{ GPa}$, $k = 0.70\text{ W}/(\text{m}\cdot\text{K})$.
+- **At 10% Porosity**: $\text{UTS} = \mathbf{109.18\text{ MPa}}$, $E = \mathbf{245.7\text{ GPa}}$, $k = \mathbf{0.63\text{ W}/(\text{m}\cdot\text{K})}$.
+- **At 20% Porosity**: $\text{UTS} = \mathbf{66.22\text{ MPa}}$, $E = \mathbf{196.8\text{ GPa}}$, $k = \mathbf{0.56\text{ W}/(\text{m}\cdot\text{K})}$.
 
 ---
 
@@ -762,16 +856,34 @@ toc: true
 ### 38. Compare the mechanical properties between metals and ceramics.
 - **題目翻譯**：請全面比較金屬材料與陶瓷材料之間的機械性質差異。
 - **對應簡報**：`MFG_chap 1`; `MFG_chap 2`; `MFG_chap 8` Slide 14, 16
-- **Model Answer for Exam (英文標準作答)**:
-  | Mechanical Property | Metals | Ceramics |
-  | :--- | :--- | :--- |
-  | **Hardness & Wear Resistance** | Moderate to high (up to 60–65 HRC for quenched tool steels). | **Extremely high** (Mohs hardness 9–10; e.g., $\text{Al}_2\text{O}_3, \text{SiC}, \text{cBN}$, Diamond); exceptional abrasive wear resistance. |
-  | **Ductility & Plastic Deformation** | **High to excellent**; large plastic elongation and reduction in area before fracture. | **Virtually zero ductility**; behaves in a purely elastic and brittle manner at room temperature. |
-  | **Tensile vs. Compressive Strength** | Approximately **symmetric** ($\sigma_{\text{tensile}} \approx \sigma_{\text{compressive}}$). | **Highly asymmetric**; extremely high compressive strength ($1000-3000+\text{ MPa}$), but low tensile strength (~1/10 of compressive strength). |
-  | **Fracture Toughness ($K_{Ic}$)** | **High** ($K_{Ic} \approx 20-150\text{ MPa}\cdot\text{m}^{1/2}$); blunts crack tips via plastic deformation. | **Very low** ($K_{Ic} \approx 1-8\text{ MPa}\cdot\text{m}^{1/2}$); extremely sensitive to surface microcracks and internal pores. |
-  | **Modulus of Elasticity ($E$)** | Moderate to high ($\text{Al} \approx 70\text{ GPa}$, Steel $\approx 210\text{ GPa}$, Tungsten $\approx 400\text{ GPa}$). | **Very high** ($\text{SiC} \approx 400-450\text{ GPa}$, Diamond $\approx 1000\text{ GPa}$); extremely stiff. |
-  | **Thermal Shock Resistance** | High; plastic deformation absorbs thermal stresses. | Poor; high modulus and lack of plastic flow cause cracking under sudden thermal gradients. |
-  | **High-Temperature Strength** | Degrades significantly above $0.4-0.5 T_m$ due to softening and creep. | **Outstanding**; retains high strength, hardness, and creep resistance at $1000^\circ\text{C}-1500^\circ\text{C}$. |
+- **Model Answer for Exam (英文標準作答 - 分項結構化對比)**:
+  #### 1. Hardness and Wear Resistance:
+  - **Metals**: Moderate to high (up to 60–65 HRC for quenched tool steels). Prone to abrasive scratching by hard mineral particles.
+  - **Ceramics**: **Extremely high** (Mohs hardness 9–10; e.g., $\text{Al}_2\text{O}_3, \text{SiC}, \text{cBN}$, Diamond); exceptional resistance to abrasive and erosive wear.
+
+  #### 2. Ductility and Plastic Formability:
+  - **Metals**: **High to excellent**; exhibit substantial plastic elongation and area reduction before fracture, enabling cold and hot forming.
+  - **Ceramics**: **Virtually zero ductility**; behave in a purely elastic and brittle manner at room temperature.
+
+  #### 3. Tensile versus Compressive Strength:
+  - **Metals**: Approximately **symmetric** ($\sigma_{\text{tensile}} \approx \sigma_{\text{compressive}}$).
+  - **Ceramics**: **Highly asymmetric**; extremely high compressive strength ($1000-3000+\text{ MPa}$), but low tensile strength (typically only about one-tenth of compressive strength).
+
+  #### 4. Fracture Toughness ($K_{Ic}$):
+  - **Metals**: **High** ($K_{Ic} \approx 20-150\text{ MPa}\cdot\text{m}^{1/2}$); able to blunt crack tips via localized plastic yielding.
+  - **Ceramics**: **Very low** ($K_{Ic} \approx 1-8\text{ MPa}\cdot\text{m}^{1/2}$); extremely sensitive to surface microcracks, notches, and internal pores.
+
+  #### 5. Modulus of Elasticity (Stiffness):
+  - **Metals**: Moderate to high ($\text{Al} \approx 70\text{ GPa}$, Steel $\approx 210\text{ GPa}$, Tungsten $\approx 400\text{ GPa}$).
+  - **Ceramics**: **Very high** ($\text{SiC} \approx 400-450\text{ GPa}$, Diamond $\approx 1000\text{ GPa}$); extremely stiff.
+
+  #### 6. Thermal Shock Resistance:
+  - **Metals**: High; plastic deformation absorbs thermal stresses.
+  - **Ceramics**: Poor; high modulus and lack of plastic flow cause cracking under sudden thermal gradients.
+
+  #### 7. Elevated-Temperature Strength:
+  - **Metals**: Degrade significantly above $0.4-0.5 T_m$ due to softening and creep.
+  - **Ceramics**: **Outstanding**; retain high strength, hardness, and creep resistance at $1000^\circ\text{C}-1500^\circ\text{C}$.
 - **中文觀念解析**：
   金屬具高延展性、高破壞韌性、拉壓對稱；陶瓷硬度極高、抗壓強度遠大於抗拉強度、常溫零延性完全脆性，但高溫強度與抗潛變性能卓越。
 
@@ -840,16 +952,28 @@ toc: true
 ### 41. Distinguish between composites and metal alloys.
 - **題目翻譯**：請區別複合材料（Composites）與金屬合金（Metal alloys）之間的本質差異。
 - **對應簡報**：`MFG_chap 4` Slide 3, 5; `MFG_chap 9` Slide 2
-- **Model Answer for Exam (英文標準作答)**:
-  | Comparison Criterion | Composite Materials | Metal Alloys |
-  | :--- | :--- | :--- |
-  | **Constitutive Definition** | An engineered material composed of two or more chemically distinct, insoluble phases (matrix + reinforcement) combined macroscopically/microscopically. | A solid solution or multiphase mixture formed by melting and dissolving elements together into a single metallic base. |
-  | **Phase Boundary / Interface** | Distinct, clearly identifiable physical and chemical **interfaces (phase boundaries)** exist between constituents. | Constituents are mixed at the **atomic scale** (solid solution or intermetallic compounds) sharing a continuous metallic crystal lattice. |
-  | **Constituent Identity** | Each component phase **retains its original physical and chemical identities and properties** intact. | Individual alloying elements lose their independent macroscopic physical identity. |
-  | **Mechanical Separability** | Reinforcement can theoretically be separated from the matrix by chemical dissolution or thermal pyrolysis. | Cannot be mechanically or physically separated into raw elemental forms. |
-  | **Anisotropy by Design** | Mechanical properties can be **tailored anisotropically** by adjusting fiber orientation and stacking sequences. | Bulk alloys are macroscopically **isotropic** after standard processing. |
+- **Model Answer for Exam (英文標準作答 - 分項結構化對比)**:
+  #### 1. Constitutive Definition:
+  - **Composites**: An engineered multiphase material formed by combining two or more chemically distinct, insoluble phases (matrix + reinforcement) with a distinct physical interface between them.
+  - **Metal Alloys**: A metallic substance formed by melting and dissolving one or more solute elements into a solvent metal, solidifying into a solid solution or intermetallic compound sharing a common metallic bond.
+
+  #### 2. Phase Boundary and Interface:
+  - **Composites**: Feature distinct, microscopically identifiable **phase boundaries/interfaces** separating the matrix and the reinforcement.
+  - **Metal Alloys**: Mixed at the **atomic scale**; atoms occupy lattice sites or interstitial spaces in a continuous, homogeneous metallic crystal lattice.
+
+  #### 3. Constituent Identity:
+  - **Composites**: The individual component phases **retain their distinct physical and chemical identities and properties**.
+  - **Metal Alloys**: The alloying elements lose their independent macroscopic physical identities, forming a new material with altered properties.
+
+  #### 4. Separability:
+  - **Composites**: Reinforcements can typically be mechanically or chemically reclaimed (e.g., by burning off or dissolving the polymer matrix).
+  - **Metal Alloys**: Cannot be physically separated into raw elemental components.
+
+  #### 5. Mechanical Anisotropy:
+  - **Composites**: Properties can be **tailored anisotropically** by controlling fiber orientations and layups.
+  - **Metal Alloys**: Bulk polycrystalline alloys are generally **isotropic** in the absence of directional cold working.
 - **中文觀念解析**：
-  複合材料由物理化學性質截然不同的相組成，相間有清晰物理界面，成分保留各自獨立特性；合金是在原子晶格尺度混合溶解，具有連續金屬鍵與均勻宏觀性質。
+  複合材料由不同相以巨觀/微觀結合，各相保留獨立物理化學特性且具有清晰界面；合金是在原子晶格尺度固溶互溶，全體共享連續金屬鍵。
 
 ---
 
@@ -963,15 +1087,25 @@ $$\frac{t_{s, \text{cyl}}}{t_{s, \text{plate}}} = \frac{1}{2.357} \approx \mathb
 ### 46. What is the differences between the solidification of pure metals and metal alloys?
 - **題目翻譯**：純金屬與合金在凝固過程中有何本質上的差異？
 - **對應簡報**：`MFG_chap 10` Slide 6, 7, 8, 9
-- **Model Answer for Exam (英文標準作答)**:
-  | Feature | Solidification of Pure Metals | Solidification of Metal Alloys |
-  | :--- | :--- | :--- |
-  | **Solidification Temperature** | Solidifies at a **single, discrete, constant temperature (freezing/melting point $T_m$)** with an isothermal plateau on cooling curve. | Solidifies over a **freezing range between liquidus ($T_L$) and solidus ($T_S$) temperatures**; no single freezing point. |
-  | **Solidification Interface** | A sharp, distinct, well-defined **planar solidification front** advances smoothly from mold walls inward. | Features a wide **two-phase "Mushy Zone"** where liquid and solid phases coexist simultaneously. |
-  | **Crystal Growth Morphology** | Generates a thin equiaxed chill zone at the wall, followed by smooth **columnar grains growing antiparallel to heat flow**. | Solidifies via complex branching **three-dimensional dendrites** (columnar and equiaxed dendrites) whose arms interlock. |
-  | **Segregation & Defects** | Single chemical composition; **no chemical segregation**; shrinkage manifests as a single concentrated piping cavity. | Suffers from **microsegregation (coring)** between dendritic arms, and interdendritic feeding resistance leads to **dispersed microporosity**. |
+- **Model Answer for Exam (英文標準作答 - 分項結構化對比)**:
+  #### 1. Solidification Temperature:
+  - **Pure Metals**: Solidify at a **single, discrete, constant temperature (melting point $T_m$)**, exhibiting a flat isothermal plateau on the cooling curve.
+  - **Metal Alloys**: Solidify over a **temperature range** between the liquidus temperature ($T_L$) and solidus temperature ($T_S$); no single freezing point.
+
+  #### 2. Solidification Interface Morphology:
+  - **Pure Metals**: Exhibit a sharp, distinct, and well-defined **planar solidification front** advancing progressively inward from the mold walls.
+  - **Metal Alloys**: Develop a wide, two-phase **"Mushy Zone"** where liquid and solid dendritic phases coexist simultaneously across the freezing range.
+
+  #### 3. Crystal Growth Morphology:
+  - **Pure Metals**: Generate a narrow equiaxed chill zone at the mold wall, followed by smooth **columnar grains growing antiparallel to heat extraction**.
+  - **Metal Alloys**: Solidify via complex, highly branched **three-dimensional dendrites** (columnar and equiaxed dendrites) whose arms interlock.
+
+  #### 4. Chemical Segregation & Porosity Defects:
+  - **Pure Metals**: Composed of a single chemical element; **no chemical segregation** occurs. Volumetric shrinkage results in a single concentrated piping cavity at the top.
+  - **Metal Alloys**: Solute rejection causes severe **microsegregation (coring)** between dendritic arms. Resistance to liquid feeding through narrow interdendritic channels produces widespread **microporosity**.
 - **中文觀念解析**：
-  純金屬在固定熔點恆溫凝固，具清晰平面凝固前緣，無成分偏析；合金在液相線與固相線之間一段溫區凝固，具有泥狀區（Mushy zone）與樹枝晶交錯，易伴隨顯微縮孔與偏析。
+  - 純金屬在固定熔點恆溫凝固，��清晰平面界面與平直柱狀晶，無偏析。
+  - 合金在液相線與固相線之間一段溫區凝固，具有泥狀區（Mushy zone）與三維互鎖樹枝晶，易產生顯微偏析與分散型顯微縮孔。
 
 ---
 
@@ -1035,15 +1169,30 @@ $$\frac{t_{s, \text{cyl}}}{t_{s, \text{plate}}} = \frac{1}{2.357} \approx \mathb
 ### 50. What differences, if any, would you expect in the properties of castings made by permanent-mold versus sandcasting processes?
 - **題目翻譯**：相較於砂模鑄造，你預期永久模鑄造所生產的鑄件在各項性質上會有何顯著差異？
 - **對應簡報**：`MFG_chap 11` Slide 4, 5, 23
-- **Model Answer for Exam (英文標準作答)**:
-  | Property | Permanent-Mold Castings | Sand-Castings |
-  | :--- | :--- | :--- |
-  | **Grain Structure** | **Extremely fine grains** due to rapid cooling and chilling by high-conductivity metal dies. | **Coarser grains** due to slow cooling in insulative silica sand. |
-  | **Mechanical Strength & Ductility** | **Significantly higher** tensile strength, yield strength, hardness, and fatigue life (Hall-Petch strengthening). | **Lower** strength, hardness, and ductility due to coarse grains and micro-porosity. |
-  | **Dimensional Accuracy** | **High precision** (tolerances within $\pm 0.1-0.3\text{ mm}$); high dimensional repeatability. | **Lower precision** (tolerances typically $\pm 1.0-3.0\text{ mm}$); mold wall movement occurs. |
-  | **Surface Finish** | **Smooth finish** ($Ra \approx 1.5-3.5\;\mu\text{m}$); requires minimal or no machining. | **Rough finish** ($Ra \approx 10-25\;\mu\text{m}$); shows granular sand texture. |
-  | **Internal Cleanliness** | Dense and clean; **free of sand inclusions or wash defects**. | Prone to **sand wash inclusions and moisture-induced pinhole gas porosity**. |
-  | **Residual Stresses & Hot Tearing** | Higher risk of residual stresses and hot tears due to rigid, non-yielding metal mold walls. | Sand molds have good **collapsibility**, allowing free contraction and lowering tear risks. |
+- **Model Answer for Exam (英文標準作答 - 分項結構化對比)**:
+  #### 1. Grain Structure:
+  - **Permanent-Mold Castings**: **Extremely fine grains** due to rapid cooling and intense chilling by high-conductivity metal dies.
+  - **Sand Castings**: **Coarser grains** due to slow heat extraction through insulative silica sand.
+
+  #### 2. Mechanical Strength and Ductility:
+  - **Permanent-Mold Castings**: **Significantly higher** tensile strength, yield strength, hardness, and fatigue life (driven by Hall-Petch grain refinement).
+  - **Sand Castings**: **Lower** strength, hardness, and ductility due to coarse dendritic structures and dispersed microporosity.
+
+  #### 3. Dimensional Precision:
+  - **Permanent-Mold Castings**: **High precision** (tight tolerances within $\pm 0.1-0.3\text{ mm}$); high dimensional repeatability.
+  - **Sand Castings**: **Lower precision** (tolerances typically $\pm 1.0-3.0\text{ mm}$) due to mold wall movement and pattern drawing variability.
+
+  #### 4. Surface Finish:
+  - **Permanent-Mold Castings**: **Smooth finish** ($Ra \approx 1.5-3.5\;\mu\text{m}$); requires minimal or no machining.
+  - **Sand Castings**: **Rough finish** ($Ra \approx 10-25\;\mu\text{m}$); shows granular sand texture, requiring larger machining allowances.
+
+  #### 5. Internal Cleanliness and Inclusions:
+  - **Permanent-Mold Castings**: Dense and clean; **free of sand inclusions or wash defects**.
+  - **Sand Castings**: Prone to **sand wash inclusions and moisture-induced pinhole gas porosity**.
+
+  #### 6. Residual Stresses & Hot Tearing:
+  - **Permanent-Mold Castings**: Higher risk of residual stresses and hot tears due to rigid, non-yielding metal mold walls.
+  - **Sand Castings**: Sand molds have good **collapsibility**, allowing free contraction and lowering tear risks.
 - **中文觀念解析**：
   永久模因金屬導熱快使晶粒極細小，強度與硬度高、尺寸精度高、表面光滑緻密且無夾砂；砂模晶粒粗、強度較低、表面粗糙，但退讓性好且熱裂傾向小。
 
@@ -1169,17 +1318,38 @@ $$\frac{t_{s, \text{cyl}}}{t_{s, \text{plate}}} = \frac{1}{2.357} \approx \mathb
 ### 57. Describe the differences between expendable and permanent molds in metal casting.
 - **題目翻譯**：請詳細描述金屬鑄造中「消耗模（Expendable Molds）」與「永久模（Permanent Molds）」之間的差異。
 - **對應簡報**：`MFG_chap 11` Slide 3, 4, 23
-- **Model Answer for Exam (英文標準作答)**:
-  | Comparison Feature | Expendable Molds | Permanent Molds |
-  | :--- | :--- | :--- |
-  | **Mold Reusability** | **Destroyed / broken after every single casting cycle** (one-time use only); a new mold must be made for each part. | **Reused repeatedly for thousands to hundreds of thousands of shots** without destroying the mold. |
-  | **Mold Materials** | Silica sand, plaster, ceramic slurries, bonded with clay, resins, or silicates. | High-alloy tool steels (H13), cast irons, refractory metals, or graphite. |
-  | **Thermal Conductivity & Cooling** | **Low thermal conductivity (insulative)**; molten metal cools slowly, leading to longer cycle times and coarser grains. | **High thermal conductivity**; rapid heat extraction produces fast chilling, fine grains, and superior strength. |
-  | **Part Complexity & Undercuts** | **Virtually unlimited**; complex internal passages and deep undercuts are easily formed using collapsible cores. | **Restricted by draft angles and parting lines**; undercuts require expensive retractable mechanical slides. |
-  | **Tooling & Equipment Cost** | **Low initial tooling costs**; short lead times for mold preparation. | **Extremely high die fabrication and machine costs**; high initial capital investment. |
-  | **Production Volume Suitability** | Ideal for **prototypes, custom one-off parts, small batches, or ultra-large castings**. | Economical only for **large-scale mass production** to amortize high tooling costs. |
-  | **Labor Cost per Casting** | High (labor-intensive mold making, pouring, and shakeout). | Low (highly automated cycle; low manual intervention). |
-  | **Dimensional Precision & Finish** | Moderate to low precision ($\pm 1.0-3.0\text{ mm}$); rougher surface ($Ra \approx 6-25\;\mu\text{m}$). | High precision ($\pm 0.1-0.3\text{ mm}$); smooth surface finish ($Ra \approx 1.5-3.5\;\mu\text{m}$). |
+- **Model Answer for Exam (英文標準作答 - 分項結構化對比)**:
+  #### 1. Mold Reusability:
+  - **Expendable Molds**: **Destroyed / broken after every single casting cycle** (one-time use only); a new mold must be made for each part.
+  - **Permanent Molds**: **Reused repeatedly for thousands to hundreds of thousands of shots** without destroying the mold.
+
+  #### 2. Mold Materials:
+  - **Expendable Molds**: Silica sand, plaster, ceramic slurries, bonded with clay, resins, or silicates.
+  - **Permanent Molds**: High-alloy tool steels (H13), cast irons, refractory metals, or graphite.
+
+  #### 3. Thermal Conductivity & Cooling Rate:
+  - **Expendable Molds**: **Low thermal conductivity (insulative)**; molten metal cools slowly, leading to longer cycle times and coarser grains.
+  - **Permanent Molds**: **High thermal conductivity**; rapid heat extraction produces fast chilling, fine grains, and superior strength.
+
+  #### 4. Part Complexity & Undercuts:
+  - **Expendable Molds**: **Virtually unlimited**; complex internal passages and deep undercuts are easily formed using collapsible cores.
+  - **Permanent Molds**: **Restricted by draft angles and parting lines**; undercuts require expensive retractable mechanical slides.
+
+  #### 5. Tooling & Equipment Cost:
+  - **Expendable Molds**: **Low initial tooling costs**; short lead times for mold preparation.
+  - **Permanent Molds**: **Extremely high die fabrication and machine costs**; high initial capital investment.
+
+  #### 6. Production Volume Suitability:
+  - **Expendable Molds**: Ideal for **prototypes, custom one-off parts, small batches, or ultra-large castings**.
+  - **Permanent Molds**: Economical only for **large-scale mass production** to amortize high tooling costs.
+
+  #### 7. Labor Cost per Casting:
+  - **Expendable Molds**: High (labor-intensive mold making, pouring, and shakeout).
+  - **Permanent Molds**: Low (highly automated cycle; low manual intervention).
+
+  #### 8. Dimensional Precision & Surface Finish:
+  - **Expendable Molds**: Moderate to low precision ($\pm 1.0-3.0\text{ mm}$); rougher surface ($Ra \approx 6-25\;\mu\text{m}$).
+  - **Permanent Molds**: High precision ($\pm 0.1-0.3\text{ mm}$); smooth surface finish ($Ra \approx 1.5-3.5\;\mu\text{m}$).
 - **中文觀念解析**：
   消耗模每件破壞一次（砂模、陶瓷模，適合小批量複雜件與巨型件，模具費低）；永久模反覆使用數萬次（耐熱鋼模，適合大批量，模具昂貴但精度高、冷卻快晶粒細、自動化成本低）。
 

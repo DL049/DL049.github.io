@@ -1,6 +1,6 @@
 ---
 title: MechanicalManufacture
-date: 2026-10-14 20:40:30 +0800
+date: 2026-10-14 20:41:17 +0800
 categories: [General]
 tags: [notes]
 math: true

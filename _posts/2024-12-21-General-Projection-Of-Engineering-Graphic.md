@@ -1,10 +1,17 @@
 ---
 title: 投影學的數學建模：通用投影
-date: 2024-12-21 17:30:00 +/+0800
-categories: [Derivation]
-tags: [mathematic, engineering_graphic]
+date: 2024-12-21 17:30:00 +0800
+categories:
+  - Derivation
+tags:
+  - mathematic
+  - engineering_graphic
 math: true
 toc: true
+description: ""
+image: ""
+pin: false
+mermaid: false
 ---
 
 ## 前言

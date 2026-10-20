@@ -25,3 +25,9 @@ assets/js/dist
 
 # Admin Config (Contains GitHub Token)
 admin/config.json
+
+# Local authoring tools and private drafts
+/admin/
+/啟動後台.bat
+/HANDOVER.md
+/_drafts/

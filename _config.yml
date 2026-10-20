@@ -216,6 +216,7 @@ exclude:
   - rollup.config.js
   - "package*.json"
   - admin
+  - HANDOVER.md
   - "啟動後台.bat"
 
 jekyll-archives:

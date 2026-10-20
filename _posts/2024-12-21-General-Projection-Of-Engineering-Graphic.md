@@ -9,7 +9,6 @@ tags:
 math: true
 toc: true
 description: ""
-image: ""
 pin: false
 mermaid: false
 ---
